@@ -1,0 +1,6 @@
+# Release files
+x64/
+x86/
+
+# IDE
+.vs/
