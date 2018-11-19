@@ -1,0 +1,3 @@
+char* vasdlajk() {
+	return "asldkajsld";
+}
