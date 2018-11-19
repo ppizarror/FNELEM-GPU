@@ -1,9 +1,8 @@
 /**
-FNELEM-GPU MAIN FILE
-Performs finite element structural analysis using an 4-node membrane, matrix inversion
-was calculated using a CUDA algorithm (Gauss Jordan inversion).
+FNELEM-GPU BASE ELEMENTS - MODEL COMPONENT
+Base element of the platform.
 
-@package fnelem.analysis
+@package fnelem.model.base
 @author ppizarror
 @date 19/11/2018
 @license
@@ -29,32 +28,57 @@ was calculated using a CUDA algorithm (Gauss Jordan inversion).
 	SOFTWARE.
 */
 
-// CUDA library imports
-#include "cuda_runtime.h"
-#include "device_launch_parameters.h"
-#include <stdio.h>
+// Library import
+#include <string>
 
-// FNELEM library imports
-#include "fnelem/analysis/matrix_inversion.cu"
-#include "fnelem/analysis/matrix_utils.cpp"
+/**
+ * Base model component.
+ */
+class ModelComponent {
+private:
+    std::string tagID = ""; // Element tag
+public:
 
-int main() {
+    // Init model
+    ModelComponent();
 
-	// Creates matrix
-	const int n = 3;
-	double *L = new double[n * n];
+    // Init model with tag
+    ModelComponent(std::string tag);
 
-	L[0 * 3 + 0] = 1;
-	L[0 * 3 + 1] = 2;
-	L[0 * 3 + 2] = 3;
-	L[1 * 3 + 0] = 5;
-	L[1 * 3 + 1] = 2;
-	L[1 * 3 + 2] = 1;
-	L[2 * 3 + 0] = 2;
-	L[2 * 3 + 1] = 2;
-	L[2 * 3 + 2] = 3;
-	double *iL = inverse_matrix(L, 3);
-	save_matrix_to_file(iL, "inverseL.txt", n, n);
+    // Destroy object
+    ~ModelComponent();
 
-	return 0;
+    // Returns tag
+    std::string getModelTag();
+
+};
+
+/**
+ * Init model.
+ */
+ModelComponent::ModelComponent() {
+}
+
+/**
+ * Init model with tag.
+ *
+ * @param tag
+ */
+ModelComponent::ModelComponent(std::string tag) {
+    this->tagID = tag;
+}
+
+/**
+ * Returns model tag.
+ *
+ * @return Model tag.
+ */
+std::string ModelComponent::getModelTag() {
+    return this->tagID;
+}
+
+/**
+ * Object destruction.
+ */
+ModelComponent::~ModelComponent() {
 }

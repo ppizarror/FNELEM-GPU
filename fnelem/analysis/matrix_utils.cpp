@@ -1,6 +1,5 @@
 /**
 FNELEM-GPU MATRIX UTILITARY FUNCTIONS
-
 Performs matrix inversion using Gauss Jordan algorithm.
 Based on: https://github.com/ZhengzhongSun/Matrix-Inversion-with-CUDA
 

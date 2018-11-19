@@ -4,4 +4,4 @@ project(FNELEM-GPU)
 set(CMAKE_CXX_STANDARD 14)
 
 # Define tests
-# add_executable(TEST-NAME test/file.cpp test/other.h)
+add_executable(TEST-MODELCOMPONENT test/test_ModelComponent.cpp)
