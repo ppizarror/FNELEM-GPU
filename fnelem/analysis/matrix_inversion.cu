@@ -33,11 +33,11 @@ Based on: https://github.com/ZhengzhongSun/Matrix-Inversion-with-CUDA
 // Library imports
 #include <cuda.h>
 #include <fstream>
-#include <iostream>
-#include <math.h>
 #include <stdio.h>
-#include <string>
-#include <vector>
+#include <iostream>
+
+// Constants
+const int MATRIX_INVERSION_CUDA_BLOCKSIZE = 8;
 
 /**
  * NODIAG normalize diagonal matrix (CUDA).
@@ -126,46 +126,41 @@ __global__ void set_zero(double *A, double *I, int n, int i) {
  */
 double *inverse_matrix(double *matrix, int n) {
 
-    // Creates matrices
-    double *iL = new double[n * n];
-    double *L = new double[n * n];
+    // Inverse matrix CPU
+    double *iMatrix = new double[n * n];
 
-    L[0 * 3 + 0] = 1;
-    L[0 * 3 + 1] = 2;
-    L[0 * 3 + 2] = 3;
-    L[1 * 3 + 0] = 5;
-    L[1 * 3 + 1] = 2;
-    L[1 * 3 + 2] = 1;
-    L[2 * 3 + 0] = 2;
-    L[2 * 3 + 1] = 2;
-    L[2 * 3 + 2] = 3;
+    // Create auxiliar matrices
+    double *d_A, *I, *dI;
 
-    // matrix_read(L, n);
-    save_inverse_matrix_to_file(L, "inv4.txt", n, n);
-    //savetofile(L, "L.txt", n, n);
-
-    double *d_A, *d_L, *I, *dI;
+    // Time of computation
     float time;
+
+    // Create CUDA error handlers
     cudaError_t err;
     cudaEvent_t start, stop;
     cudaEventCreate(&start);
     cudaEventCreate(&stop);
-    int ddsize = n * n * sizeof(double);
-    int blocksize = 8;
 
-    dim3 threadsPerBlock(blocksize, blocksize);
-    dim3 numBlocks((n + blocksize - 1) / blocksize, (n + blocksize - 1) / blocksize);
-    // memory allocation
+    // Matrix memory size
+    int ddsize = n * n * sizeof(double);
+
+    // Creates blocks
+    dim3 threadsPerBlock(MATRIX_INVERSION_CUDA_BLOCKSIZE, MATRIX_INVERSION_CUDA_BLOCKSIZE);
+    dim3 numBlocks((n + MATRIX_INVERSION_CUDA_BLOCKSIZE - 1) / MATRIX_INVERSION_CUDA_BLOCKSIZE,
+                   (n + MATRIX_INVERSION_CUDA_BLOCKSIZE - 1) / MATRIX_INVERSION_CUDA_BLOCKSIZE);
+
+    // Memory allocation
     err = cudaMalloc((void **) &d_A, ddsize);
     if (err != cudaSuccess) {
-        cout << cudaGetErrorString(err) << " in " << __FILE__ << " at line " << __LINE__ << endl;
+        std::cout << cudaGetErrorString(err) << " in " << __FILE__ << " at line " << __LINE__ << std::endl;
     }
     err = cudaMalloc((void **) &dI, ddsize);
     if (err != cudaSuccess) {
-        cout << cudaGetErrorString(err) << " in " << __FILE__ << " at line " << __LINE__ << endl;
+        std::cout << cudaGetErrorString(err) << " in " << __FILE__ << " at line " << __LINE__ << std::endl;
     }
-    I = new double[n * n];
 
+    // Creates identify matrix
+    I = new double[n * n];
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             if (i == j) I[i * n + i] = 1.0;
@@ -173,62 +168,49 @@ double *inverse_matrix(double *matrix, int n) {
         }
     }
 
-    //copy data from CPU to GPU
-    err = cudaMemcpy(d_A, L, ddsize, cudaMemcpyHostToDevice);
+    // Copy data from CPU to GPU
+    err = cudaMemcpy(d_A, matrix, ddsize, cudaMemcpyHostToDevice);
     if (err != cudaSuccess) {
-        cout << cudaGetErrorString(err) << " in " << __FILE__ << " at line " << __LINE__ << endl;
+        std::cout << cudaGetErrorString(err) << " in " << __FILE__ << " at line " << __LINE__ << std::endl;
     }
     err = cudaMemcpy(dI, I, ddsize, cudaMemcpyHostToDevice);
     if (err != cudaSuccess) {
-        cout << cudaGetErrorString(err) << " in " << __FILE__ << " at line " << __LINE__ << endl;
+        std::cout << cudaGetErrorString(err) << " in " << __FILE__ << " at line " << __LINE__ << std::endl;
     }
 
-    //timer start
+    // Timer start
     cudaEventRecord(start, 0);
 
     // L^(-1)
     for (int i = 0; i < n; i++) {
-        nodiag_normalize << < numBlocks, threadsPerBlock >> > (d_A, dI, n, i);
-        diag_normalize << < numBlocks, threadsPerBlock >> > (d_A, dI, n, i);
-        gaussjordan << < numBlocks, threadsPerBlock >> > (d_A, dI, n, i);
-        set_zero << < numBlocks, threadsPerBlock >> > (d_A, dI, n, i);
+        nodiag_normalize <<< numBlocks, threadsPerBlock >>> (d_A, dI, n, i);
+        diag_normalize <<< numBlocks, threadsPerBlock >>> (d_A, dI, n, i);
+        gaussjordan <<< numBlocks, threadsPerBlock >>> (d_A, dI, n, i);
+        set_zero <<< numBlocks, threadsPerBlock >>> (d_A, dI, n, i);
     }
 
+    // Record cuda events
     cudaEventRecord(stop, 0);
     cudaEventSynchronize(stop);
     cudaEventElapsedTime(&time, start, stop);
     cudaEventDestroy(start);
     cudaEventDestroy(stop);
 
-    //copy data from GPU to CPU
-    err = cudaMemcpy(iL, dI, ddsize, cudaMemcpyDeviceToHost);
+    // Copy data from GPU to CPU
+    err = cudaMemcpy(iMatrix, dI, ddsize, cudaMemcpyDeviceToHost);
     if (err != cudaSuccess) {
-        cout << cudaGetErrorString(err) << " in " << __FILE__ << " at line " << __LINE__ << endl;
+        std::cout << cudaGetErrorString(err) << " in " << __FILE__ << " at line " << __LINE__ << std::endl;
     }
     err = cudaMemcpy(I, d_A, ddsize, cudaMemcpyDeviceToHost);
     if (err != cudaSuccess) {
-        cout << cudaGetErrorString(err) << " in " << __FILE__ << " at line " << __LINE__ << endl;
+        std::cout << cudaGetErrorString(err) << " in " << __FILE__ << " at line " << __LINE__ << std::endl;
     }
+    std::cout << "[CUDA] Matrix inversion time: " << time << "ms\n" << std::endl;
 
-    cout << "Cuda Time - inverse: " << time << "ms\n";
-    save_inverse_matrix_to_file(iL, "inv1.txt", n, n);
-    save_inverse_matrix_to_file(I, "inv2.txt", n, n);
-    save_inverse_matrix_to_file(L, "inv3.txt", n, n);
-    //savetofile(I, "I.txt", n, n);
-    //savetofile(I, "I.txt", n, n);
+    // Free memory
     cudaFree(d_A);
     cudaFree(dI);
-
-    double *c = new double[n * n];
-    for (int i = 0; i < n; i++)
-        for (int j = 0; j < n; j++) {
-            c[i * n + j] = 0;  //put the initial value to zero
-            for (int x = 0; x < n; x++)
-                c[i * n + j] = c[i * n + j] + L[i * n + x] * iL[x * n + j];  //matrix multiplication
-        }
-    save_inverse_matrix_to_file(c, "c.txt", n, n);
-
     delete[]I;
-    delete[]L;
-    delete[]iL;
+
+    return iMatrix;
 }

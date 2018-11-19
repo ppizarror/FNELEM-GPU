@@ -30,6 +30,10 @@ Based on: https://github.com/ZhengzhongSun/Matrix-Inversion-with-CUDA
     SOFTWARE.
 */
 
+// Library imports
+#include <string>
+#include <iostream>
+
 /**
  * Save matrix to file.
  *
@@ -38,14 +42,14 @@ Based on: https://github.com/ZhengzhongSun/Matrix-Inversion-with-CUDA
  * @param n Number of rows
  * @param h Number of columns
  */
-void save_matrix_to_file(double *A, string s, int n, int h) {
+void save_matrix_to_file(double *A, std::string s, int n, int h) {
     std::ofstream plik;
     plik.open(s);
     for (int j = 0; j < h; j++) {
         for (int i = 0; i < h; i++) {
             plik << A[j * n + i] << "\t";
         }
-        plik << endl;
+        plik << std::endl;
     }
     plik.close();
 }
