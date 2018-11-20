@@ -3,7 +3,7 @@ FNELEM-GPU MATRIX INVERSION
 Performs matrix inversion using Gauss Jordan algorithm.
 Based on: https://github.com/ZhengzhongSun/Matrix-Inversion-with-CUDA
 
-@package fnelem.analysis
+@package fnelem.math
 @author ppizarror
 @date 19/11/2018
 @license
@@ -142,7 +142,7 @@ void save_matrix_to_file(double *A, std::string s, int n, int h) {
  * @param feMatrix Matrix to inverse
  * @return Inverse matrix
  */
-FEMatrix *inverse_matrix(FEMatrix *feMatrix) {
+FEMatrix *matrix_inverse_cuda(FEMatrix *feMatrix) {
 
     // Get matrix
     double *matrix = feMatrix->get_array();

@@ -3,7 +3,6 @@ FNELEM-GPU MAIN FILE
 Performs finite element structural analysis using an 4-node membrane, matrix inversion
 was calculated using a CUDA algorithm (Gauss Jordan inversion).
 
-@package fnelem.analysis
 @author ppizarror
 @date 19/11/2018
 @license
@@ -35,24 +34,25 @@ was calculated using a CUDA algorithm (Gauss Jordan inversion).
 #include <stdio.h>
 
 // FNELEM library imports
-#include "fnelem/math/matrix_inversion.cu"
+#include "fnelem/math/matrix_inversion_cuda.cu"
+#include "fnelem/model/node/Node.h"
 
 int main() {
 
     // Creates matrix
-	FEMatrix mat = FEMatrix(3, 3);
-	mat.set(0, 0, 1);
-	mat.set(0, 1, 2);
-	mat.set(0, 2, 3);
-	mat.set(1, 0, 5);
-	mat.set(1, 1, 2);
-	mat.set(1, 2, 1);
-	mat.set(2, 0, 2);
-	mat.set(2, 1, 2);
-	mat.set(2, 2, 3);
+    FEMatrix mat = FEMatrix(3, 3);
+    mat.set(0, 0, 1);
+    mat.set(0, 1, 2);
+    mat.set(0, 2, 3);
+    mat.set(1, 0, 5);
+    mat.set(1, 1, 2);
+    mat.set(1, 2, 1);
+    mat.set(2, 0, 2);
+    mat.set(2, 1, 2);
+    mat.set(2, 2, 3);
 
-    FEMatrix *imat = inverse_matrix(&mat);
-	imat->disp();
+    FEMatrix *imat = matrix_inverse_cuda(&mat);
+    imat->disp();
 
     return 0;
 }

@@ -30,6 +30,7 @@ Test matrix.
 
 // Include sources
 #include "../fnelem/math/FEMatrix.h"
+#include "../fnelem/math/matrix_inversion_cpu.h"
 #include <iostream>
 #include <cassert>
 
@@ -39,6 +40,8 @@ void test_matrix_init() {
     int *dim = matrix.get_dimension();
     assert(dim[0] == 3);
     assert(dim[1] == 5);
+    matrix.set(0, 0, 10);
+    assert(matrix.get(0, 0) == 10);
 }
 
 void test_matrix_disp() {
@@ -82,7 +85,7 @@ int test_cpu_inversion() {
     L[2 * 3 + 1] = 2;
     L[2 * 3 + 2] = 3;
     FEMatrix mat = FEMatrix(L, n, n);
-    FEMatrix *matInverse = mat.cpu_inverse();
+    FEMatrix *matInverse = matrix_inverse_cpu(&mat);
     matInverse->disp();
 }
 
