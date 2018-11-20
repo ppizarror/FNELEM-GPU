@@ -36,7 +36,10 @@ Base element of the platform.
  */
 class ModelComponent {
 private:
-    std::string tagID = ""; // Element tag
+
+    // Element tag
+    std::string tagID = "";
+
 public:
 
     // Init model

@@ -209,7 +209,7 @@ double *inverse_matrix(double *matrix, int n) {
 	// Free memory
 	cudaFree(d_A);
 	cudaFree(dI);
-	delete[]I;
+	delete[] I;
 
 	return iMatrix;
 }

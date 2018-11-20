@@ -1,6 +1,6 @@
 /**
 FNELEM-GPU - TEST
-Test fnelem/model/base/ModelComponent.
+Test structure node class.
 
 @package fnelem.model.base
 @author ppizarror
@@ -33,6 +33,13 @@ Test fnelem/model/base/ModelComponent.
 #include <iostream>
 #include <cassert>
 
+void test_node_creation() {
+    Node n = Node("NODE1", 0, 1);
+    assert(n.getModelTag() == "NODE1");
+    n = Node("NODE3D", 1.5, 3.2, 5.6);
+}
+
 int main() {
+    test_node_creation();
     return 0;
 }

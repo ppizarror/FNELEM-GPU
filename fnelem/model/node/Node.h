@@ -27,3 +27,126 @@ Structural nodes.
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 	SOFTWARE.
 */
+
+// Include sources
+#include "../base/ModelComponent.h"
+
+/**
+ * Node element.
+ */
+class Node : public ModelComponent {
+private:
+
+    // Number of degres of freedom
+    int ngdl = 0;
+
+    // Coordinates of the node
+    double *coords;
+
+    // ID of degrees of freedom
+    int *gdlid;
+
+    // Displacements vector
+    double *displ;
+
+    // Loads vector
+    double *loads;
+
+    // Reaction vector
+    double *reaction;
+
+    // Init internal variables
+    void init();
+
+public:
+
+    // Empty node
+    Node();
+
+    // Destroy node
+    ~Node();
+
+    // 2D node
+    Node(std::string tag, double posx, double posy);
+
+    // 3D node
+    Node(std::string tag, double posx, double posy, double posz);
+
+};
+
+/**
+ * Creates an empty node.
+ */
+Node::Node() {
+    this->coords = new double[0];
+    this->init();
+}
+
+/**
+ * Destroy node.
+ */
+Node::~Node() {
+    delete[] coords;
+    delete[] gdlid;
+    delete[] displ;
+    delete[] loads;
+    delete[] reaction;
+}
+
+/**
+ * Creates a 2D node.
+ *
+ * @param tag Tag of the node
+ * @param posx Position x
+ * @param posy Position y
+ */
+Node::Node(std::string tag, double posx, double posy) : ModelComponent(tag) {
+    this->ngdl = 2;
+    this->coords = new double[2];
+    this->coords[0] = posx;
+    this->coords[1] = posy;
+    this->init();
+}
+
+/**
+ * Creates a 2D node.
+ *
+ * @param tag Tag of the node
+ * @param posx Position x
+ * @param posy Position y
+ */
+Node::Node(std::string tag, double posx, double posy, double posz) : ModelComponent(tag) {
+    this->ngdl = 3;
+    this->coords = new double[3];
+    this->coords[0] = posx;
+    this->coords[1] = posy;
+    this->coords[2] = posz;
+    this->init();
+}
+
+/**
+ * Init internal variables.
+ */
+void Node::init() {
+
+    // Init ID of degrees of freedom
+    this->gdlid = new int[this->ngdl];
+
+    // Init displacements
+    this->displ = new double[this->ngdl];
+
+    // Init reactions
+    this->reaction = new double[this->ngdl];
+
+    // Init node loads
+    this->loads = new double[this->ngdl];
+
+    // Save initial values
+    for (int i = 0; i < this->ngdl; i++) {
+        this->gdlid[i] = -1;
+        this->displ[i] = 0;
+        this->reaction[i] = 0;
+        this->loads[i] = 0;
+    }
+
+}

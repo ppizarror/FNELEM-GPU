@@ -1,6 +1,6 @@
 /**
 FNELEM-GPU - TEST
-Test fnelem/model/base/ModelComponent.
+Test model component.
 
 @package fnelem.model.base
 @author ppizarror
