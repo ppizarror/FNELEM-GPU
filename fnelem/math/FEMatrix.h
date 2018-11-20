@@ -30,11 +30,18 @@ Based on: https://github.com/ZhengzhongSun/Matrix-Inversion-with-CUDA
 */
 
 // Library imports
-#include <string>
-#include <iostream>
 #include <fstream>
+#include <iostream>
+#include <math.h>
 #include <stdexcept>
+#include <string>
 
+// Constant definition
+#define FEMATRIX_MIN_INVERSION_VALUE 0.0005
+
+/**
+ * Matrix class for working with CUDA. Stores matrix in an array [1..n*m].
+ */
 class FEMatrix {
 private:
 
@@ -81,6 +88,9 @@ public:
 
     // Check if matrix is square nxn
     bool is_square() const;
+
+    // Performs matrix inversion using Gauss-Jordan elimination
+    FEMatrix *cpu_inverse() const;
 
 };
 
@@ -222,4 +232,89 @@ int *FEMatrix::get_dimension() const {
  */
 bool FEMatrix::is_square() const {
     return this->n == this->m;
+}
+
+/**
+ * Inverse matrix using Gauss-Jordan elimination algorithm.
+ *
+ * @return
+ */
+FEMatrix *FEMatrix::cpu_inverse() const {
+
+    // Check matrix is square
+    if (!this->is_square()) {
+        throw std::logic_error("Matrix not square, cannot be inverted using Gauss-Jordan");
+    }
+
+    // Creates variables
+    int dimension = this->n;
+    double temporary, r;
+    int i, j, k, temp;
+
+    // Create augmented matrix
+    double augmentedMatrix[dimension][2 * dimension];
+    for (int row = 0; row < dimension; row++) {
+        for (int col = 0; col < 2 * dimension; col++) {
+            if (col < dimension) {
+                augmentedMatrix[row][col] = this->mat[row * dimension + col];
+            } else {
+                if (row == col % dimension) {
+                    augmentedMatrix[row][col] = 1;
+                } else {
+                    augmentedMatrix[row][col] = 0;
+                }
+            }
+        }
+    }
+
+    for (j = 0; j < dimension; j++) {
+        temp = j;
+
+        // Finding maximum jth column element in last (dimension-j) rows
+        for (i = j + 1; i < dimension; i++)
+            if (augmentedMatrix[i][j] > augmentedMatrix[temp][j])
+                temp = i;
+
+        if (fabs(augmentedMatrix[temp][j]) < FEMATRIX_MIN_INVERSION_VALUE) {
+            std::cout << "[FEMatrix] Element are too small to deal with" << std::endl;
+            break;
+        }
+
+        // Swapping row which has maximum jth column element
+        if (temp != j) {
+            for (k = 0; k < 2 * dimension; k++) {
+                temporary = augmentedMatrix[j][k];
+                augmentedMatrix[j][k] = augmentedMatrix[temp][k];
+                augmentedMatrix[temp][k] = temporary;
+            }
+        }
+
+        // Performing row operations to form required identity matrix out of the input matrix
+        for (i = 0; i < dimension; i++)
+            if (i != j) {
+                r = augmentedMatrix[i][j];
+                for (k = 0; k < 2 * dimension; k++)
+                    augmentedMatrix[i][k] -= (augmentedMatrix[j][k] / augmentedMatrix[j][j]) * r;
+            } else {
+                r = augmentedMatrix[i][j];
+                for (k = 0; k < 2 * dimension; k++)
+                    augmentedMatrix[i][k] /= r;
+            }
+
+    }
+
+    // Stores inverse matrix
+    double invMatrix[dimension * dimension];
+    k = 0;
+    for (i = 0; i < dimension; i++) {
+        for (j = dimension; j < 2 * dimension; j++) {
+            invMatrix[k] = augmentedMatrix[i][j];
+            k += 1;
+        }
+    }
+
+    // Create matrix
+    FEMatrix *matrix = new FEMatrix(invMatrix, dimension, dimension);
+    return matrix;
+
 }

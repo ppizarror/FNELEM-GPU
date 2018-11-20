@@ -85,11 +85,29 @@ void test_matrix_from_array() {
     mat.disp();
 }
 
+int test_cpu_inversion() {
+    int n = 3;
+    auto *L = new double[n * n];
+    L[0 * 3 + 0] = 1;
+    L[0 * 3 + 1] = 2;
+    L[0 * 3 + 2] = 3;
+    L[1 * 3 + 0] = 5;
+    L[1 * 3 + 1] = 2;
+    L[1 * 3 + 2] = 1;
+    L[2 * 3 + 0] = 2;
+    L[2 * 3 + 1] = 2;
+    L[2 * 3 + 2] = 3;
+    FEMatrix mat = FEMatrix(L, n, n);
+    FEMatrix *matInverse = mat.cpu_inverse();
+    matInverse->disp();
+}
+
 int main() {
     test_matrix_init();
     test_matrix_disp();
     test_matrix_cpu_inverse();
     test_matrix_array();
     test_matrix_from_array();
+    test_cpu_inversion();
     return 0;
 }
