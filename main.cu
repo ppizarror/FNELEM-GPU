@@ -35,26 +35,24 @@ was calculated using a CUDA algorithm (Gauss Jordan inversion).
 #include <stdio.h>
 
 // FNELEM library imports
-#include "fnelem/analysis/matrix_inversion.cu"
-#include "fnelem/analysis/matrix_utils.cpp"
+#include "fnelem/math/matrix_inversion.cu"
 
 int main() {
 
-	// Creates matrix
-	const int n = 3;
-	double *L = new double[n * n];
+    // Creates matrix
+	FEMatrix mat = FEMatrix(3, 3);
+	mat.set(0, 0, 1);
+	mat.set(0, 1, 2);
+	mat.set(0, 2, 3);
+	mat.set(1, 0, 5);
+	mat.set(1, 1, 2);
+	mat.set(1, 2, 1);
+	mat.set(2, 0, 2);
+	mat.set(2, 1, 2);
+	mat.set(2, 2, 3);
 
-	L[0 * 3 + 0] = 1;
-	L[0 * 3 + 1] = 2;
-	L[0 * 3 + 2] = 3;
-	L[1 * 3 + 0] = 5;
-	L[1 * 3 + 1] = 2;
-	L[1 * 3 + 2] = 1;
-	L[2 * 3 + 0] = 2;
-	L[2 * 3 + 1] = 2;
-	L[2 * 3 + 2] = 3;
-	double *iL = inverse_matrix(L, 3);
-	save_matrix_to_file(iL, "inverseL.txt", n, n);
+    FEMatrix *imat = inverse_matrix(&mat);
+	imat->disp();
 
-	return 0;
+    return 0;
 }

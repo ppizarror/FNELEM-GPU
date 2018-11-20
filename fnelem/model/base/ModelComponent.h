@@ -52,7 +52,7 @@ public:
     ~ModelComponent();
 
     // Returns tag
-    std::string getModelTag();
+    std::string get_model_tag();
 
 };
 
@@ -76,7 +76,7 @@ ModelComponent::ModelComponent(std::string tag) {
  *
  * @return Model tag.
  */
-std::string ModelComponent::getModelTag() {
+std::string ModelComponent::get_model_tag() {
     return this->tagID;
 }
 

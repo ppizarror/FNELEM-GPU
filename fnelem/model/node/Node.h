@@ -2,7 +2,7 @@
 FNELEM-GPU NODE ELEMENT - NODE DEFINITION
 Structural nodes.
 
-@package fnelem.model.base
+@package fnelem.model.node
 @author ppizarror
 @date 19/11/2018
 @license
@@ -30,6 +30,7 @@ Structural nodes.
 
 // Include sources
 #include "../base/ModelComponent.h"
+#include <iostream>
 
 /**
  * Node element.
@@ -40,11 +41,11 @@ private:
     // Number of degres of freedom
     int ngdl = 0;
 
-    // Coordinates of the node
-    double *coords;
-
     // ID of degrees of freedom
     int *gdlid;
+
+    // Coordinates of the node
+    double *coords;
 
     // Displacements vector
     double *displ;
@@ -60,9 +61,6 @@ private:
 
 public:
 
-    // Empty node
-    Node();
-
     // Destroy node
     ~Node();
 
@@ -72,25 +70,23 @@ public:
     // 3D node
     Node(std::string tag, double posx, double posy, double posz);
 
-};
+    // Return number of degrees of freedom
+    int get_ngdl() const;
 
-/**
- * Creates an empty node.
- */
-Node::Node() {
-    this->coords = new double[0];
-    this->init();
-}
+    // Return node coordinates
+    double *get_coordinates() const;
+
+};
 
 /**
  * Destroy node.
  */
 Node::~Node() {
-    delete[] coords;
-    delete[] gdlid;
-    delete[] displ;
-    delete[] loads;
-    delete[] reaction;
+    // delete[] this->coords;
+    // delete[] this->gdlid;
+    // delete[] this->displ;
+    // delete[] this->loads;
+    // delete[] this->reaction;
 }
 
 /**
@@ -102,7 +98,7 @@ Node::~Node() {
  */
 Node::Node(std::string tag, double posx, double posy) : ModelComponent(tag) {
     this->ngdl = 2;
-    this->coords = new double[2];
+    this->coords = new double[this->ngdl];
     this->coords[0] = posx;
     this->coords[1] = posy;
     this->init();
@@ -117,7 +113,7 @@ Node::Node(std::string tag, double posx, double posy) : ModelComponent(tag) {
  */
 Node::Node(std::string tag, double posx, double posy, double posz) : ModelComponent(tag) {
     this->ngdl = 3;
-    this->coords = new double[3];
+    this->coords = new double[this->ngdl];
     this->coords[0] = posx;
     this->coords[1] = posy;
     this->coords[2] = posz;
@@ -149,4 +145,26 @@ void Node::init() {
         this->loads[i] = 0;
     }
 
+}
+
+/**
+ * Return number of degrees of freedom.
+ *
+ * @return Ngdl
+ */
+int Node::get_ngdl() const {
+    return this->ngdl;
+}
+
+/**
+ * Return a copy of node coordinates.
+ *
+ * @return Coordinates
+ */
+double *Node::get_coordinates() const {
+    double *coords = new double[this->ngdl];
+    for (int i = 0; i < this->ngdl; i++) {
+        coords[i] = this->coords[i];
+    }
+    return coords;
 }

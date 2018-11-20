@@ -2,7 +2,7 @@
 FNELEM-GPU - TEST
 Test structure node class.
 
-@package fnelem.model.base
+@package test
 @author ppizarror
 @date 19/11/2018
 @license
@@ -35,11 +35,20 @@ Test structure node class.
 
 void test_node_creation() {
     Node n = Node("NODE1", 0, 1);
-    assert(n.getModelTag() == "NODE1");
+    assert(n.get_model_tag() == "NODE1");
     n = Node("NODE3D", 1.5, 3.2, 5.6);
+    assert(n.get_ngdl() == 3);
+}
+
+void test_coordinates() {
+    Node n = Node("NODE", 1, 2);
+    double *c = n.get_coordinates();
+    assert(c[0] == 1);
+    assert(c[1] == 2);
 }
 
 int main() {
     test_node_creation();
+    test_coordinates();
     return 0;
 }

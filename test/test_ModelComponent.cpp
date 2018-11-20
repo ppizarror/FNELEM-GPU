@@ -2,7 +2,7 @@
 FNELEM-GPU - TEST
 Test model component.
 
-@package fnelem.model.base
+@package test
 @author ppizarror
 @date 19/11/2018
 @license
@@ -35,9 +35,9 @@ Test model component.
 
 void test_tag_init() {
     ModelComponent model = ModelComponent();
-    assert(model.getModelTag() == "");
+    assert(model.get_model_tag() == "");
     model = ModelComponent("BEAM");
-    assert(model.getModelTag() == "BEAM");
+    assert(model.get_model_tag() == "BEAM");
 }
 
 int main() {
