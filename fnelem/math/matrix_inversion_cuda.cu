@@ -1,5 +1,5 @@
 /**
-FNELEM-GPU MATRIX INVERSION
+FNELEM-GPU GPU MATRIX INVERSION
 Performs matrix inversion using Gauss Jordan algorithm.
 Based on: https://github.com/ZhengzhongSun/Matrix-Inversion-with-CUDA
 
