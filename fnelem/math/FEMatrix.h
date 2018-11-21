@@ -112,6 +112,9 @@ public:
     // Update matrix A[i][j] = val
     void set(int i, int j, double val);
 
+    // Set value for vector A[i] = val
+    void set(int i, double val);
+
     // Returns value A[i][j]
     double get(int i, int j) const;
 
@@ -144,9 +147,6 @@ public:
 
     // Get square dimension
     int get_square_dimension() const;
-
-    // Check if matrix is square nxn
-    bool is_square() const;
 
     // Assign
     FEMatrix &operator=(const FEMatrix &matrix);
@@ -199,6 +199,12 @@ public:
     // Check if matrix is symmetric
     bool is_symmetric() const;
 
+    // Check if matrix is square nxn
+    bool is_square() const;
+
+    // Check if matrix is vector
+    bool is_vector() const;
+
     // Make matrix symmetric
     void make_symmetric(bool upper);
 
@@ -216,6 +222,9 @@ public:
 
     // Calculate determinant
     double det() const;
+
+    // Get norm of vector
+    double norm() const;
 
 };
 
@@ -304,14 +313,15 @@ void FEMatrix::disp_matrix(double *matrix, int dim_n, int dim_m) const {
         }
         for (int i = 0; i < dim_n; i++) { // Rows
             for (int j = 0; j < dim_m; j++) { // Columns
-                std::cout << std::setw(maxn) << matrix[i * dim_m + j] << " ";
+                std::cout << std::noshowpoint << std::setprecision(4) << std::setw(maxn) << matrix[i * dim_m + j]
+                          << " ";
             }
             std::cout << "" << std::endl;
         }
     } else {
         for (int i = 0; i < dim_n; i++) { // Rows
             for (int j = 0; j < dim_m; j++) { // Columns
-                std::cout << std::noshowpoint << matrix[i * dim_m + j] << "\t";
+                std::cout << std::noshowpoint << std::setprecision(4) << matrix[i * dim_m + j] << "\t";
             }
             std::cout << "" << std::endl;
         }
@@ -337,6 +347,30 @@ void FEMatrix::set(int i, int j, double val) {
         throw std::logic_error("[FEMATRIX] Column or row position overflow matrix");
     }
     this->mat[(i - this->origin) * this->m + (j - this->origin)] = val;
+}
+
+/**
+ * Updates vector value.
+ *
+ * @param i Row position
+ * @param j Column position
+ * @param val Value
+ */
+void FEMatrix::set(int i, double val) {
+    if (!this->is_vector()) {
+        throw std::logic_error("[FEMATRIX] Matrix must be a vector");
+    }
+    if (this->n == 1) { // Vector is row
+        if (i - this->origin >= this->m) {
+            throw std::logic_error("[FEMATRIX] Set column vector overflow");
+        }
+        this->_set(0, i - this->origin, val);
+    } else if (this->m == 1) { // Vector is column
+        if (i - this->origin >= this->n) {
+            throw std::logic_error("[FEMATRIX] Set row vector overflow");
+        }
+        this->_set(i - this->origin, 0, val);
+    }
 }
 
 /**
@@ -372,9 +406,12 @@ double FEMatrix::get(int i, int j) const {
  * @return Value at matrix[i][j]
  */
 double FEMatrix::get(int i) const {
+    if (!this->is_vector()) {
+        throw std::logic_error("[FEMATRIX] Matrix must be a vector");
+    }
     if (this->n == 1) { // Vector is row
         if (i - this->origin >= this->m) {
-            throw std::logic_error("[FEMATRIX] Get row vector overflow");
+            throw std::logic_error("[FEMATRIX] Get column vector overflow");
         }
         return this->mat[i - this->origin];
     } else if (this->m == 1) {
@@ -382,8 +419,6 @@ double FEMatrix::get(int i) const {
             throw std::logic_error("[FEMATRIX] Get row vector overflow");
         }
         return this->mat[i - this->origin];
-    } else {
-        throw std::logic_error("[FEMATRIX] Matrix must be a vector");
     }
 }
 
@@ -1104,4 +1139,29 @@ double FEMatrix::_det_recursive(double *matrix, int d) const {
     // Return value
     return dsum;
 
+}
+
+/**
+ * Get norm of vector.
+ *
+ * @return
+ */
+double FEMatrix::norm() const {
+    if (!this->is_vector()) {
+        throw std::logic_error("[FEMATRIX] Matrix must be a vector");
+    }
+    double sumnorm = 0;
+    for (int i = 0; i < this->length(); i++) {
+        sumnorm += this->mat[i] * this->mat[i];
+    }
+    return sqrt(sumnorm);
+}
+
+/**
+ * Check if matrix is vector.
+ *
+ * @return
+ */
+bool FEMatrix::is_vector() const {
+    return this->n == 1 || this->m == 1;
 }

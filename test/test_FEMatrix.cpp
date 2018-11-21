@@ -53,6 +53,7 @@ void test_matrix_init() {
     assert(dim[1] == 5);
     matrix.set(0, 0, 10);
     assert(matrix.get(0, 0) == 10);
+    assert(!matrix.is_vector());
     delete[] dim;
 }
 
@@ -230,7 +231,6 @@ void test_constant_multiplication() {
     FEMatrix m = FEMatrix(5, 7);
     m.fill_ones();
     m *= 5;
-    m.disp();
     assert(m.sum() == 5 * 7 * 5);
 }
 
@@ -272,12 +272,12 @@ void test_row_column() {
     FEMatrix col1 = m.get_column(1); // [1, 5, 9, 13]
     col1.disp();
     assert(col1.length() == 4);
+    assert(col1.is_vector());
 
     // Test multipication
     FEMatrix colt = col1.clone().transpose();
     colt.disp();
     colt *= col1;
-    colt.disp();
     assert(colt.get(1) == 1 + 5 * 5 + 9 * 9 + 13 * 13);
 }
 
@@ -320,10 +320,52 @@ void test_determinant() {
     mat3.disp();
     assert(is_num_equal(mat3.det(), -4));
 
+    // Determinant 4x4
+    FEMatrix mat4 = FEMatrix(4, 4);
+    mat4.set_origin(1);
+    mat4.set(1, 1, 2);
+    mat4.set(1, 2, 4);
+    mat4.set(1, 3, 7);
+    mat4.set(1, 4, 8);
+    mat4.set(2, 1, 7);
+    mat4.set(2, 2, 3);
+    mat4.set(2, 3, 3);
+    mat4.set(2, 4, 5);
+    mat4.set(3, 1, 9);
+    mat4.set(3, 2, 7);
+    mat4.set(3, 3, 2);
+    mat4.set(3, 4, 1);
+    mat4.set(4, 1, 0);
+    mat4.set(4, 2, 5);
+    mat4.set(4, 3, 7);
+    mat4.set(4, 4, 3);
+    assert(is_num_equal(mat4.det(), -580));
+    assert(is_num_equal(mat4.transpose().det(), -580));
+
+    // Determinant of inverse [4x4]
+    FEMatrix imat4 = matrix_inverse_cpu(&mat4);
+    assert(is_num_equal(imat4.det(), -0.00172413793103448208));
+
+    // Determinant of sum
+    FEMatrix mat4s = mat4 + imat4;
+    assert(is_num_equal(mat4s.det(), -1451.98793103448247165943));
+
     // Determinant zero for a NxN ones matrix
     FEMatrix mat_ones = FEMatrix(10, 10);
     mat_ones.fill_ones();
     assert(is_num_equal(mat_ones.det(), 0));
+}
+
+void test_norm() {
+    FEMatrix vector = FEMatrix(6, 1);
+    vector.set(0, 3);
+    vector.set(1, 4);
+    vector.set(2, 5);
+    vector.set(3, 6);
+    vector.set(4, 7);
+    vector.set(5, 8);
+    vector.disp();
+    assert(is_num_equal(vector.norm(), 14.10673597966588488362));
 }
 
 int main() {
@@ -343,5 +385,6 @@ int main() {
     test_row_column();
     test_equal();
     test_determinant();
+    test_norm();
     return 0;
 }
