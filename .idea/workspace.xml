@@ -58,17 +58,17 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="cpp" value="3914" />
+          <entry key="cpp" value="4284" />
           <entry key="cu" value="1862" />
-          <entry key="h" value="12284" />
+          <entry key="h" value="13662" />
           <entry key="txt" value="190" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CMakeLists.txt" value="190" />
-          <entry key="Doxygen file" value="103" />
-          <entry key="ObjectiveC" value="17952" />
+          <entry key="Doxygen file" value="105" />
+          <entry key="ObjectiveC" value="19698" />
           <entry key="PLAIN_TEXT" value="5" />
         </counts>
       </usages-collector>
@@ -85,11 +85,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fnelem/math/FEMatrix.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="800" column="14" selection-start-line="800" selection-start-column="14" selection-end-line="800" selection-end-column="14" />
+            <state relative-caret-position="298">
+              <caret line="874" column="54" selection-start-line="874" selection-start-column="54" selection-end-line="874" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -103,11 +103,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/test_FEMatrix.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
-              <caret line="222" column="33" selection-start-line="222" selection-start-column="33" selection-end-line="222" selection-end-column="33" />
+            <state relative-caret-position="358">
+              <caret line="250" column="91" selection-start-line="250" selection-start-column="91" selection-end-line="250" selection-end-column="91" />
             </state>
           </provider>
         </entry>
@@ -275,16 +275,15 @@
       <workItem from="1542656095344" duration="217000" />
       <workItem from="1542656422978" duration="13772000" />
       <workItem from="1542758463957" duration="15026000" />
-      <workItem from="1542807933493" duration="2107000" />
+      <workItem from="1542807933493" duration="3754000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35586000" />
+    <option name="totallyTimeSpent" value="37233000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2080537" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -387,17 +386,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/test_FEMatrix.cpp">
+    <entry file="file://$PROJECT_DIR$/fnelem/math/FEMatrix.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="222" column="33" selection-start-line="222" selection-start-column="33" selection-end-line="222" selection-end-column="33" />
+        <state relative-caret-position="298">
+          <caret line="874" column="54" selection-start-line="874" selection-start-column="54" selection-end-line="874" selection-end-column="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fnelem/math/FEMatrix.h">
+    <entry file="file://$PROJECT_DIR$/test/test_FEMatrix.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="800" column="14" selection-start-line="800" selection-start-column="14" selection-end-line="800" selection-end-column="14" />
+        <state relative-caret-position="358">
+          <caret line="250" column="91" selection-start-line="250" selection-start-column="91" selection-end-line="250" selection-end-column="91" />
         </state>
       </provider>
     </entry>

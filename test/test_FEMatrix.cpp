@@ -223,6 +223,34 @@ void test_constant_multiplication() {
     assert(m.sum() == 5 * 7 * 5);
 }
 
+void test_row() {
+    FEMatrix m = FEMatrix(4, 4);
+    m.set_origin(1);
+    m.set(1, 1, 1);
+    m.set(1, 2, 2);
+    m.set(1, 3, 3);
+    m.set(1, 4, 4);
+    m.set(2, 1, 5);
+    m.set(2, 2, 6);
+    m.set(2, 3, 7);
+    m.set(2, 4, 8);
+    m.set(3, 1, 9);
+    m.set(3, 2, 10);
+    m.set(3, 3, 11);
+    m.set(3, 4, 12);
+    m.set(4, 1, 13);
+    m.set(4, 2, 14);
+    m.set(4, 3, 15);
+    m.set(4, 4, 16);
+    m.disp();
+    FEMatrix row1 = m.get_row(1, 1, 4); // [1, 2, 3, 4]
+    row1.disp();
+    assert(row1.get(1) == 1 && row1.get(2) == 2 && row1.get(3) == 3 && row1.get(4) == 4);
+    FEMatrix row4 = m.get_row(4); // [1, 2, 3, 4]
+    row4.disp();
+    assert(row4.get(1) == 13 && row4.get(2) == 14 && row4.get(3) == 15 && row4.get(4) == 16);
+}
+
 int main() {
     test_matrix_init();
     test_matrix_disp();
@@ -237,5 +265,6 @@ int main() {
     test_symmetric();
     test_make_symmetric();
     test_constant_multiplication();
+    test_row();
     return 0;
 }

@@ -106,6 +106,14 @@ public:
     // Returns value A[i][j]
     double get(int i, int j) const;
 
+    // Returns value for vector A[i]
+    double get(int i) const;
+
+    // Get row
+    FEMatrix get_row(int i, int from, int to) const;
+
+    FEMatrix get_row(int i) const;
+
     // Save matrix to file
     void save_to_file(std::string filename) const;
 
@@ -302,10 +310,33 @@ void FEMatrix::_set(int i, int j, double val) {
  * @return Value at matrix[i][j]
  */
 double FEMatrix::get(int i, int j) const {
-    if (i >= this->n + this->origin || j >= this->m + this->origin) {
+    if (i >= this->n + this->origin || j >= this->m + this->origin || (i - this->origin) < 0 ||
+        (j - this->origin) < 0) {
         throw std::logic_error("[FEMATRIX] Get value from matrix olumn or row position overflow");
     }
     return this->mat[(i - this->origin) * this->m + (j - this->origin)];
+}
+
+/**
+ * Returns vector value, origin used.
+ *
+ * @param i Row/Column position
+ * @return Value at matrix[i][j]
+ */
+double FEMatrix::get(int i) const {
+    if (this->n == 1) { // Vector is row
+        if (i - this->origin >= this->m) {
+            throw std::logic_error("[FEMATRIX] Get row vector overflow");
+        }
+        return this->mat[i - this->origin];
+    } else if (this->m == 1) {
+        if (i - this->origin >= this->n) {
+            throw std::logic_error("[FEMATRIX] Get row vector overflow");
+        }
+        return this->mat[i - this->origin];
+    } else {
+        throw std::logic_error("[FEMATRIX] Matrix must be a vector");
+    }
 }
 
 /**
@@ -799,4 +830,47 @@ double FEMatrix::sum() const {
         }
     }
     return st;
+}
+
+/**
+ * Get matrix row.
+ *
+ * @param i Row number
+ * @param from Init column position
+ * @param to Final column position
+ * @return
+ */
+FEMatrix FEMatrix::get_row(int i, int from, int to) const {
+
+    // Check row consistency
+    i -= this->origin;
+    from -= this->origin;
+    to -= this->origin;
+    if (i > this->n) {
+        throw std::logic_error("[FEMATRIX] Row position overflow");
+    }
+    if (from < 0 || from > this->m || to < 0 || to > this->m || to < from) {
+        throw std::logic_error("[FEMATRIX] Column position overflow");
+    }
+
+    // Create new matrix
+    FEMatrix row = FEMatrix(1, to - from + 1);
+    for (int j = from; j <= to; j++) { // Columns
+        row.set(0, j, this->_get(i, j));
+    }
+    row.set_origin(this->origin_temp);
+
+    // Return row matrix
+    return row;
+
+}
+
+/**
+ * Get matrix full row..
+ *
+ * @param i Row number
+ * @return
+ */
+FEMatrix FEMatrix::get_row(int i) const {
+    return this->get_row(i, this->origin_temp, this->m);
 }
