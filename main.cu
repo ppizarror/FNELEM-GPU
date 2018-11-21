@@ -42,8 +42,8 @@ was calculated using a CUDA algorithm (Gauss Jordan inversion).
 
 int main() {
 
-	// Create nodes
-	std::vector<Node> nodes = std::vector<Node>();
+    // Create nodes
+    std::vector<Node> nodes = std::vector<Node>();
 
     // Creates matrix
     FEMatrix mat = FEMatrix(3, 3);

@@ -51,16 +51,18 @@ FEMatrix matrix_inverse_cpu(FEMatrix *matrix) {
 
     // Create augmented matrix
     matrix->disable_origin();
-    double augmentedMatrix[dimension][2 * dimension];
+    int aug_n = dimension;
+    int aug_m = 2 * dimension;
+    double *augmentedMatrix = new double[aug_n * aug_m];
     for (int row = 0; row < dimension; row++) {
         for (int col = 0; col < 2 * dimension; col++) {
             if (col < dimension) {
-                augmentedMatrix[row][col] = matrix->get(row, col);
+                augmentedMatrix[row * aug_m + col] = matrix->get(row, col);
             } else {
                 if (row == col % dimension) {
-                    augmentedMatrix[row][col] = 1;
+                    augmentedMatrix[row * aug_m + col] = 1;
                 } else {
-                    augmentedMatrix[row][col] = 0;
+                    augmentedMatrix[row * aug_m + col] = 0;
                 }
             }
         }
@@ -72,10 +74,10 @@ FEMatrix matrix_inverse_cpu(FEMatrix *matrix) {
 
         // Finding maximum jth column element in last (dimension-j) rows
         for (i = j + 1; i < dimension; i++)
-            if (augmentedMatrix[i][j] > augmentedMatrix[temp][j])
+            if (augmentedMatrix[i * aug_m + j] > augmentedMatrix[temp * aug_m + j])
                 temp = i;
 
-        if (fabs(augmentedMatrix[temp][j]) < FEMATRIX_MIN_INVERSION_VALUE) {
+        if (fabs(augmentedMatrix[temp * aug_m + j]) < FEMATRIX_MIN_INVERSION_VALUE) {
             std::cout << "[FEMatrix] Element are too small to deal with" << std::endl;
             break;
         }
@@ -83,37 +85,45 @@ FEMatrix matrix_inverse_cpu(FEMatrix *matrix) {
         // Swapping row which has maximum jth column element
         if (temp != j) {
             for (k = 0; k < 2 * dimension; k++) {
-                temporary = augmentedMatrix[j][k];
-                augmentedMatrix[j][k] = augmentedMatrix[temp][k];
-                augmentedMatrix[temp][k] = temporary;
+                temporary = augmentedMatrix[j * aug_m + k];
+                augmentedMatrix[j * aug_m + k] = augmentedMatrix[temp * aug_m + k];
+                augmentedMatrix[temp * aug_m + k] = temporary;
             }
         }
 
         // Performing row operations to form required identity matrix out of the input matrix
         for (i = 0; i < dimension; i++)
             if (i != j) {
-                r = augmentedMatrix[i][j];
+                r = augmentedMatrix[i * aug_m + j];
                 for (k = 0; k < 2 * dimension; k++)
-                    augmentedMatrix[i][k] -= (augmentedMatrix[j][k] / augmentedMatrix[j][j]) * r;
+                    augmentedMatrix[i * aug_m + k] -=
+                            (augmentedMatrix[j * aug_m + k] / augmentedMatrix[j * aug_m + j]) * r;
             } else {
-                r = augmentedMatrix[i][j];
+                r = augmentedMatrix[i * aug_m + j];
                 for (k = 0; k < 2 * dimension; k++)
-                    augmentedMatrix[i][k] /= r;
+                    augmentedMatrix[i * aug_m + k] /= r;
             }
 
     }
 
     // Stores inverse matrix
-    double invMatrix[dimension * dimension];
+    double *invMatrix = new double[dimension * dimension];
     k = 0;
     for (i = 0; i < dimension; i++) {
         for (j = dimension; j < 2 * dimension; j++) {
-            invMatrix[k] = augmentedMatrix[i][j];
+            invMatrix[k] = augmentedMatrix[i * aug_m + j];
             k += 1;
         }
     }
 
+    // Create matrix
+    FEMatrix returnMatrix = FEMatrix(dimension, dimension, invMatrix);
+
+    // Variable deletion
+    delete[] augmentedMatrix;
+    delete[] invMatrix;
+
     // Return matrix
-    return FEMatrix(dimension, dimension, invMatrix);
+    return returnMatrix;
 
 }

@@ -14,11 +14,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="221cac94-3076-4b70-8e37-e7f72eb35a62" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/fnelem/math/FEMatrix.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/math/FEMatrix.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fnelem/math/matrix_inversion_cpu.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/math/matrix_inversion_cpu.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fnelem/math/matrix_inversion_cuda.cu" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/math/matrix_inversion_cuda.cu" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cu" beforeDir="false" afterPath="$PROJECT_DIR$/main.cu" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_FEMatrix.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_FEMatrix.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -63,7 +59,7 @@
         <counts>
           <entry key="cpp" value="5632" />
           <entry key="cu" value="1898" />
-          <entry key="h" value="17527" />
+          <entry key="h" value="17818" />
           <entry key="txt" value="190" />
         </counts>
       </usages-collector>
@@ -71,7 +67,7 @@
         <counts>
           <entry key="CMakeLists.txt" value="190" />
           <entry key="Doxygen file" value="123" />
-          <entry key="ObjectiveC" value="24929" />
+          <entry key="ObjectiveC" value="25220" />
           <entry key="PLAIN_TEXT" value="5" />
         </counts>
       </usages-collector>
@@ -100,8 +96,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fnelem/math/matrix_inversion_cpu.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="31" column="15" selection-start-line="31" selection-start-column="15" selection-end-line="31" selection-end-column="15" />
+            <state relative-caret-position="1900">
+              <caret line="126" column="23" selection-start-line="126" selection-start-column="23" selection-end-line="126" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -288,12 +284,12 @@
       <workItem from="1542656095344" duration="217000" />
       <workItem from="1542656422978" duration="13772000" />
       <workItem from="1542758463957" duration="15026000" />
-      <workItem from="1542807933493" duration="10419000" />
+      <workItem from="1542807933493" duration="10782000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43898000" />
+    <option name="totallyTimeSpent" value="44261000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
@@ -409,8 +405,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/fnelem/math/matrix_inversion_cpu.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="31" column="15" selection-start-line="31" selection-start-column="15" selection-end-line="31" selection-end-column="15" />
+        <state relative-caret-position="1900">
+          <caret line="126" column="23" selection-start-line="126" selection-start-column="23" selection-end-line="126" selection-end-column="23" />
         </state>
       </provider>
     </entry>
