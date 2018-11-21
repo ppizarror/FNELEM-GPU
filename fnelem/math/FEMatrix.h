@@ -588,6 +588,7 @@ FEMatrix FEMatrix::clone() const {
             newMatrix._set(i, j, this->_get(i, j));
         }
     }
+    newMatrix.set_origin(this->origin_temp);
     return newMatrix;
 }
 
