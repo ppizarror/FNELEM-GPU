@@ -38,7 +38,7 @@ Based on: https://github.com/ZhengzhongSun/Matrix-Inversion-with-CUDA
 class FEMatrix;
 
 // Constants
-const int MATRIX_INVERSION_CUDA_BLOCKSIZE = 8;
+#define MATRIX_INVERSION_CUDA_BLOCKSIZE 8
 
 /**
  * NODIAG normalize diagonal matrix (CUDA).
@@ -108,7 +108,6 @@ __global__ void gaussjordan(double *A, double *I, int n, int i) {
 __global__ void set_zero(double *A, double *I, int n, int i) {
     int x = blockIdx.x * blockDim.x + threadIdx.x;
     int y = blockIdx.y * blockDim.y + threadIdx.y;
-
     if (x < n && y < n) {
         if (x != i) {
             if (y == i) {
@@ -178,8 +177,10 @@ FEMatrix *matrix_inverse_cuda(FEMatrix *feMatrix) {
 
     // Creates blocks
     dim3 threadsPerBlock(MATRIX_INVERSION_CUDA_BLOCKSIZE, MATRIX_INVERSION_CUDA_BLOCKSIZE);
-    dim3 numBlocks((n + MATRIX_INVERSION_CUDA_BLOCKSIZE - 1) / MATRIX_INVERSION_CUDA_BLOCKSIZE,
-                   (n + MATRIX_INVERSION_CUDA_BLOCKSIZE - 1) / MATRIX_INVERSION_CUDA_BLOCKSIZE);
+    dim3 numBlocks((n + MATRIX_INVERSION_CUDA_BLOCKSIZE
+    -1) / MATRIX_INVERSION_CUDA_BLOCKSIZE,
+    (n + MATRIX_INVERSION_CUDA_BLOCKSIZE
+    -1) / MATRIX_INVERSION_CUDA_BLOCKSIZE);
 
     // Memory allocation
     err = cudaMalloc((void **) &d_A, ddsize);

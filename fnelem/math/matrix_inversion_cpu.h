@@ -31,6 +31,9 @@ Performs matrix inversion using Gauss Jordan algorithm.
 // Common class definition
 class FEMatrix;
 
+// Constant definition
+#define _FEMATRIX_MIN_INVERSION_VALUE 0.0005
+
 /**
  * Performs CPU matrix inversion using Gauss-Jordan elimination algorithm.
  *
@@ -77,7 +80,7 @@ FEMatrix matrix_inverse_cpu(FEMatrix *matrix) {
             if (augmentedMatrix[i * aug_m + j] > augmentedMatrix[temp * aug_m + j])
                 temp = i;
 
-        if (fabs(augmentedMatrix[temp * aug_m + j]) < FEMATRIX_MIN_INVERSION_VALUE) {
+        if (fabs(augmentedMatrix[temp * aug_m + j]) < _FEMATRIX_MIN_INVERSION_VALUE) {
             std::cout << "[FEMatrix] Element are too small to deal with" << std::endl;
             break;
         }
