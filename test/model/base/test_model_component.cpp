@@ -1,8 +1,8 @@
 /**
-FNELEM-GPU MAIN FILE
-Performs finite element structural analysis using an 4-node membrane, matrix inversion
-was calculated using a CUDA algorithm (Gauss Jordan inversion).
+FNELEM-GPU - TEST
+Test model component.
 
+@package test.model.base
 @author ppizarror
 @date 19/11/2018
 @license
@@ -28,37 +28,20 @@ was calculated using a CUDA algorithm (Gauss Jordan inversion).
 	SOFTWARE.
 */
 
-// CUDA library imports
-#include "cuda_runtime.h"
-#include "device_launch_parameters.h"
-#include <stdio.h>
-#include <vector>
+// Include sources
+#include "../../test_utils.h"
+#include "../../../fnelem/model/base/model_component.h"
+#include <iostream>
+#include <cassert>
 
-// FNELEM library imports
-#include "fnelem/math/fematrix.h"
-#include "fnelem/math/matrix_inversion_cpu.h"
-#include "fnelem/math/matrix_inversion_cuda.cu"
-#include "fnelem/model/node/node.h"
+void test_tag_init() {
+    ModelComponent model = ModelComponent();
+    assert(model.get_model_tag() == "");
+    model = ModelComponent("BEAM");
+    assert(model.get_model_tag() == "BEAM");
+}
 
 int main() {
-
-    // Create nodes
-    std::vector<Node> nodes = std::vector<Node>();
-
-    // Creates matrix
-    FEMatrix mat = FEMatrix(3, 3);
-    mat.set(0, 0, 1);
-    mat.set(0, 1, 2);
-    mat.set(0, 2, 3);
-    mat.set(1, 0, 5);
-    mat.set(1, 1, 2);
-    mat.set(1, 2, 1);
-    mat.set(2, 0, 2);
-    mat.set(2, 1, 2);
-    mat.set(2, 2, 3);
-
-    FEMatrix *imat = matrix_inverse_cuda(&mat);
-    imat->disp();
-
+    test_tag_init();
     return 0;
 }

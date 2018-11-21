@@ -2,7 +2,7 @@
 FNELEM-GPU - TEST
 Test matrix.
 
-@package test
+@package test.fnelem.math
 @author ppizarror
 @date 19/11/2018
 @license
@@ -29,21 +29,11 @@ Test matrix.
 */
 
 // Include sources
-#include "../fnelem/math/FEMatrix.h"
-#include "../fnelem/math/matrix_inversion_cpu.h"
+#include "../test_utils.h"
+#include "../../fnelem/math/fematrix.h"
+#include "../../fnelem/math/matrix_inversion_cpu.h"
 #include <iostream>
 #include <cassert>
-
-/**
- * Check if two numbers are equal under a certain tolerance.
- *
- * @param a Number to evaluate
- * @param b Number to evaluate
- * @return
- */
-bool is_num_equal(double a, double b) {
-    return fabs(a - b) < 1e-12;
-}
 
 void test_matrix_init() {
     FEMatrix matrix = FEMatrix(3, 5);

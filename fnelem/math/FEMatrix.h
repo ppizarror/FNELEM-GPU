@@ -31,11 +31,11 @@ Based on: https://github.com/ZhengzhongSun/Matrix-Inversion-with-CUDA
 
 // Library imports
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <math.h>
 #include <stdexcept>
 #include <string>
-#include <iomanip>
 
 // Constant definition
 #define FEMATRIX_MIN_INVERSION_VALUE 0.0005

@@ -1,8 +1,8 @@
 /**
 FNELEM-GPU - TEST
-Test model component.
+Test structure node class.
 
-@package test
+@package test.model.node
 @author ppizarror
 @date 19/11/2018
 @license
@@ -29,18 +29,27 @@ Test model component.
 */
 
 // Include sources
-#include "../fnelem/model/base/ModelComponent.h"
+#include "../../test_utils.h"
+#include "../../../fnelem/model/node/node.h"
 #include <iostream>
 #include <cassert>
 
-void test_tag_init() {
-    ModelComponent model = ModelComponent();
-    assert(model.get_model_tag() == "");
-    model = ModelComponent("BEAM");
-    assert(model.get_model_tag() == "BEAM");
+void test_node_creation() {
+    Node n = Node("NODE1", 0, 1);
+    assert(n.get_model_tag() == "NODE1");
+    n = Node("NODE3D", 1.5, 3.2, 5.6);
+    assert(n.get_ngdl() == 3);
+}
+
+void test_coordinates() {
+    Node n = Node("NODE", 1, 2);
+    double *c = n.get_coordinates();
+    assert(c[0] == 1);
+    assert(c[1] == 2);
 }
 
 int main() {
-    test_tag_init();
+    test_node_creation();
+    test_coordinates();
     return 0;
 }

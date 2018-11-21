@@ -1,10 +1,10 @@
 /**
-FNELEM-GPU - TEST
-Test structure node class.
+FNELEM-GPU - TEST UTILS
+Utilitary functions to perform tests.
 
 @package test
 @author ppizarror
-@date 19/11/2018
+@date 21/11/2018
 @license
 	MIT License
 	Copyright (c) 2018 Pablo Pizarro R.
@@ -29,26 +29,15 @@ Test structure node class.
 */
 
 // Include sources
-#include "../fnelem/model/node/Node.h"
-#include <iostream>
-#include <cassert>
+#include <math.h>
 
-void test_node_creation() {
-    Node n = Node("NODE1", 0, 1);
-    assert(n.get_model_tag() == "NODE1");
-    n = Node("NODE3D", 1.5, 3.2, 5.6);
-    assert(n.get_ngdl() == 3);
-}
-
-void test_coordinates() {
-    Node n = Node("NODE", 1, 2);
-    double *c = n.get_coordinates();
-    assert(c[0] == 1);
-    assert(c[1] == 2);
-}
-
-int main() {
-    test_node_creation();
-    test_coordinates();
-    return 0;
+/**
+ * Check if two numbers are equal under a certain tolerance.
+ *
+ * @param a Number to evaluate
+ * @param b Number to evaluate
+ * @return
+ */
+bool is_num_equal(double a, double b) {
+    return fabs(a - b) < 1e-12;
 }

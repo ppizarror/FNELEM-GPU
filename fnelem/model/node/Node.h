@@ -29,7 +29,7 @@ Structural nodes.
 */
 
 // Include sources
-#include "../base/ModelComponent.h"
+#include "../base/model_component.h"
 #include <iostream>
 
 /**
