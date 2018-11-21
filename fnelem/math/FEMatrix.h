@@ -226,6 +226,8 @@ public:
     // Get norm of vector
     double norm() const;
 
+    bool is_diag() const;
+
 };
 
 /**
@@ -1164,4 +1166,23 @@ double FEMatrix::norm() const {
  */
 bool FEMatrix::is_vector() const {
     return this->n == 1 || this->m == 1;
+}
+
+/**
+ * Check if matrix is diagonal.
+ *
+ * @return
+ */
+bool FEMatrix::is_diag() const {
+    if (!this->is_square()) return false;
+    for (int i = 0; i < this->n; i++) { // Rows
+        for (int j = 0; j < this->m; j++) { // Columns
+            if (i != j) { // Out of diagonal, must be zero
+                if (fabs(this->_get(i, j)) > FEMATRIX_ZERO_TOL) return false;
+            } else { // Diagonal, must be different than zero
+                if (fabs(this->_get(i, j)) < FEMATRIX_ZERO_TOL) return false;
+            }
+        }
+    }
+    return true;
 }

@@ -368,6 +368,21 @@ void test_norm() {
     assert(is_num_equal(vector.norm(), 14.10673597966588488362));
 }
 
+void test_diagonal() {
+    FEMatrix nodiagonal = FEMatrix(4, 2);
+    assert(!nodiagonal.is_diag());
+    FEMatrix diagonal = FEMatrix(4, 4);
+    diagonal.set_origin(1);
+    diagonal.set(1, 1, 1);
+    diagonal.set(2, 2, 2);
+    diagonal.set(3, 3, 3);
+    diagonal.set(4, 4, 4);
+    assert(diagonal.is_diag());
+    diagonal.set(1, 2, -1);
+    assert(!diagonal.is_diag());
+
+}
+
 int main() {
     test_matrix_init();
     test_matrix_disp();
@@ -386,5 +401,6 @@ int main() {
     test_equal();
     test_determinant();
     test_norm();
+    test_diagonal();
     return 0;
 }
