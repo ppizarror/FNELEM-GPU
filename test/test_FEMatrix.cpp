@@ -37,7 +37,7 @@ Test matrix.
 void test_matrix_init() {
     FEMatrix matrix = FEMatrix(3, 5);
     matrix.fill_zeros();
-    int *dim = matrix.get_dimension();
+    int *dim = matrix.size();
     assert(dim[0] == 3);
     assert(dim[1] == 5);
     matrix.set(0, 0, 10);
@@ -223,7 +223,7 @@ void test_constant_multiplication() {
     assert(m.sum() == 5 * 7 * 5);
 }
 
-void test_row() {
+void test_row_column() {
     FEMatrix m = FEMatrix(4, 4);
     m.set_origin(1);
     m.set(1, 1, 1);
@@ -243,12 +243,23 @@ void test_row() {
     m.set(4, 3, 15);
     m.set(4, 4, 16);
     m.disp();
+
+    // Test row
     FEMatrix row1 = m.get_row(1, 1, 4); // [1, 2, 3, 4]
     row1.disp();
     assert(row1.get(1) == 1 && row1.get(2) == 2 && row1.get(3) == 3 && row1.get(4) == 4);
-    FEMatrix row4 = m.get_row(4); // [1, 2, 3, 4]
+    FEMatrix row4 = m.get_row(4); // [13, 14, 15, 16]
     row4.disp();
     assert(row4.get(1) == 13 && row4.get(2) == 14 && row4.get(3) == 15 && row4.get(4) == 16);
+    FEMatrix r = m.get_row(3, 2, 2); // [9, 10, 11, 12]
+    assert(r.get(1) == 10);
+    r = m.get_row(3, 1, 3); // [9, 10, 11, 12]
+    r.disp();
+    assert(r.length() == 3);
+
+    // Test column
+    FEMatrix col1 = m.get_column(1); // [1, 5, 9, 13]
+    col1.disp();
 }
 
 int main() {
@@ -265,6 +276,6 @@ int main() {
     test_symmetric();
     test_make_symmetric();
     test_constant_multiplication();
-    test_row();
+    test_row_column();
     return 0;
 }

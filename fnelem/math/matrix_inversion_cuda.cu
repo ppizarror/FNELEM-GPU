@@ -148,7 +148,7 @@ FEMatrix *matrix_inverse_cuda(FEMatrix *feMatrix) {
     double *matrix = feMatrix->get_array();
 
     // Get matrix dimension
-    int *matDim = feMatrix->get_dimension();
+    int *matDim = feMatrix->size();
     int n;
     if (matDim[0] == matDim[1]) {
         n = matDim[0];

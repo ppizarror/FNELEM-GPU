@@ -112,7 +112,14 @@ public:
     // Get row
     FEMatrix get_row(int i, int from, int to) const;
 
+    // Get full row
     FEMatrix get_row(int i) const;
+
+    // Get column
+    FEMatrix get_column(int j, int from, int to) const;
+
+    // Get full column
+    FEMatrix get_column(int j) const;
 
     // Save matrix to file
     void save_to_file(std::string filename) const;
@@ -120,8 +127,11 @@ public:
     // Get matrix array
     double *get_array() const;
 
-    // Return matrix dimension
-    int *get_dimension() const;
+    // Return matrix dimension [N, M]
+    int *size() const;
+
+    // Return max dimension, usefull for vector
+    int length() const;
 
     // Get square dimension
     int get_square_dimension() const;
@@ -389,7 +399,7 @@ double *FEMatrix::get_array() const {
  *
  * @return
  */
-int *FEMatrix::get_dimension() const {
+int *FEMatrix::size() const {
     int *dim = new int[2];
     dim[0] = this->n;
     dim[1] = this->m;
@@ -424,14 +434,26 @@ int FEMatrix::get_square_dimension() const {
  * @return
  */
 FEMatrix &FEMatrix::operator=(const FEMatrix &matrix) {
+
+    // Create new matrix
+    double *newMatrix = new double[matrix.n * matrix.m];
     this->n = matrix.n;
     this->m = matrix.m;
+
+    // Assign values
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
-            this->mat[i * this->m + j] = matrix._get(i, j);
+            newMatrix[i * this->m + j] = matrix._get(i, j);
         }
     }
+
+    // Delete actual matrix and update
+    delete[] this->mat;
+    this->mat = newMatrix;
+
+    // Return actual matrix
     return *this;
+
 }
 
 /**
@@ -853,24 +875,79 @@ FEMatrix FEMatrix::get_row(int i, int from, int to) const {
         throw std::logic_error("[FEMATRIX] Column position overflow");
     }
 
-    // Create new matrix
+    // Create new vector
+    std::cout << "from " << from << ", to " << to << ", i " << i << std::endl;
     FEMatrix row = FEMatrix(1, to - from + 1);
     for (int j = from; j <= to; j++) { // Columns
-        row.set(0, j, this->_get(i, j));
+        std::cout << "i=" << i << ", j=" << j - from << std::endl;
+        row.set(0, j - from, this->_get(i, j));
     }
     row.set_origin(this->origin_temp);
 
-    // Return row matrix
+    // Return row vector
     return row;
 
 }
 
 /**
- * Get matrix full row..
+ * Get matrix full row.
  *
  * @param i Row number
  * @return
  */
 FEMatrix FEMatrix::get_row(int i) const {
     return this->get_row(i, this->origin_temp, this->m);
+}
+
+/**
+ * Get matrix column.
+ *
+ * @param j Column number
+ * @param from Init row position
+ * @param to Final row position
+ * @return
+ */
+FEMatrix FEMatrix::get_column(int j, int from, int to) const {
+
+    // Check column consistency
+    j -= this->origin;
+    from -= this->origin;
+    to -= this->origin;
+    if (j > this->m) {
+        throw std::logic_error("[FEMATRIX] Column position overflow");
+    }
+    if (from < 0 || from > this->n || to < 0 || to > this->n || to < from) {
+        throw std::logic_error("[FEMATRIX] Row position overflow");
+    }
+
+    // Create new vector
+    FEMatrix column = FEMatrix(to - from + 1, 1);
+    for (int i = from; i <= to; i++) { // Columns
+        column.set(i - from, 0, this->_get(i, j));
+    }
+    column.set_origin(this->origin_temp);
+
+    // Return column vector
+    return column;
+
+}
+
+/**
+ * Get matrix full column.
+ *
+ * @param j Column number
+ * @return
+ */
+FEMatrix FEMatrix::get_column(int j) const {
+    return this->get_column(j, this->origin_temp, this->n);
+}
+
+/**
+ * Return max dimension of matrix, usefull for vectors.
+ *
+ * @return
+ */
+int FEMatrix::length() const {
+    if (this->n > this->m) return this->n;
+    return this->m;
 }
