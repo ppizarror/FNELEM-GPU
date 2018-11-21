@@ -215,6 +215,14 @@ void test_make_symmetric() {
     assert(m.is_symmetric());
 }
 
+void test_constant_multiplication() {
+    FEMatrix m = FEMatrix(5, 7);
+    m.fill_ones();
+    m *= 5;
+    m.disp();
+    assert(m.sum() == 5 * 7 * 5);
+}
+
 int main() {
     test_matrix_init();
     test_matrix_disp();
@@ -228,5 +236,6 @@ int main() {
     test_identity();
     test_symmetric();
     test_make_symmetric();
+    test_constant_multiplication();
     return 0;
 }

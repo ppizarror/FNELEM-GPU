@@ -145,6 +145,15 @@ public:
     // Matrix multiplication with self
     FEMatrix &operator*=(const FEMatrix &matrix);
 
+    // Matrix multiplication and return new matrix
+    FEMatrix operator*=(const FEMatrix &matrix) const;
+
+    // Multiply self matrix by a constant
+    FEMatrix &operator*=(double a);
+
+    // Multiply matrix by a constant and return new matrix
+    FEMatrix operator*=(double a) const;
+
     // Clone object
     FEMatrix clone() const;
 
@@ -165,6 +174,9 @@ public:
 
     // Uses upper by default
     void make_symmetric();
+
+    // Sum all matrix
+    double sum() const;
 
 };
 
@@ -423,20 +435,8 @@ FEMatrix &FEMatrix::operator+=(const FEMatrix &matrix) {
  * @return
  */
 FEMatrix FEMatrix::operator+(const FEMatrix &matrix) const {
-
-    // Get matrix dimension
-    if (matrix.n != this->n || matrix.m != this->m) {
-        throw std::logic_error("[FEMATRIX] Matrix dimension must be the same");
-    }
-
-    FEMatrix newMatrix = FEMatrix(this->n, this->m);
-    for (int i = 0; i < this->n; i++) { // Rows
-        for (int j = 0; j < this->m; j++) { // Columns
-            newMatrix._set(i, j, this->_get(i, j) + matrix._get(i, j));
-        }
-    }
-
-    // Return matrix pointer
+    FEMatrix newMatrix = this->clone();
+    newMatrix += matrix;
     return newMatrix;
 
 }
@@ -473,22 +473,9 @@ FEMatrix &FEMatrix::operator-=(const FEMatrix &matrix) {
  * @return
  */
 FEMatrix FEMatrix::operator-(const FEMatrix &matrix) const {
-
-    // Get matrix dimension
-    if (matrix.n != this->n || matrix.m != this->m) {
-        throw std::logic_error("[FEMATRIX] Matrix dimension must be the same");
-    }
-
-    FEMatrix newMatrix = FEMatrix(this->n, this->m);
-    for (int i = 0; i < this->n; i++) { // Rows
-        for (int j = 0; j < this->m; j++) { // Columns
-            newMatrix._set(i, j, this->_get(i, j) - matrix._get(i, j));
-        }
-    }
-
-    // Return matrix pointer
+    FEMatrix newMatrix = this->clone();
+    newMatrix -= matrix;
     return newMatrix;
-
 }
 
 /**
@@ -583,6 +570,45 @@ FEMatrix &FEMatrix::operator*=(const FEMatrix &matrix) {
     // Return self
     return *this;
 
+}
+
+/**
+ * Matrix multiplication and return new matrix.
+ *
+ * @param matrix Matrix to multiply
+ * @return
+ */
+FEMatrix FEMatrix::operator*=(const FEMatrix &matrix) const {
+    FEMatrix newMatrix = this->clone();
+    newMatrix *= matrix;
+    return newMatrix;
+}
+
+/**
+ * Multiply self matrix by a constant.
+ *
+ * @param a Constant
+ * @return
+ */
+FEMatrix &FEMatrix::operator*=(double a) {
+    for (int i = 0; i < this->n; i++) { // Rows
+        for (int j = 0; j < this->m; j++) { // Columns
+            this->_set(i, j, a * this->_get(i, j));
+        }
+    }
+    return *this;
+}
+
+/**
+ * Multiply matrix by a constant and return new matrix
+ *
+ * @param a Constant
+ * @return
+ */
+FEMatrix FEMatrix::operator*=(double a) const {
+    FEMatrix newMatrix = this->clone();
+    newMatrix *= a;
+    return newMatrix;
 }
 
 /**
@@ -758,4 +784,19 @@ void FEMatrix::make_symmetric(bool upper) {
  */
 void FEMatrix::make_symmetric() {
     this->make_symmetric(true);
+}
+
+/**
+ * Sum all matrix.
+ *
+ * @return
+ */
+double FEMatrix::sum() const {
+    double st = 0;
+    for (int i = 0; i < this->n; i++) { // Rows
+        for (int j = 0; j < this->m; j++) { // Columns
+            st += this->_get(i, j);
+        }
+    }
+    return st;
 }
