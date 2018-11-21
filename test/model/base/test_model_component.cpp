@@ -31,8 +31,6 @@ Test model component.
 // Include sources
 #include "../../test_utils.h"
 #include "../../../fnelem/model/base/model_component.h"
-#include <iostream>
-#include <cassert>
 
 void test_tag_init() {
     ModelComponent model = ModelComponent();

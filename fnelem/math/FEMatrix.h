@@ -1,7 +1,6 @@
 /**
-FNELEM-GPU MATRIX UTILITARY FUNCTIONS
-Performs matrix inversion using Gauss Jordan algorithm.
-Based on: https://github.com/ZhengzhongSun/Matrix-Inversion-with-CUDA
+FNELEM-GPU MATRIX DEFINITION
+FEMatrix implement a full matrix manipulation environment.
 
 @package fnelem.math
 @author ppizarror
@@ -359,9 +358,6 @@ void FEMatrix::set(int i, int j, double val) {
  * @param val Value
  */
 void FEMatrix::set(int i, double val) {
-    if (!this->is_vector()) {
-        throw std::logic_error("[FEMATRIX] Matrix must be a vector");
-    }
     if (this->n == 1) { // Vector is row
         if (i - this->origin >= this->m) {
             throw std::logic_error("[FEMATRIX] Set column vector overflow");
@@ -372,6 +368,8 @@ void FEMatrix::set(int i, double val) {
             throw std::logic_error("[FEMATRIX] Set row vector overflow");
         }
         this->_set(i - this->origin, 0, val);
+    } else {
+        throw std::logic_error("[FEMATRIX] Matrix must be a vector");
     }
 }
 
@@ -408,9 +406,6 @@ double FEMatrix::get(int i, int j) const {
  * @return Value at matrix[i][j]
  */
 double FEMatrix::get(int i) const {
-    if (!this->is_vector()) {
-        throw std::logic_error("[FEMATRIX] Matrix must be a vector");
-    }
     if (this->n == 1) { // Vector is row
         if (i - this->origin >= this->m) {
             throw std::logic_error("[FEMATRIX] Get column vector overflow");
@@ -421,6 +416,8 @@ double FEMatrix::get(int i) const {
             throw std::logic_error("[FEMATRIX] Get row vector overflow");
         }
         return this->mat[i - this->origin];
+    } else {
+        throw std::logic_error("[FEMATRIX] Matrix must be a vector");
     }
 }
 

@@ -32,8 +32,6 @@ Test matrix.
 #include "../test_utils.h"
 #include "../../fnelem/math/fematrix.h"
 #include "../../fnelem/math/matrix_inversion_cpu.h"
-#include <iostream>
-#include <cassert>
 
 void test_matrix_init() {
     FEMatrix matrix = FEMatrix(3, 5);

@@ -2,8 +2,9 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
+      <config projectName="FNELEM-GPU" targetName="TEST-MODEL-COMPONENT" />
       <config projectName="FNELEM-GPU" targetName="TEST-NODE" />
-      <config projectName="FNELEM-GPU" targetName="TEST-MODELCOMPONENT" />
+      <config projectName="FNELEM-GPU" targetName="TEST-FEMATRIX-UTILS" />
       <config projectName="FNELEM-GPU" targetName="TEST-FEMATRIX" />
     </generated>
   </component>
@@ -14,15 +15,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="221cac94-3076-4b70-8e37-e7f72eb35a62" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fnelem/math/FEMatrix.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/math/FEMatrix.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fnelem/model/base/ModelComponent.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fnelem/model/node/Node.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/node/Node.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cu" beforeDir="false" afterPath="$PROJECT_DIR$/main.cu" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_FEMatrix.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/math/test_fematrix.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_ModelComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/base/test_model_component.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_Node.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/node/test_node.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/math/test_fematrix.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/math/test_fematrix.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/base/test_model_component.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/base/test_model_component.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/node/test_node.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/node/test_node.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_utils.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -49,33 +47,33 @@
         <counts>
           <entry key="TEST-FEMATRIX (disassembly)" value="1" />
           <entry key="c" value="1" />
-          <entry key="cpp" value="19" />
+          <entry key="cpp" value="23" />
           <entry key="cu" value="16" />
-          <entry key="h" value="19" />
-          <entry key="txt" value="6" />
+          <entry key="h" value="21" />
+          <entry key="txt" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CMakeLists.txt" value="6" />
+          <entry key="CMakeLists.txt" value="8" />
           <entry key="Disassembly" value="1" />
-          <entry key="ObjectiveC" value="54" />
+          <entry key="ObjectiveC" value="60" />
           <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="cpp" value="6455" />
+          <entry key="cpp" value="6682" />
           <entry key="cu" value="1907" />
-          <entry key="h" value="18701" />
-          <entry key="txt" value="190" />
+          <entry key="h" value="19140" />
+          <entry key="txt" value="204" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CMakeLists.txt" value="190" />
-          <entry key="Doxygen file" value="131" />
-          <entry key="ObjectiveC" value="26927" />
+          <entry key="CMakeLists.txt" value="204" />
+          <entry key="Doxygen file" value="139" />
+          <entry key="ObjectiveC" value="27585" />
           <entry key="PLAIN_TEXT" value="5" />
         </counts>
       </usages-collector>
@@ -86,8 +84,44 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fnelem/math/fematrix.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="401">
-              <caret line="53" column="14" lean-forward="true" selection-start-line="53" selection-start-column="14" selection-end-line="53" selection-end-column="14" />
+            <state relative-caret-position="40">
+              <caret line="2" column="58" selection-start-line="2" selection-start-column="58" selection-end-line="2" selection-end-column="58" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/test_utils.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="218">
+              <caret line="31" selection-start-line="31" selection-end-line="33" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/math/test_fematrix.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="140">
+              <caret line="28" column="2" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/model/base/test_model_component.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="32" column="55" selection-start-line="32" selection-start-column="55" selection-end-line="32" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/model/node/test_node.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="31" column="22" lean-forward="true" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -132,17 +166,19 @@
         <option value="$PROJECT_DIR$/test/test_ModelComponent.cpp" />
         <option value="$PROJECT_DIR$/test/test_FEMatrix.cpp" />
         <option value="$PROJECT_DIR$/test/test_Node.cpp" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/test/math/fematrix.cpp" />
         <option value="$PROJECT_DIR$/test/model/node/node.cpp" />
         <option value="$PROJECT_DIR$/test/model/base/model_component.cpp" />
-        <option value="$PROJECT_DIR$/test/math/test_fematrix.cpp" />
-        <option value="$PROJECT_DIR$/test/test_utils.h" />
-        <option value="$PROJECT_DIR$/fnelem/math/fematrix.h" />
-        <option value="$PROJECT_DIR$/test/model/base/test_model_component.cpp" />
-        <option value="$PROJECT_DIR$/test/model/node/test_node.cpp" />
         <option value="$PROJECT_DIR$/main.cu" />
         <option value="$PROJECT_DIR$/fnelem/model/node/node.h" />
+        <option value="$PROJECT_DIR$/fnelem/math/fematrix.h" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/test/math/test_fematrix.cpp" />
+        <option value="$PROJECT_DIR$/test/model/base/test_model_component.cpp" />
+        <option value="$PROJECT_DIR$/test/model/node/test_node.cpp" />
+        <option value="$PROJECT_DIR$/test/test_utils.h" />
+        <option value="$PROJECT_DIR$/fnelem/math/fematrix_utils.h" />
+        <option value="$PROJECT_DIR$/test/math/test_fematrix_utils.cpp" />
       </list>
     </option>
   </component>
@@ -262,8 +298,13 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.TEST-MODELCOMPONENT">
+  <component name="RunManager" selected="Application.TEST-FEMATRIX-UTILS">
     <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TEST-FEMATRIX-UTILS" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="FNELEM-GPU" TARGET_NAME="TEST-FEMATRIX-UTILS" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="FNELEM-GPU" RUN_TARGET_NAME="TEST-FEMATRIX-UTILS">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -273,7 +314,7 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TEST-MODELCOMPONENT" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="FNELEM-GPU" TARGET_NAME="TEST-MODELCOMPONENT" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="FNELEM-GPU" RUN_TARGET_NAME="TEST-MODELCOMPONENT">
+    <configuration name="TEST-MODEL-COMPONENT" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="FNELEM-GPU" TARGET_NAME="TEST-MODEL-COMPONENT" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="FNELEM-GPU" RUN_TARGET_NAME="TEST-MODEL-COMPONENT">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -286,7 +327,8 @@
     <list>
       <item itemvalue="Application.Build All" />
       <item itemvalue="Application.TEST-FEMATRIX" />
-      <item itemvalue="Application.TEST-MODELCOMPONENT" />
+      <item itemvalue="Application.TEST-FEMATRIX-UTILS" />
+      <item itemvalue="Application.TEST-MODEL-COMPONENT" />
       <item itemvalue="Application.TEST-NODE" />
     </list>
   </component>
@@ -305,23 +347,23 @@
       <workItem from="1542656095344" duration="217000" />
       <workItem from="1542656422978" duration="13772000" />
       <workItem from="1542758463957" duration="15026000" />
-      <workItem from="1542807933493" duration="13963000" />
+      <workItem from="1542807933493" duration="14705000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47442000" />
+    <option name="totallyTimeSpent" value="48184000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25704697" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25704697" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32867134" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.34825176" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.34825176" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -375,13 +417,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/test_utils.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fnelem/math/matrix_inversion_cuda.cu">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="520">
@@ -400,27 +435,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="79" selection-start-line="79" selection-end-line="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/model/base/test_model_component.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/model/node/test_node.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/math/test_fematrix.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -454,15 +468,57 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="6" column="57" selection-start-line="6" selection-start-column="57" selection-end-line="6" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/model/base/test_model_component.cpp">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
-          <caret line="8" column="27" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
+          <caret line="32" column="55" selection-start-line="32" selection-start-column="55" selection-end-line="32" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/model/node/test_node.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="31" column="22" lean-forward="true" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test_utils.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="31" selection-start-line="31" selection-end-line="33" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/math/test_fematrix.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="28" column="2" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/math/test_fematrix_utils.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="40" column="31" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fnelem/math/fematrix_utils.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="36" column="21" lean-forward="true" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fnelem/math/fematrix.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
-          <caret line="53" column="14" lean-forward="true" selection-start-line="53" selection-start-column="14" selection-end-line="53" selection-end-column="14" />
+        <state relative-caret-position="40">
+          <caret line="2" column="58" selection-start-line="2" selection-start-column="58" selection-end-line="2" selection-end-column="58" />
         </state>
       </provider>
     </entry>

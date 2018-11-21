@@ -29,6 +29,8 @@ Utilitary functions to perform tests.
 */
 
 // Include sources
+#include <cassert>
+#include <iostream>
 #include <math.h>
 
 /**

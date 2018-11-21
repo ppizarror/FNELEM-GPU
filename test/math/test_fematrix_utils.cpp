@@ -1,10 +1,10 @@
 /**
-FNELEM-GPU - TEST
-Test structure node class.
+FNELEM-GPU - FEMATRIX UTILS TEST
+Test FEMatrix utils.
 
-@package test.model.node
+@package test.fnelem.math
 @author ppizarror
-@date 19/11/2018
+@date 21/11/2018
 @license
 	MIT License
 	Copyright (c) 2018 Pablo Pizarro R.
@@ -29,25 +29,19 @@ Test structure node class.
 */
 
 // Include sources
-#include "../../test_utils.h"
-#include "../../../fnelem/model/node/node.h"
+#include "../test_utils.h"
+#include "../../fnelem/math/fematrix.h"
+#include "../../fnelem/math/fematrix_utils.h"
 
-void test_node_creation() {
-    Node n = Node("NODE1", 0, 1);
-    assert(n.get_model_tag() == "NODE1");
-    n = Node("NODE3D", 1.5, 3.2, 5.6);
-    assert(n.get_ngdl() == 3);
-}
-
-void test_coordinates() {
-    Node n = Node("NODE", 1, 2);
-    double *c = n.get_coordinates();
-    assert(c[0] == 1);
-    assert(c[1] == 2);
+void test_identity() {
+    int n = 5;
+    FEMatrix i = create_identity_matrix(n);
+    assert(i.is_diag());
+    assert(i.sum() == n);
+    assert(i.transpose() == i);
 }
 
 int main() {
-    test_node_creation();
-    test_coordinates();
+    test_identity();
     return 0;
 }
