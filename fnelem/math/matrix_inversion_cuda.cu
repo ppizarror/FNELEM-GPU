@@ -33,7 +33,9 @@ Based on: https://github.com/ZhengzhongSun/Matrix-Inversion-with-CUDA
 #include <cuda.h>
 #include <stdio.h>
 #include <iostream>
-#include "FEMatrix.h"
+
+// Common class definition
+class FEMatrix;
 
 // Constants
 const int MATRIX_INVERSION_CUDA_BLOCKSIZE = 8;

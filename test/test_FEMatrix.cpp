@@ -307,17 +307,23 @@ void test_determinant() {
     assert(is_num_equal(mat2.det(), -22));
 
     // Determinant 3x3
-    FEMatrix mat = FEMatrix(3, 3);
-    mat.set(0, 0, 1);
-    mat.set(0, 1, 2);
-    mat.set(0, 2, 3);
-    mat.set(1, 0, 5);
-    mat.set(1, 1, 2);
-    mat.set(1, 2, 1);
-    mat.set(2, 0, 2);
-    mat.set(2, 1, 2);
-    mat.set(2, 2, 3);
-    mat.disp();
+    FEMatrix mat3 = FEMatrix(3, 3);
+    mat3.set(0, 0, 1);
+    mat3.set(0, 1, 2);
+    mat3.set(0, 2, 3);
+    mat3.set(1, 0, 5);
+    mat3.set(1, 1, 2);
+    mat3.set(1, 2, 1);
+    mat3.set(2, 0, 2);
+    mat3.set(2, 1, 2);
+    mat3.set(2, 2, 3);
+    mat3.disp();
+    assert(is_num_equal(mat3.det(), -4));
+
+    // Determinant zero for a NxN ones matrix
+    FEMatrix mat_ones = FEMatrix(10, 10);
+    mat_ones.fill_ones();
+    assert(is_num_equal(mat_ones.det(), 0));
 }
 
 int main() {

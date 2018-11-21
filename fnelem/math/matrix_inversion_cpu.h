@@ -28,6 +28,9 @@ Performs matrix inversion using Gauss Jordan algorithm.
 	SOFTWARE.
 */
 
+// Common class definition
+class FEMatrix;
+
 /**
  * Performs CPU matrix inversion using Gauss-Jordan elimination algorithm.
  *

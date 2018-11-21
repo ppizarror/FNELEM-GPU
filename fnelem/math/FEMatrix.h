@@ -74,6 +74,9 @@ private:
     // Calcualtes determinant recursive
     double _det_recursive(double *matrix, int d) const;
 
+    // Display a matrix in console
+    void disp_matrix(double *matrix, int dim_n, int dim_m) const;
+
 public:
 
     // Constructor
@@ -287,36 +290,40 @@ void FEMatrix::fill_ones() {
     this->fill(1.0);
 }
 
-/**
- * Display matrix in console.
- */
-void FEMatrix::disp() const {
+void FEMatrix::disp_matrix(double *matrix, int dim_n, int dim_m) const {
     if (this->apply_pad) {
         int maxn = 0, snuml = 0;
         std::string snum;
-        for (int i = 0; i < this->n; i++) { // Rows
-            for (int j = 0; j < this->m; j++) { // Columns
-                snuml = static_cast<int>(std::to_string(this->_get(i, j)).length());
+        for (int i = 0; i < dim_n; i++) { // Rows
+            for (int j = 0; j < dim_m; j++) { // Columns
+                snuml = static_cast<int>(std::to_string(matrix[i * dim_m + j]).length());
                 if (snuml > maxn) {
                     maxn = snuml;
                 };
             }
         }
-        for (int i = 0; i < this->n; i++) { // Rows
-            for (int j = 0; j < this->m; j++) { // Columns
-                std::cout << std::setw(maxn) << this->_get(i, j) << " ";
+        for (int i = 0; i < dim_n; i++) { // Rows
+            for (int j = 0; j < dim_m; j++) { // Columns
+                std::cout << std::setw(maxn) << matrix[i * dim_m + j] << " ";
             }
             std::cout << "" << std::endl;
         }
     } else {
-        for (int i = 0; i < this->n; i++) { // Rows
-            for (int j = 0; j < this->m; j++) { // Columns
-                std::cout << std::noshowpoint << this->_get(i, j) << "\t";
+        for (int i = 0; i < dim_n; i++) { // Rows
+            for (int j = 0; j < dim_m; j++) { // Columns
+                std::cout << std::noshowpoint << matrix[i * dim_m + j] << "\t";
             }
             std::cout << "" << std::endl;
         }
     }
     std::cout << "" << std::endl;
+}
+
+/**
+ * Display matrix in console.
+ */
+void FEMatrix::disp() const {
+    this->disp_matrix(this->mat, this->n, this->m);
 }
 
 /**
@@ -1062,7 +1069,7 @@ double FEMatrix::_det_recursive(double *matrix, int d) const {
 
     // Dimension is greather than 2, split matrix into sub-matrices and evaluate
     int nd = d - 1;
-    int i, j, k;
+    int i, j, k, p;
     double *submat = new double[nd * nd];
 
     // Iterates submatrices
@@ -1074,9 +1081,27 @@ double FEMatrix::_det_recursive(double *matrix, int d) const {
         for (i = 0; i < nd; i++) { // Rows
             for (j = 0; j < nd; j++) { // Column
 
+                // Calculates position in global matrix
+                if (j >= k) {
+                    p = j + 1;
+                } else {
+                    p = j;
+                }
+                submat[i * nd + j] = matrix[(i + 1) * d + p];
+
             }
         }
 
+        // Calculates recursively and multiply by column value at first row
+        dsum += matrix[k] * this->_det_recursive(submat, nd) * sign;
+        sign *= -1; // Flip sign
+
     }
+
+    // Destroy memory
+    delete[] submat;
+
+    // Return value
+    return dsum;
 
 }
