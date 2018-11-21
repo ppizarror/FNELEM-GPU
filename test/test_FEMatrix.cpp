@@ -89,11 +89,44 @@ int test_cpu_inversion() {
     matInverse->disp();
 }
 
+void test_add() {
+    FEMatrix m1 = FEMatrix(3, 3);
+    m1.fill_ones();
+    FEMatrix m2 = FEMatrix(3, 3);
+    m2.fill_ones();
+    m2.set(0, 0, 3);
+    m2.set(1, 1, 5);
+    m2.disp();
+
+    // Adds
+    m2 += m1;
+    assert(m2.get(0, 0) == 4);
+    assert(m2.get(1, 1) == 6);
+
+    // Assignation
+    m1 = m2;
+    assert(m1.get(0, 0) == 4);
+    assert(m1.get(1, 1) == 6);
+}
+
+void test_substract() {
+    FEMatrix m1 = FEMatrix(3, 3);
+    m1.fill_ones();
+    FEMatrix m2 = FEMatrix(3, 3);
+    m2.fill_ones();
+    m2.set(0, 0, 3);
+    m2.set(1, 1, 5);
+    FEMatrix m3 = m2 - m1;
+    assert(m3.get(0, 0) == 2);
+}
+
 int main() {
     test_matrix_init();
     test_matrix_disp();
     test_matrix_cpu_inverse();
     test_matrix_array();
     test_cpu_inversion();
+    test_add();
+    test_substract();
     return 0;
 }

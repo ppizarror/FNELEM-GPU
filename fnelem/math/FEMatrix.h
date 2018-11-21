@@ -95,6 +95,21 @@ public:
     // Check if matrix is square nxn
     bool is_square() const;
 
+    // Assign
+    FEMatrix &operator=(const FEMatrix &matrix);
+
+    // Adds a matrix with self
+    FEMatrix &operator+=(const FEMatrix &matrix);
+
+    // Add and return a new matrix
+    FEMatrix operator+(const FEMatrix &matrix) const;
+
+    // Substract a matrix with self
+    FEMatrix &operator-=(const FEMatrix &matrix);
+
+    // Substract and return a new matrix
+    FEMatrix operator-(const FEMatrix &matrix) const;
+
 };
 
 /**
@@ -178,7 +193,7 @@ void FEMatrix::disp() const {
  */
 void FEMatrix::set(int i, int j, double val) {
     if (i >= this->n || j >= this->m) {
-        throw std::logic_error("Column or row position overflow matrix");
+        throw std::logic_error("[FEMATRIX] Column or row position overflow matrix");
     }
     this->mat[i * this->n + j] = val;
 }
@@ -259,7 +274,124 @@ int FEMatrix::get_square_dimension() const {
  */
 double FEMatrix::get(int i, int j) const {
     if (i >= this->n || j >= this->m) {
-        throw std::logic_error("Column or row position overflow matrix");
+        throw std::logic_error("[FEMATRIX] Column or row position overflow matrix");
     }
     return this->mat[i * this->n + j];
+}
+
+/**
+ * Asignation operation.
+ *
+ * @param matrix
+ * @return
+ */
+FEMatrix &FEMatrix::operator=(const FEMatrix &matrix) {
+    this->n = matrix.n;
+    this->m = matrix.m;
+    for (int i = 0; i < this->n; i++) { // Rows
+        for (int j = 0; j < this->m; j++) { // Columns
+            this->mat[i * this->n + j] = matrix.get(i, j);
+        }
+    }
+    return *this;
+}
+
+/**
+ * Adds a matrix with self.
+ *
+ * @param matrix Matrix to add
+ * @return
+ */
+FEMatrix &FEMatrix::operator+=(const FEMatrix &matrix) {
+
+    // Get matrix dimension
+    if (matrix.n != this->n || matrix.m != this->m) {
+        throw std::logic_error("[FEMATRIX] Matrix dimension must be the same");
+    }
+
+    // Adds
+    for (int i = 0; i < this->n; i++) { // Rows
+        for (int j = 0; j < this->m; j++) { // Columns
+            this->mat[i * this->n + j] += matrix.get(i, j);
+        }
+    }
+
+    // Returns self pointer
+    return *this;
+
+}
+
+/**
+ * Adds with a matrix and return new.
+ *
+ * @param matrix Matrix to add
+ * @return
+ */
+FEMatrix FEMatrix::operator+(const FEMatrix &matrix) const {
+
+    // Get matrix dimension
+    if (matrix.n != this->n || matrix.m != this->m) {
+        throw std::logic_error("[FEMATRIX] Matrix dimension must be the same");
+    }
+
+    FEMatrix newMatrix = FEMatrix(this->n, this->m);
+    for (int i = 0; i < this->n; i++) { // Rows
+        for (int j = 0; j < this->m; j++) { // Columns
+            newMatrix.set(i, j, this->get(i, j) + matrix.get(i, j));
+        }
+    }
+
+    // Return matrix pointer
+    return newMatrix;
+
+}
+
+/**
+ * Substract a matrix with self.
+ *
+ * @param matrix Matrix to add
+ * @return
+ */
+FEMatrix &FEMatrix::operator-=(const FEMatrix &matrix) {
+
+    // Get matrix dimension
+    if (matrix.n != this->n || matrix.m != this->m) {
+        throw std::logic_error("[FEMATRIX] Matrix dimension must be the same");
+    }
+
+    // Adds
+    for (int i = 0; i < this->n; i++) { // Rows
+        for (int j = 0; j < this->m; j++) { // Columns
+            this->mat[i * this->n + j] -= matrix.get(i, j);
+        }
+    }
+
+    // Returns self pointer
+    return *this;
+
+}
+
+/**
+ * Substract with a matrix and return new.
+ *
+ * @param matrix Matrix to add
+ * @return
+ */
+FEMatrix FEMatrix::operator-(const FEMatrix &matrix) const {
+
+    // Get matrix dimension
+    if (matrix.n != this->n || matrix.m != this->m) {
+        throw std::logic_error("[FEMATRIX] Matrix dimension must be the same");
+    }
+
+    FEMatrix newMatrix = FEMatrix(this->n, this->m);
+    for (int i = 0; i < this->n; i++) { // Rows
+        for (int j = 0; j < this->m; j++) { // Columns
+            newMatrix.set(i, j, this->get(i, j) - matrix.get(i, j));
+        }
+    }
+
+    // Return matrix pointer
+    return newMatrix;
+
 }
