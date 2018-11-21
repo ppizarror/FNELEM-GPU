@@ -15,7 +15,6 @@
   <component name="ChangeListManager">
     <list default="true" id="221cac94-3076-4b70-8e37-e7f72eb35a62" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/fnelem/math/FEMatrix.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/math/FEMatrix.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_FEMatrix.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_FEMatrix.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -57,17 +56,17 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="cpp" value="3333" />
+          <entry key="cpp" value="3373" />
           <entry key="cu" value="1847" />
-          <entry key="h" value="8659" />
+          <entry key="h" value="9195" />
           <entry key="txt" value="190" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CMakeLists.txt" value="190" />
-          <entry key="Doxygen file" value="86" />
-          <entry key="ObjectiveC" value="13748" />
+          <entry key="Doxygen file" value="91" />
+          <entry key="ObjectiveC" value="14319" />
           <entry key="PLAIN_TEXT" value="5" />
         </counts>
       </usages-collector>
@@ -84,11 +83,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fnelem/math/FEMatrix.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="229" column="70" selection-start-line="229" selection-start-column="70" selection-end-line="229" selection-end-column="70" />
+            <state relative-caret-position="3984">
+              <caret line="596" column="13" selection-start-line="596" selection-start-column="13" selection-end-line="596" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -102,11 +101,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/test_FEMatrix.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="162" column="14" selection-start-line="162" selection-start-column="14" selection-end-line="162" selection-end-column="14" />
+            <state relative-caret-position="352">
+              <caret line="174" column="8" selection-start-line="174" selection-start-column="8" selection-end-line="174" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -150,8 +149,8 @@
         <option value="$PROJECT_DIR$/main.cu" />
         <option value="$PROJECT_DIR$/fnelem/math/matrix_inversion_cuda.cu" />
         <option value="$PROJECT_DIR$/fnelem/math/matrix_inversion_cpu.h" />
-        <option value="$PROJECT_DIR$/fnelem/math/FEMatrix.h" />
         <option value="$PROJECT_DIR$/test/test_FEMatrix.cpp" />
+        <option value="$PROJECT_DIR$/fnelem/math/FEMatrix.h" />
       </list>
     </option>
   </component>
@@ -273,15 +272,15 @@
       <workItem from="1542655039217" duration="1022000" />
       <workItem from="1542656095344" duration="217000" />
       <workItem from="1542656422978" duration="13772000" />
-      <workItem from="1542758463957" duration="6735000" />
+      <workItem from="1542758463957" duration="7422000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25188000" />
+    <option name="totallyTimeSpent" value="25875000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="848" extended-state="7" />
+    <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.5436893" />
@@ -378,17 +377,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fnelem/math/FEMatrix.h">
+    <entry file="file://$PROJECT_DIR$/test/test_FEMatrix.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
-          <caret line="229" column="70" selection-start-line="229" selection-start-column="70" selection-end-line="229" selection-end-column="70" />
+          <caret line="174" column="8" selection-start-line="174" selection-start-column="8" selection-end-line="174" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/test_FEMatrix.cpp">
+    <entry file="file://$PROJECT_DIR$/fnelem/math/FEMatrix.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="162" column="14" selection-start-line="162" selection-start-column="14" selection-end-line="162" selection-end-column="14" />
+        <state relative-caret-position="3984">
+          <caret line="596" column="13" selection-start-line="596" selection-start-column="13" selection-end-line="596" selection-end-column="13" />
         </state>
       </provider>
     </entry>

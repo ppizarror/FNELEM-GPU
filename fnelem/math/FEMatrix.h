@@ -57,6 +57,12 @@ private:
     // Origin from one
     int origin = 0;
 
+    // Update matrix A[i][j] = val, no origin
+    void _set(int i, int j, double val);
+
+    // Returns value A[i][j], no origin
+    double _get(int i, int j) const;
+
 public:
 
     // Constructor
@@ -128,6 +134,12 @@ public:
     // Clone object
     FEMatrix clone() const;
 
+    // Return max value of matrix
+    double max() const;
+
+    // Return min value of matrix
+    double min() const;
+
 };
 
 /**
@@ -196,8 +208,6 @@ void FEMatrix::fill_ones() {
 void FEMatrix::disp() const {
 
     // Get max number length
-    
-
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
             std::cout << this->mat[i * this->m + j] << "\t";
@@ -221,7 +231,18 @@ void FEMatrix::set(int i, int j, double val) {
 }
 
 /**
- * Returns matrix value.
+ * Updates matrix value, no origin used.
+ *
+ * @param i Row position
+ * @param j Column position
+ * @param val Value
+ */
+void FEMatrix::_set(int i, int j, double val) {
+    this->mat[i * this->m + j] = val;
+}
+
+/**
+ * Returns matrix value, origin used.
  *
  * @param i Row position
  * @param j Column position
@@ -234,6 +255,16 @@ double FEMatrix::get(int i, int j) const {
     return this->mat[(i - this->origin) * this->m + (j - this->origin)];
 }
 
+/**
+ * Returns matrix value, no origin is used.
+ *
+ * @param i Row position
+ * @param j Column position
+ * @return Value at matrix[i][j]
+ */
+double FEMatrix::_get(int i, int j) const {
+    return this->mat[i * this->m + j];
+}
 
 /**
  * Save matrix to file.
@@ -245,7 +276,7 @@ void FEMatrix::save_to_file(std::string filename) const {
     plik.open(filename);
     for (int j = 0; j < this->n; j++) {
         for (int i = 0; i < this->m; i++) {
-            plik << this->mat[j * this->m + i] << "\t";
+            plik << this->_get(i, j) << "\t";
         }
         if (j < this->n - 1) {
             plik << std::endl;
@@ -313,7 +344,7 @@ FEMatrix &FEMatrix::operator=(const FEMatrix &matrix) {
     this->m = matrix.m;
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
-            this->mat[i * this->m + j] = matrix.get(i, j);
+            this->mat[i * this->m + j] = matrix._get(i, j);
         }
     }
     return *this;
@@ -335,7 +366,7 @@ FEMatrix &FEMatrix::operator+=(const FEMatrix &matrix) {
     // Adds
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
-            this->mat[i * this->m + j] += matrix.get(i, j);
+            this->mat[i * this->m + j] += matrix._get(i, j);
         }
     }
 
@@ -360,7 +391,7 @@ FEMatrix FEMatrix::operator+(const FEMatrix &matrix) const {
     FEMatrix newMatrix = FEMatrix(this->n, this->m);
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
-            newMatrix.set(i, j, this->get(i, j) + matrix.get(i, j));
+            newMatrix._set(i, j, this->_get(i, j) + matrix._get(i, j));
         }
     }
 
@@ -385,7 +416,7 @@ FEMatrix &FEMatrix::operator-=(const FEMatrix &matrix) {
     // Adds
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
-            this->mat[i * this->m + j] -= matrix.get(i, j);
+            this->mat[i * this->m + j] -= matrix._get(i, j);
         }
     }
 
@@ -410,7 +441,7 @@ FEMatrix FEMatrix::operator-(const FEMatrix &matrix) const {
     FEMatrix newMatrix = FEMatrix(this->n, this->m);
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
-            newMatrix.set(i, j, this->get(i, j) - matrix.get(i, j));
+            newMatrix._set(i, j, this->_get(i, j) - matrix._get(i, j));
         }
     }
 
@@ -428,7 +459,7 @@ FEMatrix FEMatrix::operator-() const {
     FEMatrix newMatrix = FEMatrix(this->n, this->m);
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
-            newMatrix.set(i, j, -this->get(i, j));
+            newMatrix._set(i, j, -this->_get(i, j));
         }
     }
     return newMatrix;
@@ -446,7 +477,7 @@ void FEMatrix::transpose() {
     double newMat[this->n * this->m];
     for (int i = 0; i < this->m; i++) { // Rows
         for (int j = 0; j < this->n; j++) { // Columns
-            newMat[i * this->n + j] = this->get(j, i);
+            newMat[i * this->n + j] = this->_get(j, i);
         }
     }
 
@@ -487,7 +518,7 @@ FEMatrix &FEMatrix::operator*=(const FEMatrix &matrix) {
         for (int j = 0; j < b; j++) { // Columns of new matrix
             sum = 0;
             for (int k = 0; k < this->m; k++) {
-                sum += this->get(i, k) * matrix.get(k, j);
+                sum += this->_get(i, k) * matrix._get(k, j);
             }
             auxMatrix[i * b + j] = sum;
         }
@@ -516,7 +547,7 @@ FEMatrix FEMatrix::clone() const {
     FEMatrix newMatrix = FEMatrix(this->n, this->m);
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
-            newMatrix.set(i, j, this->get(i, j));
+            newMatrix._set(i, j, this->_get(i, j));
         }
     }
     return newMatrix;
@@ -529,4 +560,42 @@ FEMatrix FEMatrix::clone() const {
  */
 void FEMatrix::set_origin(int o) {
     this->origin = o;
+}
+
+/**
+ * Return max value of matrix.
+ *
+ * @return
+ */
+double FEMatrix::max() const {
+    double max = this->_get(0, 0);
+    double num;
+    for (int i = 0; i < this->n; i++) { // Rows
+        for (int j = 0; j < this->m; j++) { // Columns
+            num = this->_get(i, j);
+            if (num > max) {
+                max = num;
+            }
+        }
+    }
+    return max;
+}
+
+/**
+ * Return min value of matrix.
+ *
+ * @return
+ */
+double FEMatrix::min() const {
+    double min = this->_get(0, 0);
+    double num;
+    for (int i = 0; i < this->n; i++) { // Rows
+        for (int j = 0; j < this->m; j++) { // Columns
+            num = this->_get(i, j);
+            if (num < min) {
+                min = num;
+            }
+        }
+    }
+    return min;
 }
