@@ -91,6 +91,9 @@ public:
     // Enable origin
     void enable_origin();
 
+    // Fill matrix with value
+    void fill(double value);
+
     // Fill matrix with zeros
     void fill_zeros();
 
@@ -158,7 +161,10 @@ public:
     FEMatrix operator-() const;
 
     // Matrix transpose
-    void transpose();
+    void transpose_self();
+
+    // Matrix transpose and return new
+    FEMatrix transpose() const;
 
     // Matrix multiplication with self
     FEMatrix &operator*=(const FEMatrix &matrix);
@@ -195,6 +201,12 @@ public:
 
     // Sum all matrix
     double sum() const;
+
+    // Equal operator
+    bool operator==(const FEMatrix &matrix) const;
+
+    // Not equal operator
+    bool operator!=(const FEMatrix &matrix) const;
 
 };
 
@@ -237,25 +249,30 @@ FEMatrix::~FEMatrix() {
 }
 
 /**
+ * Fill matrix with a certain value.
+ *
+ * @param value Value to fill
+ */
+void FEMatrix::fill(double value) {
+    for (int i = 0; i < this->n; i++) { // Rows
+        for (int j = 0; j < this->m; j++) { // Columns
+            this->mat[i * this->m + j] = value;
+        }
+    }
+}
+
+/**
  * Fill matrix with zeros.
  */
 void FEMatrix::fill_zeros() {
-    for (int i = 0; i < this->n; i++) { // Rows
-        for (int j = 0; j < this->m; j++) { // Columns
-            this->mat[i * this->m + j] = 0;
-        }
-    }
+    this->fill(0.0);
 }
 
 /**
  * Fill matrix with ones.
  */
 void FEMatrix::fill_ones() {
-    for (int i = 0; i < this->n; i++) { // Rows
-        for (int j = 0; j < this->m; j++) { // Columns
-            this->mat[i * this->m + j] = 1;
-        }
-    }
+    this->fill(1.0);
 }
 
 /**
@@ -263,12 +280,14 @@ void FEMatrix::fill_ones() {
  */
 void FEMatrix::disp() const {
     if (this->apply_pad) {
-        int maxn = 0, snuml;
+        int maxn = 0, snuml = 0;
         std::string snum;
         for (int i = 0; i < this->n; i++) { // Rows
             for (int j = 0; j < this->m; j++) { // Columns
                 snuml = static_cast<int>(std::to_string(this->_get(i, j)).length());
-                if (snuml > maxn) maxn = snuml;
+                if (snuml > maxn) {
+                    maxn = snuml;
+                };
             }
         }
         for (int i = 0; i < this->n; i++) { // Rows
@@ -549,7 +568,7 @@ FEMatrix FEMatrix::operator-() const {
 /**
  * Matrix transpose.
  */
-void FEMatrix::transpose() {
+void FEMatrix::transpose_self() {
 
     // Save temporal dimension
     int tempdim = this->n;
@@ -576,6 +595,17 @@ void FEMatrix::transpose() {
     // Delete
     delete[] newMat;
 
+}
+
+/**
+ * Matrix transpose and return new.
+ *
+ * @return New transposed matrix
+ */
+FEMatrix FEMatrix::transpose() const {
+    FEMatrix matrix = this->clone();
+    matrix.transpose_self();
+    return matrix;
 }
 
 /**
@@ -876,10 +906,8 @@ FEMatrix FEMatrix::get_row(int i, int from, int to) const {
     }
 
     // Create new vector
-    std::cout << "from " << from << ", to " << to << ", i " << i << std::endl;
     FEMatrix row = FEMatrix(1, to - from + 1);
     for (int j = from; j <= to; j++) { // Columns
-        std::cout << "i=" << i << ", j=" << j - from << std::endl;
         row.set(0, j - from, this->_get(i, j));
     }
     row.set_origin(this->origin_temp);
@@ -950,4 +978,40 @@ FEMatrix FEMatrix::get_column(int j) const {
 int FEMatrix::length() const {
     if (this->n > this->m) return this->n;
     return this->m;
+}
+
+/**
+ * Equal operator.
+ *
+ * @param matrix Matrix to compare with
+ * @return
+ */
+bool FEMatrix::operator==(const FEMatrix &matrix) const {
+    if (this->n != matrix.n || this->m != matrix.m) return false;
+    for (int i = 0; i < this->n; i++) { // Rows
+        for (int j = 0; j < this->m; j++) { // Columns
+            if (fabs(this->_get(i, j) - matrix._get(i, j)) > FEMATRIX_ZERO_TOL) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+/**
+ * Not equal operator.
+ *
+ * @param matrix Matrix to compare with
+ * @return
+ */
+bool FEMatrix::operator!=(const FEMatrix &matrix) const {
+    if (this->n != matrix.n || this->m != matrix.m) return true;
+    for (int i = 0; i < this->n; i++) { // Rows
+        for (int j = 0; j < this->m; j++) { // Columns
+            if (fabs(this->_get(i, j) - matrix._get(i, j)) < FEMATRIX_ZERO_TOL) {
+                return false;
+            }
+        }
+    }
+    return true;
 }

@@ -134,7 +134,7 @@ void test_transpose() {
     m1.set(1, 1, 10);
     m1.set(1, 1, -1);
     m1.disp();
-    m1.transpose();
+    m1.transpose_self();
     m1.disp();
 }
 
@@ -148,7 +148,7 @@ void test_multiplication() {
     m1.set(1, 2, 6);
     m1.disp();
     FEMatrix m2 = m1.clone();
-    m2.transpose();
+    m2.transpose_self();
     m1 *= m2;
     m1.disp();
     assert(m1.max() == 77);
@@ -196,7 +196,7 @@ void test_symmetric() {
     m.set(2, 1, 5);
     m.disp();
     assert(m.is_symmetric());
-    m.transpose();
+    m.transpose_self();
     assert(m.is_symmetric());
 }
 
@@ -260,6 +260,25 @@ void test_row_column() {
     // Test column
     FEMatrix col1 = m.get_column(1); // [1, 5, 9, 13]
     col1.disp();
+    assert(col1.length() == 4);
+
+    // Test multipication
+    FEMatrix colt = col1.clone().transpose();
+    colt.disp();
+    colt *= col1;
+    colt.disp();
+    assert(colt.get(1) == 1 + 5 * 5 + 9 * 9 + 13 * 13);
+}
+
+void test_equal() {
+    FEMatrix a = FEMatrix(12, 4);
+    a.fill(2);
+    a *= 0.5;
+    FEMatrix b = FEMatrix(12, 4);
+    b.fill_ones();
+    assert(a == b);
+    b *= 0.3;
+    assert(a != b);
 }
 
 int main() {
@@ -277,5 +296,6 @@ int main() {
     test_make_symmetric();
     test_constant_multiplication();
     test_row_column();
+    test_equal();
     return 0;
 }
