@@ -154,6 +154,9 @@ public:
     // Return min value of matrix
     double min() const;
 
+    // Check if matrix is identity
+    bool is_identity() const;
+
 };
 
 /**
@@ -648,4 +651,34 @@ void FEMatrix::disable_origin() {
  */
 void FEMatrix::enable_origin() {
     this->origin = this->origin_temp;
+}
+
+/**
+ * Check if matrix is identity.
+ *
+ * @return
+ */
+bool FEMatrix::is_identity() const {
+
+    // If matrix is not square
+    if (!this->is_square()) return false;
+
+    // Check matrix
+    for (int i = 0; i < this->n; i++) { // Rows
+        for (int j = 0; j < this->m; j++) { // Columns
+            if (i == j) {
+                if (fabs(this->_get(i, j) - 1) > FEMATRIX_ZERO_TOL) {
+                    return false;
+                }
+            } else {
+                if (fabs(this->_get(i, j)) > FEMATRIX_ZERO_TOL) {
+                    return false;
+                }
+            }
+        }
+    }
+
+    // Matrix is identity
+    return true;
+
 }

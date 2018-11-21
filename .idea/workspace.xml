@@ -15,7 +15,6 @@
   <component name="ChangeListManager">
     <list default="true" id="221cac94-3076-4b70-8e37-e7f72eb35a62" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/fnelem/math/FEMatrix.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/math/FEMatrix.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fnelem/math/matrix_inversion_cpu.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/math/matrix_inversion_cpu.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/test_FEMatrix.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_FEMatrix.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -58,17 +57,17 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="cpp" value="3463" />
+          <entry key="cpp" value="3522" />
           <entry key="cu" value="1847" />
-          <entry key="h" value="10590" />
+          <entry key="h" value="10985" />
           <entry key="txt" value="190" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CMakeLists.txt" value="190" />
-          <entry key="Doxygen file" value="92" />
-          <entry key="ObjectiveC" value="15803" />
+          <entry key="Doxygen file" value="94" />
+          <entry key="ObjectiveC" value="16255" />
           <entry key="PLAIN_TEXT" value="5" />
         </counts>
       </usages-collector>
@@ -85,20 +84,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fnelem/math/FEMatrix.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="642" column="1" lean-forward="true" selection-start-line="642" selection-start-column="1" selection-end-line="642" selection-end-column="1" />
+            <state relative-caret-position="9">
+              <caret line="670" column="33" selection-start-line="670" selection-start-column="33" selection-end-line="670" selection-end-column="33" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fnelem/math/matrix_inversion_cpu.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-402">
-              <caret line="64" column="28" selection-start-line="64" selection-start-column="28" selection-end-line="64" selection-end-column="28" />
+            <state relative-caret-position="-2">
+              <caret line="84" column="41" selection-start-line="84" selection-start-column="41" selection-end-line="84" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -107,7 +106,7 @@
         <entry file="file://$PROJECT_DIR$/test/test_FEMatrix.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="258">
-              <caret line="178" column="14" selection-start-line="178" selection-start-column="14" selection-end-line="178" selection-end-column="14" />
+              <caret line="185" column="18" selection-start-line="185" selection-start-column="18" selection-end-line="185" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -150,9 +149,9 @@
         <option value="$PROJECT_DIR$/fnelem/math/cuda_matrix_inversion.cu" />
         <option value="$PROJECT_DIR$/main.cu" />
         <option value="$PROJECT_DIR$/fnelem/math/matrix_inversion_cuda.cu" />
+        <option value="$PROJECT_DIR$/fnelem/math/matrix_inversion_cpu.h" />
         <option value="$PROJECT_DIR$/test/test_FEMatrix.cpp" />
         <option value="$PROJECT_DIR$/fnelem/math/FEMatrix.h" />
-        <option value="$PROJECT_DIR$/fnelem/math/matrix_inversion_cpu.h" />
       </list>
     </option>
   </component>
@@ -274,12 +273,12 @@
       <workItem from="1542655039217" duration="1022000" />
       <workItem from="1542656095344" duration="217000" />
       <workItem from="1542656422978" duration="13772000" />
-      <workItem from="1542758463957" duration="14276000" />
+      <workItem from="1542758463957" duration="14660000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32729000" />
+    <option name="totallyTimeSpent" value="33113000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
@@ -379,24 +378,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/fnelem/math/matrix_inversion_cpu.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2">
+          <caret line="84" column="41" selection-start-line="84" selection-start-column="41" selection-end-line="84" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/test_FEMatrix.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="258">
-          <caret line="178" column="14" selection-start-line="178" selection-start-column="14" selection-end-line="178" selection-end-column="14" />
+          <caret line="185" column="18" selection-start-line="185" selection-start-column="18" selection-end-line="185" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fnelem/math/FEMatrix.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="642" column="1" lean-forward="true" selection-start-line="642" selection-start-column="1" selection-end-line="642" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fnelem/math/matrix_inversion_cpu.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-402">
-          <caret line="64" column="28" selection-start-line="64" selection-start-column="28" selection-end-line="64" selection-end-column="28" />
+        <state relative-caret-position="9">
+          <caret line="670" column="33" selection-start-line="670" selection-start-column="33" selection-end-line="670" selection-end-column="33" />
         </state>
       </provider>
     </entry>

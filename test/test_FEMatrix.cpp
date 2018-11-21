@@ -175,10 +175,15 @@ void test_identity() {
     m.set(4, 3, 22);
     m.set(4, 4, 34);
     m.disp();
+
+    // Multiply by inverse
     FEMatrix im = matrix_inverse_cpu(&m);
     im.disp();
     m *= im;
     m.disp();
+
+    // Check identity
+    assert(m.is_identity());
 }
 
 int main() {
