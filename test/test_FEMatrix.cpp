@@ -42,6 +42,7 @@ void test_matrix_init() {
     assert(dim[1] == 5);
     matrix.set(0, 0, 10);
     assert(matrix.get(0, 0) == 10);
+    delete[] dim;
 }
 
 void test_matrix_disp() {
@@ -70,6 +71,7 @@ void test_matrix_array() {
     FEMatrix mat = FEMatrix(2, 2);
     double *arr = mat.get_array();
     assert(arr[0] == 0);
+    delete[] arr;
 }
 
 int test_cpu_inversion() {
@@ -84,9 +86,10 @@ int test_cpu_inversion() {
     L[2 * 3 + 0] = 2;
     L[2 * 3 + 1] = 2;
     L[2 * 3 + 2] = 3;
-    FEMatrix mat = FEMatrix(L, n, n);
-    FEMatrix *matInverse = matrix_inverse_cpu(&mat);
-    matInverse->disp();
+    FEMatrix mat = FEMatrix(n, n, L);
+    FEMatrix matInverse = matrix_inverse_cpu(&mat);
+    matInverse.disp();
+    delete[] L;
 }
 
 void test_add() {
@@ -135,6 +138,20 @@ void test_transpose() {
     m1.disp();
 }
 
+void test_multiplication() {
+    FEMatrix m1 = FEMatrix(2, 3);
+    m1.set(0, 0, 1);
+    m1.set(0, 1, 2);
+    m1.set(0, 2, 3);
+    m1.set(1, 0, 4);
+    m1.set(1, 1, 5);
+    m1.set(1, 1, 6);
+    m1.disp();
+    FEMatrix m2 = m1.clone();
+    // m1 *= m2;
+    // m1.disp();
+}
+
 int main() {
     test_matrix_init();
     test_matrix_disp();
@@ -144,5 +161,6 @@ int main() {
     test_add();
     test_substract();
     test_transpose();
+    test_multiplication();
     return 0;
 }

@@ -34,7 +34,7 @@ Performs matrix inversion using Gauss Jordan algorithm.
  * @param matrix Matrix to inverse
  * @return Inverse matrix
  */
-FEMatrix *matrix_inverse_cpu(FEMatrix *matrix) {
+FEMatrix matrix_inverse_cpu(FEMatrix *matrix) {
 
     // Check matrix is square
     if (!matrix->is_square()) {
@@ -109,6 +109,6 @@ FEMatrix *matrix_inverse_cpu(FEMatrix *matrix) {
     }
 
     // Return matrix
-    return new FEMatrix(invMatrix, dimension, dimension);
+    return FEMatrix(dimension, dimension, invMatrix);
 
 }

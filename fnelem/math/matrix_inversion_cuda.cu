@@ -243,6 +243,6 @@ FEMatrix *matrix_inverse_cuda(FEMatrix *feMatrix) {
     delete[] I;
 
     // Generate matrix
-    return new FEMatrix(iMatrix, n, n);
+    return new FEMatrix(n, n, iMatrix);
 
 }

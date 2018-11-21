@@ -60,7 +60,7 @@ public:
     FEMatrix(int n, int m);
 
     // Create matrix from array
-    FEMatrix(double *matrix, int n, int m);
+    FEMatrix(int n, int m, double *matrix);
 
     // Destructor
     ~FEMatrix();
@@ -116,6 +116,12 @@ public:
     // Matrix transpose
     void transpose();
 
+    // Matrix multiplication with self
+    FEMatrix &operator*=(const FEMatrix &matrix);
+
+    // Clone object
+    FEMatrix clone() const;
+
 };
 
 /**
@@ -138,13 +144,13 @@ FEMatrix::FEMatrix(int n, int m) {
  * @param n Number of rows
  * @param m Number of columns
  */
-FEMatrix::FEMatrix(double *matrix, int n, int m) {
+FEMatrix::FEMatrix(int n, int m, double *matrix) {
     this->n = n;
     this->m = m;
     this->mat = new double[n * m];
     for (int i = 0; i < n; i++) { // Rows
         for (int j = 0; j < m; j++) { // Columns
-            this->mat[i * n + j] = matrix[i * n + j];
+            this->mat[i * m + j] = matrix[i * m + j];
         }
     }
 }
@@ -162,7 +168,7 @@ FEMatrix::~FEMatrix() {
 void FEMatrix::fill_zeros() {
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
-            this->mat[i * this->n + j] = 0;
+            this->mat[i * this->m + j] = 0;
         }
     }
 }
@@ -173,7 +179,7 @@ void FEMatrix::fill_zeros() {
 void FEMatrix::fill_ones() {
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
-            this->mat[i * this->n + j] = 1;
+            this->mat[i * this->m + j] = 1;
         }
     }
 }
@@ -184,7 +190,7 @@ void FEMatrix::fill_ones() {
 void FEMatrix::disp() const {
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
-            std::cout << this->mat[i * this->n + j] << "\t";
+            std::cout << this->mat[i * this->m + j] << "\t";
         }
         std::cout << "" << std::endl;
     }
@@ -201,7 +207,7 @@ void FEMatrix::set(int i, int j, double val) {
     if (i >= this->n || j >= this->m) {
         throw std::logic_error("[FEMATRIX] Column or row position overflow matrix");
     }
-    this->mat[i * this->n + j] = val;
+    this->mat[i * this->m + j] = val;
 }
 
 /**
@@ -214,7 +220,7 @@ void FEMatrix::save_to_file(std::string filename) const {
     plik.open(filename);
     for (int j = 0; j < this->n; j++) {
         for (int i = 0; i < this->m; i++) {
-            plik << this->mat[j * this->n + i] << "\t";
+            plik << this->mat[j * this->m + i] << "\t";
         }
         if (j < this->n - 1) {
             plik << std::endl;
@@ -232,7 +238,7 @@ double *FEMatrix::get_array() const {
     double *mat_array = new double[this->n * this->m];
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
-            mat_array[i * this->n + j] = this->mat[i * this->n + j];
+            mat_array[i * this->m + j] = this->mat[i * this->m + j];
         }
     }
     return mat_array;
@@ -282,7 +288,7 @@ double FEMatrix::get(int i, int j) const {
     if (i >= this->n || j >= this->m) {
         throw std::logic_error("[FEMATRIX] Column or row position overflow matrix");
     }
-    return this->mat[i * this->n + j];
+    return this->mat[i * this->m + j];
 }
 
 /**
@@ -296,7 +302,7 @@ FEMatrix &FEMatrix::operator=(const FEMatrix &matrix) {
     this->m = matrix.m;
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
-            this->mat[i * this->n + j] = matrix.get(i, j);
+            this->mat[i * this->m + j] = matrix.get(i, j);
         }
     }
     return *this;
@@ -318,7 +324,7 @@ FEMatrix &FEMatrix::operator+=(const FEMatrix &matrix) {
     // Adds
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
-            this->mat[i * this->n + j] += matrix.get(i, j);
+            this->mat[i * this->m + j] += matrix.get(i, j);
         }
     }
 
@@ -368,7 +374,7 @@ FEMatrix &FEMatrix::operator-=(const FEMatrix &matrix) {
     // Adds
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
-            this->mat[i * this->n + j] -= matrix.get(i, j);
+            this->mat[i * this->m + j] -= matrix.get(i, j);
         }
     }
 
@@ -426,19 +432,72 @@ void FEMatrix::transpose() {
     int tempdim = this->n;
 
     // Create new transposed matrix
-    double *newMat = new double[this->n * this->m];
+    double newMat[this->n * this->m];
     for (int i = 0; i < this->m; i++) { // Rows
         for (int j = 0; j < this->n; j++) { // Columns
-            newMat[i * this->m + j] = this->get(j, i);
+            newMat[i * this->n + j] = this->get(j, i);
         }
     }
 
-    // Delete previous matrix
-    delete[] this->mat;
+    // Update self matrix
+    for (int i = 0; i < this->m; i++) { // Rows
+        for (int j = 0; j < this->n; j++) { // Columns
+            this->mat[i * this->n + j] = newMat[i * this->n + j];
+        }
+    }
 
     // Update matrix
-    this->mat = newMat;
     this->n = this->m;
     this->m = tempdim;
 
+}
+
+/**
+ * Matrix multiplication with self.
+ *
+ * @param matrix Matrix to multiply
+ * @return
+ */
+FEMatrix &FEMatrix::operator*=(const FEMatrix &matrix) {
+
+    // Check dimension
+    if (this->m != matrix.n) {
+        throw std::logic_error("[FEMATRIX] Can't multiply matrix, dimension doest not agree");
+    }
+
+    // Create new auxiliar matrix AXB = (this) AXN * (matrix) NXB
+    int a = this->n;
+    int b = matrix.m;
+    double auxMatrix[a * b];
+    double sum = 0; // Stores partial sum
+
+    // Multiply
+    for (int i = 0; i < a; i++) { // Rows of new matrix
+        for (int j = 0; j < b; j++) { // Columns of new matrix
+            sum = 0;
+            for (int k = 0; k < this->m; k++) {
+                sum += this->get(i, j + k) + matrix.get(j + k, i);
+            }
+            auxMatrix[i * a + j] = sum;
+        }
+    }
+
+    // Return self
+    return *this;
+
+}
+
+/**
+ * Clones matrix.
+ *
+ * @return
+ */
+FEMatrix FEMatrix::clone() const {
+    FEMatrix newMatrix = FEMatrix(this->n, this->m);
+    for (int i = 0; i < this->n; i++) { // Rows
+        for (int j = 0; j < this->m; j++) { // Columns
+            newMatrix.set(i, j, -this->get(i, j));
+        }
+    }
+    return newMatrix;
 }
