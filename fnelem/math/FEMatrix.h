@@ -71,6 +71,9 @@ private:
     // Uses pad or not to display matrix on console
     bool apply_pad = false;
 
+    // Calcualtes determinant recursive
+    double _det_recursive(double *matrix, int d) const;
+
 public:
 
     // Constructor
@@ -208,6 +211,9 @@ public:
     // Not equal operator
     bool operator!=(const FEMatrix &matrix) const;
 
+    // Calculate determinant
+    double det() const;
+
 };
 
 /**
@@ -217,6 +223,9 @@ public:
  * @param m Number of columns
  */
 FEMatrix::FEMatrix(int n, int m) {
+    if (n < 1 || m < 1) {
+        throw std::logic_error("[FEMATRIX] Invalid matrix dimension");
+    }
     this->n = n;
     this->m = m;
     this->mat = new double[n * m];
@@ -231,6 +240,9 @@ FEMatrix::FEMatrix(int n, int m) {
  * @param m Number of columns
  */
 FEMatrix::FEMatrix(int n, int m, double *matrix) {
+    if (n < 1 || m < 1) {
+        throw std::logic_error("[FEMATRIX] Invalid matrix dimension");
+    }
     this->n = n;
     this->m = m;
     this->mat = new double[n * m];
@@ -716,6 +728,9 @@ FEMatrix FEMatrix::clone() const {
  * @param o New origin
  */
 void FEMatrix::set_origin(int o) {
+    if (o < 0) {
+        throw std::logic_error("[FEMATRIX] Invalid origin");
+    }
     this->origin = o;
     this->origin_temp = o;
 }
@@ -1014,4 +1029,54 @@ bool FEMatrix::operator!=(const FEMatrix &matrix) const {
         }
     }
     return true;
+}
+
+/**
+ * Calculates determinant of the matrix.
+ *
+ * @return
+ */
+double FEMatrix::det() const {
+    if (!this->is_square()) {
+        throw std::logic_error("[FEMATRIX] Cannot calculate determinant for a non-square matrix");
+    }
+    if (this->n == 1) {
+        return this->_get(0, 0);
+    }
+    return this->_det_recursive(this->mat, this->n);
+}
+
+/**
+ * Calculate determinant of the matrix.
+ *
+ * @param matrix Submatrix to calcualte determinant
+ * @param d Actual dimension of the matrix
+ * @return
+ */
+double FEMatrix::_det_recursive(double *matrix, int d) const {
+
+    // If dimension is 2
+    if (d == 2) {
+        return matrix[0] * matrix[3] - matrix[1] * matrix[2];
+    }
+
+    // Dimension is greather than 2, split matrix into sub-matrices and evaluate
+    int nd = d - 1;
+    int i, j, k;
+    double *submat = new double[nd * nd];
+
+    // Iterates submatrices
+    double dsum = 0; // Saves actual sum of the determinant
+    int sign = 1; // Sign
+    for (k = 0; k < d; k++) { // k stores column number
+
+        // Fill submatrix
+        for (i = 0; i < nd; i++) { // Rows
+            for (j = 0; j < nd; j++) { // Column
+
+            }
+        }
+
+    }
+
 }

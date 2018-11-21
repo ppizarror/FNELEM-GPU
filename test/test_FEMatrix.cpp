@@ -34,6 +34,17 @@ Test matrix.
 #include <iostream>
 #include <cassert>
 
+/**
+ * Check if two numbers are equal under a certain tolerance.
+ *
+ * @param a Number to evaluate
+ * @param b Number to evaluate
+ * @return
+ */
+bool is_num_equal(double a, double b) {
+    return fabs(a - b) < 1e-12;
+}
+
 void test_matrix_init() {
     FEMatrix matrix = FEMatrix(3, 5);
     matrix.fill_zeros();
@@ -281,6 +292,34 @@ void test_equal() {
     assert(a != b);
 }
 
+void test_determinant() {
+    FEMatrix mat1 = FEMatrix(1, 1);
+    mat1.set(0, 0, 3);
+    assert(mat1.det() == 3); // Determinant 1x1
+
+    // Determinant 2x2
+    FEMatrix mat2 = FEMatrix(2, 2);
+    mat2.set_origin(1);
+    mat2.set(1, 1, 2);
+    mat2.set(1, 2, 4);
+    mat2.set(2, 1, 7);
+    mat2.set(2, 2, 3);
+    assert(is_num_equal(mat2.det(), -22));
+
+    // Determinant 3x3
+    FEMatrix mat = FEMatrix(3, 3);
+    mat.set(0, 0, 1);
+    mat.set(0, 1, 2);
+    mat.set(0, 2, 3);
+    mat.set(1, 0, 5);
+    mat.set(1, 1, 2);
+    mat.set(1, 2, 1);
+    mat.set(2, 0, 2);
+    mat.set(2, 1, 2);
+    mat.set(2, 2, 3);
+    mat.disp();
+}
+
 int main() {
     test_matrix_init();
     test_matrix_disp();
@@ -297,5 +336,6 @@ int main() {
     test_constant_multiplication();
     test_row_column();
     test_equal();
+    test_determinant();
     return 0;
 }
