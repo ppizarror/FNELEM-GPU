@@ -47,6 +47,7 @@ FEMatrix matrix_inverse_cpu(FEMatrix *matrix) {
     int i, j, k, temp;
 
     // Create augmented matrix
+    matrix->disable_origin();
     double augmentedMatrix[dimension][2 * dimension];
     for (int row = 0; row < dimension; row++) {
         for (int col = 0; col < 2 * dimension; col++) {
@@ -61,6 +62,7 @@ FEMatrix matrix_inverse_cpu(FEMatrix *matrix) {
             }
         }
     }
+    matrix->enable_origin();
 
     for (j = 0; j < dimension; j++) {
         temp = j;

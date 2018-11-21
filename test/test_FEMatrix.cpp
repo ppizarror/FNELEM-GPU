@@ -151,6 +151,8 @@ void test_multiplication() {
     m2.transpose();
     m1 *= m2;
     m1.disp();
+    assert(m1.max() == 77);
+    assert(m1.min() == 14);
 }
 
 void test_identity() {
@@ -172,6 +174,10 @@ void test_identity() {
     m.set(4, 2, 8);
     m.set(4, 3, 22);
     m.set(4, 4, 34);
+    m.disp();
+    FEMatrix im = matrix_inverse_cpu(&m);
+    im.disp();
+    m *= im;
     m.disp();
 }
 

@@ -35,9 +35,11 @@ Based on: https://github.com/ZhengzhongSun/Matrix-Inversion-with-CUDA
 #include <math.h>
 #include <stdexcept>
 #include <string>
+#include <iomanip>
 
 // Constant definition
 #define FEMATRIX_MIN_INVERSION_VALUE 0.0005
+#define FEMATRIX_ZERO_TOL 1e-12
 
 /**
  * Matrix class for working with CUDA. Stores matrix in an array [1..n*m].
@@ -57,11 +59,17 @@ private:
     // Origin from one
     int origin = 0;
 
+    // Saves origin
+    int origin_temp = 0;
+
     // Update matrix A[i][j] = val, no origin
     void _set(int i, int j, double val);
 
     // Returns value A[i][j], no origin
     double _get(int i, int j) const;
+
+    // Uses pad or not to display matrix on console
+    bool apply_pad = false;
 
 public:
 
@@ -76,6 +84,12 @@ public:
 
     // Set origin
     void set_origin(int o);
+
+    // Disables origin
+    void disable_origin();
+
+    // Enable origin
+    void enable_origin();
 
     // Fill matrix with zeros
     void fill_zeros();
@@ -206,13 +220,28 @@ void FEMatrix::fill_ones() {
  * Display matrix in console.
  */
 void FEMatrix::disp() const {
-
-    // Get max number length
-    for (int i = 0; i < this->n; i++) { // Rows
-        for (int j = 0; j < this->m; j++) { // Columns
-            std::cout << this->mat[i * this->m + j] << "\t";
+    if (this->apply_pad) {
+        int maxn = 0, snuml;
+        std::string snum;
+        for (int i = 0; i < this->n; i++) { // Rows
+            for (int j = 0; j < this->m; j++) { // Columns
+                snuml = static_cast<int>(std::to_string(this->_get(i, j)).length());
+                if (snuml > maxn) maxn = snuml;
+            }
         }
-        std::cout << "" << std::endl;
+        for (int i = 0; i < this->n; i++) { // Rows
+            for (int j = 0; j < this->m; j++) { // Columns
+                std::cout << std::setw(maxn) << this->_get(i, j) << " ";
+            }
+            std::cout << "" << std::endl;
+        }
+    } else {
+        for (int i = 0; i < this->n; i++) { // Rows
+            for (int j = 0; j < this->m; j++) { // Columns
+                std::cout << std::noshowpoint << this->_get(i, j) << "\t";
+            }
+            std::cout << "" << std::endl;
+        }
     }
     std::cout << "" << std::endl;
 }
@@ -474,7 +503,7 @@ void FEMatrix::transpose() {
     int tempdim = this->n;
 
     // Create new transposed matrix
-    double newMat[this->n * this->m];
+    double *newMat = new double[this->n * this->m];
     for (int i = 0; i < this->m; i++) { // Rows
         for (int j = 0; j < this->n; j++) { // Columns
             newMat[i * this->n + j] = this->_get(j, i);
@@ -491,6 +520,9 @@ void FEMatrix::transpose() {
     // Update matrix
     this->n = this->m;
     this->m = tempdim;
+
+    // Delete
+    delete[] newMat;
 
 }
 
@@ -510,7 +542,7 @@ FEMatrix &FEMatrix::operator*=(const FEMatrix &matrix) {
     // Create new auxiliar matrix AXB = (this) AXN * (matrix) NXB
     int a = this->n;
     int b = matrix.m;
-    double auxMatrix[a * b];
+    double *auxMatrix = new double[a * b];
     double sum = 0; // Stores partial sum
 
     // Multiply
@@ -532,6 +564,9 @@ FEMatrix &FEMatrix::operator*=(const FEMatrix &matrix) {
             this->mat[i * b + j] = auxMatrix[i * b + j];
         }
     }
+
+    // Delete matrix
+    delete[] auxMatrix;
 
     // Return self
     return *this;
@@ -560,6 +595,7 @@ FEMatrix FEMatrix::clone() const {
  */
 void FEMatrix::set_origin(int o) {
     this->origin = o;
+    this->origin_temp = o;
 }
 
 /**
@@ -598,4 +634,18 @@ double FEMatrix::min() const {
         }
     }
     return min;
+}
+
+/**
+ * Disables origin.
+ */
+void FEMatrix::disable_origin() {
+    this->origin = 0;
+}
+
+/**
+ * Enables origin
+ */
+void FEMatrix::enable_origin() {
+    this->origin = this->origin_temp;
 }
