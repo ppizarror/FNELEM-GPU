@@ -110,6 +110,12 @@ public:
     // Substract and return a new matrix
     FEMatrix operator-(const FEMatrix &matrix) const;
 
+    // Unary substract
+    FEMatrix operator-() const;
+
+    // Matrix transpose
+    void transpose();
+
 };
 
 /**
@@ -393,5 +399,46 @@ FEMatrix FEMatrix::operator-(const FEMatrix &matrix) const {
 
     // Return matrix pointer
     return newMatrix;
+
+}
+
+/**
+ * Unary substract.
+ *
+ * @return
+ */
+FEMatrix FEMatrix::operator-() const {
+    FEMatrix newMatrix = FEMatrix(this->n, this->m);
+    for (int i = 0; i < this->n; i++) { // Rows
+        for (int j = 0; j < this->m; j++) { // Columns
+            newMatrix.set(i, j, -this->get(i, j));
+        }
+    }
+    return newMatrix;
+}
+
+/**
+ * Matrix transpose.
+ */
+void FEMatrix::transpose() {
+
+    // Save temporal dimension
+    int tempdim = this->n;
+
+    // Create new transposed matrix
+    double *newMat = new double[this->n * this->m];
+    for (int i = 0; i < this->m; i++) { // Rows
+        for (int j = 0; j < this->n; j++) { // Columns
+            newMat[i * this->m + j] = this->get(j, i);
+        }
+    }
+
+    // Delete previous matrix
+    delete[] this->mat;
+
+    // Update matrix
+    this->mat = newMat;
+    this->n = this->m;
+    this->m = tempdim;
 
 }

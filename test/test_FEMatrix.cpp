@@ -118,6 +118,21 @@ void test_substract() {
     m2.set(1, 1, 5);
     FEMatrix m3 = m2 - m1;
     assert(m3.get(0, 0) == 2);
+    m3 = -m3;
+    assert(m3.get(0, 0) == -2);
+}
+
+void test_transpose() {
+    FEMatrix m1 = FEMatrix(2, 3);
+    m1.set(0, 0, 1);
+    m1.set(0, 1, 1);
+    m1.set(0, 2, 5);
+    m1.set(1, 0, 9);
+    m1.set(1, 1, 10);
+    m1.set(1, 1, -1);
+    m1.disp();
+    m1.transpose();
+    m1.disp();
 }
 
 int main() {
@@ -128,5 +143,6 @@ int main() {
     test_cpu_inversion();
     test_add();
     test_substract();
+    test_transpose();
     return 0;
 }
