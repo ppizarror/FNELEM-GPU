@@ -32,12 +32,16 @@ was calculated using a CUDA algorithm (Gauss Jordan inversion).
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
 #include <stdio.h>
+#include <vector>
 
 // FNELEM library imports
 #include "fnelem/math/matrix_inversion_cuda.cu"
 #include "fnelem/model/node/Node.h"
 
 int main() {
+
+	// Create nodes
+	std::vector<Node> nodes = std::vector<Node>();
 
     // Creates matrix
     FEMatrix mat = FEMatrix(3, 3);

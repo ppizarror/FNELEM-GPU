@@ -186,6 +186,35 @@ void test_identity() {
     assert(m.is_identity());
 }
 
+void test_symmetric() {
+    FEMatrix m = FEMatrix(3, 3);
+    m.set_origin(1);
+    m.set(1, 1, 3);
+    m.set(2, 2, 6);
+    m.set(3, 3, 7);
+    m.set(1, 2, 5);
+    m.set(2, 1, 5);
+    m.disp();
+    assert(m.is_symmetric());
+    m.transpose();
+    assert(m.is_symmetric());
+}
+
+void test_make_symmetric() {
+    FEMatrix m = FEMatrix(3, 3);
+    m.set_origin(1);
+    m.set(1, 1, 3);
+    m.set(2, 2, 6);
+    m.set(3, 3, 7);
+    m.set(1, 2, 5);
+    m.set(2, 3, 8);
+    m.disp();
+    assert(!m.is_symmetric());
+    m.make_symmetric();
+    m.disp();
+    assert(m.is_symmetric());
+}
+
 int main() {
     test_matrix_init();
     test_matrix_disp();
@@ -197,5 +226,7 @@ int main() {
     test_transpose();
     test_multiplication();
     test_identity();
+    test_symmetric();
+    test_make_symmetric();
     return 0;
 }

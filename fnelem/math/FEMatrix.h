@@ -157,6 +157,15 @@ public:
     // Check if matrix is identity
     bool is_identity() const;
 
+    // Check if matrix is symmetric
+    bool is_symmetric() const;
+
+    // Make matrix symmetric
+    void make_symmetric(bool upper);
+
+    // Uses upper by default
+    void make_symmetric();
+
 };
 
 /**
@@ -682,4 +691,71 @@ bool FEMatrix::is_identity() const {
     // Matrix is identity
     return true;
 
+}
+
+/**
+ * Check if matrix is symmetric.
+ *
+ * @return
+ */
+bool FEMatrix::is_symmetric() const {
+
+    // If matrix is not square
+    if (!this->is_square()) return false;
+
+    // Check matrix
+    for (int i = 0; i < this->n; i++) { // Rows
+        for (int j = 0; j < this->m; j++) { // Columns
+            if (i < j) {
+                if (fabs(this->_get(i, j) - this->_get(j, i)) > FEMATRIX_ZERO_TOL) {
+                    return false;
+                }
+            }
+        }
+    }
+
+    // Matrix is symmetric
+    return true;
+
+}
+
+/**
+ * Make matrix symmetric.
+ *
+ * @param upper Uses upper matrix to make symmetric matrix.
+ * @return
+ */
+void FEMatrix::make_symmetric(bool upper) {
+
+    // If matrix is not square
+    if (!this->is_square()) {
+        throw std::logic_error("[FEMATRIX] Cannot make symmetric a non-square matrix");
+    }
+
+    // Make symmetric
+    if (upper) {
+        for (int i = 0; i < this->n; i++) { // Rows
+            for (int j = 0; j < this->m; j++) { // Columns
+                if (i > j) {
+                    this->_set(i, j, this->_get(j, i));
+                }
+            }
+        }
+    } else {
+        for (int i = 0; i < this->n; i++) { // Rows
+            for (int j = 0; j < this->m; j++) { // Columns
+                if (i < j) {
+                    this->_set(i, j, this->_get(j, i));
+                }
+            }
+        }
+    }
+
+}
+
+/**
+ * Make matrix symmetric, uses upper by default.
+ */
+void FEMatrix::make_symmetric() {
+    this->make_symmetric(true);
 }
