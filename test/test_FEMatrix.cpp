@@ -145,11 +145,34 @@ void test_multiplication() {
     m1.set(0, 2, 3);
     m1.set(1, 0, 4);
     m1.set(1, 1, 5);
-    m1.set(1, 1, 6);
+    m1.set(1, 2, 6);
     m1.disp();
     FEMatrix m2 = m1.clone();
-    // m1 *= m2;
-    // m1.disp();
+    m2.transpose();
+    m1 *= m2;
+    m1.disp();
+}
+
+void test_identity() {
+    FEMatrix m = FEMatrix(4, 4);
+    m.set_origin(1);
+    m.set(1, 1, 1);
+    m.set(1, 2, 5);
+    m.set(1, 3, 7);
+    m.set(1, 4, 8);
+    m.set(2, 1, 123);
+    m.set(2, 2, 2432);
+    m.set(2, 3, 22);
+    m.set(2, 4, 2);
+    m.set(3, 1, 45);
+    m.set(3, 2, 345);
+    m.set(3, 3, 65);
+    m.set(3, 4, 7);
+    m.set(4, 1, 2);
+    m.set(4, 2, 8);
+    m.set(4, 3, 22);
+    m.set(4, 4, 34);
+    m.disp();
 }
 
 int main() {
@@ -162,5 +185,6 @@ int main() {
     test_substract();
     test_transpose();
     test_multiplication();
+    test_identity();
     return 0;
 }

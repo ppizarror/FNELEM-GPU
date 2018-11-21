@@ -54,6 +54,9 @@ private:
     // Matrix data
     double *mat;
 
+    // Origin from one
+    int origin = 0;
+
 public:
 
     // Constructor
@@ -64,6 +67,9 @@ public:
 
     // Destructor
     ~FEMatrix();
+
+    // Set origin
+    void set_origin(int o);
 
     // Fill matrix with zeros
     void fill_zeros();
@@ -188,6 +194,10 @@ void FEMatrix::fill_ones() {
  * Display matrix in console.
  */
 void FEMatrix::disp() const {
+
+    // Get max number length
+    
+
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
             std::cout << this->mat[i * this->m + j] << "\t";
@@ -204,11 +214,26 @@ void FEMatrix::disp() const {
  * @param val Value
  */
 void FEMatrix::set(int i, int j, double val) {
-    if (i >= this->n || j >= this->m) {
+    if (i >= this->n + this->origin || j >= this->m + this->origin) {
         throw std::logic_error("[FEMATRIX] Column or row position overflow matrix");
     }
-    this->mat[i * this->m + j] = val;
+    this->mat[(i - this->origin) * this->m + (j - this->origin)] = val;
 }
+
+/**
+ * Returns matrix value.
+ *
+ * @param i Row position
+ * @param j Column position
+ * @return Value at matrix[i][j]
+ */
+double FEMatrix::get(int i, int j) const {
+    if (i >= this->n + this->origin || j >= this->m + this->origin) {
+        throw std::logic_error("[FEMATRIX] Get value from matrix olumn or row position overflow");
+    }
+    return this->mat[(i - this->origin) * this->m + (j - this->origin)];
+}
+
 
 /**
  * Save matrix to file.
@@ -275,20 +300,6 @@ int FEMatrix::get_square_dimension() const {
     } else {
         return this->n;
     }
-}
-
-/**
- * Returns matrix value.
- *
- * @param i Row position
- * @param j Column position
- * @return Value at matrix[i][j]
- */
-double FEMatrix::get(int i, int j) const {
-    if (i >= this->n || j >= this->m) {
-        throw std::logic_error("[FEMATRIX] Column or row position overflow matrix");
-    }
-    return this->mat[i * this->m + j];
 }
 
 /**
@@ -476,9 +487,18 @@ FEMatrix &FEMatrix::operator*=(const FEMatrix &matrix) {
         for (int j = 0; j < b; j++) { // Columns of new matrix
             sum = 0;
             for (int k = 0; k < this->m; k++) {
-                sum += this->get(i, j + k) + matrix.get(j + k, i);
+                sum += this->get(i, k) * matrix.get(k, j);
             }
-            auxMatrix[i * a + j] = sum;
+            auxMatrix[i * b + j] = sum;
+        }
+    }
+
+    // Update matrix
+    this->n = a;
+    this->m = b;
+    for (int i = 0; i < a; i++) { // Rows of new matrix
+        for (int j = 0; j < b; j++) { // Columns of new matrix
+            this->mat[i * b + j] = auxMatrix[i * b + j];
         }
     }
 
@@ -496,8 +516,17 @@ FEMatrix FEMatrix::clone() const {
     FEMatrix newMatrix = FEMatrix(this->n, this->m);
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
-            newMatrix.set(i, j, -this->get(i, j));
+            newMatrix.set(i, j, this->get(i, j));
         }
     }
     return newMatrix;
+}
+
+/**
+ * Set matrix origin.
+ *
+ * @param o New origin
+ */
+void FEMatrix::set_origin(int o) {
+    this->origin = o;
 }
