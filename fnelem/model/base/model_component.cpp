@@ -1,3 +1,5 @@
+#include <utility>
+
 /**
 FNELEM-GPU BASE ELEMENTS - MODEL COMPONENT
 Base element of the platform.
@@ -30,37 +32,12 @@ Base element of the platform.
 
 // Library import
 #include <string>
-
-/**
- * Base model component.
- */
-class ModelComponent {
-private:
-
-    // Element tag
-    std::string tagID = "";
-
-public:
-
-    // Init model
-    ModelComponent();
-
-    // Init model with tag
-    ModelComponent(std::string tag);
-
-    // Destroy object
-    ~ModelComponent();
-
-    // Returns tag
-    std::string get_model_tag();
-
-};
+#include "model_component.h"
 
 /**
  * Init model.
  */
-ModelComponent::ModelComponent() {
-}
+ModelComponent::ModelComponent() = default;
 
 /**
  * Init model with tag.
@@ -68,7 +45,7 @@ ModelComponent::ModelComponent() {
  * @param tag
  */
 ModelComponent::ModelComponent(std::string tag) {
-    this->tagID = tag;
+    this->tagID = std::move(tag);
 }
 
 /**
@@ -83,5 +60,4 @@ std::string ModelComponent::get_model_tag() {
 /**
  * Object destruction.
  */
-ModelComponent::~ModelComponent() {
-}
+ModelComponent::~ModelComponent() = default;

@@ -28,7 +28,7 @@ Utilitary functions to perform tests.
 	SOFTWARE.
 */
 
-// Include sources
+// Library imports
 #include <cassert>
 #include <iostream>
 #include <math.h>

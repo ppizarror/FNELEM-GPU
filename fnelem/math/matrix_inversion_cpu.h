@@ -28,12 +28,12 @@ Performs matrix inversion using Gauss Jordan algorithm.
 	SOFTWARE.
 */
 
-// Library imports
-#include "fematrix.h"
-
 // Init header file
 #ifndef MATH_MATRIX_INVERSION_CPU_HEADER_FILE
 #define MATH_MATRIX_INVERSION_CPU_HEADER_FILE
+
+// Library imports
+#include "fematrix.h"
 
 // Constant definition
 #define _FEMATRIX_MIN_INVERSION_VALUE 0.0005

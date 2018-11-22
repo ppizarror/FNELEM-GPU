@@ -28,6 +28,10 @@ Structural nodes.
 	SOFTWARE.
 */
 
+// Init header file
+#ifndef MODEL_NODE_HEADER_FILE
+#define MODEL_NODE_HEADER_FILE
+
 // Include sources
 #include "../base/model_component.h"
 #include "../../math/fematrix.h"
@@ -79,88 +83,4 @@ public:
 
 };
 
-/**
- * Destroy node.
- */
-Node::~Node() {
-}
-
-/**
- * Creates a 2D node.
- *
- * @param tag Tag of the node
- * @param posx Position x
- * @param posy Position y
- */
-Node::Node(std::string tag, double posx, double posy) : ModelComponent(tag) {
-    this->ngdl = 2;
-    this->coords = new double[this->ngdl];
-    this->coords[0] = posx;
-    this->coords[1] = posy;
-    this->init();
-}
-
-/**
- * Creates a 2D node.
- *
- * @param tag Tag of the node
- * @param posx Position x
- * @param posy Position y
- */
-Node::Node(std::string tag, double posx, double posy, double posz) : ModelComponent(tag) {
-    this->ngdl = 3;
-    this->coords = new double[this->ngdl];
-    this->coords[0] = posx;
-    this->coords[1] = posy;
-    this->coords[2] = posz;
-    this->init();
-}
-
-/**
- * Init internal variables.
- */
-void Node::init() {
-
-    // Init ID of degrees of freedom
-    this->gdlid = new int[this->ngdl];
-
-    // Init displacements
-    this->displ = new double[this->ngdl];
-
-    // Init reactions
-    this->reaction = new double[this->ngdl];
-
-    // Init node loads
-    this->loads = new double[this->ngdl];
-
-    // Save initial values
-    for (int i = 0; i < this->ngdl; i++) {
-        this->gdlid[i] = -1;
-        this->displ[i] = 0;
-        this->reaction[i] = 0;
-        this->loads[i] = 0;
-    }
-
-}
-
-/**
- * Return number of degrees of freedom.
- *
- * @return Ngdl
- */
-int Node::get_ngdl() const {
-    return this->ngdl;
-}
-
-/**
- * Return a copy of node coordinates.
- *
- * @return Coordinates
- */
-double *Node::get_coordinates() const {
-    double *coords = new double[this->ngdl];
-    for (int i = 0; i < this->ngdl; i++) {
-        coords[i] = this->coords[i];
-    }
-    return coords;
-}
+#endif // MODEL_NODE

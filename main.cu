@@ -39,7 +39,9 @@ was calculated using a CUDA algorithm (Gauss Jordan inversion).
 #include "fnelem/math/fematrix_utils.cpp"
 #include "fnelem/math/matrix_inversion_cpu.cpp"
 #include "fnelem/math/matrix_inversion_cuda.cu"
-#include "fnelem/model/node/node.h"
+
+#include "fnelem/model/base/model_component.cpp"
+#include "fnelem/model/node/node.cpp"
 
 int main() {
 

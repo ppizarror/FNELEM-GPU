@@ -28,6 +28,10 @@ Base element of the platform.
 	SOFTWARE.
 */
 
+// Init header file
+#ifndef BASE_MODEL_COMPONENT_HEADER_FILE
+#define BASE_MODEL_COMPONENT_HEADER_FILE
+
 // Library import
 #include <string>
 
@@ -46,7 +50,7 @@ public:
     ModelComponent();
 
     // Init model with tag
-    ModelComponent(std::string tag);
+    explicit ModelComponent(std::string tag);
 
     // Destroy object
     ~ModelComponent();
@@ -56,32 +60,4 @@ public:
 
 };
 
-/**
- * Init model.
- */
-ModelComponent::ModelComponent() {
-}
-
-/**
- * Init model with tag.
- *
- * @param tag
- */
-ModelComponent::ModelComponent(std::string tag) {
-    this->tagID = tag;
-}
-
-/**
- * Returns model tag.
- *
- * @return Model tag.
- */
-std::string ModelComponent::get_model_tag() {
-    return this->tagID;
-}
-
-/**
- * Object destruction.
- */
-ModelComponent::~ModelComponent() {
-}
+#endif // BASE_MODEL_COMPONENT_HEADER_FILE
