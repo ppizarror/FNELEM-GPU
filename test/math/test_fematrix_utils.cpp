@@ -35,13 +35,20 @@ Test FEMatrix utils.
 
 void test_identity() {
     int n = 5;
-    FEMatrix i = create_identity_matrix(n);
+    FEMatrix i = FEMatrix_identity(n);
     assert(i.is_diag());
     assert(i.sum() == n);
     assert(i.transpose() == i);
 }
 
+void test_vector() {
+    FEMatrix vector = FEMatrix_vector(5);
+    vector.fill_ones();
+    vector.disp();
+}
+
 int main() {
     test_identity();
+    test_vector();
     return 0;
 }

@@ -28,10 +28,6 @@ Utilitary functions that use FEMatrix.
     SOFTWARE.
 */
 
-// Init header file
-#ifndef MATH_FEMATRIX_UTILS_HEADER_FILE
-#define MATH_FEMATRIX_UTILS_HEADER_FILE
-
 // Library imports
 #include "fematrix.h"
 
@@ -41,7 +37,13 @@ Utilitary functions that use FEMatrix.
  * @param n Dimension
  * @return
  */
-FEMatrix FEMatrix_identity(int n);
+FEMatrix FEMatrix_identity(int n) {
+    FEMatrix mat = FEMatrix(n, n);
+    for (int i = 0; i < n; i++) {
+        mat.set(i, i, 1);
+    }
+    return mat;
+}
 
 /**
  * Creates an vector.
@@ -49,6 +51,7 @@ FEMatrix FEMatrix_identity(int n);
  * @param n Vector length
  * @return
  */
-FEMatrix FEMatrix_vector(int n);
-
-#endif // MATH_FEMATRIX_UTILS_HEADER_FILE
+FEMatrix FEMatrix_vector(int n) {
+    FEMatrix mat = FEMatrix(n, 1);
+    return mat;
+}

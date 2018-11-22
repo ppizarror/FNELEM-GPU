@@ -30,6 +30,7 @@ Structural nodes.
 
 // Include sources
 #include "../base/model_component.h"
+#include "../../math/fematrix.h"
 #include <iostream>
 
 /**
@@ -82,11 +83,6 @@ public:
  * Destroy node.
  */
 Node::~Node() {
-    // delete[] this->coords;
-    // delete[] this->gdlid;
-    // delete[] this->displ;
-    // delete[] this->loads;
-    // delete[] this->reaction;
 }
 
 /**

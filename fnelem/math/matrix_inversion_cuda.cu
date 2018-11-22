@@ -34,9 +34,6 @@ Based on: https://github.com/ZhengzhongSun/Matrix-Inversion-with-CUDA
 #include <stdio.h>
 #include <iostream>
 
-// Common class definition
-class FEMatrix;
-
 // Constants
 #define MATRIX_INVERSION_CUDA_BLOCKSIZE 8
 
@@ -177,10 +174,8 @@ FEMatrix *matrix_inverse_cuda(FEMatrix *feMatrix) {
 
     // Creates blocks
     dim3 threadsPerBlock(MATRIX_INVERSION_CUDA_BLOCKSIZE, MATRIX_INVERSION_CUDA_BLOCKSIZE);
-    dim3 numBlocks((n + MATRIX_INVERSION_CUDA_BLOCKSIZE
-    -1) / MATRIX_INVERSION_CUDA_BLOCKSIZE,
-    (n + MATRIX_INVERSION_CUDA_BLOCKSIZE
-    -1) / MATRIX_INVERSION_CUDA_BLOCKSIZE);
+    dim3 numBlocks((n + MATRIX_INVERSION_CUDA_BLOCKSIZE - 1) / MATRIX_INVERSION_CUDA_BLOCKSIZE,
+                   (n + MATRIX_INVERSION_CUDA_BLOCKSIZE - 1) / MATRIX_INVERSION_CUDA_BLOCKSIZE);
 
     // Memory allocation
     err = cudaMalloc((void **) &d_A, ddsize);

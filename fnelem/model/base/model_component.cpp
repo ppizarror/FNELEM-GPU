@@ -1,10 +1,10 @@
 /**
-FNELEM-GPU CPU MATRIX INVERSION
-Performs matrix inversion using Gauss Jordan algorithm.
+FNELEM-GPU BASE ELEMENTS - MODEL COMPONENT
+Base element of the platform.
 
-@package fnelem.math
+@package fnelem.model.base
 @author ppizarror
-@date 20/11/2018
+@date 19/11/2018
 @license
 	MIT License
 	Copyright (c) 2018 Pablo Pizarro R.
@@ -28,22 +28,60 @@ Performs matrix inversion using Gauss Jordan algorithm.
 	SOFTWARE.
 */
 
-// Library imports
-#include "fematrix.h"
-
-// Init header file
-#ifndef MATH_MATRIX_INVERSION_CPU_HEADER_FILE
-#define MATH_MATRIX_INVERSION_CPU_HEADER_FILE
-
-// Constant definition
-#define _FEMATRIX_MIN_INVERSION_VALUE 0.0005
+// Library import
+#include <string>
 
 /**
- * Performs CPU matrix inversion using Gauss-Jordan elimination algorithm.
- *
- * @param matrix Matrix to inverse
- * @return Inverse matrix
+ * Base model component.
  */
-FEMatrix matrix_inverse_cpu(FEMatrix *matrix);
+class ModelComponent {
+private:
 
-#endif
+    // Element tag
+    std::string tagID = "";
+
+public:
+
+    // Init model
+    ModelComponent();
+
+    // Init model with tag
+    ModelComponent(std::string tag);
+
+    // Destroy object
+    ~ModelComponent();
+
+    // Returns tag
+    std::string get_model_tag();
+
+};
+
+/**
+ * Init model.
+ */
+ModelComponent::ModelComponent() {
+}
+
+/**
+ * Init model with tag.
+ *
+ * @param tag
+ */
+ModelComponent::ModelComponent(std::string tag) {
+    this->tagID = tag;
+}
+
+/**
+ * Returns model tag.
+ *
+ * @return Model tag.
+ */
+std::string ModelComponent::get_model_tag() {
+    return this->tagID;
+}
+
+/**
+ * Object destruction.
+ */
+ModelComponent::~ModelComponent() {
+}
