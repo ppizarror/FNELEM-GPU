@@ -103,6 +103,7 @@ void FEMatrix::fill_ones() {
 }
 
 void FEMatrix::disp_matrix(double *matrix, int dim_n, int dim_m) const {
+    double disp_val; // Stores display value
     if (this->apply_pad) {
         int maxn = 0, snuml = 0;
         std::string snum;
@@ -116,15 +117,24 @@ void FEMatrix::disp_matrix(double *matrix, int dim_n, int dim_m) const {
         }
         for (int i = 0; i < dim_n; i++) { // Rows
             for (int j = 0; j < dim_m; j++) { // Columns
-                std::cout << std::noshowpoint << std::setprecision(4) << std::setw(maxn) << matrix[i * dim_m + j]
-                          << " ";
+                disp_val = matrix[i * dim_m + j];
+                if (abs(disp_val) < __FEMATRIX_ZERO_TOL) {
+                    disp_val = 0;
+                }
+                std::cout << std::noshowpoint << std::setprecision(4) << std::setw(maxn) << disp_val;
+                if (j < dim_m - 1) std::cout << " ";
             }
             std::cout << "" << std::endl;
         }
     } else {
         for (int i = 0; i < dim_n; i++) { // Rows
             for (int j = 0; j < dim_m; j++) { // Columns
-                std::cout << std::noshowpoint << std::setprecision(4) << matrix[i * dim_m + j] << "\t";
+                disp_val = matrix[i * dim_m + j];
+                if (abs(disp_val) < __FEMATRIX_ZERO_TOL) {
+                    disp_val = 0;
+                }
+                std::cout << std::noshowpoint << std::setprecision(4) << disp_val;
+                if (j < dim_m - 1) std::cout << "\t";
             }
             std::cout << "" << std::endl;
         }
@@ -242,11 +252,20 @@ double FEMatrix::_get(int i, int j) const {
 void FEMatrix::save_to_file(std::string filename) const {
     std::ofstream plik;
     plik.open(filename);
-    for (int j = 0; j < this->n; j++) {
-        for (int i = 0; i < this->m; i++) {
-            plik << this->_get(i, j) << "\t";
+    double save_val; // Save value
+    for (int i = 0; i < this->n; i++) {
+        for (int j = 0; j < this->m; j++) {
+            save_val = this->_get(i, j);
+            if (abs(save_val) < __FEMATRIX_ZERO_TOL) {
+                save_val = 0;
+            }
+            plik << save_val;
+            if (j < this->m - 1) {
+                plik << "\t";
+            }
         }
-        if (j < this->n - 1) {
+
+        if (i < this->n - 1) {
             plik << std::endl;
         }
     }

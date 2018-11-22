@@ -52,21 +52,6 @@ void test_matrix_disp() {
     assert(matrix.is_square());
 }
 
-void test_matrix_cpu_inverse() {
-    FEMatrix mat = FEMatrix(3, 3);
-    mat.set(0, 0, 1);
-    mat.set(0, 1, 2);
-    mat.set(0, 2, 3);
-    mat.set(1, 0, 5);
-    mat.set(1, 1, 2);
-    mat.set(1, 2, 1);
-    mat.set(2, 0, 2);
-    mat.set(2, 1, 2);
-    mat.set(2, 2, 3);
-    mat.save_to_file("test-matrix-pre-inversion.txt");
-    mat.disp();
-}
-
 void test_matrix_array() {
     FEMatrix mat = FEMatrix(2, 2);
     double *arr = mat.get_array();
@@ -87,7 +72,10 @@ int test_cpu_inversion() {
     L[2 * 3 + 1] = 2;
     L[2 * 3 + 2] = 3;
     FEMatrix mat = FEMatrix(n, n, L);
+    mat.disp();
+    mat.save_to_file("test-matrix-cpu.txt");
     FEMatrix matInverse = matrix_inverse_cpu(&mat);
+    matInverse.save_to_file("test-matrix-cpu-inversion.txt");
     matInverse.disp();
     delete[] L;
 }
@@ -374,7 +362,6 @@ void test_diagonal() {
 int main() {
     test_matrix_init();
     test_matrix_disp();
-    test_matrix_cpu_inverse();
     test_matrix_array();
     test_cpu_inversion();
     test_add();
