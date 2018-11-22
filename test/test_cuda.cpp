@@ -1,8 +1,8 @@
 /**
-FNELEM-GPU - FEMATRIX UTILS TEST
-Test FEMatrix utils.
+FNELEM-GPU - TEST CUDA
+Auxiliar file to perform auto link CMakeList for CUDA.
 
-@package test.math
+@package test
 @author ppizarror
 @date 21/11/2018
 @license
@@ -28,27 +28,6 @@ Test FEMatrix utils.
 	SOFTWARE.
 */
 
-// Include sources
-#include "../test_utils.h"
-#include "../../fnelem/math/fematrix.h"
-#include "../../fnelem/math/fematrix_utils.h"
-
-void test_identity() {
-    int n = 5;
-    FEMatrix i = FEMatrix_identity(n);
-    assert(i.is_diag());
-    assert(i.sum() == n);
-    assert(i.transpose() == i);
-}
-
-void test_vector() {
-    FEMatrix vector = FEMatrix_vector(5);
-    vector.fill_ones();
-    vector.disp();
-}
-
 int main() {
-    test_identity();
-    test_vector();
     return 0;
 }

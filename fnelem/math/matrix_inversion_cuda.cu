@@ -102,7 +102,7 @@ __global__ void gaussjordan(double *A, double *I, int n, int i) {
  * @param n Dimension
  * @param i Position
  */
-__global__ void set_zero(double *A, double *I, int n, int i) {
+__global__ void set_zero(double *A, int n, int i) {
     int x = blockIdx.x * blockDim.x + threadIdx.x;
     int y = blockIdx.y * blockDim.y + threadIdx.y;
     if (x < n && y < n) {
@@ -112,26 +112,6 @@ __global__ void set_zero(double *A, double *I, int n, int i) {
             }
         }
     }
-}
-
-/**
- * Save matrix to file.
- *
- * @param A Matrix
- * @param s File name
- * @param n Number of rows
- * @param h Number of columns
- */
-void save_matrix_to_file(double *A, std::string s, int n, int h) {
-    std::ofstream plik;
-    plik.open(s);
-    for (int j = 0; j < h; j++) {
-        for (int i = 0; i < h; i++) {
-            plik << A[j * n + i] << "\t";
-        }
-        plik << std::endl;
-    }
-    plik.close();
 }
 
 /**
@@ -214,7 +194,7 @@ FEMatrix *matrix_inverse_cuda(FEMatrix *feMatrix) {
         nodiag_normalize << < numBlocks, threadsPerBlock >> > (d_A, dI, n, i);
         diag_normalize << < numBlocks, threadsPerBlock >> > (d_A, dI, n, i);
         gaussjordan << < numBlocks, threadsPerBlock >> > (d_A, dI, n, i);
-        set_zero << < numBlocks, threadsPerBlock >> > (d_A, dI, n, i);
+        set_zero << < numBlocks, threadsPerBlock >> > (d_A, n, i);
     }
 
     // Record cuda events

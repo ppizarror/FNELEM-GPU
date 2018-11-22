@@ -30,8 +30,7 @@ Base element of the platform.
 	SOFTWARE.
 */
 
-// Library import
-#include <string>
+// Include source
 #include "model_component.h"
 
 /**

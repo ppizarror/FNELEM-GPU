@@ -32,7 +32,7 @@ Performs matrix inversion using Gauss Jordan algorithm.
 #ifndef MATH_MATRIX_INVERSION_CPU_HEADER_FILE
 #define MATH_MATRIX_INVERSION_CPU_HEADER_FILE
 
-// Library imports
+// Include headers
 #include "fematrix.h"
 
 // Constant definition

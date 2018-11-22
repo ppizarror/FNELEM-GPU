@@ -32,9 +32,11 @@ Structural nodes.
 #ifndef MODEL_NODE_HEADER_FILE
 #define MODEL_NODE_HEADER_FILE
 
-// Include sources
+// Include headers
 #include "../base/model_component.h"
 #include "../../math/fematrix.h"
+
+// Library imports
 #include <iostream>
 
 /**

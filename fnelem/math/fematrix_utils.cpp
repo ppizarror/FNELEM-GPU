@@ -28,8 +28,9 @@ Utilitary functions that use FEMatrix.
     SOFTWARE.
 */
 
-// Library imports
+// Include header
 #include "fematrix.h"
+#include "fematrix_utils.h"
 
 /**
  * Creates an identity matrix.

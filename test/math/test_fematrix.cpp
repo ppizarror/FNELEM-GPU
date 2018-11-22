@@ -2,7 +2,7 @@
 FNELEM-GPU - TEST
 Test matrix.
 
-@package test.fnelem.math
+@package test.math
 @author ppizarror
 @date 19/11/2018
 @license
