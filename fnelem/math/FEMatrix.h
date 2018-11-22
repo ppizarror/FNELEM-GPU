@@ -33,7 +33,7 @@ FEMatrix implement a full matrix manipulation environment.
 #define MATH_FEMATRIX_HEADER_FILE
 
 // Constant definition
-#define _FEMATRIX_ZERO_TOL 1e-12
+#define __FEMATRIX_ZERO_TOL 1e-12
 
 // Library imports
 #include <fstream>

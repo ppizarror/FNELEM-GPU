@@ -36,7 +36,7 @@ Performs matrix inversion using Gauss Jordan algorithm.
 #include "fematrix.h"
 
 // Constant definition
-#define _FEMATRIX_MIN_INVERSION_VALUE 0.0005
+#define __FEMATRIX_MIN_INVERSION_VALUE 0.0005
 
 /**
  * Performs CPU matrix inversion using Gauss-Jordan elimination algorithm.

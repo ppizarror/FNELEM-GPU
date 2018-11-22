@@ -29,7 +29,6 @@ Utilitary functions that use FEMatrix.
 */
 
 // Include header
-#include "fematrix.h"
 #include "fematrix_utils.h"
 
 /**

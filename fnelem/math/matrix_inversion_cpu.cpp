@@ -77,7 +77,7 @@ FEMatrix matrix_inverse_cpu(FEMatrix *matrix) {
             if (augmentedMatrix[i * aug_m + j] > augmentedMatrix[temp * aug_m + j])
                 temp = i;
 
-        if (fabs(augmentedMatrix[temp * aug_m + j]) < _FEMATRIX_MIN_INVERSION_VALUE) {
+        if (fabs(augmentedMatrix[temp * aug_m + j]) < __FEMATRIX_MIN_INVERSION_VALUE) {
             std::cout << "[FEMatrix] Element are too small to deal with" << std::endl;
             break;
         }

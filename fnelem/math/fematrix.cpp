@@ -644,11 +644,11 @@ bool FEMatrix::is_identity() const {
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
             if (i == j) {
-                if (fabs(this->_get(i, j) - 1) > _FEMATRIX_ZERO_TOL) {
+                if (fabs(this->_get(i, j) - 1) > __FEMATRIX_ZERO_TOL) {
                     return false;
                 }
             } else {
-                if (fabs(this->_get(i, j)) > _FEMATRIX_ZERO_TOL) {
+                if (fabs(this->_get(i, j)) > __FEMATRIX_ZERO_TOL) {
                     return false;
                 }
             }
@@ -674,7 +674,7 @@ bool FEMatrix::is_symmetric() const {
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
             if (i < j) {
-                if (fabs(this->_get(i, j) - this->_get(j, i)) > _FEMATRIX_ZERO_TOL) {
+                if (fabs(this->_get(i, j) - this->_get(j, i)) > __FEMATRIX_ZERO_TOL) {
                     return false;
                 }
             }
@@ -848,7 +848,7 @@ bool FEMatrix::operator==(const FEMatrix &matrix) const {
     if (this->n != matrix.n || this->m != matrix.m) return false;
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
-            if (fabs(this->_get(i, j) - matrix._get(i, j)) > _FEMATRIX_ZERO_TOL) {
+            if (fabs(this->_get(i, j) - matrix._get(i, j)) > __FEMATRIX_ZERO_TOL) {
                 return false;
             }
         }
@@ -866,7 +866,7 @@ bool FEMatrix::operator!=(const FEMatrix &matrix) const {
     if (this->n != matrix.n || this->m != matrix.m) return true;
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
-            if (fabs(this->_get(i, j) - matrix._get(i, j)) < _FEMATRIX_ZERO_TOL) {
+            if (fabs(this->_get(i, j) - matrix._get(i, j)) < __FEMATRIX_ZERO_TOL) {
                 return false;
             }
         }
@@ -977,9 +977,9 @@ bool FEMatrix::is_diag() const {
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
             if (i != j) { // Out of diagonal, must be zero
-                if (fabs(this->_get(i, j)) > _FEMATRIX_ZERO_TOL) return false;
+                if (fabs(this->_get(i, j)) > __FEMATRIX_ZERO_TOL) return false;
             } else { // Diagonal, must be different than zero
-                if (fabs(this->_get(i, j)) < _FEMATRIX_ZERO_TOL) return false;
+                if (fabs(this->_get(i, j)) < __FEMATRIX_ZERO_TOL) return false;
             }
         }
     }

@@ -35,7 +35,7 @@ Based on: https://github.com/ZhengzhongSun/Matrix-Inversion-with-CUDA
 #include <iostream>
 
 // Constants
-#define MATRIX_INVERSION_CUDA_BLOCKSIZE 8
+#define __MATRIX_INVERSION_CUDA_BLOCKSIZE 8
 
 /**
  * NODIAG normalize diagonal matrix (CUDA).
@@ -153,9 +153,9 @@ FEMatrix *matrix_inverse_cuda(FEMatrix *feMatrix) {
     int ddsize = n * n * sizeof(double);
 
     // Creates blocks
-    dim3 threadsPerBlock(MATRIX_INVERSION_CUDA_BLOCKSIZE, MATRIX_INVERSION_CUDA_BLOCKSIZE);
-    dim3 numBlocks((n + MATRIX_INVERSION_CUDA_BLOCKSIZE - 1) / MATRIX_INVERSION_CUDA_BLOCKSIZE,
-                   (n + MATRIX_INVERSION_CUDA_BLOCKSIZE - 1) / MATRIX_INVERSION_CUDA_BLOCKSIZE);
+    dim3 threadsPerBlock(__MATRIX_INVERSION_CUDA_BLOCKSIZE, __MATRIX_INVERSION_CUDA_BLOCKSIZE);
+    dim3 numBlocks((n + __MATRIX_INVERSION_CUDA_BLOCKSIZE - 1) / __MATRIX_INVERSION_CUDA_BLOCKSIZE,
+                   (n + __MATRIX_INVERSION_CUDA_BLOCKSIZE - 1) / __MATRIX_INVERSION_CUDA_BLOCKSIZE);
 
     // Memory allocation
     err = cudaMalloc((void **) &d_A, ddsize);
