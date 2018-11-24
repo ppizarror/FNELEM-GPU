@@ -81,6 +81,9 @@ private:
 
 public:
 
+    // Default constructor
+    FEMatrix();
+
     // Constructor
     FEMatrix(int n, int m);
 

@@ -1,7 +1,3 @@
-#include <utility>
-
-#include <utility>
-
 /**
 FNELEM-GPU NODE ELEMENT - NODE DEFINITION
 Structural nodes.
@@ -36,9 +32,17 @@ Structural nodes.
 #include "node.h"
 
 /**
+ * Destroy inner variables.
+ */
+void Node::destroy() {
+}
+
+/**
  * Destroy node.
  */
-Node::~Node() = default;
+Node::~Node() {
+    this->destroy();
+};
 
 /**
  * Creates a 2D node.
@@ -49,9 +53,9 @@ Node::~Node() = default;
  */
 Node::Node(std::string tag, double posx, double posy) : ModelComponent(std::move(tag)) {
     this->ngdl = 2;
-    this->coords = new double[this->ngdl];
-    this->coords[0] = posx;
-    this->coords[1] = posy;
+    this->coords = FEMatrix_vector(this->ngdl);
+    this->coords.set(0, posx);
+    this->coords.set(1, posy);
     this->init();
 }
 
@@ -64,10 +68,10 @@ Node::Node(std::string tag, double posx, double posy) : ModelComponent(std::move
  */
 Node::Node(std::string tag, double posx, double posy, double posz) : ModelComponent(std::move(tag)) {
     this->ngdl = 3;
-    this->coords = new double[this->ngdl];
-    this->coords[0] = posx;
-    this->coords[1] = posy;
-    this->coords[2] = posz;
+    this->coords = FEMatrix_vector(this->ngdl);
+    this->coords.set(0, posx);
+    this->coords.set(1, posy);
+    this->coords.set(2, posz);
     this->init();
 }
 
@@ -77,23 +81,23 @@ Node::Node(std::string tag, double posx, double posy, double posz) : ModelCompon
 void Node::init() {
 
     // Init ID of degrees of freedom
-    this->gdlid = new int[this->ngdl];
+    this->gdlid = FEMatrix_vector(this->ngdl);
 
     // Init displacements
-    this->displ = new double[this->ngdl];
+    this->displ = FEMatrix_vector(this->ngdl);
 
     // Init reactions
-    this->reaction = new double[this->ngdl];
+    this->reaction = FEMatrix_vector(this->ngdl);
 
     // Init node loads
-    this->loads = new double[this->ngdl];
+    this->loads = FEMatrix_vector(this->ngdl);
 
     // Save initial values
     for (int i = 0; i < this->ngdl; i++) {
-        this->gdlid[i] = -1;
-        this->displ[i] = 0;
-        this->reaction[i] = 0;
-        this->loads[i] = 0;
+        this->gdlid.set(i, -1);
+        this->displ.set(i, 0);
+        this->reaction.set(i, 0);
+        this->loads.set(i, 0);
     }
 
 }
@@ -112,10 +116,39 @@ int Node::get_ngdl() const {
  *
  * @return Coordinates
  */
-double *Node::get_coordinates() const {
-    double *coords = new double[this->ngdl];
-    for (int i = 0; i < this->ngdl; i++) {
-        coords[i] = this->coords[i];
-    }
-    return coords;
+FEMatrix Node::get_coordinates() const {
+    return this->coords.clone();
+}
+
+/**
+ * Get GDLID vector.
+ *
+ * @return
+ */
+FEMatrix Node::get_gdlid() const {
+    return this->gdlid.clone();
+}
+
+/**
+ * Assign operator.
+ *
+ * @param node
+ * @return
+ */
+Node &Node::operator=(const Node &node) {
+
+    // Destroy inner vectors
+    this->destroy();
+
+    // Assign operator
+    this->ngdl = node.ngdl;
+    this->coords = node.coords;
+    this->displ = node.displ;
+    this->reaction = node.reaction;
+    this->loads = node.loads;
+
+    // Call ModelComponent assign
+    ModelComponent::operator=(node);
+    return *this;
+
 }

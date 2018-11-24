@@ -41,9 +41,6 @@ void test_node_creation() {
 
 void test_coordinates() {
     Node n = Node("NODE", 1, 2);
-    double *c = n.get_coordinates();
-    assert(c[0] == 1);
-    assert(c[1] == 2);
 }
 
 int main() {

@@ -35,6 +35,7 @@ Structural nodes.
 // Include headers
 #include "../base/model_component.h"
 #include "../../math/fematrix.h"
+#include "../../math/fematrix_utils.h"
 
 // Library imports
 #include <iostream>
@@ -49,22 +50,25 @@ private:
     int ngdl = 0;
 
     // ID of degrees of freedom
-    int *gdlid;
+    FEMatrix gdlid;
 
     // Coordinates of the node
-    double *coords;
+    FEMatrix coords;
 
     // Displacements vector
-    double *displ;
+    FEMatrix displ;
 
     // Loads vector
-    double *loads;
+    FEMatrix loads;
 
     // Reaction vector
-    double *reaction;
+    FEMatrix reaction;
 
     // Init internal variables
     void init();
+
+    // Destroy malloc inner variables
+    void destroy();
 
 public:
 
@@ -77,11 +81,17 @@ public:
     // 3D node
     Node(std::string tag, double posx, double posy, double posz);
 
+    // Assign
+    Node &operator=(const Node &node);
+
     // Return number of degrees of freedom
     int get_ngdl() const;
 
     // Return node coordinates
-    double *get_coordinates() const;
+    FEMatrix get_coordinates() const;
+
+    // Get GDLID of node
+    FEMatrix get_gdlid() const;
 
 };
 

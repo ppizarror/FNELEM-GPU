@@ -33,6 +33,7 @@ Base element of the platform.
 #define BASE_MODEL_COMPONENT_HEADER_FILE
 
 // Library import
+#include <iostream>
 #include <string>
 
 /**
@@ -56,7 +57,10 @@ public:
     ~ModelComponent();
 
     // Returns tag
-    std::string get_model_tag();
+    std::string get_model_tag() const;
+
+    // Assign operator
+    ModelComponent &operator=(const ModelComponent &model);
 
 };
 

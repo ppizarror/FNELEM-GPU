@@ -32,6 +32,16 @@ FEMatrix implement a full matrix manipulation environment.
 #include "fematrix.h"
 
 /**
+ * Default constructor, used by other class that initialize
+ * pointer but no implicit constructor is called.
+ */
+FEMatrix::FEMatrix() {
+    this->n = 0;
+    this->m = 0;
+    this->mat = new double[0];
+}
+
+/**
  * Creates matrix.
  *
  * @param n Number of rows
@@ -935,15 +945,9 @@ double FEMatrix::_det_recursive(double *matrix, int d) const {
         // Fill submatrix
         for (i = 0; i < nd; i++) { // Rows
             for (j = 0; j < nd; j++) { // Column
-
-                // Calculates position in global matrix
-                if (j >= k) {
-                    p = j + 1;
-                } else {
-                    p = j;
-                }
+                if (j >= k) p = j + 1; // Calculates position in global matrix
+                else p = j;
                 submat[i * nd + j] = matrix[(i + 1) * d + p];
-
             }
         }
 

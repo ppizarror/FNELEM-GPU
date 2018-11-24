@@ -1,5 +1,9 @@
 #include <utility>
 
+#include <utility>
+
+#include <utility>
+
 /**
 FNELEM-GPU BASE ELEMENTS - MODEL COMPONENT
 Base element of the platform.
@@ -52,7 +56,7 @@ ModelComponent::ModelComponent(std::string tag) {
  *
  * @return Model tag.
  */
-std::string ModelComponent::get_model_tag() {
+std::string ModelComponent::get_model_tag() const {
     return this->tagID;
 }
 
@@ -60,3 +64,14 @@ std::string ModelComponent::get_model_tag() {
  * Object destruction.
  */
 ModelComponent::~ModelComponent() = default;
+
+/**
+ * Assign operator.
+ *
+ * @param model
+ * @return
+ */
+ModelComponent &ModelComponent::operator=(const ModelComponent &model) {
+    this->tagID = model.get_model_tag();
+    return *this;
+};
