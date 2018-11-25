@@ -93,6 +93,9 @@ public:
     // Get GDLID of node
     FEMatrix get_gdlid() const;
 
+    // Get results of loads
+    FEMatrix get_load_results() const;
+
 };
 
 #endif // MODEL_NODE

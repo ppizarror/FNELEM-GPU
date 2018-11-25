@@ -1008,3 +1008,35 @@ bool FEMatrix::is_diag() const {
     }
     return true;
 }
+
+/**
+ * Check if all elements of matrix are same value.
+ *
+ * @param a Value to compare
+ * @return
+ */
+bool FEMatrix::is_equal_double(double a) const {
+    for (int i = 0; i < this->n; i++) { // Rows
+        for (int j = 0; j < this->m; j++) { // Columns
+            if (fabs(this->_get(i, j) - a) > __FEMATRIX_ZERO_TOL) return false;
+        }
+    }
+    return true;
+}
+
+/**
+ * Check if matrix only contains zeros.
+ *
+ * @return
+ */
+bool FEMatrix::is_zeros() const {
+    return this->is_equal_double(0);
+}
+
+/**
+ * Check if matrix only contains ones.
+ * @return
+ */
+bool FEMatrix::is_ones() const {
+    return this->is_equal_double(1);
+}

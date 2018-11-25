@@ -33,18 +33,35 @@ Test structure node class.
 #include "../../../fnelem/model/node/node.h"
 
 void test_node_creation() {
+
+    // Test nodo en 2D
     Node n = Node("NODE1", 0, 1);
     assert(n.get_model_tag() == "NODE1");
+    FEMatrix gdlid = FEMatrix(2, 1);
+    gdlid.set(0, -1);
+    gdlid.set(1, -1);
+    assert(gdlid == n.get_gdlid());
+
+    // Test nodo en 3D
     n = Node("NODE3D", 1.5, 3.2, 5.6);
     assert(n.get_ngdl() == 3);
+
 }
 
 void test_coordinates() {
     Node n = Node("NODE", 1, 2);
+    assert(n.get_coordinates().get(0) == 1);
+    assert(n.get_coordinates().get(1) == 2);
+}
+
+void test_loads() {
+    Node n = Node("NODE", 4, 5, -7);
+    assert(n.get_load_results().is)
 }
 
 int main() {
     test_node_creation();
     test_coordinates();
+    test_loads();
     return 0;
 }

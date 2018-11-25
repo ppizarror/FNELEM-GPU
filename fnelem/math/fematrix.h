@@ -234,6 +234,15 @@ public:
     // Check if matrix is diagonal
     bool is_diag() const;
 
+    // Check if matrix is certain value
+    bool is_equal_double(double a) const;
+
+    // Check if matrix is only zeros
+    bool is_zeros() const;
+
+    // Check if matrix is only ones
+    bool is_ones() const;
+
 };
 
 #endif // MATH_FEMATRIX_HEADER_FILE

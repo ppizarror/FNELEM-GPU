@@ -356,7 +356,18 @@ void test_diagonal() {
     assert(diagonal.is_diag());
     diagonal.set(1, 2, -1);
     assert(!diagonal.is_diag());
+}
 
+void test_double_equal() {
+    FEMatrix mat = FEMatrix(5, 5);
+    mat.fill_ones();
+    assert(mat.is_equal_double(1));
+    assert(!mat.is_equal_double(0));
+    assert(mat.is_ones());
+    mat.fill_zeros();
+    assert(!mat.is_equal_double(1));
+    assert(mat.is_equal_double(0));
+    assert(mat.is_zeros());
 }
 
 int main() {
@@ -377,5 +388,6 @@ int main() {
     test_determinant();
     test_norm();
     test_diagonal();
+    test_double_equal();
     return 0;
 }

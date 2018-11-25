@@ -152,3 +152,12 @@ Node &Node::operator=(const Node &node) {
     return *this;
 
 }
+
+/**
+ * Get load results.
+ *
+ * @return
+ */
+FEMatrix Node::get_load_results() const {
+    return this->loads.clone();
+}
