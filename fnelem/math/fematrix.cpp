@@ -395,6 +395,16 @@ FEMatrix &FEMatrix::operator+=(const FEMatrix &matrix) {
 }
 
 /**
+ * Substract a matrix with self.
+ *
+ * @param matrix Matrix to add
+ * @return
+ */
+FEMatrix &FEMatrix::operator+=(const FEMatrix *matrix) {
+    (*this) += *matrix;
+}
+
+/**
  * Adds with a matrix and return new.
  *
  * @param matrix Matrix to add
@@ -430,6 +440,16 @@ FEMatrix &FEMatrix::operator-=(const FEMatrix &matrix) {
     // Returns self pointer
     return *this;
 
+}
+
+/**
+ * Substract a matrix with self.
+ *
+ * @param matrix Matrix to add
+ * @return
+ */
+FEMatrix &FEMatrix::operator-=(const FEMatrix *matrix) {
+    (*this) -= *matrix;
 }
 
 /**
@@ -1049,4 +1069,47 @@ bool FEMatrix::is_zeros() const {
  */
 bool FEMatrix::is_ones() const {
     return this->is_double(1);
+}
+
+/**
+ * Transform matrix to string.
+ *
+ * @param matlab_like Uses matlab system to export matrix
+ * @param sep Separator
+ * @return
+ */
+std::string FEMatrix::to_string(bool matlab_like, std::string sep) const {
+    std::string s;
+    bool isv = this->is_vector();
+    if (matlab_like) s += "[";
+    for (int i = 0; i < this->n; i++) { // Rows
+        if (this->n > 1 && matlab_like && !isv) s += "[";
+        for (int j = 0; j < this->m; j++) { // Columns
+            s += std::to_string(this->_get(i, j));
+            if (j < this->m - 1) s += ", ";
+        }
+        if (this->n > 1 && matlab_like && !isv) s += "]";
+        if (i < this->n - 1) s += sep;
+    }
+    if (matlab_like) s += "]";
+    return s;
+}
+
+/**
+ * Transform matrix to string.
+ *
+ * @param matlab_like Uses matlab system to export matrix
+ * @return
+ */
+std::string FEMatrix::to_string(bool matlab_like) const {
+    return this->to_string(matlab_like, "; ");
+}
+
+/**
+ * Transform matrix to string line separated by tab.
+ * 
+ * @return 
+ */
+std::string FEMatrix::to_string_line() const {
+    return this->to_string(false, "\t");
 }

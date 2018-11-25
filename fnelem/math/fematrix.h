@@ -159,11 +159,17 @@ public:
     // Adds a matrix with self
     FEMatrix &operator+=(const FEMatrix &matrix);
 
+    // Adds a matrix with self
+    FEMatrix &operator+=(const FEMatrix *matrix);
+
     // Add and return a new matrix
     FEMatrix operator+(const FEMatrix &matrix) const;
 
     // Substract a matrix with self
     FEMatrix &operator-=(const FEMatrix &matrix);
+
+    // Substract a matrix with self
+    FEMatrix &operator-=(const FEMatrix *matrix);
 
     // Substract and return a new matrix
     FEMatrix operator-(const FEMatrix &matrix) const;
@@ -242,6 +248,15 @@ public:
 
     // Check if matrix is only ones
     bool is_ones() const;
+
+    // Transform matrix to string
+    std::string to_string(bool matlab_like, std::string sep) const;
+
+    // Transform matrix to string
+    std::string to_string(bool matlab_like) const;
+
+    // Transform matrix to string line separated by tab
+    std::string to_string_line() const;
 
 };
 
