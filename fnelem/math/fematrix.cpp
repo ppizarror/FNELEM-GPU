@@ -338,6 +338,16 @@ int FEMatrix::get_square_dimension() const {
  */
 FEMatrix &FEMatrix::operator=(const FEMatrix &matrix) {
 
+    // If both matrices have same size
+    if (this->n == matrix.n && this->m == matrix.m) {
+        for (int i = 0; i < this->n; i++) { // Rows
+            for (int j = 0; j < this->m; j++) { // Columns
+                this->set(i, j, matrix.get(i, j));
+            }
+        }
+        return *this;
+    }
+
     // Create new matrix
     double *newMatrix = new double[matrix.n * matrix.m];
     this->n = matrix.n;
@@ -372,7 +382,7 @@ FEMatrix &FEMatrix::operator+=(const FEMatrix &matrix) {
         throw std::logic_error("[FEMATRIX] Matrix dimension must be the same");
     }
 
-    // Adds
+    // Addition
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
             this->mat[i * this->m + j] += matrix._get(i, j);
@@ -1015,7 +1025,7 @@ bool FEMatrix::is_diag() const {
  * @param a Value to compare
  * @return
  */
-bool FEMatrix::is_equal_double(double a) const {
+bool FEMatrix::is_double(double a) const {
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
             if (fabs(this->_get(i, j) - a) > __FEMATRIX_ZERO_TOL) return false;
@@ -1030,7 +1040,7 @@ bool FEMatrix::is_equal_double(double a) const {
  * @return
  */
 bool FEMatrix::is_zeros() const {
-    return this->is_equal_double(0);
+    return this->is_double(0);
 }
 
 /**
@@ -1038,5 +1048,5 @@ bool FEMatrix::is_zeros() const {
  * @return
  */
 bool FEMatrix::is_ones() const {
-    return this->is_equal_double(1);
+    return this->is_double(1);
 }

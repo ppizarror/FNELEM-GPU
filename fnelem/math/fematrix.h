@@ -235,7 +235,7 @@ public:
     bool is_diag() const;
 
     // Check if matrix is certain value
-    bool is_equal_double(double a) const;
+    bool is_double(double a) const;
 
     // Check if matrix is only zeros
     bool is_zeros() const;
