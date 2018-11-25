@@ -62,6 +62,9 @@ public:
     // Assign operator
     ModelComponent &operator=(const ModelComponent &model);
 
+    // Display model
+    void disp() const;
+
 };
 
 #endif // BASE_MODEL_COMPONENT_HEADER_FILE

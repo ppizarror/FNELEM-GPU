@@ -68,4 +68,11 @@ ModelComponent::~ModelComponent() = default;
 ModelComponent &ModelComponent::operator=(const ModelComponent &model) {
     this->tagID = model.get_model_tag();
     return *this;
+}
+
+/**
+ * Display model on console.
+ */
+void ModelComponent::disp() const {
+    std::cout << "\tTag: " << this->tagID << std::endl;
 };
