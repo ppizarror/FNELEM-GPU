@@ -142,10 +142,12 @@ Node &Node::operator=(const Node &node) {
 
     // Assign operator
     this->ngdl = node.ngdl;
+
     this->coords = node.coords;
     this->displ = node.displ;
-    this->reaction = node.reaction;
+    this->gdlid = node.gdlid;
     this->loads = node.loads;
+    this->reaction = node.reaction;
 
     // Call ModelComponent assign
     ModelComponent::operator=(node);
@@ -160,4 +162,50 @@ Node &Node::operator=(const Node &node) {
  */
 FEMatrix Node::get_load_results() const {
     return this->loads.clone();
+}
+
+/**
+ * Get node displacements.
+ *
+ * @return
+ */
+FEMatrix Node::get_displacements() const {
+    return this->displ.clone();
+}
+
+/**
+ * Get node reactions.
+ *
+ * @return
+ */
+FEMatrix Node::get_reactions() const {
+    return this->reaction.clone();
+}
+
+/**
+ * Set GDLID of local degree of freedom.
+ *
+ * @param local_id ID of local freedom of liberty (1...n)
+ * @param global_id ID of global freedom of liberty
+ */
+void Node::set_gdlid(int local_id, int global_id) {
+    if (local_id < 1 || local_id > this->ngdl) {
+        throw std::logic_error("[NODE] Local GDLID greather than number of Node NGDL");
+    }
+    this->gdlid.set(local_id - 1, global_id);
+}
+
+/**
+ * Set GDLID from vector.
+ *
+ * @param gdlid Vector of GDLID vector
+ */
+void Node::set_gdlid(FEMatrix gdlid) {
+    if (!gdlid.is_vector()) {
+        throw std::logic_error("[NODE] gdlid must be a vector");
+    }
+    if (gdlid.length() != this->ngdl) {
+        throw std::logic_error("[NODE] Number of degrees of freedom does not match");
+    }
+    this->gdlid = gdlid;
 }

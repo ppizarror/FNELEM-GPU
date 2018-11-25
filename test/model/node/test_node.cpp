@@ -52,16 +52,34 @@ void test_coordinates() {
     Node n = Node("NODE", 1, 2);
     assert(n.get_coordinates().get(0) == 1);
     assert(n.get_coordinates().get(1) == 2);
+    assert(n.get_gdlid().is_double(-1));
 }
 
 void test_loads() {
     Node n = Node("NODE", 4, 5, -7);
-    assert(n.get_load_results().is)
+    assert(n.get_load_results().is_zeros());
+    assert(n.get_displacements().is_zeros());
+    assert(n.get_reactions().is_zeros());
+}
+
+void test_set_gdlid() {
+    Node n = Node("NODE", 0, 0, 0);
+    FEMatrix gdl = FEMatrix_vector(3);
+    gdl.set(0, 5);
+    gdl.set(1, 6);
+    gdl.set(2, 8);
+    n.set_gdlid(1, 5);
+    n.set_gdlid(2, 6);
+    n.set_gdlid(3, 8);
+    assert(n.get_gdlid() == gdl);
+    n = Node("NODE", 0, 0, 0);
+    assert(n.get_gdlid().is_double(-1));
 }
 
 int main() {
     test_node_creation();
     test_coordinates();
     test_loads();
+    test_set_gdlid();
     return 0;
 }

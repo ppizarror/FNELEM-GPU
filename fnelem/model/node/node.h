@@ -96,6 +96,18 @@ public:
     // Get results of loads
     FEMatrix get_load_results() const;
 
+    // Get node displacements
+    FEMatrix get_displacements() const;
+
+    // Get node reactions
+    FEMatrix get_reactions() const;
+
+    // Set node GDLID
+    void set_gdlid(int local_id, int global_id);
+
+    // Set node GDLID from vector/matrix
+    void set_gdlid(FEMatrix gdlid);
+
 };
 
 #endif // MODEL_NODE
