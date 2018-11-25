@@ -342,7 +342,7 @@ FEMatrix &FEMatrix::operator=(const FEMatrix &matrix) {
     if (this->n == matrix.n && this->m == matrix.m) {
         for (int i = 0; i < this->n; i++) { // Rows
             for (int j = 0; j < this->m; j++) { // Columns
-                this->set(i, j, matrix.get(i, j));
+                this->_set(i, j, matrix._get(i, j));
             }
         }
         return *this;
@@ -905,12 +905,12 @@ bool FEMatrix::operator!=(const FEMatrix &matrix) const {
     if (this->n != matrix.n || this->m != matrix.m) return true;
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
-            if (fabs(this->_get(i, j) - matrix._get(i, j)) < __FEMATRIX_ZERO_TOL) {
-                return false;
+            if (fabs(this->_get(i, j) - matrix._get(i, j)) > __FEMATRIX_ZERO_TOL) {
+                return true;
             }
         }
     }
-    return true;
+    return false;
 }
 
 /**
