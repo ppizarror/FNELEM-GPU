@@ -45,6 +45,9 @@ void test_vector() {
     FEMatrix vector = FEMatrix_vector(5);
     vector.fill_ones();
     vector.disp();
+    std::cout << vector.to_string(true) << std::endl;
+    std::cout << vector.to_string(false) << std::endl;
+    std::cout << vector.to_string_line() << std::endl;
 }
 
 int main() {

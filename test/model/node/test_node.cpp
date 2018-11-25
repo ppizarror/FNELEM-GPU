@@ -92,11 +92,38 @@ void test_node_displacements() {
     assert(n.get_displacements() == displ);
 }
 
+void test_node_load() {
+    Node n = Node("NODE", 0, 0);
+    FEMatrix load = FEMatrix_vector(2);
+    load.set(0, 5);
+    load.set(1, -6);
+    n.apply_load(&load);
+    assert(n.get_reactions() == -load);
+    n.apply_element_stress(&load);
+    assert(n.get_reactions().is_zeros());
+}
+
+void test_node_full() {
+    Node n = Node("NODE", 0, 0, 0);
+    FEMatrix displ = FEMatrix_vector(3);
+    displ.set(0, 5);
+    displ.set(1, -6);
+    displ.set(2, 0);
+    n.set_displacement(&displ);
+    FEMatrix load = FEMatrix_vector(3);
+    load.set(0, 2);
+    load.set(1, -1);
+    n.apply_load(&load);
+    n.disp();
+}
+
 int main() {
     test_node_creation();
     test_coordinates();
     test_loads();
     test_set_gdlid();
     test_node_displacements();
+    test_node_load();
+    test_node_full();
     return 0;
 }

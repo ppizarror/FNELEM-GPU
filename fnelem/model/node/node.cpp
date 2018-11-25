@@ -183,6 +183,21 @@ FEMatrix Node::get_reactions() const {
 }
 
 /**
+ * Check vector.
+ *
+ * @param mat External matrix
+ * @param vector_name Vector name
+ */
+void Node::check_vector(const FEMatrix *mat, std::string vector_name) {
+    if (!mat->is_vector()) {
+        throw std::logic_error("[NODE] " + vector_name + " must be a vector");
+    }
+    if (mat->length() != this->ngdl) {
+        throw std::logic_error("[NODE] Number of degrees of freedom does not match");
+    }
+}
+
+/**
  * Set GDLID of local degree of freedom.
  *
  * @param local_id ID of local freedom of liberty (1...n)
@@ -200,13 +215,8 @@ void Node::set_gdlid(int local_id, int global_id) {
  *
  * @param gdlid Vector of GDLID vector
  */
-void Node::set_gdlid(FEMatrix *gdl) {
-    if (!gdl->is_vector()) {
-        throw std::logic_error("[NODE] Node GDLID must be a vector");
-    }
-    if (gdl->length() != this->ngdl) {
-        throw std::logic_error("[NODE] Number of degrees of freedom does not match");
-    }
+void Node::set_gdlid(const FEMatrix *gdl) {
+    this->check_vector(gdl, "Node GDLID");
     this->gdlid = *gdl;
 }
 
@@ -228,12 +238,35 @@ void Node::set_displacement(int local_id, double d) {
  *
  * @param d Vector of node displacements
  */
-void Node::set_displacement(FEMatrix *d) {
-    if (!d->is_vector()) {
-        throw std::logic_error("[NODE] Node displacements must be a vector");
-    }
-    if (d->length() != this->ngdl) {
-        throw std::logic_error("[NODE] Number of degrees of freedom does not match");
-    }
+void Node::set_displacement(const FEMatrix *d) {
+    this->check_vector(d, "Node displacements");
     this->displ = *d;
+}
+
+/**
+ * Apply load to node.
+ *
+ * @param load Node load
+ */
+void Node::apply_load(const FEMatrix *load) {
+    this->check_vector(load, "Node loads");
+    this->reaction -= load;
+}
+
+/**
+ * Apply element inner stress to node reactions.
+ *
+ * @param sigma Element stress
+ */
+void Node::apply_element_stress(const FEMatrix *sigma) {
+    this->check_vector(sigma, "Element stress");
+    this->reaction += sigma;
+}
+
+/**
+ * Display node information.
+ */
+void Node::disp() const {
+    std::cout << "Node information" << std::endl;
+    ModelComponent::disp();
 }

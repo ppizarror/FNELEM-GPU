@@ -77,6 +77,8 @@ int test_cpu_inversion() {
     FEMatrix matInverse = matrix_inverse_cpu(&mat);
     matInverse.save_to_file("test-matrix-cpu-inversion.txt");
     matInverse.disp();
+    std::cout << matInverse.to_string(true) << std::endl;
+    std::cout << matInverse.to_string(false) << std::endl;
     delete[] L;
 }
 

@@ -37,6 +37,7 @@ void test_tag_init() {
     assert(model.get_model_tag() == "");
     model = ModelComponent("BEAM");
     assert(model.get_model_tag() == "BEAM");
+    model.disp();
 }
 
 int main() {

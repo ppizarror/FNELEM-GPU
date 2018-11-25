@@ -70,6 +70,9 @@ private:
     // Destroy malloc inner variables
     void destroy();
 
+    // Check external vector
+    void check_vector(const FEMatrix *mat, std::string vector_name);
+
 public:
 
     // Destroy node
@@ -106,13 +109,22 @@ public:
     void set_gdlid(int local_id, int global_id);
 
     // Set node GDLID from vector/matrix
-    void set_gdlid(FEMatrix *gdl);
+    void set_gdlid(const FEMatrix *gdl);
 
     // Set node displacements
     void set_displacement(int local_id, double d);
 
     // Set node displacements from vector/matrix
-    void set_displacement(FEMatrix *d);
+    void set_displacement(const FEMatrix *d);
+
+    // Apply load to node
+    void apply_load(const FEMatrix *load);
+
+    // Adds element inner stress to reactions
+    void apply_element_stress(const FEMatrix *sigma);
+
+    // Display node information to console
+    void disp() const;
 
 };
 
