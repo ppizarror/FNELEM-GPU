@@ -200,12 +200,40 @@ void Node::set_gdlid(int local_id, int global_id) {
  *
  * @param gdlid Vector of GDLID vector
  */
-void Node::set_gdlid(FEMatrix gdlid) {
-    if (!gdlid.is_vector()) {
-        throw std::logic_error("[NODE] gdlid must be a vector");
+void Node::set_gdlid(FEMatrix *gdl) {
+    if (!gdl->is_vector()) {
+        throw std::logic_error("[NODE] Node GDLID must be a vector");
     }
-    if (gdlid.length() != this->ngdl) {
+    if (gdl->length() != this->ngdl) {
         throw std::logic_error("[NODE] Number of degrees of freedom does not match");
     }
-    this->gdlid = gdlid;
+    this->gdlid = *gdl;
+}
+
+/**
+ * Set node displacements.
+ *
+ * @param local_id ID of local freedom of liberty (1...n)
+ * @param global_id Displacement
+ */
+void Node::set_displacement(int local_id, double d) {
+    if (local_id < 1 || local_id > this->ngdl) {
+        throw std::logic_error("[NODE] Local GDLID greather than number of Node NGDL");
+    }
+    this->displ.set(local_id - 1, d);
+}
+
+/**
+ * Set node displacements from vector.
+ *
+ * @param d Vector of node displacements
+ */
+void Node::set_displacement(FEMatrix *d) {
+    if (!d->is_vector()) {
+        throw std::logic_error("[NODE] Node displacements must be a vector");
+    }
+    if (d->length() != this->ngdl) {
+        throw std::logic_error("[NODE] Number of degrees of freedom does not match");
+    }
+    this->displ = *d;
 }

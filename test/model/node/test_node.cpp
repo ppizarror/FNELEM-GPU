@@ -74,6 +74,22 @@ void test_set_gdlid() {
     assert(n.get_gdlid() == gdl);
     n = Node("NODE", 0, 0, 0);
     assert(n.get_gdlid().is_double(-1));
+    n.set_gdlid(&gdl);
+    assert(n.get_gdlid() == gdl);
+}
+
+void test_node_displacements() {
+    Node n = Node("NODE", 0, 0, 0);
+    FEMatrix displ = FEMatrix_vector(3);
+    displ.set(0, 5);
+    displ.set(1, -6);
+    displ.set(2, 0);
+    n.set_displacement(&displ);
+    assert(n.get_displacements() == displ);
+    displ.set(0, -5);
+    assert(n.get_displacements() != displ);
+    n.set_displacement(1, -5);
+    assert(n.get_displacements() == displ);
 }
 
 int main() {
@@ -81,5 +97,6 @@ int main() {
     test_coordinates();
     test_loads();
     test_set_gdlid();
+    test_node_displacements();
     return 0;
 }

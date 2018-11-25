@@ -106,7 +106,13 @@ public:
     void set_gdlid(int local_id, int global_id);
 
     // Set node GDLID from vector/matrix
-    void set_gdlid(FEMatrix gdlid);
+    void set_gdlid(FEMatrix *gdl);
+
+    // Set node displacements
+    void set_displacement(int local_id, double d);
+
+    // Set node displacements from vector/matrix
+    void set_displacement(FEMatrix *d);
 
 };
 
