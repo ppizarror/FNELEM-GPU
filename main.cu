@@ -40,13 +40,17 @@ was calculated using a CUDA algorithm (Gauss Jordan inversion).
 #include "fnelem/math/matrix_inversion_cpu.cpp"
 #include "fnelem/math/matrix_inversion_cuda.cu"
 
+#include "fnelem/model/base/uuid.cpp"
 #include "fnelem/model/base/model_component.cpp"
 #include "fnelem/model/node/node.cpp"
+
+#include "test/model/node/test_node.h"
 
 int main() {
 
     // Create nodes
-    std::vector<Node> nodes = std::vector<Node>();
+    // std::vector<Node> nodes = std::vector<Node>();
+	test_node_suite();
 
     // Creates matrix
     FEMatrix mat = FEMatrix(3, 3);
@@ -62,6 +66,7 @@ int main() {
 
     FEMatrix *imat = matrix_inverse_cuda(&mat);
     imat->disp();
+	delete imat;
 
     return 0;
 }

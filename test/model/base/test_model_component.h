@@ -1,6 +1,6 @@
 /**
 FNELEM-GPU - TEST
-Test model component.
+Test model component, header definition
 
 @package test.model.base
 @author ppizarror
@@ -29,9 +29,21 @@ Test model component.
 */
 
 // Include sources
-#include "test_model_component.h"
+#include "../../test_utils.h"
+#include "../../../fnelem/model/base/model_component.h"
 
-int main() {
-    test_modelcomponent_suite();
-    return 0;
+void __test_modelcomponent_tag_init() {
+    test_print_title("MODELCOMPONENT", "test_modelcomponent_tag_init");
+    ModelComponent model = ModelComponent();
+    assert(model.get_model_tag() == "");
+    model = ModelComponent("BEAM");
+    assert(model.get_model_tag() == "BEAM");
+    model.disp();
+}
+
+/**
+ * Performs TEST-MODELCOMPONENT suite.
+ */
+void test_modelcomponent_suite() {
+    __test_modelcomponent_tag_init();
 }

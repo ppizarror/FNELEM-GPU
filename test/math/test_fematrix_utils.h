@@ -1,10 +1,10 @@
 /**
-FNELEM-GPU - TEST
-Test model component.
+FNELEM-GPU - FEMATRIX UTILS TEST
+Test FEMatrix utils, header definition.
 
-@package test.model.base
+@package test.math
 @author ppizarror
-@date 19/11/2018
+@date 21/11/2018
 @license
 	MIT License
 	Copyright (c) 2018 Pablo Pizarro R.
@@ -29,9 +29,37 @@ Test model component.
 */
 
 // Include sources
-#include "test_model_component.h"
+#include "../test_utils.h"
+#include "../../fnelem/math/fematrix.h"
+#include "../../fnelem/math/fematrix_utils.h"
 
-int main() {
-    test_modelcomponent_suite();
-    return 0;
+void __test_fematrix_utils_identity() {
+    test_print_title("FEMATRIX-UTILS", "test_fematrix_utils_identity");
+    int n = 5;
+    FEMatrix *i = FEMatrix_identity(n);
+    FEMatrix *it = i->transpose();
+    assert(i->is_diag());
+    assert(i->sum() == n);
+    assert(it->equals(i));
+    delete i;
+    delete it;
+}
+
+void __test_fematrix_utils_vector() {
+    test_print_title("FEMATRIX-UTILS", "test_fematrix_utils_vector");
+    FEMatrix *vector = FEMatrix_vector(5);
+    vector->fill_ones();
+    vector->disp();
+    std::cout << vector->to_string(true) << std::endl;
+    std::cout << vector->to_string(false) << std::endl;
+    std::cout << vector->to_string_line() << std::endl;
+    delete vector;
+}
+
+/**
+ * Performs TEST-FEMATRIX-UTILS tests.
+ */
+void test_fematrix_utils_suite() {
+    __test_fematrix_utils_identity();
+    __test_fematrix_utils_vector();
 }

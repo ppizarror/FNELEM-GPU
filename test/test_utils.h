@@ -32,6 +32,7 @@ Utilitary functions to perform tests.
 #include <cassert>
 #include <iostream>
 #include <math.h>
+#include <string>
 
 /**
  * Check if two numbers are equal under a certain tolerance.
@@ -42,4 +43,14 @@ Utilitary functions to perform tests.
  */
 bool is_num_equal(double a, double b) {
     return fabs(a - b) < 1e-12;
+}
+
+/**
+ * Print test to console.
+ *
+ * @param suite Suite name
+ * @param test Test name
+ */
+void test_print_title(std::string suite, std::string test) {
+    std::cout << "[" << suite << "] " << test << std::endl;
 }

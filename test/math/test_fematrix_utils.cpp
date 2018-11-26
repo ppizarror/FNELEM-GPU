@@ -29,29 +29,9 @@ Test FEMatrix utils.
 */
 
 // Include sources
-#include "../test_utils.h"
-#include "../../fnelem/math/fematrix.h"
-#include "../../fnelem/math/fematrix_utils.h"
-
-void test_identity() {
-    int n = 5;
-    FEMatrix i = FEMatrix_identity(n);
-    assert(i.is_diag());
-    assert(i.sum() == n);
-    assert(i.transpose() == i);
-}
-
-void test_vector() {
-    FEMatrix vector = FEMatrix_vector(5);
-    vector.fill_ones();
-    vector.disp();
-    std::cout << vector.to_string(true) << std::endl;
-    std::cout << vector.to_string(false) << std::endl;
-    std::cout << vector.to_string_line() << std::endl;
-}
+#include "test_fematrix_utils.h"
 
 int main() {
-    test_identity();
-    test_vector();
+    test_fematrix_utils_suite();
     return 0;
 }
