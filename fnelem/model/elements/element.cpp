@@ -71,3 +71,64 @@ Element::Element(std::string tag) : ModelComponent(std::move(tag)) {}
 std::vector<Node *> *Element::get_nodes() const {
     return this->nodes;
 }
+
+/**
+ * Get number of degrees of freedom.
+ *
+ * @return
+ */
+int Element::get_ngdl() const {
+    return this->ngdl;
+}
+
+/**
+ * Get GDLID associated with the element.
+ *
+ * @return
+ */
+FEMatrix *Element::get_gdlid() const {
+    return this->gdlid->clone();
+}
+
+/**
+ * Get local stiffness matrix.
+ *
+ * @return
+ */
+FEMatrix *Element::get_stiffness_local() const {
+    return this->stiffness_local->clone();
+}
+
+/**
+ * Get global stiffness matrix.
+ *
+ * @return
+ */
+FEMatrix *Element::get_stiffness_global() const {
+    return this->stiffness_global->clone();
+}
+
+/**
+ * Get local resistant force.
+ *
+ * @return
+ */
+FEMatrix *Element::get_force_local() const {
+    return this->force_local->clone();
+}
+
+/**
+ * Get global resistant force.
+ *
+ * @return
+ */
+FEMatrix *Element::get_force_global() const {
+    return this->force_global->clone();
+}
+
+/**
+ * Disp element information to console.
+ */
+void Element::disp() const {
+    ModelComponent::disp();
+}

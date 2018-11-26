@@ -41,6 +41,9 @@ protected:
     // Number of nodes
     int nnodes = 0;
 
+    // Number of degrees of freedom
+    int ngdl = 0;
+
     // Nodes of the element, vector of pointers
     std::vector<Node *> *nodes = new std::vector<Node *>();
 
@@ -62,6 +65,21 @@ protected:
     // Element has been initialized
     bool initialized = false;
 
+    // Set gdlid from nodes
+    virtual void set_gdlid() {};
+
+    // Add resistant force to reaction
+    virtual void add_force_to_reaction() {};
+
+    // Update element after analysis
+    virtual void update() {};
+
+    // Save element properties to file
+    virtual void save_properties(std::ofstream &file) const {};
+
+    // Save internal stress to file
+    virtual void save_internal_stress(std::ofstream &file) const {};
+
 public:
 
     // Destroy
@@ -73,8 +91,32 @@ public:
     // Get node number
     int get_node_number() const;
 
+    // Get number of degrees of freedom
+    int get_ngdl() const;
+
     // Get element nodes
     std::vector<Node *> *get_nodes() const;
+
+    // Get GDLID associated with the element
+    FEMatrix *get_gdlid() const;
+
+    // Get local stiffness matrix
+    FEMatrix *get_stiffness_local() const;
+
+    // Get global stiffness matrix
+    FEMatrix *get_stiffness_global() const;
+
+    // Get local resistant force
+    FEMatrix *get_force_local() const;
+
+    // Get global resistant force
+    FEMatrix *get_force_global() const;
+
+    // Initialize element
+    virtual void initialize() {};
+
+    // Display element information to console
+    void disp() const override;
 
 };
 
