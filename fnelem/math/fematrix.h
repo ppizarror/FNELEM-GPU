@@ -79,6 +79,12 @@ private:
     // Display a matrix in console
     void disp_matrix(double *matrix, int dim_n, int dim_m) const;
 
+    // Check if matrix has been deleted
+    bool deleted = false;
+
+    // Matrix name
+    std::string mat_name = "";
+
 public:
 
     // Default constructor
@@ -127,16 +133,16 @@ public:
     double get(int i) const;
 
     // Get row
-    FEMatrix get_row(int i, int from, int to) const;
+    FEMatrix *get_row(int i, int from, int to) const;
 
     // Get full row
-    FEMatrix get_row(int i) const;
+    FEMatrix *get_row(int i) const;
 
     // Get column
-    FEMatrix get_column(int j, int from, int to) const;
+    FEMatrix *get_column(int j, int from, int to) const;
 
     // Get full column
-    FEMatrix get_column(int j) const;
+    FEMatrix *get_column(int j) const;
 
     // Save matrix to file
     void save_to_file(std::string filename) const;
@@ -154,7 +160,7 @@ public:
     int get_square_dimension() const;
 
     // Assign
-    FEMatrix &operator=(const FEMatrix &matrix);
+    FEMatrix &operator=(const FEMatrix *matrix);
 
     // Adds a matrix with self
     FEMatrix &operator+=(const FEMatrix &matrix);
@@ -163,7 +169,7 @@ public:
     FEMatrix &operator+=(const FEMatrix *matrix);
 
     // Add and return a new matrix
-    FEMatrix operator+(const FEMatrix &matrix) const;
+    FEMatrix *operator+(const FEMatrix &matrix) const;
 
     // Substract a matrix with self
     FEMatrix &operator-=(const FEMatrix &matrix);
@@ -172,31 +178,31 @@ public:
     FEMatrix &operator-=(const FEMatrix *matrix);
 
     // Substract and return a new matrix
-    FEMatrix operator-(const FEMatrix &matrix) const;
+    FEMatrix *operator-(const FEMatrix &matrix) const;
 
     // Unary substract
-    FEMatrix operator-() const;
+    FEMatrix *operator-() const;
 
     // Matrix transpose
     void transpose_self();
 
     // Matrix transpose and return new
-    FEMatrix transpose() const;
+    FEMatrix *transpose() const;
 
     // Matrix multiplication with self
     FEMatrix &operator*=(const FEMatrix &matrix);
 
     // Matrix multiplication and return new matrix
-    FEMatrix operator*=(const FEMatrix &matrix) const;
+    FEMatrix *operator*=(const FEMatrix &matrix) const;
 
     // Multiply self matrix by a constant
     FEMatrix &operator*=(double a);
 
     // Multiply matrix by a constant and return new matrix
-    FEMatrix operator*=(double a) const;
+    FEMatrix *operator*=(double a) const;
 
-    // Clone object
-    FEMatrix clone() const;
+    // Create new matrix
+    FEMatrix *clone() const;
 
     // Return max value of matrix
     double max() const;
@@ -243,6 +249,9 @@ public:
     // Check if matrix is certain value
     bool is_double(double a) const;
 
+    // Check if matrix is equal
+    bool is_equal() const;
+
     // Check if matrix is only zeros
     bool is_zeros() const;
 
@@ -250,13 +259,28 @@ public:
     bool is_ones() const;
 
     // Transform matrix to string
-    std::string to_string(bool matlab_like, std::string sep) const;
+    std::string to_string(bool matlab_like, std::string sep, bool to_int) const;
 
-    // Transform matrix to string
+    // Transform matrix to string, to integer disabled
+    std::string to_string(bool matlab_like, bool to_int) const;
+
+    // Transform matrix to string, to integer disabled
     std::string to_string(bool matlab_like) const;
 
     // Transform matrix to string line separated by tab
+    std::string to_string_line(bool to_int) const;
+
+    // Transform matrix to string line separated by tab, integer disabled
     std::string to_string_line() const;
+
+    // Set matrix name
+    void set_name(std::string name);
+
+    // Get matrix name
+    std::string get_name() const;
+
+    // Check if matrix is same as other
+    bool equals(FEMatrix *mat) const;
 
 };
 

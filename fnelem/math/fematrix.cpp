@@ -1,3 +1,5 @@
+#include <utility>
+
 /**
 FNELEM-GPU MATRIX DEFINITION
 FEMatrix implement a full matrix manipulation environment.
@@ -82,7 +84,9 @@ FEMatrix::FEMatrix(int n, int m, double *matrix) {
  * Destroy matrix.
  */
 FEMatrix::~FEMatrix() {
+    if (this->deleted) return;
     delete[] this->mat;
+    this->deleted = true;
 }
 
 /**
@@ -336,27 +340,27 @@ int FEMatrix::get_square_dimension() const {
  * @param matrix
  * @return
  */
-FEMatrix &FEMatrix::operator=(const FEMatrix &matrix) {
+FEMatrix &FEMatrix::operator=(const FEMatrix *matrix) {
 
     // If both matrices have same size
-    if (this->n == matrix.n && this->m == matrix.m) {
+    if (this->n == matrix->n && this->m == matrix->m) {
         for (int i = 0; i < this->n; i++) { // Rows
             for (int j = 0; j < this->m; j++) { // Columns
-                this->_set(i, j, matrix._get(i, j));
+                this->_set(i, j, matrix->_get(i, j));
             }
         }
         return *this;
     }
 
     // Create new matrix
-    double *newMatrix = new double[matrix.n * matrix.m];
-    this->n = matrix.n;
-    this->m = matrix.m;
+    double *newMatrix = new double[matrix->n * matrix->m];
+    this->n = matrix->n;
+    this->m = matrix->m;
 
     // Assign values
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
-            newMatrix[i * this->m + j] = matrix._get(i, j);
+            newMatrix[i * this->m + j] = matrix->_get(i, j);
         }
     }
 
@@ -402,6 +406,7 @@ FEMatrix &FEMatrix::operator+=(const FEMatrix &matrix) {
  */
 FEMatrix &FEMatrix::operator+=(const FEMatrix *matrix) {
     (*this) += *matrix;
+    return *this;
 }
 
 /**
@@ -410,11 +415,10 @@ FEMatrix &FEMatrix::operator+=(const FEMatrix *matrix) {
  * @param matrix Matrix to add
  * @return
  */
-FEMatrix FEMatrix::operator+(const FEMatrix &matrix) const {
-    FEMatrix newMatrix = this->clone();
-    newMatrix += matrix;
+FEMatrix *FEMatrix::operator+(const FEMatrix &matrix) const {
+    FEMatrix *newMatrix = this->clone();
+    *newMatrix += matrix;
     return newMatrix;
-
 }
 
 /**
@@ -450,6 +454,7 @@ FEMatrix &FEMatrix::operator-=(const FEMatrix &matrix) {
  */
 FEMatrix &FEMatrix::operator-=(const FEMatrix *matrix) {
     (*this) -= *matrix;
+    return *this;
 }
 
 /**
@@ -458,9 +463,9 @@ FEMatrix &FEMatrix::operator-=(const FEMatrix *matrix) {
  * @param matrix Matrix to add
  * @return
  */
-FEMatrix FEMatrix::operator-(const FEMatrix &matrix) const {
-    FEMatrix newMatrix = this->clone();
-    newMatrix -= matrix;
+FEMatrix *FEMatrix::operator-(const FEMatrix &matrix) const {
+    FEMatrix *newMatrix = this->clone();
+    *newMatrix -= matrix;
     return newMatrix;
 }
 
@@ -469,11 +474,11 @@ FEMatrix FEMatrix::operator-(const FEMatrix &matrix) const {
  *
  * @return
  */
-FEMatrix FEMatrix::operator-() const {
-    FEMatrix newMatrix = FEMatrix(this->n, this->m);
+FEMatrix *FEMatrix::operator-() const {
+    FEMatrix *newMatrix = new FEMatrix(this->n, this->m);
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
-            newMatrix._set(i, j, -this->_get(i, j));
+            newMatrix->_set(i, j, -this->_get(i, j));
         }
     }
     return newMatrix;
@@ -516,9 +521,9 @@ void FEMatrix::transpose_self() {
  *
  * @return New transposed matrix
  */
-FEMatrix FEMatrix::transpose() const {
-    FEMatrix matrix = this->clone();
-    matrix.transpose_self();
+FEMatrix *FEMatrix::transpose() const {
+    FEMatrix *matrix = this->clone();
+    matrix->transpose_self();
     return matrix;
 }
 
@@ -575,9 +580,9 @@ FEMatrix &FEMatrix::operator*=(const FEMatrix &matrix) {
  * @param matrix Matrix to multiply
  * @return
  */
-FEMatrix FEMatrix::operator*=(const FEMatrix &matrix) const {
-    FEMatrix newMatrix = this->clone();
-    newMatrix *= matrix;
+FEMatrix *FEMatrix::operator*=(const FEMatrix &matrix) const {
+    FEMatrix *newMatrix = this->clone();
+    *newMatrix *= matrix;
     return newMatrix;
 }
 
@@ -602,9 +607,9 @@ FEMatrix &FEMatrix::operator*=(double a) {
  * @param a Constant
  * @return
  */
-FEMatrix FEMatrix::operator*=(double a) const {
-    FEMatrix newMatrix = this->clone();
-    newMatrix *= a;
+FEMatrix *FEMatrix::operator*=(double a) const {
+    FEMatrix *newMatrix = this->clone();
+    *newMatrix *= a;
     return newMatrix;
 }
 
@@ -613,14 +618,14 @@ FEMatrix FEMatrix::operator*=(double a) const {
  *
  * @return
  */
-FEMatrix FEMatrix::clone() const {
-    FEMatrix newMatrix = FEMatrix(this->n, this->m);
+FEMatrix *FEMatrix::clone() const {
+    FEMatrix *newMatrix = new FEMatrix(this->n, this->m);
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
-            newMatrix._set(i, j, this->_get(i, j));
+            newMatrix->_set(i, j, this->_get(i, j));
         }
     }
-    newMatrix.set_origin(this->origin_temp);
+    newMatrix->set_origin(this->origin_temp);
     return newMatrix;
 }
 
@@ -809,7 +814,7 @@ double FEMatrix::sum() const {
  * @param to Final column position
  * @return
  */
-FEMatrix FEMatrix::get_row(int i, int from, int to) const {
+FEMatrix *FEMatrix::get_row(int i, int from, int to) const {
 
     // Check row consistency
     i -= this->origin;
@@ -823,11 +828,11 @@ FEMatrix FEMatrix::get_row(int i, int from, int to) const {
     }
 
     // Create new vector
-    FEMatrix row = FEMatrix(1, to - from + 1);
+    FEMatrix *row = new FEMatrix(1, to - from + 1);
     for (int j = from; j <= to; j++) { // Columns
-        row.set(0, j - from, this->_get(i, j));
+        row->set(0, j - from, this->_get(i, j));
     }
-    row.set_origin(this->origin_temp);
+    row->set_origin(this->origin_temp);
 
     // Return row vector
     return row;
@@ -840,7 +845,7 @@ FEMatrix FEMatrix::get_row(int i, int from, int to) const {
  * @param i Row number
  * @return
  */
-FEMatrix FEMatrix::get_row(int i) const {
+FEMatrix *FEMatrix::get_row(int i) const {
     return this->get_row(i, this->origin_temp, this->m);
 }
 
@@ -852,7 +857,7 @@ FEMatrix FEMatrix::get_row(int i) const {
  * @param to Final row position
  * @return
  */
-FEMatrix FEMatrix::get_column(int j, int from, int to) const {
+FEMatrix *FEMatrix::get_column(int j, int from, int to) const {
 
     // Check column consistency
     j -= this->origin;
@@ -866,11 +871,11 @@ FEMatrix FEMatrix::get_column(int j, int from, int to) const {
     }
 
     // Create new vector
-    FEMatrix column = FEMatrix(to - from + 1, 1);
+    FEMatrix *column = new FEMatrix(to - from + 1, 1);
     for (int i = from; i <= to; i++) { // Columns
-        column.set(i - from, 0, this->_get(i, j));
+        column->set(i - from, 0, this->_get(i, j));
     }
-    column.set_origin(this->origin_temp);
+    column->set_origin(this->origin_temp);
 
     // Return column vector
     return column;
@@ -883,7 +888,7 @@ FEMatrix FEMatrix::get_column(int j, int from, int to) const {
  * @param j Column number
  * @return
  */
-FEMatrix FEMatrix::get_column(int j) const {
+FEMatrix *FEMatrix::get_column(int j) const {
     return this->get_column(j, this->origin_temp, this->n);
 }
 
@@ -1076,16 +1081,21 @@ bool FEMatrix::is_ones() const {
  *
  * @param matlab_like Uses matlab system to export matrix
  * @param sep Separator
+ * @param to_int Transforms to int
  * @return
  */
-std::string FEMatrix::to_string(bool matlab_like, std::string sep) const {
+std::string FEMatrix::to_string(bool matlab_like, std::string sep, bool to_int) const {
     std::string s;
     bool isv = this->is_vector();
     if (matlab_like) s += "[";
     for (int i = 0; i < this->n; i++) { // Rows
         if (this->n > 1 && matlab_like && !isv) s += "[";
         for (int j = 0; j < this->m; j++) { // Columns
-            s += std::to_string(this->_get(i, j));
+            if (!to_int) {
+                s += std::to_string(this->_get(i, j));
+            } else {
+                s += std::to_string(static_cast<int>(this->_get(i, j)));
+            }
             if (j < this->m - 1) s += ", ";
         }
         if (this->n > 1 && matlab_like && !isv) s += "]";
@@ -1099,10 +1109,31 @@ std::string FEMatrix::to_string(bool matlab_like, std::string sep) const {
  * Transform matrix to string.
  *
  * @param matlab_like Uses matlab system to export matrix
+ * @param to_int Transforms to int
+ * @return
+ */
+std::string FEMatrix::to_string(bool matlab_like, bool to_int) const {
+    return this->to_string(matlab_like, "; ", to_int);
+}
+
+/**
+ * Transform matrix to string.
+ *
+ * @param matlab_like Uses matlab system to export matrix
  * @return
  */
 std::string FEMatrix::to_string(bool matlab_like) const {
-    return this->to_string(matlab_like, "; ");
+    return this->to_string(matlab_like, false);
+}
+
+/**
+ * Transform matrix to string line separated by tab.
+ *
+ * @param to_int Transforms to int
+ * @return
+ */
+std::string FEMatrix::to_string_line(bool to_int) const {
+    return this->to_string(false, "\t", to_int);
 }
 
 /**
@@ -1111,5 +1142,42 @@ std::string FEMatrix::to_string(bool matlab_like) const {
  * @return 
  */
 std::string FEMatrix::to_string_line() const {
-    return this->to_string(false, "\t");
+    return this->to_string(false, "\t", false);
+}
+
+/**
+ * Set matrix name.
+ *
+ * @param name Name
+ */
+void FEMatrix::set_name(std::string name) {
+    this->mat_name = std::move(name);
+}
+
+/**
+ * Return matrix name.
+ *
+ * @return
+ */
+std::string FEMatrix::get_name() const {
+    return this->mat_name;
+}
+
+/**
+ * Matrix is equal
+ * @return
+ */
+bool FEMatrix::is_equal() const {
+    if (this->n * this->m > 0) return this->is_double(this->mat[0]);
+    return false;
+}
+
+/**
+ * Check if matrix is same as other.
+ *
+ * @param mat
+ * @return
+ */
+bool FEMatrix::equals(FEMatrix *mat) const {
+    return (*this) == *mat;
 }
