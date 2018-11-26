@@ -280,3 +280,33 @@ void Node::disp() const {
     std::cout << "\tDisplacements:\t" << this->displ->to_string_line() << std::endl;
     std::cout << "\tReactions:\t\t" << this->reaction->to_string_line() << std::endl;
 }
+
+/**
+ * Save node properties to file.
+ *
+ * @param file
+ */
+void Node::save_properties(std::ofstream &file) const {
+    file << "\t Node " << this->get_model_tag() << ": ";
+    file << this->coords->to_string_line() << std::endl;
+}
+
+/**
+ * Save node displacements to file.
+ *
+ * @param file
+ */
+void Node::save_displacements(std::ofstream &file) const {
+    file << "\t Node " << this->get_model_tag() << ": ";
+    file << this->coords->to_string_line() << std::endl;
+}
+
+/**
+ * Save node displacements to file.
+ *
+ * @param file
+ */
+void Node::save_reactions(std::ofstream &file) const {
+    file << "\t Node " << this->get_model_tag() << ": ";
+    file << this->coords->to_string_line() << std::endl;
+}

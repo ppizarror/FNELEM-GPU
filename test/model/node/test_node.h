@@ -55,7 +55,7 @@ void __test_node_creation() {
 
 }
 
-void __test_coordinates() {
+void __test_node_coordinates() {
     test_print_title("NODE", "test_coordinates");
     Node *n = new Node("NODE", 1, 2);
     FEMatrix *coords = n->get_coordinates();
@@ -68,7 +68,7 @@ void __test_coordinates() {
     delete n;
 }
 
-void __test_loads() {
+void __test_node_loads() {
     test_print_title("NODE", "test_loads");
     Node *n = new Node("NODE", 4, 5, -7);
     FEMatrix *loads = n->get_load_results();
@@ -83,7 +83,7 @@ void __test_loads() {
     delete n;
 }
 
-void __test_set_gdlid() {
+void __test_node_set_gdlid() {
     test_print_title("NODE", "test_set_gdlid");
     Node *n1 = new Node("NODE", 0, 0, 0);
     FEMatrix *gdl = FEMatrix_vector(3);
@@ -176,23 +176,52 @@ void __test_node_full() {
     delete load;
 }
 
-void __test_simple() {
+void __test_node_simple() {
     test_print_title("NODE", "test_simple");
     Node *n1 = new Node("NODE", 1, 2);
     n1->disp();
     delete n1;
 }
 
+void __test_node_save_to_file() {
+    test_print_title("NODE", "test_save_to_file");
+
+    // Create node
+    Node *n = new Node("N1", 1, 1, -1);
+    FEMatrix *displ = FEMatrix_vector(3);
+    displ->set(0, 5);
+    displ->set(1, -6);
+    displ->set(2, 0);
+    n->set_displacement(displ);
+    FEMatrix *load = FEMatrix_vector(3);
+    load->set(0, 2);
+    load->set(1, -1);
+    n->apply_load(load);
+
+    // Create file
+    std::ofstream plik;
+    plik.open("test-node-properties.txt");
+    n->save_properties(plik);
+    n->save_displacements(plik);
+    n->save_reactions(plik);
+    plik.close();
+
+    delete n;
+    delete displ;
+    delete load;
+}
+
 /**
  * Performs TEST-NODE suite.
  */
 void test_node_suite() {
-    __test_simple();
+    __test_node_simple();
     __test_node_creation();
-    __test_coordinates();
-    __test_loads();
-    __test_set_gdlid();
+    __test_node_coordinates();
+    __test_node_loads();
+    __test_node_set_gdlid();
     __test_node_displacements();
     __test_node_load();
     __test_node_full();
+    __test_node_save_to_file();
 }

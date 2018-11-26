@@ -8,3 +8,6 @@ cmake-build-debug/
 
 # Shortcuts
 *.lnk
+
+# Test files
+test*.txt

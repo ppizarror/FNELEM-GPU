@@ -91,7 +91,7 @@ public:
     int get_ngdl() const;
 
     // Return node coordinates
-    FEMatrix* get_coordinates() const;
+    FEMatrix *get_coordinates() const;
 
     // Get GDLID of node
     FEMatrix *get_gdlid() const;
@@ -125,6 +125,15 @@ public:
 
     // Display node information to console
     void disp() const override;
+
+    // Save properties to file
+    void save_properties(std::ofstream &file) const;
+
+    // Save properties to file
+    void save_displacements(std::ofstream &file) const;
+
+    // Save properties to file
+    void save_reactions(std::ofstream &file) const;
 
 };
 
