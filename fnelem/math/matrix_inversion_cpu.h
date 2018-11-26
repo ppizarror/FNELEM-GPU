@@ -44,6 +44,6 @@ Performs matrix inversion using Gauss Jordan algorithm.
  * @param matrix Matrix to inverse
  * @return Inverse matrix
  */
-FEMatrix matrix_inverse_cpu(FEMatrix *matrix);
+FEMatrix *matrix_inverse_cpu(FEMatrix *matrix);
 
 #endif

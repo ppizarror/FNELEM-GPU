@@ -41,7 +41,7 @@ Utilitary functions that use FEMatrix.
  * @param n Dimension
  * @return
  */
-FEMatrix FEMatrix_identity(int n);
+FEMatrix *FEMatrix_identity(int n);
 
 /**
  * Creates an vector.
@@ -49,6 +49,6 @@ FEMatrix FEMatrix_identity(int n);
  * @param n Vector length
  * @return
  */
-FEMatrix FEMatrix_vector(int n);
+FEMatrix *FEMatrix_vector(int n);
 
 #endif // MATH_FEMATRIX_UTILS_HEADER_FILE

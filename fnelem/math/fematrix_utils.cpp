@@ -37,10 +37,10 @@ Utilitary functions that use FEMatrix.
  * @param n Dimension
  * @return
  */
-FEMatrix FEMatrix_identity(int n) {
-    FEMatrix mat = FEMatrix(n, n);
+FEMatrix *FEMatrix_identity(int n) {
+    FEMatrix *mat = new FEMatrix(n, n);
     for (int i = 0; i < n; i++) {
-        mat.set(i, i, 1);
+        mat->set(i, i, 1);
     }
     return mat;
 }
@@ -51,7 +51,6 @@ FEMatrix FEMatrix_identity(int n) {
  * @param n Vector length
  * @return
  */
-FEMatrix FEMatrix_vector(int n) {
-    FEMatrix mat = FEMatrix(n, 1);
-    return mat;
+FEMatrix *FEMatrix_vector(int n) {
+    return new FEMatrix(n, 1);
 }
