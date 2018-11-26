@@ -29,8 +29,8 @@ Utilitary functions that use FEMatrix.
 */
 
 // Init header file
-#ifndef MATH_FEMATRIX_UTILS_HEADER_FILE
-#define MATH_FEMATRIX_UTILS_HEADER_FILE
+#ifndef FNELEM_GPU_MATH_FEMATRIX_UTILS_H
+#define FNELEM_GPU_MATH_FEMATRIX_UTILS_H
 
 // Library imports
 #include "fematrix.h"
@@ -51,4 +51,4 @@ FEMatrix *FEMatrix_identity(int n);
  */
 FEMatrix *FEMatrix_vector(int n);
 
-#endif // MATH_FEMATRIX_UTILS_HEADER_FILE
+#endif // FNELEM_GPU_MATH_FEMATRIX_UTILS_H

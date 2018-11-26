@@ -1,5 +1,5 @@
 /**
-FNELEM-GPU - TEST
+FNELEM-GPU - TEST MODEL COMPONENT
 Test model component, header definition
 
 @package test.model.base

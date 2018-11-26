@@ -29,8 +29,8 @@ Structural nodes.
 */
 
 // Init header file
-#ifndef MODEL_NODE_HEADER_FILE
-#define MODEL_NODE_HEADER_FILE
+#ifndef FNELEM_GPU_MODEL_NODE_HEADER_FILE
+#define FNELEM_GPU_MODEL_NODE_HEADER_FILE
 
 // Include headers
 #include "../base/model_component.h"
@@ -137,4 +137,4 @@ public:
 
 };
 
-#endif // MODEL_NODE
+#endif // FNELEM_GPU_MODEL_NODE

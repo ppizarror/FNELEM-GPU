@@ -29,19 +29,21 @@ Imports all tests.
 */
 
 // Init header file
-#ifndef TEST_FNELEM_SUITE
-#define TEST_FNELEM_SUITE
+#ifndef FNELEM_GPU_TEST_FNELEM_SUITE_H
+#define FNELEM_GPU_TEST_FNELEM_SUITE_H
 
 #include "math/test_fematrix.h"
 #include "math/test_fematrix_utils.h"
 #include "model/base/test_model_component.h"
+#include "model/elements/test_elements.h"
 #include "model/node/test_node.h"
 
 void test_suite() {
+    test_elements_suite();
     test_fematrix_suite();
     test_fematrix_utils_suite();
     test_modelcomponent_suite();
     test_node_suite();
 }
 
-#endif // TEST_FNELEM_SUITE
+#endif // FNELEM_GPU_TEST_FNELEM_SUITE_H

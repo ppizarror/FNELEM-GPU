@@ -29,8 +29,8 @@ FEMatrix implement a full matrix manipulation environment.
 */
 
 // Init header file
-#ifndef MATH_FEMATRIX_HEADER_FILE
-#define MATH_FEMATRIX_HEADER_FILE
+#ifndef FNELEM_GPU_MATH_FEMATRIX_H
+#define FNELEM_GPU_MATH_FEMATRIX_H
 
 // Constant definition
 #define __FEMATRIX_ZERO_TOL 1e-12
@@ -284,4 +284,4 @@ public:
 
 };
 
-#endif // MATH_FEMATRIX_HEADER_FILE
+#endif // FNELEM_GPU_MATH_FEMATRIX_H

@@ -29,8 +29,8 @@ Performs matrix inversion using Gauss Jordan algorithm.
 */
 
 // Init header file
-#ifndef MATH_MATRIX_INVERSION_CPU_HEADER_FILE
-#define MATH_MATRIX_INVERSION_CPU_HEADER_FILE
+#ifndef FNELEM_GPU_MATH_MATRIX_INVERSION_CPU_H
+#define FNELEM_GPU_MATH_MATRIX_INVERSION_CPU_H
 
 // Include headers
 #include "fematrix.h"
@@ -46,4 +46,4 @@ Performs matrix inversion using Gauss Jordan algorithm.
  */
 FEMatrix *matrix_inverse_cpu(FEMatrix *matrix);
 
-#endif
+#endif // FNELEM_GPU_MATH_MATRIX_INVERSION_CPU_H

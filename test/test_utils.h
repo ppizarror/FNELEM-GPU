@@ -29,8 +29,8 @@ Utilitary functions to perform tests.
 */
 
 // Init header file
-#ifndef TEST_FNELEM_UTILS
-#define TEST_FNELEM_UTILS
+#ifndef FNELEM_GPU_TEST_FNELEM_UTILS_H
+#define FNELEM_GPU_TEST_FNELEM_UTILS_H
 
 // Library imports
 #include <cassert>
@@ -59,4 +59,4 @@ void test_print_title(const std::string &suite, const std::string &test) {
     std::cout << "[" << suite << "] " << test << std::endl;
 }
 
-#endif // TEST_FNELEM_UTILS
+#endif // FNELEM_GPU_TEST_FNELEM_UTILS_H

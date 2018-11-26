@@ -29,8 +29,8 @@ Base element of the platform.
 */
 
 // Init header file
-#ifndef BASE_MODEL_COMPONENT_HEADER_FILE
-#define BASE_MODEL_COMPONENT_HEADER_FILE
+#ifndef FNELEM_GPU_BASE_MODELCOMPONENT_H
+#define FNELEM_GPU_BASE_MODELCOMPONENT_H
 
 // Library import
 #include "sole.hpp"
@@ -71,4 +71,4 @@ public:
 
 };
 
-#endif // BASE_MODEL_COMPONENT_HEADER_FILE
+#endif // FNELEM_GPU_BASE_MODELCOMPONENT_H

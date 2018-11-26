@@ -1,10 +1,10 @@
 /**
-FNELEM-GPU - TEST MODEL COMPONENT
-Test model component.
+FNELEM-GPU - TEST
+Test base elements, header definition.
 
-@package test.model.base
+@package test.model.elements
 @author ppizarror
-@date 19/11/2018
+@date 26/11/2018
 @license
 	MIT License
 	Copyright (c) 2018 Pablo Pizarro R.
@@ -29,9 +29,19 @@ Test model component.
 */
 
 // Include sources
-#include "test_model_component.h"
+#include "../../test_utils.h"
+#include "../../../fnelem/model/elements/element.h"
 
-int main() {
-    test_modelcomponent_suite();
-    return 0;
+void __test_elements_creation() {
+    Element *elem = new Element("Test element");
+    elem->disp();
+    assert(elem->get_node_number() == 0);
+    delete elem;
+}
+
+/**
+ * Performs TEST-MODELCOMPONENT suite.
+ */
+void test_elements_suite() {
+    __test_elements_creation();
 }

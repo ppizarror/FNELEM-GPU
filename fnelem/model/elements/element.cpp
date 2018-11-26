@@ -1,10 +1,12 @@
-/**
-FNELEM-GPU - TEST MODEL COMPONENT
-Test model component.
+#include <utility>
 
-@package test.model.base
+/**
+FNELEM-GPU ELEMENTS
+Base structural element class.
+
+@package fnelem.model.elements
 @author ppizarror
-@date 19/11/2018
+@date 26/11/2018
 @license
 	MIT License
 	Copyright (c) 2018 Pablo Pizarro R.
@@ -28,10 +30,44 @@ Test model component.
 	SOFTWARE.
 */
 
-// Include sources
-#include "test_model_component.h"
+// Include source
+#include "element.h"
 
-int main() {
-    test_modelcomponent_suite();
-    return 0;
+/**
+ * Class destructor.
+ */
+Element::~Element() {
+    delete this->nodes;
+    if (this->initialized) {
+        delete this->gdlid;
+        delete this->force_global;
+        delete this->force_local;
+        delete this->stiffness_global;
+        delete this->stiffness_local;
+    }
+}
+
+/**
+ * Return number of nodes.
+ *
+ * @return
+ */
+int Element::get_node_number() const {
+    return this->nnodes;
+}
+
+/**
+ * Default constructor.
+ *
+ * @param tag Element tag
+ */
+Element::Element(std::string tag) : ModelComponent(std::move(tag)) {}
+
+/**
+ * Get element nodes.
+ *
+ * @return
+ */
+std::vector<Node *> *Element::get_nodes() const {
+    return this->nodes;
 }

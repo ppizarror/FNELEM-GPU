@@ -30,16 +30,26 @@ set(FNELEM_NODE
         fnelem/model/node/node.cpp
         )
 
+# NODE LIBRARY
+set(FNELEM_ELEMENT
+        ${FNELEM_MATH}
+        ${FNELEM_MODELCOMPONENT}
+        ${FNELEM_NODE}
+        fnelem/model/elements/element.cpp
+        )
+
 # ALL LIBRARIES
 set(FNELEM_ALL
         ${FNELEM_MATH}
         ${FNELEM_MODELCOMPONENT}
         ${FNELEM_NODE}
+        ${FNELEM_ELEMENT}
         )
 
 # DEFINE TESTS
 add_executable(TEST-ALL test/test_suite.cpp ${FNELEM_ALL})
 add_executable(TEST-CUDA test/test_cuda.cpp ${FNELEM_CUDA})
+add_executable(TEST-ELEMENTS test/model/elements/test_elements.cpp ${FNELEM_ELEMENT})
 add_executable(TEST-FEMATRIX test/math/test_fematrix.cpp ${FNELEM_MATH})
 add_executable(TEST-FEMATRIX-UTILS test/math/test_fematrix_utils.cpp ${FNELEM_MATH})
 add_executable(TEST-MODEL-COMPONENT test/model/base/test_model_component.cpp ${FNELEM_MODELCOMPONENT})

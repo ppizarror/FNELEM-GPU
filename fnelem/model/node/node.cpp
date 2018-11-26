@@ -298,7 +298,7 @@ void Node::save_properties(std::ofstream &file) const {
  */
 void Node::save_displacements(std::ofstream &file) const {
     file << "\t Node " << this->get_model_tag() << ": ";
-    file << this->coords->to_string_line() << std::endl;
+    file << this->displ->to_string_line() << std::endl;
 }
 
 /**
@@ -308,5 +308,5 @@ void Node::save_displacements(std::ofstream &file) const {
  */
 void Node::save_reactions(std::ofstream &file) const {
     file << "\t Node " << this->get_model_tag() << ": ";
-    file << this->coords->to_string_line() << std::endl;
+    file << this->reaction->to_string_line() << std::endl;
 }

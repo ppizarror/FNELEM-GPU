@@ -1,10 +1,10 @@
 /**
-FNELEM-GPU - TEST MODEL COMPONENT
-Test model component.
+FNELEM-GPU - TEST ELEMENTS
+Test base elements.
 
-@package test.model.base
+@package test.model.elements
 @author ppizarror
-@date 19/11/2018
+@date 26/11/2018
 @license
 	MIT License
 	Copyright (c) 2018 Pablo Pizarro R.
@@ -29,9 +29,9 @@ Test model component.
 */
 
 // Include sources
-#include "test_model_component.h"
+#include "test_elements.h"
 
 int main() {
-    test_modelcomponent_suite();
+    test_elements_suite();
     return 0;
 }
