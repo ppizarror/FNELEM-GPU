@@ -50,19 +50,19 @@ private:
     int ngdl = 0;
 
     // ID of degrees of freedom
-    FEMatrix gdlid;
+    FEMatrix *gdlid;
 
     // Coordinates of the node
-    FEMatrix coords;
+    FEMatrix *coords;
 
     // Displacements vector
-    FEMatrix displ;
+    FEMatrix *displ;
 
     // Loads vector
-    FEMatrix loads;
+    FEMatrix *loads;
 
     // Reaction vector
-    FEMatrix reaction;
+    FEMatrix *reaction;
 
     // Init internal variables
     void init();
@@ -91,40 +91,40 @@ public:
     int get_ngdl() const;
 
     // Return node coordinates
-    FEMatrix get_coordinates() const;
+    FEMatrix* get_coordinates() const;
 
     // Get GDLID of node
-    FEMatrix get_gdlid() const;
+    FEMatrix *get_gdlid() const;
 
     // Get results of loads
-    FEMatrix get_load_results() const;
+    FEMatrix *get_load_results() const;
 
     // Get node displacements
-    FEMatrix get_displacements() const;
+    FEMatrix *get_displacements() const;
 
     // Get node reactions
-    FEMatrix get_reactions() const;
+    FEMatrix *get_reactions() const;
 
     // Set node GDLID
     void set_gdlid(int local_id, int global_id);
 
     // Set node GDLID from vector/matrix
-    void set_gdlid(const FEMatrix *gdl);
+    void set_gdlid(FEMatrix *gdl);
 
     // Set node displacements
     void set_displacement(int local_id, double d);
 
     // Set node displacements from vector/matrix
-    void set_displacement(const FEMatrix *d);
+    void set_displacement(FEMatrix *d);
 
     // Apply load to node
-    void apply_load(const FEMatrix *load);
+    void apply_load(FEMatrix *load);
 
     // Adds element inner stress to reactions
-    void apply_element_stress(const FEMatrix *sigma);
+    void apply_element_stress(FEMatrix *sigma);
 
     // Display node information to console
-    void disp() const;
+    void disp() const override;
 
 };
 

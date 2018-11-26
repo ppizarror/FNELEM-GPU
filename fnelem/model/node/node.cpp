@@ -35,6 +35,11 @@ Structural nodes.
  * Destroy inner variables.
  */
 void Node::destroy() {
+    delete this->coords;
+    delete this->displ;
+    delete this->gdlid;
+    delete this->loads;
+    delete this->reaction;
 }
 
 /**
@@ -54,8 +59,8 @@ Node::~Node() {
 Node::Node(std::string tag, double posx, double posy) : ModelComponent(std::move(tag)) {
     this->ngdl = 2;
     this->coords = FEMatrix_vector(this->ngdl);
-    this->coords.set(0, posx);
-    this->coords.set(1, posy);
+    this->coords->set(0, posx);
+    this->coords->set(1, posy);
     this->init();
 }
 
@@ -69,9 +74,9 @@ Node::Node(std::string tag, double posx, double posy) : ModelComponent(std::move
 Node::Node(std::string tag, double posx, double posy, double posz) : ModelComponent(std::move(tag)) {
     this->ngdl = 3;
     this->coords = FEMatrix_vector(this->ngdl);
-    this->coords.set(0, posx);
-    this->coords.set(1, posy);
-    this->coords.set(2, posz);
+    this->coords->set(0, posx);
+    this->coords->set(1, posy);
+    this->coords->set(2, posz);
     this->init();
 }
 
@@ -94,10 +99,10 @@ void Node::init() {
 
     // Save initial values
     for (int i = 0; i < this->ngdl; i++) {
-        this->gdlid.set(i, -1);
-        this->displ.set(i, 0);
-        this->reaction.set(i, 0);
-        this->loads.set(i, 0);
+        this->gdlid->set(i, -1);
+        this->displ->set(i, 0);
+        this->reaction->set(i, 0);
+        this->loads->set(i, 0);
     }
 
 }
@@ -116,8 +121,8 @@ int Node::get_ngdl() const {
  *
  * @return Coordinates
  */
-FEMatrix Node::get_coordinates() const {
-    return this->coords.clone();
+FEMatrix *Node::get_coordinates() const {
+    return this->coords->clone();
 }
 
 /**
@@ -125,8 +130,8 @@ FEMatrix Node::get_coordinates() const {
  *
  * @return
  */
-FEMatrix Node::get_gdlid() const {
-    return this->gdlid.clone();
+FEMatrix *Node::get_gdlid() const {
+    return this->gdlid->clone();
 }
 
 /**
@@ -160,8 +165,8 @@ Node &Node::operator=(const Node &node) {
  *
  * @return
  */
-FEMatrix Node::get_load_results() const {
-    return this->loads.clone();
+FEMatrix *Node::get_load_results() const {
+    return this->loads->clone();
 }
 
 /**
@@ -169,8 +174,8 @@ FEMatrix Node::get_load_results() const {
  *
  * @return
  */
-FEMatrix Node::get_displacements() const {
-    return this->displ.clone();
+FEMatrix *Node::get_displacements() const {
+    return this->displ->clone();
 }
 
 /**
@@ -178,8 +183,8 @@ FEMatrix Node::get_displacements() const {
  *
  * @return
  */
-FEMatrix Node::get_reactions() const {
-    return this->reaction.clone();
+FEMatrix *Node::get_reactions() const {
+    return this->reaction->clone();
 }
 
 /**
@@ -207,7 +212,7 @@ void Node::set_gdlid(int local_id, int global_id) {
     if (local_id < 1 || local_id > this->ngdl) {
         throw std::logic_error("[NODE] Local GDLID greather than number of Node NGDL");
     }
-    this->gdlid.set(local_id - 1, global_id);
+    this->gdlid->set(local_id - 1, global_id);
 }
 
 /**
@@ -215,9 +220,9 @@ void Node::set_gdlid(int local_id, int global_id) {
  *
  * @param gdlid Vector of GDLID vector
  */
-void Node::set_gdlid(const FEMatrix *gdl) {
+void Node::set_gdlid(FEMatrix *gdl) {
     this->check_vector(gdl, "Node GDLID");
-    this->gdlid = *gdl;
+    (*this->gdlid) = gdl;
 }
 
 /**
@@ -230,7 +235,7 @@ void Node::set_displacement(int local_id, double d) {
     if (local_id < 1 || local_id > this->ngdl) {
         throw std::logic_error("[NODE] Local GDLID greather than number of Node NGDL");
     }
-    this->displ.set(local_id - 1, d);
+    this->displ->set(local_id - 1, d);
 }
 
 /**
@@ -238,9 +243,9 @@ void Node::set_displacement(int local_id, double d) {
  *
  * @param d Vector of node displacements
  */
-void Node::set_displacement(const FEMatrix *d) {
+void Node::set_displacement(FEMatrix *d) {
     this->check_vector(d, "Node displacements");
-    this->displ = *d;
+    (*this->displ) = d;
 }
 
 /**
@@ -248,9 +253,9 @@ void Node::set_displacement(const FEMatrix *d) {
  *
  * @param load Node load
  */
-void Node::apply_load(const FEMatrix *load) {
+void Node::apply_load(FEMatrix *load) {
     this->check_vector(load, "Node loads");
-    this->reaction -= load;
+    (*this->reaction) -= *load;
 }
 
 /**
@@ -258,9 +263,9 @@ void Node::apply_load(const FEMatrix *load) {
  *
  * @param sigma Element stress
  */
-void Node::apply_element_stress(const FEMatrix *sigma) {
+void Node::apply_element_stress(FEMatrix *sigma) {
     this->check_vector(sigma, "Element stress");
-    this->reaction += sigma;
+    (*this->reaction) += *sigma;
 }
 
 /**
@@ -269,4 +274,9 @@ void Node::apply_element_stress(const FEMatrix *sigma) {
 void Node::disp() const {
     std::cout << "Node information" << std::endl;
     ModelComponent::disp();
+    std::cout << "\tNumber degrees of freedom:\t" << this->ngdl << std::endl;
+    std::cout << "\tCoordinates:\t" << this->coords->to_string_line() << std::endl;
+    std::cout << "\tGLOBAL ID:\t\t" << this->gdlid->to_string_line(true) << std::endl;
+    std::cout << "\tDisplacements:\t" << this->displ->to_string_line() << std::endl;
+    std::cout << "\tReactions:\t\t" << this->reaction->to_string_line() << std::endl;
 }
