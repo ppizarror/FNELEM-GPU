@@ -33,6 +33,7 @@ Base element of the platform.
 #define BASE_MODEL_COMPONENT_HEADER_FILE
 
 // Library import
+#include "sole.hpp"
 #include <iostream>
 #include <string>
 
@@ -44,6 +45,9 @@ private:
 
     // Element tag
     std::string tagID = "";
+
+    // UUID
+    std::string uuid = "";
 
 public:
 
@@ -62,7 +66,7 @@ public:
     // Assign operator
     ModelComponent &operator=(const ModelComponent &model);
 
-    // Display model
+    virtual // Display model
     void disp() const;
 
 };

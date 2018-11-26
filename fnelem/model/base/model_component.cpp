@@ -34,14 +34,17 @@ Base element of the platform.
 /**
  * Init model.
  */
-ModelComponent::ModelComponent() = default;
+ModelComponent::ModelComponent() {
+    sole::uuid u4 = sole::uuid4();
+    this->uuid = u4.str();
+}
 
 /**
  * Init model with tag.
  *
  * @param tag
  */
-ModelComponent::ModelComponent(std::string tag) {
+ModelComponent::ModelComponent(std::string tag) : ModelComponent() {
     this->tagID = std::move(tag);
 }
 
@@ -74,5 +77,6 @@ ModelComponent &ModelComponent::operator=(const ModelComponent &model) {
  * Display model on console.
  */
 void ModelComponent::disp() const {
-    std::cout << "\tTag: " << this->tagID << std::endl;
+    std::cout << "\tTag:\t" << this->tagID << std::endl;
+    std::cout << "\tUUID:\t" << this->uuid << std::endl;
 };
