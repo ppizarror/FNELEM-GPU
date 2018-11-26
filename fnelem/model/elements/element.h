@@ -31,7 +31,7 @@ Base structural element class.
 #ifndef FNELEM_GPU_ELEMENT_H
 #define FNELEM_GPU_ELEMENT_H
 
-// Include headers
+// Library imports
 #include "../node/node.h"
 #include <vector>
 

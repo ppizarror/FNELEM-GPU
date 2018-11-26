@@ -1,5 +1,3 @@
-#include <utility>
-
 /**
 FNELEM-GPU ELEMENTS
 Base structural element class.
@@ -30,7 +28,7 @@ Base structural element class.
 	SOFTWARE.
 */
 
-// Include source
+// Include header
 #include "element.h"
 
 /**
