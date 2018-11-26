@@ -1,6 +1,6 @@
 /**
-FNELEM-GPU - TEST
-Test matrix.
+FNELEM-GPU - FEMATRIX TEST
+Test finite element matrix (FEMATRIX).
 
 @package test.math
 @author ppizarror

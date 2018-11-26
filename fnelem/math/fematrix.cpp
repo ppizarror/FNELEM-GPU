@@ -1,5 +1,3 @@
-#include <utility>
-
 /**
 FNELEM-GPU MATRIX DEFINITION
 FEMatrix implement a full matrix manipulation environment.

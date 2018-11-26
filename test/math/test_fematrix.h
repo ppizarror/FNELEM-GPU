@@ -1,6 +1,6 @@
 /**
-FNELEM-GPU - TEST
-Test matrix, header definition.
+FNELEM-GPU - FEMATRIX TEST
+Test finite element matrix (FEMATRIX), header definition.
 
 @package test.math
 @author ppizarror
@@ -66,7 +66,7 @@ void __test_fematrix_array() {
     delete mat;
 }
 
-int __test_fematrix_cpu_inversion() {
+void __test_fematrix_cpu_inversion() {
     test_print_title("FEMATRIX", "test_fematrix_cpu_inversion");
     int n = 3;
     auto *L = new double[n * n];

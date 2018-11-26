@@ -1,6 +1,6 @@
 /**
-FNELEM-GPU - TEST UTILS
-Utilitary functions to perform tests.
+FNELEM-GPU - TEST SUITE
+Imports all tests.
 
 @package test
 @author ppizarror
@@ -28,35 +28,10 @@ Utilitary functions to perform tests.
 	SOFTWARE.
 */
 
-// Init header file
-#ifndef TEST_FNELEM_UTILS
-#define TEST_FNELEM_UTILS
+// Include header
+#include "test_suite.h"
 
-// Library imports
-#include <cassert>
-#include <iostream>
-#include <math.h>
-#include <string>
-
-/**
- * Check if two numbers are equal under a certain tolerance.
- *
- * @param a Number to evaluate
- * @param b Number to evaluate
- * @return
- */
-bool is_num_equal(double a, double b) {
-    return fabs(a - b) < 1e-12;
+int main() {
+    test_suite();
+    return 0;
 }
-
-/**
- * Print test to console.
- *
- * @param suite Suite name
- * @param test Test name
- */
-void test_print_title(const std::string &suite, const std::string &test) {
-    std::cout << "[" << suite << "] " << test << std::endl;
-}
-
-#endif // TEST_FNELEM_UTILS
