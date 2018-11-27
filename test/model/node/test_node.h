@@ -1,6 +1,6 @@
 /**
 FNELEM-GPU - TEST
-Test structure node class, header definition.
+Test structure node class.
 
 @package test.model.node
 @author ppizarror

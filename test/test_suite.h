@@ -36,14 +36,16 @@ Imports all tests.
 #include "math/test_fematrix_utils.h"
 #include "model/base/test_model_component.h"
 #include "model/elements/test_elements.h"
+#include "model/elements/test_membrane.h"
 #include "model/node/test_node.h"
 
 void test_suite() {
-    test_elements_suite();
     test_fematrix_suite();
     test_fematrix_utils_suite();
-    test_modelcomponent_suite();
+    test_model_component_suite();
     test_node_suite();
+    test_elements_suite();
+    test_membrane_suite();
 }
 
 #endif // FNELEM_GPU_TEST_FNELEM_SUITE_H

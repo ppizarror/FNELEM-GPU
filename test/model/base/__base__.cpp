@@ -1,8 +1,8 @@
 /**
-FNELEM-GPU - FEMATRIX TEST
-Test finite element matrix (FEMATRIX).
+FNELEM-GPU - TEST MODEL/BASE
+Test model.base package.
 
-@package test.math
+@package test.model.base
 @author ppizarror
 @date 19/11/2018
 @license
@@ -29,9 +29,9 @@ Test finite element matrix (FEMATRIX).
 */
 
 // Include sources
-#include "test_fematrix.h"
+#include "test_modelcomponent.h"
 
 int main() {
-    test_fematrix_suite();
+    test_modelcomponent_suite();
     return 0;
 }

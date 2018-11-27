@@ -1,6 +1,6 @@
 /**
 FNELEM-GPU - FEMATRIX TEST
-Test finite element matrix (FEMATRIX), header definition.
+Test finite element matrix (FEMATRIX).
 
 @package test.math
 @author ppizarror

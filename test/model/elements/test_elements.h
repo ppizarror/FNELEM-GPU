@@ -1,6 +1,6 @@
 /**
 FNELEM-GPU - TEST
-Test base elements, header definition.
+Test base elements.
 
 @package test.model.elements
 @author ppizarror
@@ -33,6 +33,7 @@ Test base elements, header definition.
 #include "../../../fnelem/model/elements/element.h"
 
 void __test_elements_creation() {
+    test_print_title("ELEMENTS", "test_elements_creation");
     Element *elem = new Element("Test element");
     elem->disp();
     assert(elem->get_node_number() == 0);
@@ -40,7 +41,7 @@ void __test_elements_creation() {
 }
 
 /**
- * Performs TEST-MODELCOMPONENT suite.
+ * Performs TEST-ELEMENTS suite.
  */
 void test_elements_suite() {
     __test_elements_creation();

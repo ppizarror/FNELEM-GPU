@@ -1,10 +1,10 @@
 /**
-FNELEM-GPU - FEMATRIX UTILS TEST
-Test FEMatrix utils.
+FNELEM-GPU - TEST
+Test model.node package.
 
-@package test.math
+@package test.model.node
 @author ppizarror
-@date 21/11/2018
+@date 19/11/2018
 @license
 	MIT License
 	Copyright (c) 2018 Pablo Pizarro R.
@@ -29,9 +29,9 @@ Test FEMatrix utils.
 */
 
 // Include sources
-#include "test_fematrix_utils.h"
+#include "test_node.h"
 
 int main() {
-    test_fematrix_utils_suite();
+    test_node_suite();
     return 0;
 }

@@ -1,6 +1,6 @@
 /**
 FNELEM-GPU - FEMATRIX UTILS TEST
-Test FEMatrix utils, header definition.
+Test FEMatrix utils.
 
 @package test.math
 @author ppizarror

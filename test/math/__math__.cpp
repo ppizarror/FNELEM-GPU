@@ -1,8 +1,8 @@
 /**
-FNELEM-GPU - TEST MODEL COMPONENT
-Test model component.
+FNELEM-GPU - TEST MATH
+Test math package.
 
-@package test.model.base
+@package test.math
 @author ppizarror
 @date 19/11/2018
 @license
@@ -29,9 +29,11 @@ Test model component.
 */
 
 // Include sources
-#include "test_model_component.h"
+#include "test_fematrix.h"
+#include "test_fematrix_utils.h"
 
 int main() {
-    test_modelcomponent_suite();
+    test_fematrix_suite();
+    test_fematrix_utils_suite();
     return 0;
 }

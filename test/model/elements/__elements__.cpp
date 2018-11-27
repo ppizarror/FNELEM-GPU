@@ -1,6 +1,6 @@
 /**
 FNELEM-GPU - TEST ELEMENTS
-Test base elements.
+Test model.elements package.
 
 @package test.model.elements
 @author ppizarror
@@ -30,8 +30,10 @@ Test base elements.
 
 // Include sources
 #include "test_elements.h"
+#include "test_membrane.h"
 
 int main() {
     test_elements_suite();
+    test_membrane_suite();
     return 0;
 }

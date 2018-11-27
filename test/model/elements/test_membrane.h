@@ -1,10 +1,10 @@
 /**
-FNELEM-GPU - TEST
-Test structure node class.
+FNELEM-GPU - TEST MEMBRANE
+Test membrane element.
 
-@package test.model.node
+@package test.model.elements
 @author ppizarror
-@date 19/11/2018
+@date 26/11/2018
 @license
 	MIT License
 	Copyright (c) 2018 Pablo Pizarro R.
@@ -29,9 +29,16 @@ Test structure node class.
 */
 
 // Include sources
-#include "test_node.h"
+#include "../../test_utils.h"
+#include "../../../fnelem/model/elements/membrane.h"
 
-int main() {
-    test_node_suite();
-    return 0;
+void __test_membrane_init() {
+    test_print_title("ELEMENTS-MEMBRANE", "test_membrane_init");
+}
+
+/**
+ * Performs TEST-MEMBRANE suite.
+ */
+void test_membrane_suite() {
+    __test_membrane_init();
 }

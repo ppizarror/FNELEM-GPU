@@ -1,6 +1,6 @@
 /**
 FNELEM-GPU MATRIX DEFINITION
-FEMatrix implement a full matrix manipulation environment.
+FEMatrix implements a full matrix manipulation environment.
 
 @package fnelem.math
 @author ppizarror
