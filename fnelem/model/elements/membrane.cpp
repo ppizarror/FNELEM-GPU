@@ -105,6 +105,8 @@ Membrane::Membrane(std::string tag, Node *n1, Node *n2, Node *n3, Node *n4, doub
 
     // Generates local matrix
     this->generate_local_stiffness();
+    this->stiffness_local->set_disp_precision(4);
+    this->stiffness_global->set_disp_precision(4);
 
 }
 
@@ -245,5 +247,31 @@ double Membrane::k_cij(FEMatrix *A, int i, int j) {
  * Display membrane information.
  */
 void Membrane::disp() const {
+    std::cout << "Membrane information" << std::endl;
     Element::disp();
+
+    // Display geometric / constitutive values
+    std::cout << "\n\tWidth:\t\t\t\t" << 2 * this->b << std::endl;
+    std::cout << "\tHeight:\t\t\t\t" << 2 * this->h << std::endl;
+    std::cout << "\tElastic modulus:\t" << this->E << std::endl;
+    std::cout << "\tPoisson modulus:\t" << this->poisson << std::endl;
+
+    // Node information
+    std::string nodetag;
+    Node *n;
+    for (unsigned long i = 0; i < this->nnodes; i++) {
+        n = this->nodes->at(i);
+        nodetag += n->get_model_tag();
+        if (i < this->nnodes - 1) {
+            nodetag += ", ";
+        }
+    }
+    std::cout << "\tElement nodes:\t\t" << nodetag << std::endl;
+
+    // Display local stiffnesss matrix
+    std::cout << "\tLocal stiffness matrix (8x8):" << std::endl;
+    this->stiffness_local->set_disp_identation(2);
+    this->stiffness_local->disp();
+    this->stiffness_local->set_disp_identation(0);
+
 }

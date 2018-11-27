@@ -121,8 +121,12 @@ void FEMatrix::fill_ones() {
  * @param dim_n N dimension
  * @param dim_m M dimension
  * @param norm_exponent Normalizes exponent by pow-10
+ * @param identation Display identation
  */
-void FEMatrix::disp_matrix(double *matrix, int dim_n, int dim_m, bool norm_exponent) const {
+void FEMatrix::disp_matrix(double *matrix, int dim_n, int dim_m, bool norm_exponent, int identation) const {
+
+    // Iterators
+    int i, j, k;
 
     // If exponent normalization
     double div_norm = 1.0;
@@ -130,6 +134,9 @@ void FEMatrix::disp_matrix(double *matrix, int dim_n, int dim_m, bool norm_expon
         double max_elem = this->max();
         double exponent = floor(log10(max_elem));
         div_norm = pow(10, exponent);
+        for (k = 0; k < identation; k++) {
+            std::cout << "\t";
+        }
         if (exponent > 0) {
             std::cout << "1.0e+0" << exponent << " *" << std::endl;
         } else {
@@ -141,16 +148,19 @@ void FEMatrix::disp_matrix(double *matrix, int dim_n, int dim_m, bool norm_expon
     if (this->apply_pad) {
         int maxn = 0, snuml = 0;
         std::string snum;
-        for (int i = 0; i < dim_n; i++) { // Rows
-            for (int j = 0; j < dim_m; j++) { // Columns
+        for (i = 0; i < dim_n; i++) { // Rows
+            for (j = 0; j < dim_m; j++) { // Columns
                 snuml = static_cast<int>(std::to_string(matrix[i * dim_m + j] / div_norm).length());
                 if (snuml > maxn) {
                     maxn = snuml;
                 };
             }
         }
-        for (int i = 0; i < dim_n; i++) { // Rows
-            for (int j = 0; j < dim_m; j++) { // Columns
+        for (i = 0; i < dim_n; i++) { // Rows
+            for (k = 0; k < identation; k++) {
+                std::cout << "\t";
+            }
+            for (j = 0; j < dim_m; j++) { // Columns
                 disp_val = matrix[i * dim_m + j] / div_norm;
                 if (abs(disp_val) < __FEMATRIX_ZERO_TOL) {
                     disp_val = 0;
@@ -161,8 +171,11 @@ void FEMatrix::disp_matrix(double *matrix, int dim_n, int dim_m, bool norm_expon
             std::cout << "" << std::endl;
         }
     } else {
-        for (int i = 0; i < dim_n; i++) { // Rows
-            for (int j = 0; j < dim_m; j++) { // Columns
+        for (i = 0; i < dim_n; i++) { // Rows
+            for (k = 0; k < identation; k++) {
+                std::cout << "\t";
+            }
+            for (j = 0; j < dim_m; j++) { // Columns
                 disp_val = matrix[i * dim_m + j] / div_norm;
                 if (abs(disp_val) < __FEMATRIX_ZERO_TOL) {
                     disp_val = 0;
@@ -173,14 +186,13 @@ void FEMatrix::disp_matrix(double *matrix, int dim_n, int dim_m, bool norm_expon
             std::cout << "" << std::endl;
         }
     }
-    std::cout << "" << std::endl;
 }
 
 /**
  * Display matrix in console.
  */
 void FEMatrix::disp() const {
-    this->disp_matrix(this->mat, this->n, this->m, true);
+    this->disp_matrix(this->mat, this->n, this->m, true, this->disp_identation);
 }
 
 /**
@@ -1209,4 +1221,13 @@ bool FEMatrix::equals(FEMatrix *mat) const {
  */
 void FEMatrix::set_disp_precision(int precision) {
     this->disp_precision = precision;
+}
+
+/**
+ * Set output indentation.
+ *
+ * @param identation Identation level
+ */
+void FEMatrix::set_disp_identation(int identation) {
+    this->disp_identation = identation;
 }

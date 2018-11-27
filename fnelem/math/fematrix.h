@@ -77,7 +77,7 @@ private:
     double _det_recursive(double *matrix, int d) const;
 
     // Display a matrix in console
-    void disp_matrix(double *matrix, int dim_n, int dim_m, bool norm_exponent) const;
+    void disp_matrix(double *matrix, int dim_n, int dim_m, bool norm_exponent, int identation) const;
 
     // Check if matrix has been deleted
     bool deleted = false;
@@ -87,6 +87,9 @@ private:
 
     // Output double precision
     int disp_precision = 4;
+
+    // Output identation
+    int disp_identation = 0;
 
 public:
 
@@ -287,6 +290,9 @@ public:
 
     // Set output disp precision
     void set_disp_precision(int precision);
+
+    // Set output identation
+    void set_disp_identation(int identation);
 
 };
 

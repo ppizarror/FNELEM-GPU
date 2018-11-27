@@ -274,7 +274,7 @@ void Node::apply_element_stress(FEMatrix *sigma) {
 void Node::disp() const {
     std::cout << "Node information" << std::endl;
     ModelComponent::disp();
-    std::cout << "\tNumber degrees of freedom:\t" << this->ngdl << std::endl;
+    std::cout << "\n\tNumber degrees of freedom:\t" << this->ngdl << std::endl;
     std::cout << "\tCoordinates:\t" << this->coords->to_string_line() << std::endl;
     std::cout << "\tGLOBAL ID:\t\t" << this->gdlid->to_string_line(true) << std::endl;
     std::cout << "\tDisplacements:\t" << this->displ->to_string_line() << std::endl;
