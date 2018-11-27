@@ -56,11 +56,8 @@ protected:
     // Global stiffness matrix
     FEMatrix *stiffness_global;
 
-    // Local resistant force
-    FEMatrix *force_local;
-
-    // Global resistant force
-    FEMatrix *force_global;
+    // Constitutive matrix
+    FEMatrix *constitutive;
 
     // Element has been initialized
     bool initialized = false;
@@ -111,6 +108,9 @@ public:
 
     // Get global resistant force
     FEMatrix *get_force_global() const;
+
+    // Get constitutive matrix
+    FEMatrix *get_constitutive() const;
 
     // Initialize element
     virtual void initialize() {};

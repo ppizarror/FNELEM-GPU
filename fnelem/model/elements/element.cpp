@@ -38,10 +38,9 @@ Element::~Element() {
     delete this->nodes;
     if (this->initialized) {
         delete this->gdlid;
-        delete this->force_global;
-        delete this->force_local;
         delete this->stiffness_global;
         delete this->stiffness_local;
+        delete this->constitutive;
     }
 }
 
@@ -112,7 +111,7 @@ FEMatrix *Element::get_stiffness_global() const {
  * @return
  */
 FEMatrix *Element::get_force_local() const {
-    return this->force_local->clone();
+    return new FEMatrix(this->ngdl, 1);
 }
 
 /**
@@ -121,7 +120,7 @@ FEMatrix *Element::get_force_local() const {
  * @return
  */
 FEMatrix *Element::get_force_global() const {
-    return this->force_global->clone();
+    return new FEMatrix(this->ngdl, 1);
 }
 
 /**
@@ -129,4 +128,13 @@ FEMatrix *Element::get_force_global() const {
  */
 void Element::disp() const {
     ModelComponent::disp();
+}
+
+/**
+ * Returns constitutive matrix.
+ *
+ * @return
+ */
+FEMatrix *Element::get_constitutive() const {
+    return this->constitutive;
 }

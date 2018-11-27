@@ -135,6 +135,15 @@ public:
     // Save properties to file
     void save_reactions(std::ofstream &file) const;
 
+    // Get position x
+    double get_pos_x() const;
+
+    // Get position x
+    double get_pos_y() const;
+
+    // Get position x
+    double get_pos_z() const;
+
 };
 
 #endif // FNELEM_GPU_MODEL_NODE

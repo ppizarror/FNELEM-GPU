@@ -310,3 +310,33 @@ void Node::save_reactions(std::ofstream &file) const {
     file << "\t Node " << this->get_model_tag() << ": ";
     file << this->reaction->to_string_line() << std::endl;
 }
+
+/**
+ * Return x position.
+ *
+ * @return
+ */
+double Node::get_pos_x() const {
+    return this->coords->get(0);
+}
+
+/**
+ * Return y position.
+ *
+ * @return
+ */
+double Node::get_pos_y() const {
+    return this->coords->get(1);
+}
+
+/**
+ * Return z position.
+ *
+ * @return
+ */
+double Node::get_pos_z() const {
+    if (this->ngdl == 2) {
+        throw std::logic_error("[NODE] z-coordinate does not exist in a 2D node");
+    }
+    return this->coords->get(2);
+}

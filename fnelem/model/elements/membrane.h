@@ -35,8 +35,39 @@ Bidimensional membrane element composed by 4 nodes.
 // Libray imports
 #include "element.h"
 
+// Constant definition
+#define __MEMBRANE_INTEGRATION_NPOINTS 15
+
 class Membrane : public Element {
-protected:
+private:
+
+    // Elasticity modulus
+    double E = 0;
+
+    // Poisson modulus
+    double poisson = 0;
+
+    // Thickness of the section
+    double t = 0;
+
+    // Width of the section
+    double b = 0;
+
+    // Height of the section
+    double h = 0;
+
+    // Equivalent node forces
+    FEMatrix *Feq;
+
+public:
+
+    // Constructor
+    Membrane(std::string tag, Node *n1, Node *n2, Node *n3, Node *n4,
+             double E, double poisson, double thickness);
+
+    // Destructor
+    ~Membrane();
+
 };
 
 #endif // FNELEM_GPU_MEMBRANE_H

@@ -34,6 +34,23 @@ Test membrane element.
 
 void __test_membrane_init() {
     test_print_title("ELEMENTS-MEMBRANE", "test_membrane_init");
+
+    // Node creation
+    Node *n1 = new Node("N1", 0, 0);
+    Node *n2 = new Node("N2", 250, 0);
+    Node *n3 = new Node("N3", 250, 100);
+    Node *n4 = new Node("N6", 0, 100);
+
+    // Creates membrane
+    Membrane *mem = new Membrane("MEM", n1, n2, n3, n4, 300000, 0.15, 20);
+
+    // Delete vars
+    delete n1;
+    delete n2;
+    delete n3;
+    delete n4;
+    delete mem;
+
 }
 
 /**
