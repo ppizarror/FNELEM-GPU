@@ -51,6 +51,9 @@ void __test_node_creation() {
     // Test 3D node
     Node *n2 = new Node("NODE3D", 1.5, 3.2, 5.6);
     assert(n2->get_ngdl() == 3);
+    assert(is_num_equal(n2->get_pos_x(), 1.5));
+    assert(is_num_equal(n2->get_pos_y(), 3.2));
+    assert(is_num_equal(n2->get_pos_z(), 5.6));
     delete n2;
 
 }

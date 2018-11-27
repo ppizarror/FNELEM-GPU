@@ -32,7 +32,7 @@ Test membrane element.
 #include "../../test_utils.h"
 #include "../../../fnelem/model/elements/membrane.h"
 
-void __test_membrane_init() {
+void __test_membrane_creation() {
     test_print_title("ELEMENTS-MEMBRANE", "test_membrane_init");
 
     // Node creation
@@ -43,6 +43,14 @@ void __test_membrane_init() {
 
     // Creates membrane
     Membrane *mem = new Membrane("MEM", n1, n2, n3, n4, 300000, 0.15, 20);
+
+    // Test dimension
+    assert(is_num_equal(mem->get_width(), 250));
+    assert(is_num_equal(mem->get_height(), 100));
+
+    // Test ngdl
+    assert(is_num_equal(mem->get_node_number(), 4));
+    assert(is_num_equal(mem->get_ngdl(), 8));
 
     // Delete vars
     delete n1;
@@ -57,5 +65,5 @@ void __test_membrane_init() {
  * Performs TEST-MEMBRANE suite.
  */
 void test_membrane_suite() {
-    __test_membrane_init();
+    __test_membrane_creation();
 }

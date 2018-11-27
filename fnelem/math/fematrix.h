@@ -77,13 +77,16 @@ private:
     double _det_recursive(double *matrix, int d) const;
 
     // Display a matrix in console
-    void disp_matrix(double *matrix, int dim_n, int dim_m) const;
+    void disp_matrix(double *matrix, int dim_n, int dim_m, bool norm_exponent) const;
 
     // Check if matrix has been deleted
     bool deleted = false;
 
     // Matrix name
     std::string mat_name = "";
+
+    // Output double precision
+    int disp_precision = 4;
 
 public:
 
@@ -281,6 +284,9 @@ public:
 
     // Check if matrix is same as other
     bool equals(FEMatrix *mat) const;
+
+    // Set output disp precision
+    void set_disp_precision(int precision);
 
 };
 

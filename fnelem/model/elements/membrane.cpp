@@ -58,6 +58,7 @@ Membrane::Membrane(std::string tag, Node *n1, Node *n2, Node *n3, Node *n4, doub
     this->nodes->push_back(n2);
     this->nodes->push_back(n3);
     this->nodes->push_back(n4);
+    this->nnodes = 4;
 
     // Generate constitutive matrix
     this->constitutive = new FEMatrix(3, 3);
@@ -66,6 +67,7 @@ Membrane::Membrane(std::string tag, Node *n1, Node *n2, Node *n3, Node *n4, doub
     this->constitutive->set(1, 0, poisson / (1 - poisson * poisson));
     this->constitutive->set(1, 1, 1 / (1 - poisson * poisson));
     this->constitutive->set(2, 2, 1 / (2 + 2 * poisson));
+    (*this->constitutive) *= this->E;
 
     // Calculates dimension
     //     4 ------------- 3
@@ -92,11 +94,17 @@ Membrane::Membrane(std::string tag, Node *n1, Node *n2, Node *n3, Node *n4, doub
     this->b = db1;
     this->h = dh1;
 
-    // Init forces
-    this->Feq = FEMatrix_vector(8);
-
     // Init matrices
-    this->Feq = new FEMatrix(8, 8);
+    this->Feq = FEMatrix_vector(8);
+    this->stiffness_local = new FEMatrix(8, 8);
+    this->stiffness_global = new FEMatrix(8, 8);
+    this->gdlid = FEMatrix_vector(8);
+
+    // Set as initialized
+    this->initialize();
+
+    // Generates local matrix
+    this->generate_local_stiffness();
 
 }
 
@@ -105,4 +113,137 @@ Membrane::Membrane(std::string tag, Node *n1, Node *n2, Node *n3, Node *n4, doub
  */
 Membrane::~Membrane() {
     delete this->Feq;
+}
+
+/**
+ * Return membrane width.
+ *
+ * @return
+ */
+double Membrane::get_width() const {
+    return 2 * this->b;
+}
+
+/**
+ * Return membrane height.
+ *
+ * @return
+ */
+double Membrane::get_height() const {
+    return 2 * this->h;
+}
+
+/**
+ * Calculate local stiffness matrix
+ */
+void Membrane::generate_local_stiffness() {
+
+    // Init A-vector
+    FEMatrix *A = FEMatrix_vector(6);
+    A->set_origin(1);
+
+    // Calculate constitutive relationship
+    A->set(1, (this->t * this->h * this->constitutive->get(0, 0)) / (6 * this->b));
+    A->set(2, (this->t * this->b * this->constitutive->get(1, 1)) / (6 * this->h));
+    A->set(3, (this->t * this->constitutive->get(0, 1)) / 4);
+    A->set(4, (this->t * this->b * this->constitutive->get(2, 2)) / (6 * this->h));
+    A->set(5, (this->t * this->h * this->constitutive->get(2, 2)) / (6 * this->b));
+    A->set(6, (this->t * this->constitutive->get(2, 2)) / 4);
+
+    // Generates local stiffness matrix
+    this->stiffness_local->set_origin(1);
+    this->stiffness_local->set(1, 1, 2 * this->k_aij(A, 1, 4));
+    this->stiffness_local->set(1, 2, this->k_aij(A, 3, 6));
+    this->stiffness_local->set(1, 3, this->k_cij(A, 4, 1));
+    this->stiffness_local->set(1, 4, this->k_bij(A, 3, 6));
+    this->stiffness_local->set(1, 5, -this->k_aij(A, 1, 4));
+    this->stiffness_local->set(1, 6, -this->k_aij(A, 3, 6));
+    this->stiffness_local->set(1, 7, this->k_cij(A, 1, 4));
+    this->stiffness_local->set(1, 8, this->k_bij(A, 6, 3));
+
+    this->stiffness_local->set(2, 2, 2 * this->k_aij(A, 2, 4));
+    this->stiffness_local->set(2, 3, this->k_bij(A, 6, 3));
+    this->stiffness_local->set(2, 4, this->k_cij(A, 2, 5));
+    this->stiffness_local->set(2, 5, -this->k_aij(A, 3, 6));
+    this->stiffness_local->set(2, 6, -this->k_aij(A, 2, 5));
+    this->stiffness_local->set(2, 7, this->k_bij(A, 3, 6));
+    this->stiffness_local->set(2, 8, this->k_cij(A, 5, 2));
+
+    this->stiffness_local->set(3, 3, 2 * this->k_aij(A, 1, 4));
+    this->stiffness_local->set(3, 4, -this->k_aij(A, 3, 6));
+    this->stiffness_local->set(3, 5, this->k_cij(A, 1, 4));
+    this->stiffness_local->set(3, 6, this->k_bij(A, 3, 6));
+    this->stiffness_local->set(3, 7, -this->k_aij(A, 1, 4));
+    this->stiffness_local->set(3, 8, this->k_aij(A, 6, 3));
+
+    this->stiffness_local->set(4, 4, 2 * this->k_aij(A, 2, 4));
+    this->stiffness_local->set(4, 5, this->k_bij(A, 6, 3));
+    this->stiffness_local->set(4, 6, this->k_cij(A, 5, 2));
+    this->stiffness_local->set(4, 7, this->k_aij(A, 3, 6));
+    this->stiffness_local->set(4, 8, -this->k_aij(A, 5, 2));
+
+    this->stiffness_local->set(5, 5, 2 * this->k_aij(A, 1, 4));
+    this->stiffness_local->set(5, 6, this->k_aij(A, 3, 6));
+    this->stiffness_local->set(5, 7, this->k_cij(A, 4, 1));
+    this->stiffness_local->set(5, 8, -this->k_bij(A, 6, 3));
+
+    this->stiffness_local->set(6, 6, 2 * this->k_aij(A, 2, 4));
+    this->stiffness_local->set(6, 7, this->k_bij(A, 6, 3));
+    this->stiffness_local->set(6, 8, this->k_cij(A, 2, 5));
+
+    this->stiffness_local->set(7, 7, 2 * this->k_aij(A, 1, 4));
+    this->stiffness_local->set(7, 8, -this->k_bij(A, 3, 6));
+
+    this->stiffness_local->set(8, 8, 2 * this->k_aij(A, 2, 4));
+
+    // Extends matrix transpose
+    this->stiffness_local->make_symmetric();
+    this->stiffness_local->set_origin(0);
+
+    // Variable deletion
+    delete A;
+
+}
+
+/**
+ * Return Aij stiffness modifier.
+ *
+ * @param A Matrix
+ * @param i Position-i
+ * @param j Position-j
+ * @return
+ */
+double Membrane::k_aij(FEMatrix *A, int i, int j) {
+    return A->get(i) + A->get(j);
+}
+
+/**
+ * Return Aij stiffness modifier.
+ *
+ * @param A Matrix
+ * @param i Position-i
+ * @param j Position-j
+ * @return
+ */
+double Membrane::k_bij(FEMatrix *A, int i, int j) {
+    return A->get(i) - A->get(j);
+}
+
+/**
+ * Return Cij stiffness modifier.
+ *
+ * @param A Matrix
+ * @param i Position-i
+ * @param j Position-j
+ * @return
+ */
+double Membrane::k_cij(FEMatrix *A, int i, int j) {
+    return A->get(i) - 2 * A->get(j);
+}
+
+/**
+ * Display membrane information.
+ */
+void Membrane::disp() const {
+    Element::disp();
 }

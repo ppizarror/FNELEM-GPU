@@ -138,3 +138,10 @@ void Element::disp() const {
 FEMatrix *Element::get_constitutive() const {
     return this->constitutive;
 }
+
+/**
+ * Set as initialized.
+ */
+void Element::initialize() {
+    this->initialized = true;
+}

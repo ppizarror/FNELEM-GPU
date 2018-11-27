@@ -114,14 +114,36 @@ void FEMatrix::fill_ones() {
     this->fill(1.0);
 }
 
-void FEMatrix::disp_matrix(double *matrix, int dim_n, int dim_m) const {
+/**
+ * Display matrix to console.
+ *
+ * @param matrix Matrix to display
+ * @param dim_n N dimension
+ * @param dim_m M dimension
+ * @param norm_exponent Normalizes exponent by pow-10
+ */
+void FEMatrix::disp_matrix(double *matrix, int dim_n, int dim_m, bool norm_exponent) const {
+
+    // If exponent normalization
+    double div_norm = 1.0;
+    if (norm_exponent) { // Calculates biggest exponent
+        double max_elem = this->max();
+        double exponent = floor(log10(max_elem));
+        div_norm = pow(10, exponent);
+        if (exponent > 0) {
+            std::cout << "1.0e+0" << exponent << " *" << std::endl;
+        } else {
+            std::cout << "1.0e-0" << exponent << " *" << std::endl;
+        }
+    }
+
     double disp_val; // Stores display value
     if (this->apply_pad) {
         int maxn = 0, snuml = 0;
         std::string snum;
         for (int i = 0; i < dim_n; i++) { // Rows
             for (int j = 0; j < dim_m; j++) { // Columns
-                snuml = static_cast<int>(std::to_string(matrix[i * dim_m + j]).length());
+                snuml = static_cast<int>(std::to_string(matrix[i * dim_m + j] / div_norm).length());
                 if (snuml > maxn) {
                     maxn = snuml;
                 };
@@ -129,11 +151,11 @@ void FEMatrix::disp_matrix(double *matrix, int dim_n, int dim_m) const {
         }
         for (int i = 0; i < dim_n; i++) { // Rows
             for (int j = 0; j < dim_m; j++) { // Columns
-                disp_val = matrix[i * dim_m + j];
+                disp_val = matrix[i * dim_m + j] / div_norm;
                 if (abs(disp_val) < __FEMATRIX_ZERO_TOL) {
                     disp_val = 0;
                 }
-                std::cout << std::noshowpoint << std::setprecision(4) << std::setw(maxn) << disp_val;
+                std::cout << std::noshowpoint << std::setprecision(this->disp_precision) << std::setw(maxn) << disp_val;
                 if (j < dim_m - 1) std::cout << " ";
             }
             std::cout << "" << std::endl;
@@ -141,11 +163,11 @@ void FEMatrix::disp_matrix(double *matrix, int dim_n, int dim_m) const {
     } else {
         for (int i = 0; i < dim_n; i++) { // Rows
             for (int j = 0; j < dim_m; j++) { // Columns
-                disp_val = matrix[i * dim_m + j];
+                disp_val = matrix[i * dim_m + j] / div_norm;
                 if (abs(disp_val) < __FEMATRIX_ZERO_TOL) {
                     disp_val = 0;
                 }
-                std::cout << std::noshowpoint << std::setprecision(4) << disp_val;
+                std::cout << std::noshowpoint << std::setprecision(this->disp_precision) << disp_val;
                 if (j < dim_m - 1) std::cout << "\t";
             }
             std::cout << "" << std::endl;
@@ -158,7 +180,7 @@ void FEMatrix::disp_matrix(double *matrix, int dim_n, int dim_m) const {
  * Display matrix in console.
  */
 void FEMatrix::disp() const {
-    this->disp_matrix(this->mat, this->n, this->m);
+    this->disp_matrix(this->mat, this->n, this->m, true);
 }
 
 /**
@@ -1178,4 +1200,13 @@ bool FEMatrix::is_equal() const {
  */
 bool FEMatrix::equals(FEMatrix *mat) const {
     return (*this) == *mat;
+}
+
+/**
+ * Set output disp precision.
+ *
+ * @param precision Digit precision
+ */
+void FEMatrix::set_disp_precision(int precision) {
+    this->disp_precision = precision;
 }

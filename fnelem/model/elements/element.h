@@ -113,7 +113,7 @@ public:
     FEMatrix *get_constitutive() const;
 
     // Initialize element
-    virtual void initialize() {};
+    virtual void initialize();
 
     // Display element information to console
     void disp() const override;

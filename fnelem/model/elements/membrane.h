@@ -59,6 +59,18 @@ private:
     // Equivalent node forces
     FEMatrix *Feq;
 
+    // Calculate local stiffness matrix
+    void generate_local_stiffness();
+
+    // Calculate Aij stiffness value
+    double k_aij(FEMatrix *A, int i, int j);
+
+    // Calculate Bij stiffness value
+    double k_bij(FEMatrix *A, int i, int j);
+
+    // Calculate Cij stiffness value
+    double k_cij(FEMatrix *A, int i, int j);
+
 public:
 
     // Constructor
@@ -67,6 +79,15 @@ public:
 
     // Destructor
     ~Membrane();
+
+    // Return membrane width
+    double get_width() const;
+
+    // Return membrane height
+    double get_height() const;
+
+    // Display membrane information
+    void disp() const override;
 
 };
 
