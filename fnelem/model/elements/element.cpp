@@ -136,7 +136,7 @@ void Element::disp() const {
  * @return
  */
 FEMatrix *Element::get_constitutive() const {
-    return this->constitutive;
+    return this->constitutive->clone();
 }
 
 /**

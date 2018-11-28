@@ -101,6 +101,12 @@ public:
     // Get displacement vector from (x,y) point inside membrane
     FEMatrix *get_displacement(double x, double y) const;
 
+    // Get deformation/strain vector from (x,y) point inside membrane
+    FEMatrix *get_deformation(double x, double y) const;
+
+    // Calculate strain vector from (x,y) point inside membrane
+    FEMatrix *get_stress(double x, double y) const;
+
 };
 
 #endif // FNELEM_GPU_MEMBRANE_H

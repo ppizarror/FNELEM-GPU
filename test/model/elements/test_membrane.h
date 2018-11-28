@@ -69,9 +69,21 @@ void __test_membrane_creation() {
     // Display membrane information
     mem->disp();
 
+    // Test constitutive matrix
+    FEMatrix *c = mem->get_constitutive();
+    (*c) *= pow(10, -5);
+    assert(is_num_equal(c->get(0, 0), 3.0690537084398981094));
+    assert(is_num_equal(c->get(0, 1), 0.46035805626598458318));
+    assert(is_num_equal(c->get(0, 2), 0));
+    assert(is_num_equal(c->get(1, 0), 0.46035805626598458318));
+    assert(is_num_equal(c->get(1, 1), 3.0690537084398981094));
+    assert(is_num_equal(c->get(1, 2), 0));
+    assert(is_num_equal(c->get(2, 0), 0));
+    assert(is_num_equal(c->get(2, 1), 0));
+    assert(is_num_equal(c->get(2, 2), 1.3043478260869567631));
+
     // Test local stiffness of matrix
     FEMatrix *k = mem->get_stiffness_local();
-
     FEMatrix *kl = mem->get_stiffness_local();
     FEMatrix *ke = mem->get_stiffness_global();
     (*k) *= pow(10, -6);
@@ -136,6 +148,7 @@ void __test_membrane_creation() {
     delete localf;
     delete globalf;
     delete dofid;
+    delete c;
 
 }
 
@@ -157,6 +170,16 @@ void __test_membrane_evalxy() {
     assert(d->length() == 2);
     assert(d->is_zeros());
 
+    // Calculate deformation/strain
+    FEMatrix *st = mem->get_deformation(0, 0);
+    assert(st->length() == 3);
+    assert(st->is_zeros());
+
+    // Calculate stress
+    FEMatrix *sr = mem->get_stress(0, 0);
+    assert(sr->length() == 3);
+    assert(sr->is_zeros());
+
     // Var deletion
     delete n1;
     delete n2;
@@ -164,6 +187,8 @@ void __test_membrane_evalxy() {
     delete n4;
     delete mem;
     delete d;
+    delete st;
+    delete sr;
 
 }
 

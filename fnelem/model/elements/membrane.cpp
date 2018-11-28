@@ -280,6 +280,12 @@ void Membrane::disp() const {
     }
     std::cout << "\tElement nodes:\t\t" << nodetag << std::endl;
 
+    // Display constitutive matrix
+    std::cout << "\tConstitutive matrix (3x3):" << std::endl;
+    this->constitutive->set_disp_identation(2);
+    this->constitutive->disp();
+    this->constitutive->set_disp_identation(0);
+
     // Display local stiffnesss matrix
     std::cout << "\tLocal stiffness matrix (8x8):" << std::endl;
     this->stiffness_local->set_disp_identation(2);
@@ -368,7 +374,7 @@ FEMatrix *Membrane::get_displacement(double x, double y) const {
     d->set(6, n4->get_displacement(1));
     d->set(7, n4->get_displacement(2));
 
-    // Calculates deformation
+    // Calculates displacement; [2x8]x[8x1] = [2x1]
     FEMatrix *dsp = (*N * *d);
 
     // Delete data
@@ -378,4 +384,82 @@ FEMatrix *Membrane::get_displacement(double x, double y) const {
     // Return matrix
     return dsp;
 
+}
+
+/**
+ * Get deformation vector from (x,y) point inside membrane.
+ *
+ * @param x X-position
+ * @param y Y-position
+ * @return
+ */
+FEMatrix *Membrane::get_deformation(double x, double y) const {
+
+    // Check point is valid
+    this->validate_xy(x, y);
+
+    // Generate B matrix
+    double a1 = (this->b + x) / (4 * this->b * this->h);
+    double a2 = (this->b - x) / (4 * this->b * this->h);
+    double a3 = (this->h + y) / (4 * this->b * this->h);
+    double a4 = (this->h - y) / (4 * this->b * this->h);
+
+    FEMatrix *B = new FEMatrix(3, 8);
+    B->set(0, 0, -a4);
+    B->set(0, 2, a4);
+    B->set(0, 4, a3);
+    B->set(0, 6, -a3);
+    B->set(1, 1, -a2);
+    B->set(1, 3, -a1);
+    B->set(1, 5, a1);
+    B->set(1, 7, a2);
+    B->set(2, 0, -a2);
+    B->set(2, 1, -a4);
+    B->set(2, 2, -a1);
+    B->set(2, 3, a4);
+    B->set(2, 4, a1);
+    B->set(2, 5, a3);
+    B->set(2, 6, a2);
+    B->set(2, 7, -a3);
+
+    // Find node displacements
+    Node *n1 = this->nodes->at(0);
+    Node *n2 = this->nodes->at(1);
+    Node *n3 = this->nodes->at(2);
+    Node *n4 = this->nodes->at(3);
+
+    FEMatrix *d = FEMatrix_vector(8);
+    d->set(0, n1->get_displacement(1));
+    d->set(1, n1->get_displacement(2));
+    d->set(2, n2->get_displacement(1));
+    d->set(3, n2->get_displacement(2));
+    d->set(4, n3->get_displacement(1));
+    d->set(5, n3->get_displacement(2));
+    d->set(6, n4->get_displacement(1));
+    d->set(7, n4->get_displacement(2));
+
+    // Calculates deformation; [3x8]x[8x1] = [3x1]
+    FEMatrix *def = (*B * *d);
+
+    // Delete data
+    delete B;
+    delete d;
+
+    // Return matrix
+    return def;
+
+}
+
+/**
+ * Calculate strain vector from (x,y) point inside membrane.
+ *
+ * @param x X-position
+ * @param y Y-position
+ * @return
+ */
+FEMatrix *Membrane::get_stress(double x, double y) const {
+    FEMatrix *def = this->get_deformation(x, y);
+    FEMatrix *stress = *this->constitutive * *def; // [3x3]x[3x1] = [3x1]
+    delete def;
+    return stress;
 }
