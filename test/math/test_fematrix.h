@@ -52,6 +52,9 @@ void __test_fematrix_disp() {
     test_print_title("FEMATRIX", "test_fematrix_disp");
     FEMatrix *matrix = new FEMatrix(3, 3);
     matrix->fill_ones();
+    matrix->set_disp_exponent(4);
+    matrix->set_disp_precision(4);
+    matrix->set_disp_identation(1);
     matrix->disp();
     assert(matrix->is_square());
     delete matrix;

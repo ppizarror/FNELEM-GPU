@@ -107,6 +107,18 @@ public:
     // Calculate strain vector from (x,y) point inside membrane
     FEMatrix *get_stress(double x, double y) const;
 
+    // Get local resistant force
+    FEMatrix *get_force_local() const override;
+
+    // Get global resistant force
+    FEMatrix *get_force_global() const override;
+
+    // Add equivalent force to internal forces
+    void add_equivalent_force_node(int nodenum, FEMatrix *f);
+
+    // Add resistant force to reaction
+    void add_force_to_reaction() override;
+
 };
 
 #endif // FNELEM_GPU_MEMBRANE_H

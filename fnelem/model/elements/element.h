@@ -62,21 +62,6 @@ protected:
     // Element has been initialized
     bool initialized = false;
 
-    // Set degree of freedom from nodes
-    virtual void set_dofid() {};
-
-    // Add resistant force to reaction
-    virtual void add_force_to_reaction() {};
-
-    // Update element after analysis
-    virtual void update() {};
-
-    // Save element properties to file
-    virtual void save_properties(std::ofstream &file) const {};
-
-    // Save internal stress to file
-    virtual void save_internal_stress(std::ofstream &file) const {};
-
 public:
 
     // Destroy
@@ -104,10 +89,10 @@ public:
     FEMatrix *get_stiffness_global() const;
 
     // Get local resistant force
-    FEMatrix *get_force_local() const;
+    virtual FEMatrix *get_force_local() const;
 
     // Get global resistant force
-    FEMatrix *get_force_global() const;
+    virtual FEMatrix *get_force_global() const;
 
     // Get constitutive matrix
     FEMatrix *get_constitutive() const;
@@ -117,6 +102,21 @@ public:
 
     // Display element information to console
     void disp() const override;
+
+    // Set degree of freedom from nodes
+    virtual void set_dofid() {};
+
+    // Add resistant force to reaction
+    virtual void add_force_to_reaction() {};
+
+    // Update element after analysis
+    virtual void update() {};
+
+    // Save element properties to file
+    virtual void save_properties(std::ofstream &file) const {};
+
+    // Save internal stress to file
+    virtual void save_internal_stress(std::ofstream &file) const {};
 
 };
 

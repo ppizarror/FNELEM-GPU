@@ -17,9 +17,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="221cac94-3076-4b70-8e37-e7f72eb35a62" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/fnelem/model/elements/element.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/elements/element.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fnelem/math/fematrix.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/math/fematrix.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fnelem/math/fematrix.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/math/fematrix.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fnelem/model/elements/element.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/elements/element.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fnelem/model/elements/membrane.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/elements/membrane.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fnelem/model/elements/membrane.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/elements/membrane.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fnelem/model/node/node.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/node/node.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fnelem/model/node/node.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/node/node.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/math/test_fematrix.h" beforeDir="false" afterPath="$PROJECT_DIR$/test/math/test_fematrix.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/model/elements/test_membrane.h" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/elements/test_membrane.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -32,11 +37,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fnelem/model/elements/membrane.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="95" column="11" lean-forward="true" selection-start-line="95" selection-start-column="11" selection-end-line="95" selection-end-column="11" />
+            <state relative-caret-position="230">
+              <caret line="118" column="38" selection-start-line="118" selection-start-column="7" selection-end-line="118" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -44,17 +49,53 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fnelem/model/elements/membrane.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="286" column="47" selection-start-line="286" selection-start-column="47" selection-end-line="286" selection-end-column="47" />
+            <state relative-caret-position="211">
+              <caret line="576" column="4" selection-start-line="576" selection-start-column="4" selection-end-line="576" selection-end-column="4" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fnelem/model/node/node.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="291">
+              <caret line="381" column="1" selection-start-line="381" selection-start-column="1" selection-end-line="381" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fnelem/model/node/node.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="271">
+              <caret line="132" column="11" lean-forward="true" selection-start-line="132" selection-start-column="11" selection-end-line="132" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/model/elements/test_membrane.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="73" column="24" selection-start-line="73" selection-start-column="24" selection-end-line="73" selection-end-column="24" />
+            <state relative-caret-position="130">
+              <caret line="221" column="49" selection-start-line="221" selection-start-column="49" selection-end-line="221" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fnelem/math/fematrix.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="282" column="9" lean-forward="true" selection-start-line="282" selection-start-column="9" selection-end-line="282" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/math/test_fematrix.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="57" column="19" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -62,8 +103,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fnelem/model/elements/element.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="138" column="38" selection-start-line="138" selection-start-column="38" selection-end-line="138" selection-end-column="38" />
+            <state relative-caret-position="130">
+              <caret line="112" column="19" selection-start-line="112" selection-start-column="19" selection-end-line="112" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fnelem/math/fematrix.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="141" column="12" lean-forward="true" selection-start-line="141" selection-start-column="12" selection-end-line="141" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -71,8 +121,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fnelem/model/elements/element.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1135">
-              <caret line="47" column="25" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
+            <state relative-caret-position="277">
+              <caret line="109" column="44" selection-start-line="108" selection-start-column="4" selection-end-line="109" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -139,21 +189,21 @@
         <option value="$PROJECT_DIR$/test/model/node/test_fnelem_node.cpp" />
         <option value="$PROJECT_DIR$/test/model/base/test_modelcomponent.h" />
         <option value="$PROJECT_DIR$/test/math/test_fematrix_utils.h" />
-        <option value="$PROJECT_DIR$/test/math/test_fematrix.h" />
         <option value="$PROJECT_DIR$/test/model/base/test_model_component.h" />
         <option value="$PROJECT_DIR$/test/model/node/test_node.h" />
         <option value="$PROJECT_DIR$/test/model/elements/test_elements.h" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/test/model/base/__base__.cpp" />
-        <option value="$PROJECT_DIR$/fnelem/model/elements/element.h" />
-        <option value="$PROJECT_DIR$/fnelem/model/node/node.h" />
-        <option value="$PROJECT_DIR$/fnelem/model/node/node.cpp" />
-        <option value="$PROJECT_DIR$/fnelem/math/fematrix.h" />
-        <option value="$PROJECT_DIR$/fnelem/math/fematrix.cpp" />
         <option value="$PROJECT_DIR$/test/test_suite.h" />
+        <option value="$PROJECT_DIR$/fnelem/model/elements/element.cpp" />
+        <option value="$PROJECT_DIR$/fnelem/model/elements/element.h" />
+        <option value="$PROJECT_DIR$/fnelem/math/fematrix.h" />
+        <option value="$PROJECT_DIR$/test/math/test_fematrix.h" />
+        <option value="$PROJECT_DIR$/fnelem/math/fematrix.cpp" />
         <option value="$PROJECT_DIR$/fnelem/model/elements/membrane.h" />
         <option value="$PROJECT_DIR$/fnelem/model/elements/membrane.cpp" />
-        <option value="$PROJECT_DIR$/fnelem/model/elements/element.cpp" />
+        <option value="$PROJECT_DIR$/fnelem/model/node/node.h" />
+        <option value="$PROJECT_DIR$/fnelem/model/node/node.cpp" />
         <option value="$PROJECT_DIR$/test/model/elements/test_membrane.h" />
       </list>
     </option>
@@ -216,13 +266,6 @@
               <item name="FNELEM-GPU" type="462c0819:PsiDirectoryNode" />
               <item name="fnelem" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FNELEM-GPU" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FNELEM-GPU" type="462c0819:PsiDirectoryNode" />
-              <item name="fnelem" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="base" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FNELEM-GPU" type="b2602c69:ProjectViewProjectNode" />
@@ -376,24 +419,24 @@
       <workItem from="1543149028711" duration="21707000" />
       <workItem from="1543237239880" duration="11779000" />
       <workItem from="1543269745422" duration="16813000" />
-      <workItem from="1543413004439" duration="8213000" />
+      <workItem from="1543413004439" duration="11169000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="118687000" />
+    <option name="totallyTimeSpent" value="121643000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19530201" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19530201" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32867134" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.38687152" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.38687152" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39944133" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -590,41 +633,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fnelem/model/node/node.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="120" column="25" selection-start-line="120" selection-start-column="25" selection-end-line="120" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fnelem/model/node/node.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="366" column="22" selection-start-line="366" selection-start-column="22" selection-end-line="366" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fnelem/math/fematrix.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="652" column="21" selection-start-line="652" selection-start-column="21" selection-end-line="652" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fnelem/math/fematrix.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="206" column="50" lean-forward="true" selection-start-line="206" selection-start-column="50" selection-end-line="206" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/math/test_fematrix.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2140">
-          <caret line="2" column="38" selection-start-line="2" selection-start-column="38" selection-end-line="2" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/model/node/test_node.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -639,38 +647,73 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fnelem/model/elements/element.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1135">
-          <caret line="47" column="25" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fnelem/model/elements/membrane.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="286" column="47" selection-start-line="286" selection-start-column="47" selection-end-line="286" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fnelem/model/elements/element.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="138" column="38" selection-start-line="138" selection-start-column="38" selection-end-line="138" selection-end-column="38" />
+        <state relative-caret-position="130">
+          <caret line="112" column="19" selection-start-line="112" selection-start-column="19" selection-end-line="112" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/model/elements/test_membrane.h">
+    <entry file="file://$PROJECT_DIR$/fnelem/math/fematrix.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="73" column="24" selection-start-line="73" selection-start-column="24" selection-end-line="73" selection-end-column="24" />
+        <state relative-caret-position="187">
+          <caret line="141" column="12" lean-forward="true" selection-start-line="141" selection-start-column="12" selection-end-line="141" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fnelem/math/fematrix.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="282" column="9" lean-forward="true" selection-start-line="282" selection-start-column="9" selection-end-line="282" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fnelem/model/elements/element.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="109" column="44" selection-start-line="108" selection-start-column="4" selection-end-line="109" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fnelem/model/elements/membrane.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="95" column="11" lean-forward="true" selection-start-line="95" selection-start-column="11" selection-end-line="95" selection-end-column="11" />
+        <state relative-caret-position="230">
+          <caret line="118" column="38" selection-start-line="118" selection-start-column="7" selection-end-line="118" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fnelem/model/elements/membrane.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="576" column="4" selection-start-line="576" selection-start-column="4" selection-end-line="576" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fnelem/model/node/node.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="132" column="11" lean-forward="true" selection-start-line="132" selection-start-column="11" selection-end-line="132" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fnelem/model/node/node.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="381" column="1" selection-start-line="381" selection-start-column="1" selection-end-line="381" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/math/test_fematrix.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="57" column="19" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/model/elements/test_membrane.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="221" column="49" selection-start-line="221" selection-start-column="49" selection-end-line="221" selection-end-column="49" />
         </state>
       </provider>
     </entry>

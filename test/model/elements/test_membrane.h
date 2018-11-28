@@ -153,7 +153,6 @@ void __test_membrane_creation() {
 }
 
 void __test_membrane_evalxy() {
-
     test_print_title("ELEMENTS-MEMBRANE", "test_membrane_evalxy");
 
     // Node creation
@@ -192,10 +191,60 @@ void __test_membrane_evalxy() {
 
 }
 
+void __test_membrane_forces() {
+    test_print_title("ELEMENTS-MEMBRANE", "test_membrane_forces");
+
+    // Node creation
+    Node *n1 = new Node("N1", 0, 0);
+    Node *n2 = new Node("N2", 250, 0);
+    Node *n3 = new Node("N7", 250, 100);
+    Node *n4 = new Node("N6", 0, 100);
+
+    // Creates membrane
+    Membrane *mem = new Membrane("MEM", n1, n2, n3, n4, 300000, 0.15, 20);
+
+    // Add force
+    FEMatrix *f = FEMatrix_vector(2);
+    f->set(0, -1);
+    f->set(1, 5);
+    mem->add_equivalent_force_node(4, f);
+    mem->add_equivalent_force_node(4, f);
+
+    // Get local/global force
+    FEMatrix *fl = mem->get_force_local();
+    FEMatrix *fg = mem->get_force_global();
+    assert(fl->is_zeros());
+    assert(is_num_equal(fg->get(6), 2));
+    assert(is_num_equal(fg->get(7), -10)); // Fglobal = Flocal - Feq
+
+    // Add force to reactions
+    mem->add_force_to_reaction();
+    assert(is_num_equal(n1->get_reaction(1), 0));
+    assert(is_num_equal(n1->get_reaction(2), 0));
+    assert(is_num_equal(n2->get_reaction(1), 0));
+    assert(is_num_equal(n2->get_reaction(2), 0));
+    assert(is_num_equal(n3->get_reaction(1), 0));
+    assert(is_num_equal(n3->get_reaction(2), 0));
+    assert(is_num_equal(n4->get_reaction(1), 0));
+    assert(is_num_equal(n4->get_reaction(2), 0));
+
+    // Variable deletion
+    delete n1;
+    delete n2;
+    delete n3;
+    delete n4;
+    delete mem;
+    delete f;
+    delete fl;
+    delete fg;
+
+}
+
 /**
  * Performs TEST-MEMBRANE suite.
  */
 void test_membrane_suite() {
     __test_membrane_creation();
     __test_membrane_evalxy();
+    __test_membrane_forces();
 }

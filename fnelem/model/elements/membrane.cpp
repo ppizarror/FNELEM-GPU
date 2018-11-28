@@ -358,7 +358,7 @@ FEMatrix *Membrane::get_displacement(double x, double y) const {
     N->set(1, 5, N3);
     N->set(1, 7, N4);
 
-    // Find node displacements
+    // Get node displacements
     Node *n1 = this->nodes->at(0);
     Node *n2 = this->nodes->at(1);
     Node *n3 = this->nodes->at(2);
@@ -422,7 +422,7 @@ FEMatrix *Membrane::get_deformation(double x, double y) const {
     B->set(2, 6, a2);
     B->set(2, 7, -a3);
 
-    // Find node displacements
+    // Get node displacements
     Node *n1 = this->nodes->at(0);
     Node *n2 = this->nodes->at(1);
     Node *n3 = this->nodes->at(2);
@@ -462,4 +462,122 @@ FEMatrix *Membrane::get_stress(double x, double y) const {
     FEMatrix *stress = *this->constitutive * *def; // [3x3]x[3x1] = [3x1]
     delete def;
     return stress;
+}
+
+/**
+ * Calculate local resistant force.
+ *
+ * @return
+ */
+FEMatrix *Membrane::get_force_local() const {
+
+    // Get node displacements
+    Node *n1 = this->nodes->at(0);
+    Node *n2 = this->nodes->at(1);
+    Node *n3 = this->nodes->at(2);
+    Node *n4 = this->nodes->at(3);
+
+    FEMatrix *d = FEMatrix_vector(8);
+    d->set(0, n1->get_displacement(1));
+    d->set(1, n1->get_displacement(2));
+    d->set(2, n2->get_displacement(1));
+    d->set(3, n2->get_displacement(2));
+    d->set(4, n3->get_displacement(1));
+    d->set(5, n3->get_displacement(2));
+    d->set(6, n4->get_displacement(1));
+    d->set(7, n4->get_displacement(2));
+
+    // Calculate force by multiplication with local stiffness matrix
+    FEMatrix *fr_local = (*this->stiffness_local * *d);
+    delete d;
+
+    // Return matrix
+    return fr_local;
+
+}
+
+/**
+ * Calculate global resistant force.
+ *
+ * @return
+ */
+FEMatrix *Membrane::get_force_global() const {
+    FEMatrix *fr_local = this->get_force_local();
+    *fr_local -= this->Feq;
+    return fr_local;
+}
+
+/**
+ * Add equivalent force to nodes.
+ *
+ * @param nodenum Number of node (1-4)
+ * @param f Force vector
+ */
+void Membrane::add_equivalent_force_node(int nodenum, FEMatrix *f) {
+    int fnode = f->length();
+    if (nodenum < 1 || nodenum > 4) {
+        throw std::logic_error("[MEMBRANE] Invalid node number @addEquivalentForce");
+    }
+    int pos = fnode * nodenum - 1; // Force position
+    f->disable_origin();
+    for (int i = 0; i < fnode; i++) {
+        this->Feq->set(pos + i - 1, this->Feq->get(pos + i - 1) + f->get(i));
+    }
+    f->enable_origin();
+}
+
+/**
+ * Add resistant force to reaction.
+ */
+void Membrane::add_force_to_reaction() {
+
+    // Calculate global resistant force
+    FEMatrix *fr_global = this->get_force_global();
+
+    // Get nodes
+    Node *n1 = this->nodes->at(0);
+    Node *n2 = this->nodes->at(1);
+    Node *n3 = this->nodes->at(2);
+    Node *n4 = this->nodes->at(3);
+
+    // Generate load vector
+    FEMatrix *load = FEMatrix_vector(2);
+
+    load->set(0, -this->Feq->get(0));
+    load->set(1, -this->Feq->get(1));
+    n1->apply_load(load);
+
+    load->set(0, -this->Feq->get(2));
+    load->set(1, -this->Feq->get(3));
+    n2->apply_load(load);
+
+    load->set(0, -this->Feq->get(4));
+    load->set(1, -this->Feq->get(5));
+    n3->apply_load(load);
+
+    load->set(0, -this->Feq->get(6));
+    load->set(1, -this->Feq->get(7));
+    n4->apply_load(load);
+
+    // Add resistant force as load
+    load->set(0, fr_global->get(0));
+    load->set(1, fr_global->get(1));
+    n1->apply_element_stress(load);
+
+    load->set(0, fr_global->get(2));
+    load->set(1, fr_global->get(3));
+    n2->apply_element_stress(load);
+
+    load->set(0, fr_global->get(4));
+    load->set(1, fr_global->get(5));
+    n3->apply_element_stress(load);
+
+    load->set(0, fr_global->get(6));
+    load->set(1, fr_global->get(7));
+    n4->apply_element_stress(load);
+
+    // Delete variables
+    delete fr_global;
+    delete load;
+
 }

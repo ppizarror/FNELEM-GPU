@@ -129,6 +129,9 @@ public:
     // Adds element inner stress to reactions
     void apply_element_stress(FEMatrix *sigma);
 
+    // Get node reaction ad local dof
+    double get_reaction(int local_id);
+
     // Display node information to console
     void disp() const override;
 

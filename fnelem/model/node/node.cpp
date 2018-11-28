@@ -246,6 +246,7 @@ void Node::set_displacement(int local_id, double d) {
 void Node::set_displacement(FEMatrix *d) {
     this->check_vector(d, "Node displacements");
     (*this->displ) = d;
+    this->displ->set_origin(0);
 }
 
 /**
@@ -365,4 +366,17 @@ double Node::get_displacement(int local_id) {
         throw std::logic_error("[NODE] Local DOFID greather than number of Node NDOF");
     }
     return this->displ->get(local_id - 1);
+}
+
+/**
+ * Get node reaction at local dof.
+ *
+ * @param local_id Local dof id
+ * @return
+ */
+double Node::get_reaction(int local_id) {
+    if (local_id < 1 || local_id > this->ndof) {
+        throw std::logic_error("[NODE] Local DOFID greather than number of Node NDOF");
+    }
+    return this->reaction->get(local_id - 1);
 }

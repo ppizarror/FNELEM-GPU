@@ -91,6 +91,9 @@ private:
     // Output identation
     int disp_identation = 0;
 
+    // Min exponent to perform normalization
+    int disp_normalization_exponent = 3;
+
 public:
 
     // Default constructor
@@ -299,6 +302,9 @@ public:
 
     // Set output identation
     void set_disp_identation(int identation);
+
+    // Set output minimal exponent
+    void set_disp_exponent(int exponent);
 
 };
 
