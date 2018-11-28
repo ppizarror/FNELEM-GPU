@@ -74,7 +74,7 @@ std::vector<Node *> *Element::get_nodes() const {
  *
  * @return
  */
-int Element::get_ngdl() const {
+int Element::get_ndof() const {
     return this->ngdl;
 }
 

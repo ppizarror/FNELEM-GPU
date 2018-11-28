@@ -29,9 +29,9 @@ Test model.base package.
 */
 
 // Include sources
-#include "test_modelcomponent.h"
+#include "test_model_component.h"
 
 int main() {
-    test_modelcomponent_suite();
+    test_model_component_suite();
     return 0;
 }

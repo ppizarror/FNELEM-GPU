@@ -57,8 +57,8 @@ Node::~Node() {
  * @param posy Position y
  */
 Node::Node(std::string tag, double posx, double posy) : ModelComponent(std::move(tag)) {
-    this->ngdl = 2;
-    this->coords = FEMatrix_vector(this->ngdl);
+    this->ndof = 2;
+    this->coords = FEMatrix_vector(this->ndof);
     this->coords->set(0, posx);
     this->coords->set(1, posy);
     this->init();
@@ -72,8 +72,8 @@ Node::Node(std::string tag, double posx, double posy) : ModelComponent(std::move
  * @param posy Position y
  */
 Node::Node(std::string tag, double posx, double posy, double posz) : ModelComponent(std::move(tag)) {
-    this->ngdl = 3;
-    this->coords = FEMatrix_vector(this->ngdl);
+    this->ndof = 3;
+    this->coords = FEMatrix_vector(this->ndof);
     this->coords->set(0, posx);
     this->coords->set(1, posy);
     this->coords->set(2, posz);
@@ -86,19 +86,19 @@ Node::Node(std::string tag, double posx, double posy, double posz) : ModelCompon
 void Node::init() {
 
     // Init ID of degrees of freedom
-    this->gdlid = FEMatrix_vector(this->ngdl);
+    this->gdlid = FEMatrix_vector(this->ndof);
 
     // Init displacements
-    this->displ = FEMatrix_vector(this->ngdl);
+    this->displ = FEMatrix_vector(this->ndof);
 
     // Init reactions
-    this->reaction = FEMatrix_vector(this->ngdl);
+    this->reaction = FEMatrix_vector(this->ndof);
 
     // Init node loads
-    this->loads = FEMatrix_vector(this->ngdl);
+    this->loads = FEMatrix_vector(this->ndof);
 
     // Save initial values
-    for (int i = 0; i < this->ngdl; i++) {
+    for (int i = 0; i < this->ndof; i++) {
         this->gdlid->set(i, -1);
         this->displ->set(i, 0);
         this->reaction->set(i, 0);
@@ -112,8 +112,8 @@ void Node::init() {
  *
  * @return Ngdl
  */
-int Node::get_ngdl() const {
-    return this->ngdl;
+int Node::get_ndof() const {
+    return this->ndof;
 }
 
 /**
@@ -130,7 +130,7 @@ FEMatrix *Node::get_coordinates() const {
  *
  * @return
  */
-FEMatrix *Node::get_gdlid() const {
+FEMatrix *Node::get_dof() const {
     return this->gdlid->clone();
 }
 
@@ -146,7 +146,7 @@ Node &Node::operator=(const Node &node) {
     this->destroy();
 
     // Assign operator
-    this->ngdl = node.ngdl;
+    this->ndof = node.ndof;
 
     this->coords = node.coords;
     this->displ = node.displ;
@@ -197,19 +197,19 @@ void Node::check_vector(const FEMatrix *mat, std::string vector_name) {
     if (!mat->is_vector()) {
         throw std::logic_error("[NODE] " + vector_name + " must be a vector");
     }
-    if (mat->length() != this->ngdl) {
+    if (mat->length() != this->ndof) {
         throw std::logic_error("[NODE] Number of degrees of freedom does not match");
     }
 }
 
 /**
- * Set GDLID of local degree of freedom.
+ * Set local degrees of freedom.
  *
  * @param local_id ID of local freedom of liberty (1...n)
  * @param global_id ID of global freedom of liberty
  */
-void Node::set_gdlid(int local_id, int global_id) {
-    if (local_id < 1 || local_id > this->ngdl) {
+void Node::set_dof(int local_id, int global_id) {
+    if (local_id < 1 || local_id > this->ndof) {
         throw std::logic_error("[NODE] Local GDLID greather than number of Node NGDL");
     }
     this->gdlid->set(local_id - 1, global_id);
@@ -220,7 +220,7 @@ void Node::set_gdlid(int local_id, int global_id) {
  *
  * @param gdlid Vector of GDLID vector
  */
-void Node::set_gdlid(FEMatrix *gdl) {
+void Node::set_dof(FEMatrix *gdl) {
     this->check_vector(gdl, "Node GDLID");
     (*this->gdlid) = gdl;
 }
@@ -232,7 +232,7 @@ void Node::set_gdlid(FEMatrix *gdl) {
  * @param global_id Displacement
  */
 void Node::set_displacement(int local_id, double d) {
-    if (local_id < 1 || local_id > this->ngdl) {
+    if (local_id < 1 || local_id > this->ndof) {
         throw std::logic_error("[NODE] Local GDLID greather than number of Node NGDL");
     }
     this->displ->set(local_id - 1, d);
@@ -274,7 +274,7 @@ void Node::apply_element_stress(FEMatrix *sigma) {
 void Node::disp() const {
     std::cout << "Node information" << std::endl;
     ModelComponent::disp();
-    std::cout << "\n\tNumber degrees of freedom:\t" << this->ngdl << std::endl;
+    std::cout << "\n\tNumber degrees of freedom:\t" << this->ndof << std::endl;
     std::cout << "\tCoordinates:\t" << this->coords->to_string_line() << std::endl;
     std::cout << "\tGLOBAL ID:\t\t" << this->gdlid->to_string_line(true) << std::endl;
     std::cout << "\tDisplacements:\t" << this->displ->to_string_line() << std::endl;
@@ -335,7 +335,7 @@ double Node::get_pos_y() const {
  * @return
  */
 double Node::get_pos_z() const {
-    if (this->ngdl == 2) {
+    if (this->ndof == 2) {
         throw std::logic_error("[NODE] z-coordinate does not exist in a 2D node");
     }
     return this->coords->get(2);

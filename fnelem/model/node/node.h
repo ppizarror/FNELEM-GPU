@@ -47,7 +47,7 @@ class Node : public ModelComponent {
 private:
 
     // Number of degres of freedom
-    int ngdl = 0;
+    int ndof = 0;
 
     // ID of degrees of freedom
     FEMatrix *gdlid;
@@ -88,13 +88,13 @@ public:
     Node &operator=(const Node &node);
 
     // Return number of degrees of freedom
-    int get_ngdl() const;
+    int get_ndof() const;
 
     // Return node coordinates
     FEMatrix *get_coordinates() const;
 
-    // Get GDLID of node
-    FEMatrix *get_gdlid() const;
+    // Get degrees of freedom of node
+    FEMatrix *get_dof() const;
 
     // Get results of loads
     FEMatrix *get_load_results() const;
@@ -105,11 +105,11 @@ public:
     // Get node reactions
     FEMatrix *get_reactions() const;
 
-    // Set node GDLID
-    void set_gdlid(int local_id, int global_id);
+    // Set node degrees of freedom
+    void set_dof(int local_id, int global_id);
 
-    // Set node GDLID from vector/matrix
-    void set_gdlid(FEMatrix *gdl);
+    // Set node degrees of freedom from vector/matrix
+    void set_dof(FEMatrix *gdl);
 
     // Set node displacements
     void set_displacement(int local_id, double d);

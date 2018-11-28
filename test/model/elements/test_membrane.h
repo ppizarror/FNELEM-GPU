@@ -48,9 +48,9 @@ void __test_membrane_creation() {
     assert(is_num_equal(mem->get_width(), 250));
     assert(is_num_equal(mem->get_height(), 100));
 
-    // Test ngdl
+    // Test ndof
     assert(is_num_equal(mem->get_node_number(), 4));
-    assert(is_num_equal(mem->get_ngdl(), 8));
+    assert(is_num_equal(mem->get_ndof(), 8));
 
     // Display membrane information
     mem->disp();

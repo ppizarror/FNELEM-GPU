@@ -62,8 +62,8 @@ protected:
     // Element has been initialized
     bool initialized = false;
 
-    // Set gdlid from nodes
-    virtual void set_gdlid() {};
+    // Set degree of freedom from nodes
+    virtual void set_dofid() {};
 
     // Add resistant force to reaction
     virtual void add_force_to_reaction() {};
@@ -89,7 +89,7 @@ public:
     int get_node_number() const;
 
     // Get number of degrees of freedom
-    int get_ngdl() const;
+    int get_ndof() const;
 
     // Get element nodes
     std::vector<Node *> *get_nodes() const;

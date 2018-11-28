@@ -37,6 +37,7 @@ void __test_elements_creation() {
     Element *elem = new Element("Test element");
     elem->disp();
     assert(elem->get_node_number() == 0);
+    assert(elem->get_ndof() == 0);
     delete elem;
 }
 
