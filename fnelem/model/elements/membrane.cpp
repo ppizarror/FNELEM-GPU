@@ -1,5 +1,3 @@
-#include <utility>
-
 /**
 FNELEM-GPU MEMBRANE ELEMENT
 Bidimensional membrane element composed by 4 nodes.
