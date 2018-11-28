@@ -201,6 +201,12 @@ public:
     // Matrix multiplication and return new matrix
     FEMatrix *operator*=(const FEMatrix &matrix) const;
 
+    // Matrix multiplication and return new matrix
+    FEMatrix *operator*=(const FEMatrix *matrix) const;
+
+    // Matrix multiplication and return new matrix
+    FEMatrix *operator*(const FEMatrix &matrix) const;
+
     // Multiply self matrix by a constant
     FEMatrix &operator*=(double a);
 

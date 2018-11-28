@@ -344,7 +344,7 @@ double Node::get_pos_z() const {
 /**
  * Get degree of freedom from local id.
  *
- * @param local_id
+ * @param local_id Local dof id
  * @return
  */
 int Node::get_dof(int local_id) {
@@ -352,4 +352,17 @@ int Node::get_dof(int local_id) {
         throw std::logic_error("[NODE] Local DOFID greather than number of Node NDOF");
     }
     return static_cast<int>(this->dofid->get(local_id - 1));
+}
+
+/**
+ * Get node displacement at local dof.
+ *
+ * @param local_id Local dof id
+ * @return
+ */
+double Node::get_displacement(int local_id) {
+    if (local_id < 1 || local_id > this->ndof) {
+        throw std::logic_error("[NODE] Local DOFID greather than number of Node NDOF");
+    }
+    return this->displ->get(local_id - 1);
 }

@@ -117,6 +117,9 @@ public:
     // Set node displacements
     void set_displacement(int local_id, double d);
 
+    // Get node displacement at local dof
+    double get_displacement(int local_id);
+
     // Set node displacements from vector/matrix
     void set_displacement(FEMatrix *d);
 

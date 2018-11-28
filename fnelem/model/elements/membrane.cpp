@@ -227,7 +227,7 @@ void Membrane::generate_global_stiffness() {
  * @param j Position-j
  * @return
  */
-double Membrane::k_aij(FEMatrix *A, int i, int j) {
+double Membrane::k_aij(FEMatrix *A, int i, int j) const {
     return A->get(i) + A->get(j);
 }
 
@@ -239,7 +239,7 @@ double Membrane::k_aij(FEMatrix *A, int i, int j) {
  * @param j Position-j
  * @return
  */
-double Membrane::k_bij(FEMatrix *A, int i, int j) {
+double Membrane::k_bij(FEMatrix *A, int i, int j) const {
     return A->get(i) - A->get(j);
 }
 
@@ -251,7 +251,7 @@ double Membrane::k_bij(FEMatrix *A, int i, int j) {
  * @param j Position-j
  * @return
  */
-double Membrane::k_cij(FEMatrix *A, int i, int j) {
+double Membrane::k_cij(FEMatrix *A, int i, int j) const {
     return A->get(i) - 2 * A->get(j);
 }
 
@@ -308,5 +308,74 @@ void Membrane::set_dofid() {
     this->dofid->set(5, n3->get_dof(2));
     this->dofid->set(6, n4->get_dof(1));
     this->dofid->set(7, n4->get_dof(2));
+
+}
+
+/**
+ * Validate (x,y) internal point to calculate stress/deformation.
+ *
+ * @param x X-position in membrane
+ * @param y Y-position in membrane
+ * @return
+ */
+void Membrane::validate_xy(double x, double y) const {
+    if (fabs(x) > this->b || fabs(y) > this->h) {
+        throw std::logic_error("[MEMBRANE] Position (x,y) out of membrane");
+    }
+}
+
+/**
+ * Get displacement vector from (x,y) point inside membrane.
+ *
+ * @param x X-position
+ * @param y Y-position
+ * @return
+ */
+FEMatrix *Membrane::get_displacement(double x, double y) const {
+
+    // Check point is valid
+    this->validate_xy(x, y);
+
+    // Generate N matrix
+    double N1 = (this->b - x) * (this->h - y) / (4 * this->b * this->h);
+    double N2 = (this->b + x) * (this->h - y) / (4 * this->b * this->h);
+    double N3 = (this->b + x) * (this->h + y) / (4 * this->b * this->h);
+    double N4 = (this->b - x) * (this->h + y) / (4 * this->b * this->h);
+
+    FEMatrix *N = new FEMatrix(2, 8);
+    N->set(0, 0, N1);
+    N->set(0, 2, N2);
+    N->set(0, 4, N3);
+    N->set(0, 6, N4);
+    N->set(1, 1, N1);
+    N->set(1, 3, N2);
+    N->set(1, 5, N3);
+    N->set(1, 7, N4);
+
+    // Find node displacements
+    Node *n1 = this->nodes->at(0);
+    Node *n2 = this->nodes->at(1);
+    Node *n3 = this->nodes->at(2);
+    Node *n4 = this->nodes->at(3);
+
+    FEMatrix *d = FEMatrix_vector(8);
+    d->set(0, n1->get_displacement(1));
+    d->set(1, n1->get_displacement(2));
+    d->set(2, n2->get_displacement(1));
+    d->set(3, n2->get_displacement(2));
+    d->set(4, n3->get_displacement(1));
+    d->set(5, n3->get_displacement(2));
+    d->set(6, n4->get_displacement(1));
+    d->set(7, n4->get_displacement(2));
+
+    // Calculates deformation
+    FEMatrix *dsp = (*N * *d);
+
+    // Delete data
+    delete N;
+    delete d;
+
+    // Return matrix
+    return dsp;
 
 }

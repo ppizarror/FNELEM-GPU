@@ -33,7 +33,7 @@ Test membrane element.
 #include "../../../fnelem/model/elements/membrane.h"
 
 void __test_membrane_creation() {
-    test_print_title("ELEMENTS-MEMBRANE", "test_membrane_init");
+    test_print_title("ELEMENTS-MEMBRANE", "test_membrane_creation");
 
     // Node creation
     Node *n1 = new Node("N1", 0, 0);
@@ -139,9 +139,38 @@ void __test_membrane_creation() {
 
 }
 
+void __test_membrane_evalxy() {
+
+    test_print_title("ELEMENTS-MEMBRANE", "test_membrane_evalxy");
+
+    // Node creation
+    Node *n1 = new Node("N1", 0, 0);
+    Node *n2 = new Node("N2", 250, 0);
+    Node *n3 = new Node("N7", 250, 100);
+    Node *n4 = new Node("N6", 0, 100);
+
+    // Creates membrane
+    Membrane *mem = new Membrane("MEM", n1, n2, n3, n4, 300000, 0.15, 20);
+
+    // Calcule displacement
+    FEMatrix *d = mem->get_displacement(0, 0);
+    assert(d->length() == 2);
+    assert(d->is_zeros());
+
+    // Var deletion
+    delete n1;
+    delete n2;
+    delete n3;
+    delete n4;
+    delete mem;
+    delete d;
+
+}
+
 /**
  * Performs TEST-MEMBRANE suite.
  */
 void test_membrane_suite() {
     __test_membrane_creation();
+    __test_membrane_evalxy();
 }

@@ -66,13 +66,16 @@ private:
     void generate_global_stiffness();
 
     // Calculate Aij stiffness value
-    double k_aij(FEMatrix *A, int i, int j);
+    double k_aij(FEMatrix *A, int i, int j) const;
 
     // Calculate Bij stiffness value
-    double k_bij(FEMatrix *A, int i, int j);
+    double k_bij(FEMatrix *A, int i, int j) const;
 
     // Calculate Cij stiffness value
-    double k_cij(FEMatrix *A, int i, int j);
+    double k_cij(FEMatrix *A, int i, int j) const;
+
+    // Validate (x,y) point to perform stress/deformation analysis
+    void validate_xy(double x, double y) const;
 
 public:
 
@@ -94,6 +97,9 @@ public:
 
     // Set degree of freedom ID from nodes
     void set_dofid() override;
+
+    // Get displacement vector from (x,y) point inside membrane
+    FEMatrix *get_displacement(double x, double y) const;
 
 };
 
