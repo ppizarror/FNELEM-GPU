@@ -37,7 +37,7 @@ Base structural element class.
 Element::~Element() {
     delete this->nodes;
     if (this->initialized) {
-        delete this->gdlid;
+        delete this->dofid;
         delete this->stiffness_global;
         delete this->stiffness_local;
         delete this->constitutive;
@@ -75,16 +75,16 @@ std::vector<Node *> *Element::get_nodes() const {
  * @return
  */
 int Element::get_ndof() const {
-    return this->ngdl;
+    return this->ndof;
 }
 
 /**
- * Get GDLID associated with the element.
+ * Get DOFID associated with the element.
  *
  * @return
  */
-FEMatrix *Element::get_gdlid() const {
-    return this->gdlid->clone();
+FEMatrix *Element::get_dofid() const {
+    return this->dofid->clone();
 }
 
 /**
@@ -111,7 +111,7 @@ FEMatrix *Element::get_stiffness_global() const {
  * @return
  */
 FEMatrix *Element::get_force_local() const {
-    return new FEMatrix(this->ngdl, 1);
+    return new FEMatrix(this->ndof, 1);
 }
 
 /**
@@ -120,7 +120,7 @@ FEMatrix *Element::get_force_local() const {
  * @return
  */
 FEMatrix *Element::get_force_global() const {
-    return new FEMatrix(this->ngdl, 1);
+    return new FEMatrix(this->ndof, 1);
 }
 
 /**

@@ -50,7 +50,7 @@ private:
     int ndof = 0;
 
     // ID of degrees of freedom
-    FEMatrix *gdlid;
+    FEMatrix *dofid;
 
     // Coordinates of the node
     FEMatrix *coords;
@@ -107,6 +107,9 @@ public:
 
     // Set node degrees of freedom
     void set_dof(int local_id, int global_id);
+
+    // Get node degree of freedom
+    int get_dof(int local_id);
 
     // Set node degrees of freedom from vector/matrix
     void set_dof(FEMatrix *gdl);

@@ -132,15 +132,26 @@ void FEMatrix::disp_matrix(double *matrix, int dim_n, int dim_m, bool norm_expon
     double div_norm = 1.0;
     if (norm_exponent) { // Calculates biggest exponent
         double max_elem = this->max();
-        double exponent = floor(log10(max_elem));
-        div_norm = pow(10, exponent);
-        for (k = 0; k < identation; k++) {
-            std::cout << "\t";
+        double sign = 1;
+        if (max_elem < 0) {
+            sign = -1;
         }
-        if (exponent > 0) {
-            std::cout << "1.0e+0" << exponent << " *" << std::endl;
-        } else {
-            std::cout << "1.0e-0" << exponent << " *" << std::endl;
+        if (max_elem != 0) {
+            max_elem *= sign;
+            double exponent = floor(log10(max_elem));
+            div_norm = pow(10, exponent);
+            for (k = 0; k < identation; k++) {
+                std::cout << "\t";
+            }
+            if (exponent != 0) {
+                if (exponent > 0) {
+                    std::cout << "1.0e+0" << exponent << " *" << std::endl;
+                } else {
+                    std::cout << "1.0e-0" << exponent << " *" << std::endl;
+                }
+            } else {
+                div_norm = 1.0;
+            }
         }
     }
 
@@ -685,7 +696,7 @@ double FEMatrix::max() const {
     for (int i = 0; i < this->n; i++) { // Rows
         for (int j = 0; j < this->m; j++) { // Columns
             num = this->_get(i, j);
-            if (num > max) {
+            if (fabs(num) > fabs(max)) {
                 max = num;
             }
         }

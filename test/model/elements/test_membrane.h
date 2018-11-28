@@ -44,6 +44,20 @@ void __test_membrane_creation() {
     // Creates membrane
     Membrane *mem = new Membrane("MEM", n1, n2, n3, n4, 300000, 0.15, 20);
 
+    // Check forces are zero
+    FEMatrix *localf = mem->get_force_local();
+    FEMatrix *globalf = mem->get_force_global();
+
+    assert(localf->is_zeros());
+    assert(globalf->is_zeros());
+
+    // Check node pointers are the same
+    std::vector<Node *> *nodes = mem->get_nodes();
+    assert (n1 == nodes->at(0));
+    assert (n2 == nodes->at(1));
+    assert (n3 == nodes->at(2));
+    assert (n4 == nodes->at(3));
+
     // Test dimension
     assert(is_num_equal(mem->get_width(), 250));
     assert(is_num_equal(mem->get_height(), 100));
@@ -55,12 +69,73 @@ void __test_membrane_creation() {
     // Display membrane information
     mem->disp();
 
+    // Test local stiffness of matrix
+    FEMatrix *k = mem->get_stiffness_local();
+
+    FEMatrix *kl = mem->get_stiffness_local();
+    FEMatrix *ke = mem->get_stiffness_global();
+    (*k) *= pow(10, -6);
+
+    assert(k->is_symmetric());
+    assert(k->is_square());
+
+    assert(is_num_equal(k->get(0, 0), 2.9923273657289004568));
+    assert(is_num_equal(k->get(0, 1), 0.88235294117647056211));
+    assert(is_num_equal(k->get(0, 2), 0.26854219948849117339));
+    assert(is_num_equal(k->get(0, 3), -0.42199488491048597893));
+    assert(is_num_equal(k->get(0, 4), -1.4961636828644502284));
+    assert(is_num_equal(k->get(0, 5), -0.88235294117647056211));
+    assert(is_num_equal(k->get(0, 6), -1.7647058823529413463));
+    assert(is_num_equal(k->get(0, 7), 0.42199488491048597893));
+    assert(is_num_equal(k->get(1, 1), 7.2890025575447561224));
+    assert(is_num_equal(k->get(1, 2), 0.42199488491048597893));
+    assert(is_num_equal(k->get(1, 3), 2.2097186700767257328));
+    assert(is_num_equal(k->get(1, 4), -0.88235294117647056211));
+    assert(is_num_equal(k->get(1, 5), -2.731457800511508438));
+    assert(is_num_equal(k->get(1, 6), -0.42199488491048597893));
+    assert(is_num_equal(k->get(1, 7), -4.9411764705882346149));
+    assert(is_num_equal(k->get(2, 2), 2.9923273657289004568));
+    assert(is_num_equal(k->get(2, 3), -0.88235294117647056211));
+    assert(is_num_equal(k->get(2, 4), -1.7647058823529413463));
+    assert(is_num_equal(k->get(2, 5), -0.42199488491048597893));
+    assert(is_num_equal(k->get(2, 6), -1.4961636828644502284));
+    assert(is_num_equal(k->get(2, 7), 0.88235294117647056211));
+    assert(is_num_equal(k->get(3, 3), 7.2890025575447561224));
+    assert(is_num_equal(k->get(3, 4), 0.42199488491048597893));
+    assert(is_num_equal(k->get(3, 5), -4.9411764705882346149));
+    assert(is_num_equal(k->get(3, 6), 0.88235294117647056211));
+    assert(is_num_equal(k->get(3, 7), -2.731457800511508438));
+    assert(is_num_equal(k->get(4, 4), 2.9923273657289004568));
+    assert(is_num_equal(k->get(4, 5), 0.88235294117647056211));
+    assert(is_num_equal(k->get(4, 6), 0.26854219948849117339));
+    assert(is_num_equal(k->get(4, 7), -0.42199488491048597893));
+    assert(is_num_equal(k->get(5, 5), 7.2890025575447561224));
+    assert(is_num_equal(k->get(5, 6), 0.42199488491048597893));
+    assert(is_num_equal(k->get(5, 7), 2.2097186700767257328));
+    assert(is_num_equal(k->get(6, 6), 2.9923273657289004568));
+    assert(is_num_equal(k->get(6, 7), 0.42199488491048597893));
+    assert(is_num_equal(k->get(7, 7), 7.2890025575447561224));
+
+    // Check local and global matrices are the same
+    assert(kl->equals(ke));
+
+    // Test local degrees of freedom, must be -1
+    mem->set_dofid();
+    FEMatrix *dofid = mem->get_dofid();
+    assert(dofid->is_double(-1));
+
     // Delete vars
     delete n1;
     delete n2;
     delete n3;
     delete n4;
     delete mem;
+    delete k;
+    delete kl;
+    delete ke;
+    delete localf;
+    delete globalf;
+    delete dofid;
 
 }
 

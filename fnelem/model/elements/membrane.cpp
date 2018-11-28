@@ -49,7 +49,7 @@ Membrane::Membrane(std::string tag, Node *n1, Node *n2, Node *n3, Node *n4, doub
         : Element(std::move(tag)) {
 
     // Stores material
-    this->ngdl = 8;
+    this->ndof = 8;
     this->E = E;
     this->poisson = poisson;
 
@@ -98,13 +98,15 @@ Membrane::Membrane(std::string tag, Node *n1, Node *n2, Node *n3, Node *n4, doub
     this->Feq = FEMatrix_vector(8);
     this->stiffness_local = new FEMatrix(8, 8);
     this->stiffness_global = new FEMatrix(8, 8);
-    this->gdlid = FEMatrix_vector(8);
+    this->dofid = FEMatrix_vector(8);
 
     // Set as initialized
     this->initialize();
 
     // Generates local matrix
     this->generate_local_stiffness();
+    this->generate_global_stiffness();
+
     this->stiffness_local->set_disp_precision(4);
     this->stiffness_global->set_disp_precision(4);
 
@@ -208,6 +210,16 @@ void Membrane::generate_local_stiffness() {
 }
 
 /**
+ * Generate global stiffness matrix.
+ */
+void Membrane::generate_global_stiffness() {
+
+    // As membrane does not have any rotation local and global matrices are the same
+    (*this->stiffness_global) = this->stiffness_local;
+
+}
+
+/**
  * Return Aij stiffness modifier.
  *
  * @param A Matrix
@@ -273,5 +285,28 @@ void Membrane::disp() const {
     this->stiffness_local->set_disp_identation(2);
     this->stiffness_local->disp();
     this->stiffness_local->set_disp_identation(0);
+
+}
+
+/**
+ * Set ID degrees of freedom from node definition.
+ */
+void Membrane::set_dofid() {
+
+    // Get nodes
+    Node *n1 = this->nodes->at(0);
+    Node *n2 = this->nodes->at(1);
+    Node *n3 = this->nodes->at(2);
+    Node *n4 = this->nodes->at(3);
+
+    // Set dofid
+    this->dofid->set(0, n1->get_dof(1));
+    this->dofid->set(1, n1->get_dof(2));
+    this->dofid->set(2, n2->get_dof(1));
+    this->dofid->set(3, n2->get_dof(2));
+    this->dofid->set(4, n3->get_dof(1));
+    this->dofid->set(5, n3->get_dof(2));
+    this->dofid->set(6, n4->get_dof(1));
+    this->dofid->set(7, n4->get_dof(2));
 
 }

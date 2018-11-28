@@ -42,13 +42,13 @@ protected:
     int nnodes = 0;
 
     // Number of degrees of freedom
-    int ngdl = 0;
+    int ndof = 0;
 
     // Nodes of the element, vector of pointers
     std::vector<Node *> *nodes = new std::vector<Node *>();
 
-    // GDLID of the nodes
-    FEMatrix *gdlid;
+    // DOFID of the nodes
+    FEMatrix *dofid;
 
     // Local stiffness matrix
     FEMatrix *stiffness_local;
@@ -94,8 +94,8 @@ public:
     // Get element nodes
     std::vector<Node *> *get_nodes() const;
 
-    // Get GDLID associated with the element
-    FEMatrix *get_gdlid() const;
+    // Get ID degrees of freedom associated with the element
+    FEMatrix *get_dofid() const;
 
     // Get local stiffness matrix
     FEMatrix *get_stiffness_local() const;

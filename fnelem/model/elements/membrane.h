@@ -62,6 +62,9 @@ private:
     // Calculate local stiffness matrix
     void generate_local_stiffness();
 
+    // Calculate global stiffness matrix
+    void generate_global_stiffness();
+
     // Calculate Aij stiffness value
     double k_aij(FEMatrix *A, int i, int j);
 
@@ -88,6 +91,9 @@ public:
 
     // Display membrane information
     void disp() const override;
+
+    // Set degree of freedom ID from nodes
+    void set_dofid() override;
 
 };
 

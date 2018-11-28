@@ -37,7 +37,7 @@ Structural nodes.
 void Node::destroy() {
     delete this->coords;
     delete this->displ;
-    delete this->gdlid;
+    delete this->dofid;
     delete this->loads;
     delete this->reaction;
 }
@@ -86,7 +86,7 @@ Node::Node(std::string tag, double posx, double posy, double posz) : ModelCompon
 void Node::init() {
 
     // Init ID of degrees of freedom
-    this->gdlid = FEMatrix_vector(this->ndof);
+    this->dofid = FEMatrix_vector(this->ndof);
 
     // Init displacements
     this->displ = FEMatrix_vector(this->ndof);
@@ -99,7 +99,7 @@ void Node::init() {
 
     // Save initial values
     for (int i = 0; i < this->ndof; i++) {
-        this->gdlid->set(i, -1);
+        this->dofid->set(i, -1);
         this->displ->set(i, 0);
         this->reaction->set(i, 0);
         this->loads->set(i, 0);
@@ -131,7 +131,7 @@ FEMatrix *Node::get_coordinates() const {
  * @return
  */
 FEMatrix *Node::get_dof() const {
-    return this->gdlid->clone();
+    return this->dofid->clone();
 }
 
 /**
@@ -150,7 +150,7 @@ Node &Node::operator=(const Node &node) {
 
     this->coords = node.coords;
     this->displ = node.displ;
-    this->gdlid = node.gdlid;
+    this->dofid = node.dofid;
     this->loads = node.loads;
     this->reaction = node.reaction;
 
@@ -210,9 +210,9 @@ void Node::check_vector(const FEMatrix *mat, std::string vector_name) {
  */
 void Node::set_dof(int local_id, int global_id) {
     if (local_id < 1 || local_id > this->ndof) {
-        throw std::logic_error("[NODE] Local GDLID greather than number of Node NGDL");
+        throw std::logic_error("[NODE] Local DOFID greather than number of Node NDOF");
     }
-    this->gdlid->set(local_id - 1, global_id);
+    this->dofid->set(local_id - 1, global_id);
 }
 
 /**
@@ -221,8 +221,8 @@ void Node::set_dof(int local_id, int global_id) {
  * @param gdlid Vector of GDLID vector
  */
 void Node::set_dof(FEMatrix *gdl) {
-    this->check_vector(gdl, "Node GDLID");
-    (*this->gdlid) = gdl;
+    this->check_vector(gdl, "Node DOFID");
+    (*this->dofid) = gdl;
 }
 
 /**
@@ -233,7 +233,7 @@ void Node::set_dof(FEMatrix *gdl) {
  */
 void Node::set_displacement(int local_id, double d) {
     if (local_id < 1 || local_id > this->ndof) {
-        throw std::logic_error("[NODE] Local GDLID greather than number of Node NGDL");
+        throw std::logic_error("[NODE] Local DOFID greather than number of Node NDOF");
     }
     this->displ->set(local_id - 1, d);
 }
@@ -276,7 +276,7 @@ void Node::disp() const {
     ModelComponent::disp();
     std::cout << "\n\tNumber degrees of freedom:\t" << this->ndof << std::endl;
     std::cout << "\tCoordinates:\t" << this->coords->to_string_line() << std::endl;
-    std::cout << "\tGLOBAL ID:\t\t" << this->gdlid->to_string_line(true) << std::endl;
+    std::cout << "\tGLOBAL ID:\t\t" << this->dofid->to_string_line(true) << std::endl;
     std::cout << "\tDisplacements:\t" << this->displ->to_string_line() << std::endl;
     std::cout << "\tReactions:\t\t" << this->reaction->to_string_line() << std::endl;
 }
@@ -339,4 +339,17 @@ double Node::get_pos_z() const {
         throw std::logic_error("[NODE] z-coordinate does not exist in a 2D node");
     }
     return this->coords->get(2);
+}
+
+/**
+ * Get degree of freedom from local id.
+ *
+ * @param local_id
+ * @return
+ */
+int Node::get_dof(int local_id) {
+    if (local_id < 1 || local_id > this->ndof) {
+        throw std::logic_error("[NODE] Local DOFID greather than number of Node NDOF");
+    }
+    return static_cast<int>(this->dofid->get(local_id - 1));
 }
