@@ -77,6 +77,9 @@ private:
     // Validate (x,y) point to perform stress/deformation analysis
     void validate_xy(double x, double y) const;
 
+    // Generate stress vector
+    FEMatrix *generate_stress_npoints_matrix() const;
+
 public:
 
     // Constructor
@@ -118,6 +121,12 @@ public:
 
     // Add resistant force to reaction
     void add_force_to_reaction() override;
+
+    // Save properties to file
+    void save_properties(std::ofstream &file) const override;
+
+    // Save internal stress to file
+    void save_internal_stress(std::ofstream &file) const override;
 
 };
 

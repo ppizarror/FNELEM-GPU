@@ -579,3 +579,116 @@ void Membrane::add_force_to_reaction() {
     delete load;
 
 }
+
+/**
+ * Save properties to file.
+ *
+ * @param file File handler
+ */
+void Membrane::save_properties(std::ofstream &file) const {
+    file << "\tMembrane " << this->get_model_tag() << ":";
+    file << "\n\t\tWidth (2b):\t\t" << 2 * this->b;
+    file << "\n\t\tHeight (2h):\t" << 2 * this->h;
+    file << "\n\t\tThickness:\t\t" << this->t;
+    file << "\n\t\tElastic mod:\t" << this->E;
+    file << "\n\t\tPoisson mod:\t" << this->poisson;
+
+    // Node information
+    std::string nodetag;
+    Node *n;
+    for (unsigned long i = 0; i < this->nnodes; i++) {
+        n = this->nodes->at(i);
+        nodetag += n->get_model_tag();
+        if (i < this->nnodes - 1) {
+            nodetag += ", ";
+        }
+    }
+    file << "\n\t\tElement nodes:\t" << nodetag;
+
+}
+
+/**
+ * Generate tension matrix of integration points.
+ *
+ * @return
+ */
+FEMatrix *Membrane::generate_stress_npoints_matrix() const {
+
+    // Calculate total elements
+    int el = static_cast<int>(pow(__MEMBRANE_INTEGRATION_NPOINTS + 1, 2));
+
+    // Generate vector
+    FEMatrix *tvec = new FEMatrix(el, 7);
+
+    // Calculate integration point differential evaluation
+    double dx = (2 * this->b) / (__MEMBRANE_INTEGRATION_NPOINTS + 1);
+    double dy = (2 * this->h) / (__MEMBRANE_INTEGRATION_NPOINTS + 1);
+
+    // Get first node coordinates
+    double cglobx = this->nodes->at(0)->get_pos_x();
+    double cgloby = this->nodes->at(0)->get_pos_y();
+
+    int k = 0;
+    double x = 0, y = 0; // Stores each integration point coordinates
+    for (int i = 1; i < __MEMBRANE_INTEGRATION_NPOINTS + 2; i++) {
+        for (int j = 1; j < __MEMBRANE_INTEGRATION_NPOINTS + 2; j++) {
+
+            // Calculate integration point coordinates
+            x = -this->b + (i - 1) * dx;
+            y = -this->h + (j - 1) * dy;
+
+            // Calculate tension
+            FEMatrix *stress = this->get_stress(x, y);
+
+            // Stores to matrix
+            tvec->set(k, 0, cglobx + x + this->b);
+            tvec->set(k, 1, cgloby + y + this->h);
+            tvec->set(k, 2, x);
+            tvec->set(k, 3, y);
+            tvec->set(k, 4, stress->get(0));
+            tvec->set(k, 5, stress->get(1));
+            tvec->set(k, 6, stress->get(2));
+
+            // Deletes matrix
+            delete stress;
+            k += 1;
+            
+        }
+    }
+
+    // Return matrix
+    return tvec;
+
+}
+
+/**
+ * Save internal stress to file.
+ *
+ * @param file
+ */
+void Membrane::save_internal_stress(std::ofstream &file) const {
+
+    // Stores forces
+    FEMatrix *fr = this->get_force_global();
+
+    // Saves forces to each node
+    file << "\tMembrane " << this->get_model_tag() << ":";
+    file << "\n\t\tNode " << this->nodes->at(0)->get_model_tag() << " (-b, -h):\t" << fr->get(0) << ",\t" << fr->get(1);
+    file << "\n\t\tNode " << this->nodes->at(1)->get_model_tag() << " (+b, -h):\t" << fr->get(2) << ",\t" << fr->get(3);
+    file << "\n\t\tNode " << this->nodes->at(2)->get_model_tag() << " (+b, +h):\t" << fr->get(4) << ",\t" << fr->get(5);
+    file << "\n\t\tNode " << this->nodes->at(3)->get_model_tag() << " (-b, +h):\t" << fr->get(6) << ",\t" << fr->get(7);
+
+    // Writes tension
+    FEMatrix *tm = this->generate_stress_npoints_matrix();
+    int tmlen = tm->length();
+    file << "\n\t\tStress " << this->get_model_tag() << " [GLOBALX GLOBALY X Y SIGMAX SIGMAY SIGMAXY DISPLX DISPLY]";
+    for (int i = 0; i < tmlen; i++) {
+        file << "\n\t\t\t" << tm->get(i, 0) << "\t" << tm->get(i, 1) << "\t" << tm->get(i, 2) << "\t";
+        file << tm->get(i, 3) << "\t" << tm->get(i, 4) << "\t" << tm->get(i, 5) << "\t" << tm->get(i, 6);
+    }
+
+    // Deletes variables
+    delete fr;
+    delete tm;
+
+}
