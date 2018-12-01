@@ -203,7 +203,7 @@ void __test_node_save_to_file() {
 
     // Create file
     std::ofstream plik;
-    plik.open("test-node-properties.txt");
+    plik.open("out/test-node-properties.txt");
     n->save_properties(plik);
     n->save_displacements(plik);
     n->save_reactions(plik);

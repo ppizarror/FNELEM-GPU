@@ -84,9 +84,9 @@ void __test_fematrix_cpu_inversion() {
     L[2 * 3 + 2] = 3;
     FEMatrix *mat = new FEMatrix(n, n, L);
     mat->disp();
-    mat->save_to_file("test-matrix-cpu.txt");
+    mat->save_to_file("out/test-matrix-cpu.txt");
     FEMatrix *matInverse = matrix_inverse_cpu(mat);
-    matInverse->save_to_file("test-matrix-cpu-inversion.txt");
+    matInverse->save_to_file("out/test-matrix-cpu-inversion.txt");
     matInverse->disp();
     std::cout << matInverse->to_string(true) << std::endl;
     std::cout << matInverse->to_string(false) << std::endl;

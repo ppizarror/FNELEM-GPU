@@ -254,7 +254,7 @@ void __test_membrane_save_to_file() {
 
     // Save file
     std::ofstream plik;
-    plik.open("test-save-membrane.txt");
+    plik.open("out/test-save-membrane.txt");
     mem->save_properties(plik);
     plik << "\n" << std::endl;
     mem->save_internal_stress(plik);
