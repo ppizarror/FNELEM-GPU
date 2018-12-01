@@ -1,10 +1,10 @@
 /**
-FNELEM-GPU - TEST SUITE
-Imports all tests.
+FNELEM-GPU - TEST LOAD
+Test general load class.
 
-@package test
+@package test.model.load
 @author ppizarror
-@date 21/11/2018
+@date 30/11/2018
 @license
 	MIT License
 	Copyright (c) 2018 Pablo Pizarro R.
@@ -28,28 +28,16 @@ Imports all tests.
 	SOFTWARE.
 */
 
-// Init header file
-#ifndef FNELEM_GPU_TEST_FNELEM_SUITE_H
-#define FNELEM_GPU_TEST_FNELEM_SUITE_H
+// Include sources
+#include "../../test_utils.h"
+#include "../../../fnelem/model/load/load.h"
 
-#include "math/test_fematrix.h"
-#include "math/test_fematrix_utils.h"
-#include "model/base/test_model_component.h"
-#include "model/elements/test_elements.h"
-#include "model/elements/test_membrane.h"
-#include "model/load/test_load.h"
-#include "model/node/test_node.h"
-#include "model/restraints/test_node_restraint.h"
-
-void test_suite() {
-    test_fematrix_suite();
-    test_fematrix_utils_suite();
-    test_model_component_suite();
-    test_node_suite();
-    test_elements_suite();
-    test_membrane_suite();
-    test_node_restraint_suite();
-    test_load_suite();
+void __test_load_init() {
 }
 
-#endif // FNELEM_GPU_TEST_FNELEM_SUITE_H
+/**
+ * Performs TEST-LOAD suite.
+ */
+void test_load_suite() {
+    __test_load_init();
+}

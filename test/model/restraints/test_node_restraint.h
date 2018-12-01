@@ -1,8 +1,8 @@
 /**
 FNELEM-GPU - TEST
-Test model.restraints package.
+Test node restraints.
 
-@package test.model.node
+@package test.model.restraints
 @author ppizarror
 @date 30/11/2018
 @license
