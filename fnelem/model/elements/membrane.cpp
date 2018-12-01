@@ -257,7 +257,7 @@ double Membrane::k_cij(FEMatrix *A, int i, int j) const {
  * Display membrane information.
  */
 void Membrane::disp() const {
-    std::cout << "Membrane information" << std::endl;
+    std::cout << "Membrane information:" << std::endl;
     Element::disp();
 
     // Display geometric / constitutive values

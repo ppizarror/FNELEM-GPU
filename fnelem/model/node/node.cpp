@@ -273,7 +273,7 @@ void Node::apply_element_stress(FEMatrix *sigma) {
  * Display node information.
  */
 void Node::disp() const {
-    std::cout << "Node information" << std::endl;
+    std::cout << "Node information:" << std::endl;
     ModelComponent::disp();
     std::cout << "\n\tNumber degrees of freedom:\t" << this->ndof << std::endl;
     std::cout << "\tCoordinates:\t" << this->coords->to_string_line() << std::endl;

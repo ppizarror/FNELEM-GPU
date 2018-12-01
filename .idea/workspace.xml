@@ -18,13 +18,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="221cac94-3076-4b70-8e37-e7f72eb35a62" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fnelem/math/fematrix.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/math/fematrix.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fnelem/math/fematrix.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/math/fematrix.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fnelem/model/elements/membrane.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/elements/membrane.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fnelem/model/restraints/node_restraint.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/restraints/node_restraint.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fnelem/model/restraints/node_restraint.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/restraints/node_restraint.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/model/restraints/__restraints__.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/restraints/__restraints__.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/model/restraints/test_node_restraint.h" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/restraints/test_node_restraint.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -38,73 +33,46 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fnelem/model/elements/membrane.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="603" column="9" selection-start-line="603" selection-start-column="9" selection-end-line="603" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fnelem/model/restraints/node_restraint.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="760">
-              <caret line="60" column="20" selection-start-line="60" selection-start-column="20" selection-end-line="60" selection-end-column="20" />
+            <state relative-caret-position="214">
+              <caret line="70" column="11" selection-start-line="70" selection-start-column="11" selection-end-line="70" selection-end-column="11" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fnelem/model/node/node.h">
+        <entry file="file://$PROJECT_DIR$/fnelem/model/node/node.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-290">
-              <caret line="135" column="11" selection-start-line="135" selection-start-column="11" selection-end-line="135" selection-end-column="11" />
+            <state relative-caret-position="290">
+              <caret line="275" column="49" selection-start-line="275" selection-start-column="4" selection-end-line="275" selection-end-column="49" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fnelem/math/fematrix.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="580" column="28" selection-start-line="580" selection-start-column="28" selection-end-line="580" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/model/node/test_node.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="51" column="49" selection-start-line="51" selection-start-column="4" selection-end-line="51" selection-end-column="49" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fnelem/model/restraints/node_restraint.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="68" selection-start-line="68" selection-end-line="68" />
+            <state relative-caret-position="150">
+              <caret line="92" column="45" selection-start-line="92" selection-start-column="45" selection-end-line="92" selection-end-column="45" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/model/restraints/__restraints__.cpp">
+        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="34" column="32" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
+            <state relative-caret-position="374">
+              <caret line="65" column="97" selection-start-line="65" selection-start-column="97" selection-end-line="65" selection-end-column="97" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fnelem/math/fematrix.h">
+        <entry file="file://$PROJECT_DIR$/fnelem/model/base/model_component.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="204" column="55" selection-start-line="204" selection-start-column="55" selection-end-line="204" selection-end-column="55" />
+            <state relative-caret-position="138">
+              <caret line="78" column="21" selection-start-line="78" selection-start-column="21" selection-end-line="78" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -113,16 +81,7 @@
         <entry file="file://$PROJECT_DIR$/test/model/restraints/test_node_restraint.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="146">
-              <caret line="39" selection-start-line="39" selection-end-line="39" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="55" column="27" selection-start-line="55" selection-start-column="27" selection-end-line="55" selection-end-column="27" />
+              <caret line="45" column="9" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -197,14 +156,14 @@
         <option value="$PROJECT_DIR$/test/model/elements/test_membrane.h" />
         <option value="$PROJECT_DIR$/main.cu" />
         <option value="$PROJECT_DIR$/test/test_suite.h" />
-        <option value="$PROJECT_DIR$/fnelem/model/restraints/node_restraint.h" />
         <option value="$PROJECT_DIR$/test/model/restraints/__restraints__.cpp" />
-        <option value="$PROJECT_DIR$/fnelem/model/restraints/node_restraint.cpp" />
-        <option value="$PROJECT_DIR$/test/model/restraints/test_node_restraint.h" />
         <option value="$PROJECT_DIR$/fnelem/model/elements/membrane.cpp" />
         <option value="$PROJECT_DIR$/fnelem/math/fematrix.cpp" />
         <option value="$PROJECT_DIR$/fnelem/math/fematrix.h" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/fnelem/model/restraints/node_restraint.h" />
+        <option value="$PROJECT_DIR$/test/model/restraints/test_node_restraint.h" />
+        <option value="$PROJECT_DIR$/fnelem/model/restraints/node_restraint.cpp" />
       </list>
     </option>
   </component>
@@ -254,12 +213,6 @@
               <item name="FNELEM-GPU" type="b2602c69:ProjectViewProjectNode" />
               <item name="FNELEM-GPU" type="462c0819:PsiDirectoryNode" />
               <item name="fnelem" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FNELEM-GPU" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FNELEM-GPU" type="462c0819:PsiDirectoryNode" />
-              <item name="fnelem" type="462c0819:PsiDirectoryNode" />
-              <item name="math" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FNELEM-GPU" type="b2602c69:ProjectViewProjectNode" />
@@ -366,7 +319,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.TEST-ALL">
+  <component name="RunManager" selected="Application.TEST-NODE-RESTRAINT">
     <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="FNELEM-GPU" RUN_TARGET_NAME="TEST-ALL" EXPLICIT_BUILD_TARGET_NAME="all">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -442,12 +395,12 @@
       <workItem from="1543413004439" duration="11345000" />
       <workItem from="1543425974929" duration="28000" />
       <workItem from="1543546236282" duration="635000" />
-      <workItem from="1543591334339" duration="8304000" />
+      <workItem from="1543591334339" duration="9187000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="130786000" />
+    <option name="totallyTimeSpent" value="131669000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
@@ -532,13 +485,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/model/base/test_fnelem_base.h" />
-    <entry file="file://$PROJECT_DIR$/fnelem/model/base/model_component.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="62" column="33" lean-forward="true" selection-start-line="62" selection-start-column="17" selection-end-line="62" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/model/elements/test_membrane.cpp" />
     <entry file="file://$PROJECT_DIR$/test/test_utils.h">
       <provider selected="true" editor-type-id="text-editor">
@@ -685,13 +631,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fnelem/model/node/node.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="210" column="11" selection-start-line="210" selection-start-column="11" selection-end-line="210" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/model/node/test_node.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -710,20 +649,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-290">
           <caret line="135" column="11" selection-start-line="135" selection-start-column="11" selection-end-line="135" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fnelem/model/restraints/node_restraint.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="68" selection-start-line="68" selection-end-line="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fnelem/model/restraints/node_restraint.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="60" column="20" selection-start-line="60" selection-start-column="20" selection-end-line="60" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -748,17 +673,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/model/restraints/test_node_restraint.h">
+    <entry file="file://$PROJECT_DIR$/fnelem/model/node/node.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="39" selection-start-line="39" selection-end-line="39" />
+        <state relative-caret-position="290">
+          <caret line="275" column="49" selection-start-line="275" selection-start-column="4" selection-end-line="275" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="55" column="27" selection-start-line="55" selection-start-column="27" selection-end-line="55" selection-end-column="27" />
+        <state relative-caret-position="374">
+          <caret line="65" column="97" selection-start-line="65" selection-start-column="97" selection-end-line="65" selection-end-column="97" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fnelem/model/base/model_component.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="78" column="21" selection-start-line="78" selection-start-column="21" selection-end-line="78" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fnelem/model/restraints/node_restraint.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="70" column="11" selection-start-line="70" selection-start-column="11" selection-end-line="70" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/model/restraints/test_node_restraint.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="45" column="9" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fnelem/model/restraints/node_restraint.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="92" column="45" selection-start-line="92" selection-start-column="45" selection-end-line="92" selection-end-column="45" />
         </state>
       </provider>
     </entry>

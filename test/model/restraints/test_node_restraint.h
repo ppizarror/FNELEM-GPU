@@ -43,6 +43,7 @@ void __test_node_restraint() {
     r->apply();
     FEMatrix *dofn1 = n->get_dof();
     assert(dofn1->is_double(-1));
+    r->disp();
 
     // Create restraints
     r->add_dofid(1);
@@ -57,6 +58,9 @@ void __test_node_restraint() {
     assert(is_num_equal(n->get_dof(1), 0));
     assert(is_num_equal(n->get_dof(2), -1));
     assert(is_num_equal(n->get_dof(3), 0));
+
+    // Display restraint information
+    r->disp();
 
     // Delete vars
     delete n;

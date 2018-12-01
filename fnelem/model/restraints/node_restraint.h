@@ -50,6 +50,9 @@ private:
     // Stores node reference
     Node *node;
 
+    // Stores NDOF of node
+    int ndof = 0;
+
 public:
 
     // Constructor
@@ -63,6 +66,9 @@ public:
 
     // Apply restraints
     void apply();
+
+    // Display node information to console
+    void disp() const override;
 
 };
 
