@@ -127,6 +127,7 @@ FEMatrix *Element::get_force_global() const {
  * Disp element information to console.
  */
 void Element::disp() const {
+    std::cout << "Element information:" << std::endl;
     ModelComponent::disp();
 }
 

@@ -28,7 +28,34 @@ General load definition.
 	SOFTWARE.
 */
 
+// Init header file
 #ifndef FNELEM_GPU_MODEL_LOAD_H
 #define FNELEM_GPU_MODEL_LOAD_H
+
+// Include headers
+#include "../base/model_component.h"
+#include "../../math/fematrix.h"
+#include "../../math/fematrix_utils.h"
+#include "../node/node.h"
+
+// Library imports
+#include <iostream>
+
+class Load : ModelComponent {
+public:
+
+    // Constructor
+    explicit Load(std::string tag);
+
+    // Destructor
+    ~Load();
+
+    // Apply load
+    virtual void apply();
+
+    // Display load information to console
+    void disp() const override;
+
+};
 
 #endif // FNELEM_GPU_MODEL_LOAD_H

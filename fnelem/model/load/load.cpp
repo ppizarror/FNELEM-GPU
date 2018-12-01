@@ -1,3 +1,5 @@
+#include <utility>
+
 /**
 FNELEM-GPU LOAD - LOAD ABSTRACT CLASS.
 General load definition.
@@ -30,3 +32,30 @@ General load definition.
 
 // Include header
 #include "load.h"
+
+/**
+ * Constructor.
+ *
+ * @param tag Load tag
+ */
+Load::Load(std::string tag) : ModelComponent(std::move(tag)) {
+}
+
+/**
+ * Destructor.
+ */
+Load::~Load() = default;
+
+/**
+ * Apply load.
+ */
+void Load::apply() {
+}
+
+/**
+ * Display load information.
+ */
+void Load::disp() const {
+    std::cout << "Load information:" << std::endl;
+    ModelComponent::disp();
+}

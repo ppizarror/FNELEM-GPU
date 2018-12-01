@@ -33,6 +33,10 @@ Test general load class.
 #include "../../../fnelem/model/load/load.h"
 
 void __test_load_init() {
+    Load *ld = new Load("LOAD");
+    ld->apply();
+    ld->disp();
+    delete ld;
 }
 
 /**
