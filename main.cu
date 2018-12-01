@@ -44,6 +44,7 @@ was calculated using a CUDA algorithm (Gauss Jordan inversion).
 #include "fnelem/model/elements/element.cpp"
 #include "fnelem/model/elements/membrane.cpp"
 #include "fnelem/model/loads/load.cpp"
+#include "fnelem/model/loads/load_membrane_distributed.cpp"
 #include "fnelem/model/loads/load_node.cpp"
 #include "fnelem/model/nodes/node.cpp"
 #include "fnelem/model/restraints/restraint_node.cpp"
@@ -52,8 +53,7 @@ was calculated using a CUDA algorithm (Gauss Jordan inversion).
 
 int main() {
 
-    // Create nodes
-    std::vector<Node> nodes = std::vector<Node>();
+    // Test all
     test_suite();
 
     // Creates matrix

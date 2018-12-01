@@ -38,18 +38,22 @@ Imports all tests.
 #include "model/elements/test_elements.h"
 #include "model/elements/test_membrane.h"
 #include "model/loads/test_load.h"
+#include "model/loads/test_load_membrane_distributed.h"
+#include "model/loads/test_load_node.h"
 #include "model/nodes/test_node.h"
 #include "model/restraints/test_restraint_node.h"
 
 void test_suite() {
+    test_elements_suite();
     test_fematrix_suite();
     test_fematrix_utils_suite();
+    test_load_membrane_distributed_suite();
+    test_load_node_suite();
+    test_load_suite();
+    test_membrane_suite();
     test_model_component_suite();
     test_node_suite();
-    test_elements_suite();
-    test_membrane_suite();
     test_restraint_node_suite();
-    test_load_suite();
 }
 
 #endif // FNELEM_GPU_TEST_FNELEM_SUITE_H

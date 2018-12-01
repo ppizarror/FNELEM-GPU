@@ -30,10 +30,12 @@ Test model.load package.
 
 // Include sources
 #include "test_load.h"
+#include "test_load_membrane_distributed.h"
 #include "test_load_node.h"
 
 int main() {
     test_load_suite();
     test_load_node_suite();
+    test_load_membrane_distributed_suite();
     return 0;
 }

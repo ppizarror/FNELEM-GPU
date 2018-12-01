@@ -53,6 +53,7 @@ set(FNELEM_MODEL_LOADS
         ${FNELEM_MODEL_BASE}
         ${FNELEM_MODEL_NODES}
         fnelem/model/loads/load.cpp
+        fnelem/model/loads/load_membrane_distributed.cpp
         fnelem/model/loads/load_node.cpp
         )
 

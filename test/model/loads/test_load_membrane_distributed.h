@@ -1,10 +1,10 @@
 /**
 FNELEM-GPU - TEST LOAD
-Test general load class.
+Test membrane distributed load.
 
 @package test.model.load
 @author ppizarror
-@date 30/11/2018
+@date 01/12/2018
 @license
 	MIT License
 	Copyright (c) 2018 Pablo Pizarro R.
@@ -30,19 +30,15 @@ Test general load class.
 
 // Include sources
 #include "../../test_utils.h"
-#include "../../../fnelem/model/loads/load.h"
+#include "../../../fnelem/model/loads/load_membrane_distributed.h"
 
-void __test_load_init() {
-    test_print_title("LOAD", "load_init");
-    Load *ld = new Load("LOAD");
-    ld->apply(1);
-    ld->disp();
-    delete ld;
+void __test_load_membrane_distributed_init() {
+    test_print_title("LOAD-MEMBRANE-DISTRIBUTED", "test_load_membrane_distributed_init");
 }
 
 /**
- * Performs TEST-LOAD suite.
+ * Performs TEST-MEMBRANED-DISTRIBUTED suite.
  */
-void test_load_suite() {
-    __test_load_init();
+void test_load_membrane_distributed_suite() {
+    __test_load_membrane_distributed_init();
 }

@@ -1,6 +1,6 @@
 /**
 FNELEM-GPU - TEST LOAD
-Test general load node.
+Test load node.
 
 @package test.model.load
 @author ppizarror
@@ -33,6 +33,7 @@ Test general load node.
 #include "../../../fnelem/model/loads/load_node.h"
 
 void __test_load_node_init() {
+    test_print_title("LOAD-NODE", "load_node_init");
 
     // Creates node
     Node *n = new Node("NODE", 250, 0, -543);
