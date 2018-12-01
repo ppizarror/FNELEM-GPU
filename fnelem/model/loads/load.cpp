@@ -46,14 +46,16 @@ Load::~Load() = default;
 
 /**
  * Apply load.
+ *
+ * @param factor Load factor
  */
-void Load::apply() {
+void Load::apply(double factor) {
+    std::cout << "Load apply factor " << factor << std::endl;
 }
 
 /**
  * Display load information.
  */
 void Load::disp() const {
-    std::cout << "Load information:" << std::endl;
     ModelComponent::disp();
 }

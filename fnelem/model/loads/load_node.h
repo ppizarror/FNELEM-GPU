@@ -38,7 +38,32 @@ Load applied to node.
 // Library imports
 #include <iostream>
 
-class LoadNode : Load {
+class LoadNode : public Load {
+private:
+
+    // Vector load
+    FEMatrix *load;
+
+    // Target node reference
+    Node *node;
+
+    // NDOF of target node
+    int ndof = 0;
+
+public:
+
+    // Constructor
+    LoadNode(std::string tag, Node *n, FEMatrix *l);
+
+    // Destructor
+    ~LoadNode();
+
+    // Apply load
+    void apply(double factor) override;
+
+    // Display load information to console
+    void disp() const override;
+
 };
 
 #endif // FNELEM_GPU_MODEL_LOAD_NODE_H

@@ -514,7 +514,10 @@ FEMatrix *Membrane::get_force_global() const {
 void Membrane::add_equivalent_force_node(int nodenum, FEMatrix *f) {
     int fnode = f->length();
     if (nodenum < 1 || nodenum > 4) {
-        throw std::logic_error("[MEMBRANE] Invalid node number @addEquivalentForce");
+        throw std::logic_error("[MEMBRANE] Invalid node number");
+    }
+    if (!f->is_vector()) {
+        throw std::logic_error("[MEMBRANE] Load must be a vector");
     }
     int pos = fnode * nodenum - 1; // Force position
     f->disable_origin();

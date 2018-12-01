@@ -30,3 +30,57 @@ Load applied to node.
 
 // Include header
 #include "load_node.h"
+
+/**
+ * Constructor.
+ *
+ * @param tag Node load tag
+ * @param n Target node
+ * @param l Target load
+ */
+LoadNode::LoadNode(std::string tag, Node *n, FEMatrix *l) : Load(std::move(tag)) {
+
+    // Stores node ndof
+    this->ndof = n->get_ndof();
+
+    // Check if load and node have same ndof
+    if (l->length() != this->ndof || !l->is_vector()) {
+        throw std::logic_error("[LOAD-NODE] Load vector invalid length, must be a vector, with node NODF components");
+    }
+
+    // Clones load
+    this->load = l->clone();
+    this->node = n;
+}
+
+/**
+ * Destructor.
+ */
+LoadNode::~LoadNode() {
+    delete this->load;
+}
+
+/**
+ * Apply force
+ * @param factor
+ */
+void LoadNode::apply(double factor) {
+
+    // Generate new modified load
+    FEMatrix *loadmod = this->load->clone();
+    *loadmod *= factor;
+    this->node->apply_load(loadmod);
+
+    // Deletes created load
+    delete loadmod;
+
+}
+
+/**
+ * Display node load information.
+ */
+void LoadNode::disp() const {
+    std::cout << "Load node information:" << std::endl;
+    Load::disp();
+    std::cout << "\n\tLoads:\t" << this->load->to_string_line() << std::endl;
+}

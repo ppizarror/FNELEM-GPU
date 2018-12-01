@@ -41,7 +41,7 @@ General load definition.
 // Library imports
 #include <iostream>
 
-class Load : ModelComponent {
+class Load : public ModelComponent {
 public:
 
     // Constructor
@@ -51,7 +51,7 @@ public:
     ~Load();
 
     // Apply load
-    virtual void apply();
+    virtual void apply(double factor);
 
     // Display load information to console
     void disp() const override;

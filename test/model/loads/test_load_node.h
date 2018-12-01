@@ -33,6 +33,28 @@ Test general load node.
 #include "../../../fnelem/model/loads/load_node.h"
 
 void __test_load_node_init() {
+
+    // Creates node
+    Node *n = new Node("NODE", 250, 0, -543);
+
+    // Creates vector load
+    FEMatrix *loadv = FEMatrix_vector(3);
+    loadv->set(0, -5);
+
+    // Creates load node
+    LoadNode *ln = new LoadNode("LN", n, loadv);
+    ln->disp();
+
+    // Apply load node force
+    n->disp();
+    ln->apply(1.0);
+    n->disp();
+
+    // Var deletion
+    delete n;
+    delete loadv;
+    delete ln;
+
 }
 
 /**

@@ -34,7 +34,7 @@ Test general load class.
 
 void __test_load_init() {
     Load *ld = new Load("LOAD");
-    ld->apply();
+    ld->apply(1);
     ld->disp();
     delete ld;
 }
