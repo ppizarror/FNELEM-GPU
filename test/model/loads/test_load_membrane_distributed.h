@@ -34,6 +34,25 @@ Test membrane distributed load.
 
 void __test_load_membrane_distributed_init() {
     test_print_title("LOAD-MEMBRANE-DISTRIBUTED", "test_load_membrane_distributed_init");
+
+    // Creates membrane
+    Node *n1 = new Node("N1", 0, 0);
+    Node *n2 = new Node("N2", 250, 0);
+    Node *n3 = new Node("N7", 250, 100);
+    Node *n4 = new Node("N6", 0, 100);
+    Membrane *mem = new Membrane("MEM", n1, n2, n3, n4, 300000, 0.15, 20);
+
+    // Creates load
+    LoadMembraneDistributed *load = new LoadMembraneDistributed("LOAD-MEM", mem, 1, 2, 10, 0, 12, 1);
+
+    // Var deletion
+    delete mem;
+    delete n1;
+    delete n2;
+    delete n3;
+    delete n4;
+    delete load;
+
 }
 
 /**

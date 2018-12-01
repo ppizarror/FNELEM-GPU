@@ -31,7 +31,7 @@ set(FNELEM_MODEL_NODES
         )
 
 # MODEL ELEMENT LIBRARY
-set(FNELEM_MODEL_ELEMENT
+set(FNELEM_MODEL_ELEMENTS
         ${FNELEM_MATH}
         ${FNELEM_MODEL_BASE}
         ${FNELEM_MODEL_NODES}
@@ -44,6 +44,7 @@ set(FNELEM_MODEL_RESTRAINTS
         ${FNELEM_MATH}
         ${FNELEM_MODEL_BASE}
         ${FNELEM_MODEL_NODES}
+        fnelem/model/restraints/restraint.cpp
         fnelem/model/restraints/restraint_node.cpp
         )
 
@@ -52,6 +53,7 @@ set(FNELEM_MODEL_LOADS
         ${FNELEM_MATH}
         ${FNELEM_MODEL_BASE}
         ${FNELEM_MODEL_NODES}
+        ${FNELEM_MODEL_ELEMENTS}
         fnelem/model/loads/load.cpp
         fnelem/model/loads/load_membrane_distributed.cpp
         fnelem/model/loads/load_node.cpp
@@ -62,7 +64,7 @@ set(FNELEM
         ${FNELEM_MATH}
         ${FNELEM_MODEL_BASE}
         ${FNELEM_MODEL_NODES}
-        ${FNELEM_MODEL_ELEMENT}
+        ${FNELEM_MODEL_ELEMENTS}
         ${FNELEM_MODEL_RESTRAINTS}
         ${FNELEM_MODEL_LOADS}
         )
@@ -71,7 +73,7 @@ set(FNELEM
 add_executable(TEST-ALL test/test_suite.cpp ${FNELEM})
 add_executable(TEST-BASE test/model/base/__base__.cpp ${FNELEM_MODEL_BASE})
 add_executable(TEST-CUDA test/test_cuda.cpp ${FNELEM_CUDA})
-add_executable(TEST-ELEMENTS test/model/elements/__elements__.cpp ${FNELEM_MODEL_ELEMENT})
+add_executable(TEST-ELEMENTS test/model/elements/__elements__.cpp ${FNELEM_MODEL_ELEMENTS})
 add_executable(TEST-FEMATRIX test/math/__math__.cpp ${FNELEM_MATH})
 add_executable(TEST-LOADS test/model/loads/__loads__.cpp ${FNELEM_MODEL_LOADS})
 add_executable(TEST-NODES test/model/nodes/__nodes__.cpp ${FNELEM_MODEL_NODES})

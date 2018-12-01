@@ -47,6 +47,7 @@ was calculated using a CUDA algorithm (Gauss Jordan inversion).
 #include "fnelem/model/loads/load_membrane_distributed.cpp"
 #include "fnelem/model/loads/load_node.cpp"
 #include "fnelem/model/nodes/node.cpp"
+#include "fnelem/model/restraints/restraint.cpp"
 #include "fnelem/model/restraints/restraint_node.cpp"
 
 #include "test/test_suite.h"

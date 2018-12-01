@@ -29,14 +29,11 @@ Bidimensional membrane element composed by 4 nodes.
 */
 
 
-#ifndef FNELEM_GPU_MEMBRANE_H
-#define FNELEM_GPU_MEMBRANE_H
+#ifndef __FNELEM_MODEL_ELEMENTS_MEMBRANE_H
+#define __FNELEM_MODEL_ELEMENTS_MEMBRANE_H
 
 // Libray imports
 #include "element.h"
-
-// Constant definition
-#define __MEMBRANE_INTEGRATION_NPOINTS 15
 
 class Membrane : public Element {
 private:
@@ -130,4 +127,4 @@ public:
 
 };
 
-#endif // FNELEM_GPU_MEMBRANE_H
+#endif // __FNELEM_MODEL_ELEMENTS_MEMBRANE_H

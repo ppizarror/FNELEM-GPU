@@ -29,13 +29,52 @@ Distributed load in membrane element.
 */
 
 // Init header file
-#ifndef FNELEM_GPU_MODEL_LOAD_MEMBRANE_DISTRIBUTED_H
-#define FNELEM_GPU_MODEL_LOAD_MEMBRANE_DISTRIBUTED_H
+#ifndef __FNELEM_MODEL_LOADS_LOAD_MEMBRANE_DISTRIBUTED_H
+#define __FNELEM_MODEL_LOADS_LOAD_MEMBRANE_DISTRIBUTED_H
 
 // Include headers
 #include "load.h"
+#include "../elements/membrane.h"
 
 // Library imports
 #include <iostream>
 
-#endif // FNELEM_GPU_MODEL_LOAD_MEMBRANE_DISTRIBUTED_H
+class LoadMembraneDistributed : public Load {
+private:
+
+    // Loads
+    double load1 = 0;
+    double load2 = 0;
+
+    // Load distance
+    double dist1 = 0;
+    double dist2 = 0;
+
+    // Distance between loads
+    double L = 0;
+
+    // Angle of application
+    double theta = 0;
+
+    // Node references
+    Node *node1;
+    Node *node2;
+
+public:
+
+    // Constructor
+    LoadMembraneDistributed(std::string tag, Membrane *membrane, int node1,
+                            int node2, double load1, double dist1, double load2, double dist2);
+
+    // Destructor
+    ~LoadMembraneDistributed();
+
+    // Apply load
+    void apply(double factor) override;
+
+    // Display load information
+    void disp() const override;
+
+};
+
+#endif // __FNELEM_MODEL_LOADS_LOAD_MEMBRANE_DISTRIBUTED_H

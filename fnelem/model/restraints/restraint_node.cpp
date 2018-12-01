@@ -37,7 +37,7 @@ Node restraint definition.
  * @param tag Node restraint tag
  * @param n Node to apply restraints
  */
-RestraintNode::RestraintNode(std::string tag, Node *n) : ModelComponent(std::move(tag)) {
+RestraintNode::RestraintNode(std::string tag, Node *n) : Restraint(std::move(tag)) {
 
     // Generate inner restraints vector
     this->dofid = FEMatrix_vector(n->get_ndof());
@@ -78,7 +78,7 @@ void RestraintNode::add_dofid(int id) {
  */
 void RestraintNode::apply() {
     for (int i = 0; i < this->ndof; i++) {
-        if (fabs(this->dofid->get(i) + 1) > __FEMATRIX_ZERO_TOL) {
+        if (fabs(this->dofid->get(i) + 1) > FNELEM_CONST_ZERO_TOLERANCE) {
             this->node->set_dof(static_cast<int>(this->dofid->get(i)), 0);
         }
     }
@@ -89,7 +89,7 @@ void RestraintNode::apply() {
  */
 void RestraintNode::disp() const {
     std::cout << "Node restraint information:" << std::endl;
-    ModelComponent::disp();
+    Restraint::disp();
     std::cout << "\n\tRestrained node:\t" << this->node->get_model_tag();
 
     // Generate restrained DOFID
@@ -99,7 +99,7 @@ void RestraintNode::disp() const {
     } else {
         std::string resdof;
         for (int i = 0; i < this->ndof; i++) {
-            if (fabs(this->dofid->get(i) + 1) > __FEMATRIX_ZERO_TOL) {
+            if (fabs(this->dofid->get(i) + 1) > FNELEM_CONST_ZERO_TOLERANCE) {
                 resdof += std::to_string(static_cast<int>(this->dofid->get(i)));
                 if (i < this->ndof - 1) {
                     resdof += "\t";

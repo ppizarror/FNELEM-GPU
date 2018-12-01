@@ -61,8 +61,9 @@ LoadNode::~LoadNode() {
 }
 
 /**
- * Apply force
- * @param factor
+ * Apply load.
+ *
+ * @param factor Load factor
  */
 void LoadNode::apply(double factor) {
 

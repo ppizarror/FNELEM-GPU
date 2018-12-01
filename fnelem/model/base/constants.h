@@ -1,10 +1,10 @@
 /**
-FNELEM-GPU RESTRAINTS - NODE RESTRAINT.
-Node restraint definition.
+FNELEM-GPU BASE - CONSTANTS
+Constants definition.
 
-@package fnelem.model.restraints
+@package fnelem.model.base
 @author ppizarror
-@date 30/11/2018
+@date 01/12/2018
 @license
 	MIT License
 	Copyright (c) 2018 Pablo Pizarro R.
@@ -29,44 +29,10 @@ Node restraint definition.
 */
 
 // Init header file
-#ifndef __FNELEM_MODEL_RESTRAINTS_RESTRAINT_NODE_H
-#define __FNELEM_MODEL_RESTRAINTS_RESTRAINT_NODE_H
+#ifndef __FNELEM_MODEL_BASE_CONSTANTS_H
+#define __FNELEM_MODEL_BASE_CONSTANTS_H
 
-// Include headers
-#include "restraint.h"
+#define FNELEM_CONST_MEMBRANE_INTEGRATION_NPOINTS 15    // Number of integration points inside membrane
+#define FNELEM_CONST_ZERO_TOLERANCE 1e-12               // Zero tolerance
 
-// Library imports
-#include <iostream>
-
-class RestraintNode : public Restraint {
-private:
-
-    // Stores vector of DOFID restraints
-    FEMatrix *dofid;
-
-    // Stores node reference
-    Node *node;
-
-    // Stores NDOF of node
-    int ndof = 0;
-
-public:
-
-    // Constructor
-    RestraintNode(std::string tag, Node *n);
-
-    // Destructor
-    ~RestraintNode();
-
-    // Add restraint
-    void add_dofid(int id);
-
-    // Apply restraints
-    void apply() override;
-
-    // Display restraint information to console
-    void disp() const override;
-
-};
-
-#endif // __FNELEM_MODEL_RESTRAINTS_RESTRAINT_NODE_H
+#endif // __FNELEM_MODEL_BASE_CONSTANTS_H

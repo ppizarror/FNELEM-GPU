@@ -80,10 +80,10 @@ Membrane::Membrane(std::string tag, Node *n1, Node *n2, Node *n3, Node *n4, doub
     dh1 = fabs(n1->get_pos_y() - n4->get_pos_y()) / 2;
     dh2 = fabs(n2->get_pos_y() - n3->get_pos_y()) / 2;
 
-    if (fabs(db1 - db2) > __FEMATRIX_ZERO_TOL) {
+    if (fabs(db1 - db2) > FNELEM_CONST_ZERO_TOLERANCE) {
         throw std::logic_error("[MEMBRANE] Invalid node dimension at @x");
     }
-    if (fabs(dh1 - dh2) > __FEMATRIX_ZERO_TOL) {
+    if (fabs(dh1 - dh2) > FNELEM_CONST_ZERO_TOLERANCE) {
         throw std::logic_error("[MEMBRANE] Invalid node dimension at @y");
     }
 
@@ -618,14 +618,14 @@ void Membrane::save_properties(std::ofstream &file) const {
 FEMatrix *Membrane::generate_stress_npoints_matrix() const {
 
     // Calculate total elements
-    int el = static_cast<int>(pow(__MEMBRANE_INTEGRATION_NPOINTS + 1, 2));
+    int el = static_cast<int>(pow(FNELEM_CONST_MEMBRANE_INTEGRATION_NPOINTS + 1, 2));
 
     // Generate vector
     FEMatrix *tvec = new FEMatrix(el, 7);
 
     // Calculate integration point differential evaluation
-    double dx = (2 * this->b) / (__MEMBRANE_INTEGRATION_NPOINTS + 1);
-    double dy = (2 * this->h) / (__MEMBRANE_INTEGRATION_NPOINTS + 1);
+    double dx = (2 * this->b) / (FNELEM_CONST_MEMBRANE_INTEGRATION_NPOINTS + 1);
+    double dy = (2 * this->h) / (FNELEM_CONST_MEMBRANE_INTEGRATION_NPOINTS + 1);
 
     // Get first node coordinates
     double cglobx = this->nodes->at(0)->get_pos_x();
@@ -633,8 +633,8 @@ FEMatrix *Membrane::generate_stress_npoints_matrix() const {
 
     int k = 0;
     double x = 0, y = 0; // Stores each integration point coordinates
-    for (int i = 1; i < __MEMBRANE_INTEGRATION_NPOINTS + 2; i++) {
-        for (int j = 1; j < __MEMBRANE_INTEGRATION_NPOINTS + 2; j++) {
+    for (int i = 1; i < FNELEM_CONST_MEMBRANE_INTEGRATION_NPOINTS + 2; i++) {
+        for (int j = 1; j < FNELEM_CONST_MEMBRANE_INTEGRATION_NPOINTS + 2; j++) {
 
             // Calculate integration point coordinates
             x = -this->b + (i - 1) * dx;

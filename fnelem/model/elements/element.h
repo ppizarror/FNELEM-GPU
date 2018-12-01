@@ -28,8 +28,8 @@ Base structural element class.
 	SOFTWARE.
 */
 
-#ifndef FNELEM_GPU_ELEMENT_H
-#define FNELEM_GPU_ELEMENT_H
+#ifndef __FNELEM_MODEL_ELEMENTS_ELEMENT_H
+#define __FNELEM_MODEL_ELEMENTS_ELEMENT_H
 
 // Library imports
 #include "../nodes/node.h"
@@ -120,4 +120,4 @@ public:
 
 };
 
-#endif // FNELEM_GPU_ELEMENT_H
+#endif // __FNELEM_MODEL_ELEMENTS_ELEMENT_H

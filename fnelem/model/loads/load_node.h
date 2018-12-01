@@ -29,8 +29,8 @@ Load applied to node.
 */
 
 // Init header file
-#ifndef FNELEM_GPU_MODEL_LOAD_NODE_H
-#define FNELEM_GPU_MODEL_LOAD_NODE_H
+#ifndef __FNELEM_MODEL_LOADS_LOAD_NODE_H
+#define __FNELEM_MODEL_LOADS_LOAD_NODE_H
 
 // Include headers
 #include "load.h"
@@ -66,4 +66,4 @@ public:
 
 };
 
-#endif // FNELEM_GPU_MODEL_LOAD_NODE_H
+#endif // __FNELEM_MODEL_LOADS_LOAD_NODE_H

@@ -1,10 +1,10 @@
 /**
-FNELEM-GPU RESTRAINTS - NODE RESTRAINT.
-Node restraint definition.
+FNELEM-GPU RESTRAINTS - RESTRAINT.
+Abstract restraint class.
 
 @package fnelem.model.restraints
 @author ppizarror
-@date 30/11/2018
+@date 01/12/2018
 @license
 	MIT License
 	Copyright (c) 2018 Pablo Pizarro R.
@@ -29,44 +29,33 @@ Node restraint definition.
 */
 
 // Init header file
-#ifndef __FNELEM_MODEL_RESTRAINTS_RESTRAINT_NODE_H
-#define __FNELEM_MODEL_RESTRAINTS_RESTRAINT_NODE_H
+#ifndef __FNELEM_MODEL_RESTRAINTS_RESTRAINT_H
+#define __FNELEM_MODEL_RESTRAINTS_RESTRAINT_H
 
 // Include headers
-#include "restraint.h"
+#include "../base/model_component.h"
+#include "../../math/fematrix.h"
+#include "../../math/fematrix_utils.h"
+#include "../nodes/node.h"
 
 // Library imports
 #include <iostream>
 
-class RestraintNode : public Restraint {
-private:
-
-    // Stores vector of DOFID restraints
-    FEMatrix *dofid;
-
-    // Stores node reference
-    Node *node;
-
-    // Stores NDOF of node
-    int ndof = 0;
-
+class Restraint : ModelComponent {
 public:
 
     // Constructor
-    RestraintNode(std::string tag, Node *n);
+    Restraint(std::string tag);
 
     // Destructor
-    ~RestraintNode();
+    ~Restraint();
 
-    // Add restraint
-    void add_dofid(int id);
-
-    // Apply restraints
-    void apply() override;
+    virtual // Apply restraints
+    void apply() = 0;
 
     // Display restraint information to console
     void disp() const override;
 
 };
 
-#endif // __FNELEM_MODEL_RESTRAINTS_RESTRAINT_NODE_H
+#endif // __FNELEM_MODEL_RESTRAINTS_RESTRAINT_H

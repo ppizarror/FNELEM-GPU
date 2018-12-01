@@ -29,8 +29,8 @@ General load definition.
 */
 
 // Init header file
-#ifndef FNELEM_GPU_MODEL_LOAD_H
-#define FNELEM_GPU_MODEL_LOAD_H
+#ifndef __FNELEM_MODEL_LOADS_LOAD_H
+#define __FNELEM_MODEL_LOADS_LOAD_H
 
 // Include headers
 #include "../base/model_component.h"
@@ -58,4 +58,4 @@ public:
 
 };
 
-#endif // FNELEM_GPU_MODEL_LOAD_H
+#endif // __FNELEM_MODEL_LOADS_LOAD_H

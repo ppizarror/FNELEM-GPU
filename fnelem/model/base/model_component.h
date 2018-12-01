@@ -1,5 +1,5 @@
 /**
-FNELEM-GPU BASE ELEMENTS - MODEL COMPONENT
+FNELEM-GPU BASE - MODEL COMPONENT
 Base element of the platform.
 
 @package fnelem.model.base
@@ -29,10 +29,11 @@ Base element of the platform.
 */
 
 // Init header file
-#ifndef FNELEM_GPU_BASE_MODELCOMPONENT_H
-#define FNELEM_GPU_BASE_MODELCOMPONENT_H
+#ifndef __FNELEM_MODEL_BASE_MODEL_COMPONENT_H
+#define __FNELEM_MODEL_BASE_MODEL_COMPONENT_H
 
 // Library import
+#include "constants.h"
 #include "sole.hpp"
 #include <iostream>
 #include <string>
@@ -71,4 +72,4 @@ public:
 
 };
 
-#endif // FNELEM_GPU_BASE_MODELCOMPONENT_H
+#endif // __FNELEM_MODEL_BASE_MODEL_COMPONENT_H
