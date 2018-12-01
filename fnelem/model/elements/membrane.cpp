@@ -652,7 +652,7 @@ FEMatrix *Membrane::generate_stress_npoints_matrix() const {
             // Deletes matrix
             delete stress;
             k += 1;
-            
+
         }
     }
 

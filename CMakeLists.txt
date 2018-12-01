@@ -39,6 +39,14 @@ set(FNELEM_ELEMENT
         fnelem/model/elements/membrane.cpp
         )
 
+# RESTRAINTS LIBRARY
+set(FNELEM_RESTRAINTS
+        ${FNELEM_MATH}
+        ${FNELEM_MODELCOMPONENT}
+        ${FNELEM_NODE}
+        fnelem/model/restraints/node_restraint.cpp
+        )
+
 # ALL LIBRARIES
 set(FNELEM_ALL
         ${FNELEM_MATH}
@@ -54,3 +62,4 @@ add_executable(TEST-ELEMENTS test/model/elements/__elements__.cpp ${FNELEM_ELEME
 add_executable(TEST-FEMATRIX test/math/__math__.cpp ${FNELEM_MATH})
 add_executable(TEST-MODEL-COMPONENT test/model/base/__base__.cpp ${FNELEM_MODELCOMPONENT})
 add_executable(TEST-NODE test/model/node/__node__.cpp ${FNELEM_NODE})
+add_executable(TEST-NODE-RESTRAINT test/model/restraints/__restraints__.cpp ${FNELEM_RESTRAINTS})
