@@ -637,18 +637,6 @@ FEMatrix *FEMatrix::operator*=(const FEMatrix &matrix) const {
  * @param matrix Matrix to multiply
  * @return
  */
-FEMatrix *FEMatrix::operator*=(const FEMatrix *matrix) const {
-    FEMatrix *newMatrix = this->clone();
-    *newMatrix *= matrix;
-    return newMatrix;
-}
-
-/**
- * Matrix multiplication and return new matrix.
- *
- * @param matrix Matrix to multiply
- * @return
- */
 FEMatrix *FEMatrix::operator*(const FEMatrix &matrix) const {
     FEMatrix *newMatrix = this->clone();
     *newMatrix *= matrix;
