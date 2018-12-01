@@ -51,6 +51,11 @@ Membrane::Membrane(std::string tag, Node *n1, Node *n2, Node *n3, Node *n4, doub
     this->E = E;
     this->poisson = poisson;
 
+    // Check nodes only are 2-D
+    if (n1->get_ndof() != 2 || n2->get_ndof() != 2 || n3->get_ndof() != 2 || n4->get_ndof() != 2) {
+        throw std::logic_error("[MEMBRANE] Membrane element only works with 2D nodes");
+    }
+
     // Stores nodes
     this->nodes->push_back(n1);
     this->nodes->push_back(n2);
@@ -289,6 +294,23 @@ void Membrane::disp() const {
     this->stiffness_local->set_disp_identation(2);
     this->stiffness_local->disp();
     this->stiffness_local->set_disp_identation(0);
+
+    // Display equivalent force
+    std::cout << "\tEquivalent force (1x8):" << std::endl;
+    std::cout << "\t\t";
+    for (int i = 0; i < 4; i++) {
+        std::cout << std::setw(7) << "(" << (i + 1) << ")";
+        if (i < 4) std::cout << "\t";
+    }
+    std::cout << std::endl;
+    for (int i = 0; i < 2; i++) {
+        std::cout << "\t\t";
+        for (int j = 0; j < 4; j++) {
+            std::cout << std::setw(8) << this->Feq->get(i + 2 * j);
+            if (j < 3) std::cout << "\t";
+        }
+        std::cout << std::endl;
+    }
 
 }
 

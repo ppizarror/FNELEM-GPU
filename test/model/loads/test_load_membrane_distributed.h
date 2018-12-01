@@ -43,9 +43,10 @@ void __test_load_membrane_distributed_init() {
     Membrane *mem = new Membrane("MEM", n1, n2, n3, n4, 300000, 0.15, 20);
 
     // Creates load
-    LoadMembraneDistributed *load = new LoadMembraneDistributed("LOAD-MEM", mem, 1, 2, 10, 0, 10, 1);
+    LoadMembraneDistributed *load = new LoadMembraneDistributed("LOAD-MEM", mem, 1, 2, -10, 0, -10, 1);
     load->apply(1.0);
     load->disp();
+    mem->disp();
 
     // Var deletion
     delete mem;

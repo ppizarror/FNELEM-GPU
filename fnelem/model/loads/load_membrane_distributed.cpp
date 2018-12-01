@@ -1,5 +1,3 @@
-#include <utility>
-
 /**
 FNELEM-GPU LOAD - MEMBRANE DISTRIBUTED LOAD.
 Distributed load in membrane element.
@@ -82,6 +80,11 @@ LoadMembraneDistributed::LoadMembraneDistributed(std::string tag, Membrane *memb
     Node *n1 = nodes->at(static_cast<unsigned long>(node1 - 1));
     Node *n2 = nodes->at(static_cast<unsigned long>(node2 - 1));
 
+    // Check nodes only are 2-D
+    if (n1->get_ndof() != 2 || n2->get_ndof() != 2) {
+        throw std::logic_error("[LOAD-MEMBRANE] Membrane distributed load only works with 2D nodes");
+    }
+
     // Calculates length
     double dx = n2->get_pos_x() - n1->get_pos_x();
     double dy = n2->get_pos_y() - n1->get_pos_y();
@@ -91,12 +94,15 @@ LoadMembraneDistributed::LoadMembraneDistributed(std::string tag, Membrane *memb
     this->theta = atan(dy / dx);
 
     // Stores distances, loads and nodes
+    this->membrane = membrane;
+    this->nnode1 = node1;
+    this->nnode2 = node2;
     this->node1 = n1;
     this->node2 = n2;
     this->load1 = load1;
     this->load2 = load2;
-    this->dist1 = dist1;
-    this->dist2 = dist2;
+    this->dist1 = dist1 * this->L;
+    this->dist2 = dist2 * this->L;
 
 }
 
@@ -125,6 +131,26 @@ void LoadMembraneDistributed::apply(double factor) {
     double v1_y = v1 * cos(this->theta);
     double v2_x = v2 * sin(this->theta);
     double v2_y = v2 * cos(this->theta);
+
+    // Generate load vectors
+    FEMatrix *loadvector1 = FEMatrix_vector(this->node1->get_ndof());
+    FEMatrix *loadvector2 = FEMatrix_vector(this->node2->get_ndof());
+    loadvector1->set(0, factor * v1_x);
+    loadvector1->set(1, factor * v1_y);
+    loadvector2->set(0, factor * v2_x);
+    loadvector2->set(1, factor * v2_y);
+
+    // Apply equivalent forces
+    this->membrane->add_equivalent_force_node(this->nnode1, loadvector1);
+    this->membrane->add_equivalent_force_node(this->nnode2, loadvector2);
+
+    // Apply force to nodes
+    this->node1->apply_load(loadvector1);
+    this->node2->apply_load(loadvector2);
+
+    // Variable deletion
+    delete loadvector1;
+    delete loadvector2;
 
 }
 

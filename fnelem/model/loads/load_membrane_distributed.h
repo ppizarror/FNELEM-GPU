@@ -57,8 +57,13 @@ private:
     double theta = 0;
 
     // Node references
+    int nnode1 = 0;
+    int nnode2 = 0;
     Node *node1;
     Node *node2;
+
+    // Membrane reference
+    Membrane *membrane;
 
     // Distributed load function
     double rho(double x) const;
