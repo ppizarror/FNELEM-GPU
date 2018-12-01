@@ -1,3 +1,5 @@
+#include <utility>
+
 /**
 FNELEM-GPU RESTRAINTS - NODE RESTRAINT.
 Node restraint definition.
@@ -30,3 +32,55 @@ Node restraint definition.
 
 // Include header
 #include "node_restraint.h"
+
+/**
+ * Constructor.
+ *
+ * @param tag Node restraint tag
+ * @param n Node to apply restraints
+ */
+NodeRestraint::NodeRestraint(std::string tag, Node *n) : ModelComponent(std::move(tag)) {
+
+    // Generate inner restraints vector
+    this->dofid = FEMatrix_vector(n->get_ndof());
+    this->dofid->fill(-1); // IF -1 no dofid has been filled
+
+    // Stores node reference
+    this->node = n;
+
+}
+
+/**
+ * Destructor.
+ */
+NodeRestraint::~NodeRestraint() {
+    delete this->dofid;
+}
+
+/**
+ * Add DOFID restraint.
+ *
+ * @param id
+ */
+void NodeRestraint::add_dofid(int id) {
+
+    // Check if id is valid
+    if (id < 1 || id > this->node->get_ndof()) {
+        throw std::logic_error("[NODE-RESTRAINT] Local DOFID restraint greather than number of Node NDOF");
+    }
+
+    // Stores data
+    this->dofid->set(id - 1, id);
+
+}
+
+/**
+ * Apply node restraints.
+ */
+void NodeRestraint::apply() {
+    for (int i = 0; i < this->node->get_ndof(); i++) {
+        if (fabs(this->dofid->get(i) + 1) > __FEMATRIX_ZERO_TOL) {
+            this->node->set_dof(static_cast<int>(this->dofid->get(i)), 0);
+        }
+    }
+}

@@ -32,5 +32,6 @@ Test model.restraints package.
 #include "test_node_restraint.h"
 
 int main() {
+    test_node_restraint_suite();
     return 0;
 }

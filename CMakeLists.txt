@@ -53,6 +53,7 @@ set(FNELEM_ALL
         ${FNELEM_MODELCOMPONENT}
         ${FNELEM_NODE}
         ${FNELEM_ELEMENT}
+        ${FNELEM_RESTRAINTS}
         )
 
 # DEFINE TESTS

@@ -36,11 +36,34 @@ Node restraint definition.
 #include "../base/model_component.h"
 #include "../../math/fematrix.h"
 #include "../../math/fematrix_utils.h"
+#include "../node/node.h"
 
 // Library imports
 #include <iostream>
 
 class NodeRestraint : ModelComponent {
+private:
+
+    // Stores vector of DOFID restraints
+    FEMatrix *dofid;
+
+    // Stores node reference
+    Node *node;
+
+public:
+
+    // Constructor
+    NodeRestraint(std::string tag, Node *n);
+
+    // Destructor
+    ~NodeRestraint();
+
+    // Add restraint
+    void add_dofid(int id);
+
+    // Apply restraints
+    void apply();
+
 };
 
 #endif // FNELEM_GPU_MODEL_NODE_RESTRAINT_H
