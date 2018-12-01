@@ -77,6 +77,27 @@ LoadMembraneDistributed::LoadMembraneDistributed(std::string tag, Membrane *memb
         throw std::logic_error("[LOAD-MEMBRANE-DISTRIBUTED] Load distances cannot be the same");
     }
 
+    // Get nodes from element
+    std::vector<Node *> *nodes = membrane->get_nodes();
+    Node *n1 = nodes->at(static_cast<unsigned long>(node1 - 1));
+    Node *n2 = nodes->at(static_cast<unsigned long>(node2 - 1));
+
+    // Calculates length
+    double dx = n2->get_pos_x() - n1->get_pos_x();
+    double dy = n2->get_pos_y() - n1->get_pos_y();
+    this->L = sqrt(pow(dx, 2) + pow(dy, 2));
+
+    // Calculates angle
+    this->theta = atan(dy / dx);
+
+    // Stores distances, loads and nodes
+    this->node1 = n1;
+    this->node2 = n2;
+    this->load1 = load1;
+    this->load2 = load2;
+    this->dist1 = dist1;
+    this->dist2 = dist2;
+
 }
 
 /**
@@ -90,12 +111,77 @@ LoadMembraneDistributed::~LoadMembraneDistributed() = default;
  * @param factor Load factor
  */
 void LoadMembraneDistributed::apply(double factor) {
-    Load::apply(factor);
+
+    // Calculates integrals
+    double steps = (this->dist2 - this->dist1) / FNELEM_CONST_GAUSS_INTEGRAL_POINTS;
+    double v1 = 0.0, v2 = 0.0;
+    for (int i = 0; i < FNELEM_CONST_GAUSS_INTEGRAL_POINTS; i++) {
+        v1 += this->v1_int(this->dist1 + (i + 0.5) * steps) * steps;
+        v2 += this->v2_int(this->dist1 + (i + 0.5) * steps) * steps;
+    }
+
+    // Rotate forces
+    double v1_x = v1 * sin(this->theta);
+    double v1_y = v1 * cos(this->theta);
+    double v2_x = v2 * sin(this->theta);
+    double v2_y = v2 * cos(this->theta);
+
 }
 
 /**
  * Display load information.
  */
 void LoadMembraneDistributed::disp() const {
+    std::cout << "Load membrane distribuited information:" << std::endl;
     Load::disp();
+}
+
+/**
+ * Distributed load function.
+ *
+ * @param x Distance evaluation
+ * @return
+ */
+double LoadMembraneDistributed::rho(double x) const {
+    return this->load1 + (this->load2 - this->load1) * (x - this->dist1) / (this->dist2);
+}
+
+/**
+ * Calculates N1 interpolation.
+ *
+ * @param x Distance
+ * @return
+ */
+double LoadMembraneDistributed::N1(double x) const {
+    return 1 - 3 * pow(x / this->L, 2) + 2 * pow(x / this->L, 3);
+}
+
+/**
+ * Calculates N3 interpolation.
+ *
+ * @param x Distance
+ * @return
+ */
+double LoadMembraneDistributed::N3(double x) const {
+    return 3 * pow(x / this->L, 2) - 2 * pow(x / this->L, 3);
+}
+
+/**
+ * X-displacement interpolation function.
+ *
+ * @param x Distance
+ * @return
+ */
+double LoadMembraneDistributed::v1_int(double x) const {
+    return this->rho(x) * this->N1(x);
+}
+
+/**
+ * Y-displacement interpolation function.
+ *
+ * @param x Distance
+ * @return
+ */
+double LoadMembraneDistributed::v2_int(double x) const {
+    return this->rho(x) * this->N3(x);
 }

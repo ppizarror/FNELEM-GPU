@@ -38,8 +38,8 @@ void __test_membrane_creation() {
     // Node creation
     Node *n1 = new Node("N1", 0, 0);
     Node *n2 = new Node("N2", 250, 0);
-    Node *n3 = new Node("N7", 250, 100);
-    Node *n4 = new Node("N6", 0, 100);
+    Node *n3 = new Node("N3", 250, 100);
+    Node *n4 = new Node("N4", 0, 100);
 
     // Creates membrane
     Membrane *mem = new Membrane("MEM", n1, n2, n3, n4, 300000, 0.15, 20);
@@ -158,8 +158,8 @@ void __test_membrane_evalxy() {
     // Node creation
     Node *n1 = new Node("N1", 0, 0);
     Node *n2 = new Node("N2", 250, 0);
-    Node *n3 = new Node("N7", 250, 100);
-    Node *n4 = new Node("N6", 0, 100);
+    Node *n3 = new Node("N3", 250, 100);
+    Node *n4 = new Node("N4", 0, 100);
 
     // Creates membrane
     Membrane *mem = new Membrane("MEM", n1, n2, n3, n4, 300000, 0.15, 20);
@@ -197,8 +197,8 @@ void __test_membrane_forces() {
     // Node creation
     Node *n1 = new Node("N1", 0, 0);
     Node *n2 = new Node("N2", 250, 0);
-    Node *n3 = new Node("N7", 250, 100);
-    Node *n4 = new Node("N6", 0, 100);
+    Node *n3 = new Node("N3", 250, 100);
+    Node *n4 = new Node("N4", 0, 100);
 
     // Creates membrane
     Membrane *mem = new Membrane("MEM", n1, n2, n3, n4, 300000, 0.15, 20);
@@ -246,8 +246,8 @@ void __test_membrane_save_to_file() {
     // Node creation
     Node *n1 = new Node("N1", 0, 0);
     Node *n2 = new Node("N2", 250, 0);
-    Node *n3 = new Node("N7", 250, 100);
-    Node *n4 = new Node("N6", 0, 100);
+    Node *n3 = new Node("N3", 250, 100);
+    Node *n4 = new Node("N4", 0, 100);
 
     // Creates membrane
     Membrane *mem = new Membrane("MEM", n1, n2, n3, n4, 300000, 0.15, 20);

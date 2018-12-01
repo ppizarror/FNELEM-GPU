@@ -60,6 +60,21 @@ private:
     Node *node1;
     Node *node2;
 
+    // Distributed load function
+    double rho(double x) const;
+
+    // Interpolation N1
+    double N1(double x) const;
+
+    // Interpolation N2
+    double N3(double x) const;
+
+    // X-displacement interpolation function
+    double v1_int(double x) const;
+
+    // Y-displacement interpolation function
+    double v2_int(double x) const;
+
 public:
 
     // Constructor

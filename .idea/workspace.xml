@@ -19,23 +19,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="221cac94-3076-4b70-8e37-e7f72eb35a62" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fnelem/math/fematrix.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/math/fematrix.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fnelem/math/fematrix_utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/math/fematrix_utils.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fnelem/math/matrix_inversion_cpu.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/math/matrix_inversion_cpu.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fnelem/model/base/model_component.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/base/model_component.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fnelem/model/elements/element.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/elements/element.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fnelem/model/elements/membrane.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/elements/membrane.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fnelem/model/elements/membrane.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/elements/membrane.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fnelem/model/loads/load.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/loads/load.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fnelem/model/base/constants.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/base/constants.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fnelem/model/loads/load_membrane_distributed.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/loads/load_membrane_distributed.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fnelem/model/loads/load_membrane_distributed.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/loads/load_membrane_distributed.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fnelem/model/loads/load_node.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/loads/load_node.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fnelem/model/loads/load_node.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/loads/load_node.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fnelem/model/nodes/node.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/nodes/node.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fnelem/model/restraints/restraint_node.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/restraints/restraint_node.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fnelem/model/restraints/restraint_node.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/restraints/restraint_node.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cu" beforeDir="false" afterPath="$PROJECT_DIR$/main.cu" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/elements/test_membrane.h" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/elements/test_membrane.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/model/loads/test_load_membrane_distributed.h" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/loads/test_load_membrane_distributed.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -49,10 +37,55 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main.cu">
+        <entry file="file://$PROJECT_DIR$/fnelem/model/loads/load_membrane_distributed.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="53" selection-start-line="53" selection-end-line="53" />
+            <state relative-caret-position="280">
+              <caret line="117" column="58" selection-start-line="117" selection-start-column="58" selection-end-line="117" selection-end-column="58" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fnelem/model/base/constants.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="260">
+              <caret line="34" column="47" selection-start-line="34" selection-start-column="47" selection-end-line="34" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fnelem/model/loads/load_membrane_distributed.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="45" column="11" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/model/loads/test_load_membrane_distributed.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="218">
+              <caret line="45" column="96" selection-start-line="45" selection-start-column="96" selection-end-line="45" selection-end-column="96" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fnelem/model/loads/load.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="260">
+              <caret line="31" column="16" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/model/elements/test_elements.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="20">
+              <caret line="35" column="59" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -107,7 +140,6 @@
         <option value="$PROJECT_DIR$/test/model/restraints/__restraints__.cpp" />
         <option value="$PROJECT_DIR$/test/model/restraints/test_restraint_node.h" />
         <option value="$PROJECT_DIR$/test/math/test_fematrix.h" />
-        <option value="$PROJECT_DIR$/test/model/elements/test_membrane.h" />
         <option value="$PROJECT_DIR$/test/model/nodes/test_node.h" />
         <option value="$PROJECT_DIR$/fnelem/model/elements/element.cpp" />
         <option value="$PROJECT_DIR$/fnelem/model/loads/load.cpp" />
@@ -116,18 +148,14 @@
         <option value="$PROJECT_DIR$/test/test_suite.h" />
         <option value="$PROJECT_DIR$/test/model/loads/__loads__.cpp" />
         <option value="$PROJECT_DIR$/fnelem/model/loads/load_node.cpp" />
-        <option value="$PROJECT_DIR$/test/model/loads/test_load_membrane_distributed.h" />
         <option value="$PROJECT_DIR$/fnelem/model/elements/membrane.cpp" />
-        <option value="$PROJECT_DIR$/fnelem/model/loads/load_membrane_distributed.cpp" />
         <option value="$PROJECT_DIR$/fnelem/math/fematrix.h" />
         <option value="$PROJECT_DIR$/fnelem/math/fematrix_utils.h" />
         <option value="$PROJECT_DIR$/fnelem/math/matrix_inversion_cpu.h" />
-        <option value="$PROJECT_DIR$/fnelem/model/base/constants.h" />
         <option value="$PROJECT_DIR$/fnelem/model/base/model_component.h" />
         <option value="$PROJECT_DIR$/fnelem/model/elements/element.h" />
         <option value="$PROJECT_DIR$/fnelem/model/elements/membrane.h" />
         <option value="$PROJECT_DIR$/fnelem/model/loads/load.h" />
-        <option value="$PROJECT_DIR$/fnelem/model/loads/load_membrane_distributed.h" />
         <option value="$PROJECT_DIR$/fnelem/model/loads/load_node.h" />
         <option value="$PROJECT_DIR$/fnelem/model/nodes/node.h" />
         <option value="$PROJECT_DIR$/fnelem/model/restraints/restraint.h" />
@@ -136,11 +164,16 @@
         <option value="$PROJECT_DIR$/fnelem/model/restraints/restraint_node.cpp" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/main.cu" />
+        <option value="$PROJECT_DIR$/test/model/elements/test_membrane.h" />
+        <option value="$PROJECT_DIR$/fnelem/model/loads/load_membrane_distributed.h" />
+        <option value="$PROJECT_DIR$/test/model/loads/test_load_membrane_distributed.h" />
+        <option value="$PROJECT_DIR$/fnelem/model/loads/load_membrane_distributed.cpp" />
+        <option value="$PROJECT_DIR$/fnelem/model/base/constants.h" />
       </list>
     </option>
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="width" value="977" />
     <option name="height" value="1050" />
@@ -291,7 +324,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.TEST-RESTRAINTS">
+  <component name="RunManager" selected="Application.TEST-LOADS">
     <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="FNELEM-GPU" RUN_TARGET_NAME="TEST-ALL" EXPLICIT_BUILD_TARGET_NAME="all">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -373,23 +406,23 @@
       <workItem from="1543413004439" duration="11345000" />
       <workItem from="1543425974929" duration="28000" />
       <workItem from="1543546236282" duration="635000" />
-      <workItem from="1543591334339" duration="19180000" />
+      <workItem from="1543591334339" duration="21696000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="141662000" />
+    <option name="totallyTimeSpent" value="144178000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21140939" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24496645" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3282123" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49798658" visible="true" weight="0.38687152" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49798658" visible="true" weight="0.38687152" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39944133" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -584,20 +617,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/model/elements/test_elements.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-126">
-          <caret line="35" column="59" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/model/elements/test_membrane.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="252" column="74" selection-start-line="245" selection-start-column="4" selection-end-line="252" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fnelem/model/loads/load.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="317">
@@ -612,13 +631,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/model/loads/test_load_membrane_distributed.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="53" column="16" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fnelem/model/base/model_component.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -630,13 +642,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="244">
           <caret line="87" column="5" lean-forward="true" selection-start-line="87" selection-start-column="5" selection-end-line="87" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fnelem/model/loads/load_membrane_distributed.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="77" column="5" selection-start-line="77" selection-start-column="5" selection-end-line="77" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -661,13 +666,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fnelem/model/base/constants.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="31" column="16" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fnelem/model/base/model_component.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -685,20 +683,6 @@
     <entry file="file://$PROJECT_DIR$/fnelem/model/elements/membrane.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
-          <caret line="31" column="16" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fnelem/model/loads/load.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="31" column="16" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fnelem/model/loads/load_membrane_distributed.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
           <caret line="31" column="16" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="16" />
         </state>
       </provider>
@@ -756,6 +740,55 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="53" selection-start-line="53" selection-end-line="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fnelem/model/loads/load.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="31" column="16" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/model/elements/test_elements.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="35" column="59" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/model/elements/test_membrane.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="41" column="27" selection-start-line="41" selection-start-column="27" selection-end-line="41" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fnelem/model/loads/load_membrane_distributed.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="45" column="11" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/model/loads/test_load_membrane_distributed.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="45" column="96" selection-start-line="45" selection-start-column="96" selection-end-line="45" selection-end-column="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fnelem/model/base/constants.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="34" column="47" selection-start-line="34" selection-start-column="47" selection-end-line="34" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fnelem/model/loads/load_membrane_distributed.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="117" column="58" selection-start-line="117" selection-start-column="58" selection-end-line="117" selection-end-column="58" />
         </state>
       </provider>
     </entry>
