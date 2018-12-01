@@ -1,8 +1,8 @@
 /**
-FNELEM-GPU - TEST
-Test node restraints.
+FNELEM-GPU - TEST LOAD
+Test general load class.
 
-@package test.model.restraints
+@package test.model.load
 @author ppizarror
 @date 30/11/2018
 @license
@@ -30,48 +30,18 @@ Test node restraints.
 
 // Include sources
 #include "../../test_utils.h"
-#include "../../../fnelem/model/restraints/node_restraint.h"
+#include "../../../fnelem/model/loads/load.h"
 
-void __test_node_restraint() {
-    test_print_title("NODE-RESTRAINT", "test_node_restraint");
-
-    // Create node
-    Node *n = new Node("NODE", 1.5, 3.2, 5.6);
-    NodeRestraint *r = new NodeRestraint("R1", n);
-
-    // Apply restraints, no DOFID has been setted, so GLOBALID of node is -1
-    r->apply();
-    FEMatrix *dofn1 = n->get_dof();
-    assert(dofn1->is_double(-1));
-    r->disp();
-
-    // Create restraints
-    r->add_dofid(1);
-    r->apply();
-    assert(is_num_equal(n->get_dof(1), 0));
-    assert(is_num_equal(n->get_dof(2), -1));
-    assert(is_num_equal(n->get_dof(3), -1));
-
-    // Apply more constraints
-    r->add_dofid(3);
-    r->apply();
-    assert(is_num_equal(n->get_dof(1), 0));
-    assert(is_num_equal(n->get_dof(2), -1));
-    assert(is_num_equal(n->get_dof(3), 0));
-
-    // Display restraint information
-    r->disp();
-
-    // Delete vars
-    delete n;
-    delete r;
-    delete dofn1;
-
+void __test_load_init() {
+    Load *ld = new Load("LOAD");
+    ld->apply();
+    ld->disp();
+    delete ld;
 }
 
 /**
- * Performs TEST-NODE-RESTRAINT suite.
+ * Performs TEST-LOAD suite.
  */
-void test_node_restraint_suite() {
-    __test_node_restraint();
+void test_load_suite() {
+    __test_load_init();
 }

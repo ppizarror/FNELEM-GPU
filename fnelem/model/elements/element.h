@@ -32,7 +32,7 @@ Base structural element class.
 #define FNELEM_GPU_ELEMENT_H
 
 // Library imports
-#include "../node/node.h"
+#include "../nodes/node.h"
 #include <vector>
 
 class Element : public ModelComponent {

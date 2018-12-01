@@ -1,10 +1,10 @@
 /**
-FNELEM-GPU - TEST
-Test model.restraints package.
+FNELEM-GPU - TEST LOAD
+Test general load node.
 
-@package test.model.restraints
+@package test.model.load
 @author ppizarror
-@date 30/11/2018
+@date 01/12/2018
 @license
 	MIT License
 	Copyright (c) 2018 Pablo Pizarro R.
@@ -29,9 +29,15 @@ Test model.restraints package.
 */
 
 // Include sources
-#include "test_restraint_node.h"
+#include "../../test_utils.h"
+#include "../../../fnelem/model/loads/load_node.h"
 
-int main() {
-    test_restraint_node_suite();
-    return 0;
+void __test_load_node_init() {
+}
+
+/**
+ * Performs TEST-LOAD-NODE suite.
+ */
+void test_load_node_suite() {
+    __test_load_node_init();
 }

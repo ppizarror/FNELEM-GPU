@@ -1,8 +1,8 @@
 /**
-FNELEM-GPU - TEST LOAD
-Test general load class.
+FNELEM-GPU - TEST
+Test node restraints.
 
-@package test.model.load
+@package test.model.restraints
 @author ppizarror
 @date 30/11/2018
 @license
@@ -30,18 +30,48 @@ Test general load class.
 
 // Include sources
 #include "../../test_utils.h"
-#include "../../../fnelem/model/load/load.h"
+#include "../../../fnelem/model/restraints/restraint_node.h"
 
-void __test_load_init() {
-    Load *ld = new Load("LOAD");
-    ld->apply();
-    ld->disp();
-    delete ld;
+void __test_restraint_node() {
+    test_print_title("RESTRAINT-NODE", "test_restraint_node");
+
+    // Create node
+    Node *n = new Node("NODE", 1.5, 3.2, 5.6);
+    RestraintNode *r = new RestraintNode("R1", n);
+
+    // Apply restraints, no DOFID has been setted, so GLOBALID of node is -1
+    r->apply();
+    FEMatrix *dofn1 = n->get_dof();
+    assert(dofn1->is_double(-1));
+    r->disp();
+
+    // Create restraints
+    r->add_dofid(1);
+    r->apply();
+    assert(is_num_equal(n->get_dof(1), 0));
+    assert(is_num_equal(n->get_dof(2), -1));
+    assert(is_num_equal(n->get_dof(3), -1));
+
+    // Apply more constraints
+    r->add_dofid(3);
+    r->apply();
+    assert(is_num_equal(n->get_dof(1), 0));
+    assert(is_num_equal(n->get_dof(2), -1));
+    assert(is_num_equal(n->get_dof(3), 0));
+
+    // Display restraint information
+    r->disp();
+
+    // Delete vars
+    delete n;
+    delete r;
+    delete dofn1;
+
 }
 
 /**
- * Performs TEST-LOAD suite.
+ * Performs TEST-RESTRAINT-NODE suite.
  */
-void test_load_suite() {
-    __test_load_init();
+void test_restraint_node_suite() {
+    __test_restraint_node();
 }

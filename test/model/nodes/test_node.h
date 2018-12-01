@@ -30,7 +30,7 @@ Test structure node class.
 
 // Include sources
 #include "../../test_utils.h"
-#include "../../../fnelem/model/node/node.h"
+#include "../../../fnelem/model/nodes/node.h"
 
 void __test_node_creation() {
     test_print_title("NODE", "test_node_creation");

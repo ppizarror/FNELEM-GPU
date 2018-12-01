@@ -1,5 +1,3 @@
-#include <utility>
-
 /**
 FNELEM-GPU RESTRAINTS - NODE RESTRAINT.
 Node restraint definition.
@@ -31,7 +29,7 @@ Node restraint definition.
 */
 
 // Include header
-#include "node_restraint.h"
+#include "restraint_node.h"
 
 /**
  * Constructor.
@@ -39,7 +37,7 @@ Node restraint definition.
  * @param tag Node restraint tag
  * @param n Node to apply restraints
  */
-NodeRestraint::NodeRestraint(std::string tag, Node *n) : ModelComponent(std::move(tag)) {
+RestraintNode::RestraintNode(std::string tag, Node *n) : ModelComponent(std::move(tag)) {
 
     // Generate inner restraints vector
     this->dofid = FEMatrix_vector(n->get_ndof());
@@ -54,7 +52,7 @@ NodeRestraint::NodeRestraint(std::string tag, Node *n) : ModelComponent(std::mov
 /**
  * Destructor.
  */
-NodeRestraint::~NodeRestraint() {
+RestraintNode::~RestraintNode() {
     delete this->dofid;
 }
 
@@ -63,7 +61,7 @@ NodeRestraint::~NodeRestraint() {
  *
  * @param id
  */
-void NodeRestraint::add_dofid(int id) {
+void RestraintNode::add_dofid(int id) {
 
     // Check if id is valid
     if (id < 1 || id > this->ndof) {
@@ -78,7 +76,7 @@ void NodeRestraint::add_dofid(int id) {
 /**
  * Apply node restraints.
  */
-void NodeRestraint::apply() {
+void RestraintNode::apply() {
     for (int i = 0; i < this->ndof; i++) {
         if (fabs(this->dofid->get(i) + 1) > __FEMATRIX_ZERO_TOL) {
             this->node->set_dof(static_cast<int>(this->dofid->get(i)), 0);
@@ -89,7 +87,7 @@ void NodeRestraint::apply() {
 /**
  * Display node restraint information.
  */
-void NodeRestraint::disp() const {
+void RestraintNode::disp() const {
     std::cout << "Node restraint information:" << std::endl;
     ModelComponent::disp();
     std::cout << "\n\tRestrained node:\t" << this->node->get_model_tag();

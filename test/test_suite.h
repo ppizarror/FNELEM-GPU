@@ -37,9 +37,9 @@ Imports all tests.
 #include "model/base/test_model_component.h"
 #include "model/elements/test_elements.h"
 #include "model/elements/test_membrane.h"
-#include "model/load/test_load.h"
-#include "model/node/test_node.h"
-#include "model/restraints/test_node_restraint.h"
+#include "model/loads/test_load.h"
+#include "model/nodes/test_node.h"
+#include "model/restraints/test_restraint_node.h"
 
 void test_suite() {
     test_fematrix_suite();
@@ -48,7 +48,7 @@ void test_suite() {
     test_node_suite();
     test_elements_suite();
     test_membrane_suite();
-    test_node_restraint_suite();
+    test_restraint_node_suite();
     test_load_suite();
 }
 

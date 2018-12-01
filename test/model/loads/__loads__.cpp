@@ -1,8 +1,8 @@
 /**
-FNELEM-GPU LOAD - LOAD ABSTRACT CLASS.
-General load definition.
+FNELEM-GPU - TEST
+Test model.load package.
 
-@package fnelem.model.load
+@package test.model.load
 @author ppizarror
 @date 30/11/2018
 @license
@@ -28,34 +28,12 @@ General load definition.
 	SOFTWARE.
 */
 
-// Init header file
-#ifndef FNELEM_GPU_MODEL_LOAD_H
-#define FNELEM_GPU_MODEL_LOAD_H
+// Include sources
+#include "test_load.h"
+#include "test_load_node.h"
 
-// Include headers
-#include "../base/model_component.h"
-#include "../../math/fematrix.h"
-#include "../../math/fematrix_utils.h"
-#include "../node/node.h"
-
-// Library imports
-#include <iostream>
-
-class Load : ModelComponent {
-public:
-
-    // Constructor
-    explicit Load(std::string tag);
-
-    // Destructor
-    ~Load();
-
-    // Apply load
-    virtual void apply();
-
-    // Display load information to console
-    void disp() const override;
-
-};
-
-#endif // FNELEM_GPU_MODEL_LOAD_H
+int main() {
+    test_load_suite();
+    test_load_node_suite();
+    return 0;
+}

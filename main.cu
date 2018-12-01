@@ -43,9 +43,9 @@ was calculated using a CUDA algorithm (Gauss Jordan inversion).
 #include "fnelem/model/base/model_component.cpp"
 #include "fnelem/model/elements/element.cpp"
 #include "fnelem/model/elements/membrane.cpp"
-#include "fnelem/model/load/load.cpp"
-#include "fnelem/model/node/node.cpp"
-#include "fnelem/model/restraints/node_restraint.cpp"
+#include "fnelem/model/loads/load.cpp"
+#include "fnelem/model/nodes/node.cpp"
+#include "fnelem/model/restraints/restraint_node.cpp"
 
 #include "test/test_suite.h"
 

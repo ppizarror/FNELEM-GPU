@@ -1,12 +1,10 @@
-#include <utility>
-
 /**
-FNELEM-GPU LOAD - LOAD ABSTRACT CLASS.
-General load definition.
+FNELEM-GPU LOAD - NODE LOAD.
+Load applied to node.
 
 @package fnelem.model.load
 @author ppizarror
-@date 30/11/2018
+@date 01/12/2018
 @license
 	MIT License
 	Copyright (c) 2018 Pablo Pizarro R.
@@ -30,32 +28,17 @@ General load definition.
 	SOFTWARE.
 */
 
-// Include header
+// Init header file
+#ifndef FNELEM_GPU_MODEL_LOAD_NODE_H
+#define FNELEM_GPU_MODEL_LOAD_NODE_H
+
+// Include headers
 #include "load.h"
 
-/**
- * Constructor.
- *
- * @param tag Load tag
- */
-Load::Load(std::string tag) : ModelComponent(std::move(tag)) {
-}
+// Library imports
+#include <iostream>
 
-/**
- * Destructor.
- */
-Load::~Load() = default;
+class LoadNode : Load {
+};
 
-/**
- * Apply load.
- */
-void Load::apply() {
-}
-
-/**
- * Display load information.
- */
-void Load::disp() const {
-    std::cout << "Load information:" << std::endl;
-    ModelComponent::disp();
-}
+#endif // FNELEM_GPU_MODEL_LOAD_NODE_H

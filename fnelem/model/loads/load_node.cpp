@@ -1,10 +1,10 @@
 /**
-FNELEM-GPU - TEST
-Test model.restraints package.
+FNELEM-GPU LOAD - NODE LOAD.
+Load applied to node.
 
-@package test.model.restraints
+@package fnelem.model.load
 @author ppizarror
-@date 30/11/2018
+@date 01/12/2018
 @license
 	MIT License
 	Copyright (c) 2018 Pablo Pizarro R.
@@ -28,10 +28,5 @@ Test model.restraints package.
 	SOFTWARE.
 */
 
-// Include sources
-#include "test_restraint_node.h"
-
-int main() {
-    test_restraint_node_suite();
-    return 0;
-}
+// Include header
+#include "load_node.h"
