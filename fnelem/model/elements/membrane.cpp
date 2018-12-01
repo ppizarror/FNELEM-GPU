@@ -269,7 +269,7 @@ void Membrane::disp() const {
     // Node information
     std::string nodetag;
     Node *n;
-    for (unsigned long i = 0; i < this->nnodes; i++) {
+    for (std::size_t i = 0; i < this->nnodes; i++) {
         n = this->nodes->at(i);
         nodetag += n->get_model_tag();
         if (i < this->nnodes - 1) {
@@ -596,7 +596,7 @@ void Membrane::save_properties(std::ofstream &file) const {
     // Node information
     std::string nodetag;
     Node *n;
-    for (unsigned long i = 0; i < this->nnodes; i++) {
+    for (std::size_t i = 0; i < this->nnodes; i++) {
         n = this->nodes->at(i);
         nodetag += n->get_model_tag();
         if (i < this->nnodes - 1) {
