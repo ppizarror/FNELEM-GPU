@@ -1,10 +1,10 @@
 /**
-FNELEM-GPU - TEST
-Test model.load package.
+FNELEM-GPU LOAD - LOAD PATTERN ABSTRACT CLASS.
+General load pattern definition.
 
-@package test.model.load
+@package fnelem.model.load
 @author ppizarror
-@date 30/11/2018
+@date 21/12/2018
 @license
 	MIT License
 	Copyright (c) 2018 Pablo Pizarro R.
@@ -28,16 +28,30 @@ Test model.load package.
 	SOFTWARE.
 */
 
-// Include sources
-#include "test_load.h"
-#include "test_load_membrane_distributed.h"
-#include "test_load_node.h"
-#include "test_load_pattern.h"
+// Include header
+#include "load_pattern.h"
 
-int main() {
-    test_load_suite();
-    test_load_node_suite();
-    test_load_membrane_distributed_suite();
-    test_load_pattern_suite();
-    return 0;
+/**
+ * Constructor.
+ *
+ * @param tag Load pattern tag
+ */
+LoadPattern::LoadPattern(std::string tag) : ModelComponent(std::move(tag)) {
+}
+
+/**
+ * Destructor.
+ */
+LoadPattern::~LoadPattern() = default;
+
+/**
+ * Apply load.
+ */
+void LoadPattern::apply() {};
+
+/**
+ * Display load information.
+ */
+void LoadPattern::disp() const {
+    ModelComponent::disp();
 }

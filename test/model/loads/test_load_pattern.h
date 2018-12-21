@@ -1,10 +1,10 @@
 /**
-FNELEM-GPU - TEST
-Test model.load package.
+FNELEM-GPU - TEST LOAD PATTERN
+Test load pattern class.
 
 @package test.model.load
 @author ppizarror
-@date 30/11/2018
+@date 21/12/2018
 @license
 	MIT License
 	Copyright (c) 2018 Pablo Pizarro R.
@@ -29,15 +29,20 @@ Test model.load package.
 */
 
 // Include sources
-#include "test_load.h"
-#include "test_load_membrane_distributed.h"
-#include "test_load_node.h"
-#include "test_load_pattern.h"
+#include "../../test_utils.h"
+#include "../../../fnelem/model/loads/load_pattern.h"
 
-int main() {
-    test_load_suite();
-    test_load_node_suite();
-    test_load_membrane_distributed_suite();
-    test_load_pattern_suite();
-    return 0;
+void __test_load_pattern_init() {
+    test_print_title("LOAD", "load_pattern_init");
+    LoadPattern *ld = new LoadPattern("LOAD");
+    ld->apply();
+    ld->disp();
+    delete ld;
+}
+
+/**
+ * Performs TEST-LOAD-PATTERN suite.
+ */
+void test_load_pattern_suite() {
+    __test_load_pattern_init();
 }
