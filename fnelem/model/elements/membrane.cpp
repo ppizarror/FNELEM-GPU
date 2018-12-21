@@ -43,7 +43,8 @@ Bidimensional membrane element composed by 4 nodes.
  * @param poisson Poisson constant of the section
  * @param thickness Thickness of the section
  */
-Membrane::Membrane(std::string tag, Node *n1, Node *n2, Node *n3, Node *n4, double E, double poisson, double thickness)
+Membrane::Membrane(std::string tag, Node *n1, Node *n2, Node *n3, Node *n4,
+                   double E, double poisson, double thickness)
         : Element(std::move(tag)) {
 
     // Stores material

@@ -58,6 +58,7 @@ set(FNELEM_MODEL_LOADS
         fnelem/model/loads/load_membrane_distributed.cpp
         fnelem/model/loads/load_node.cpp
         fnelem/model/loads/load_pattern.cpp
+        fnelem/model/loads/load_pattern_constant.cpp
         )
 
 # ALL LIBRARIES

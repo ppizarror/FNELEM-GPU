@@ -1,10 +1,12 @@
-/**
-FNELEM-GPU - TEST
-Test model.load package.
+#include <utility>
 
-@package test.model.load
+/**
+FNELEM-GPU LOAD - CONSTANT LOAD PATTERN.
+Constant load pattern class.
+
+@package fnelem.model.load
 @author ppizarror
-@date 30/11/2018
+@date 21/12/2018
 @license
 	MIT License
 	Copyright (c) 2018 Pablo Pizarro R.
@@ -28,18 +30,39 @@ Test model.load package.
 	SOFTWARE.
 */
 
-// Include sources
-#include "test_load.h"
-#include "test_load_membrane_distributed.h"
-#include "test_load_node.h"
-#include "test_load_pattern.h"
-#include "test_load_pattern_constant.h"
+// Include header
+#include "load_pattern_constant.h"
 
-int main() {
-    test_load_suite();
-    test_load_node_suite();
-    test_load_membrane_distributed_suite();
-    test_load_pattern_suite();
-    test_load_pattern_constant_suite();
-    return 0;
+/**
+ * Load pattern constant constructor.
+ *
+ * @param tag Load pattern constant tag
+ * @param loads Load vector
+ */
+LoadPatternConstant::LoadPatternConstant(std::string tag, std::vector<Load *> *loads) :
+        LoadPattern(std::move(tag)) {
+    this->load_array = loads;
+}
+
+/**
+ * Destructor.
+ */
+LoadPatternConstant::~LoadPatternConstant() = default;
+
+/**
+ * Apply load pattern.
+ */
+void LoadPatternConstant::apply() {
+    for (auto &i : *this->load_array) {
+        i->apply(1);
+    }
+}
+
+/**
+ * Display load pattern information.
+ */
+void LoadPatternConstant::disp() const {
+    std::cout << "Constant load pattern information:" << std::endl;
+    LoadPattern::disp();
+    std::cout << "\n\tTotal loads at vector:\t" << this->load_array->size() << std::endl;
 }

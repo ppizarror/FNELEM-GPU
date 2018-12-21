@@ -1,10 +1,10 @@
 /**
-FNELEM-GPU - TEST
-Test model.load package.
+FNELEM-GPU LOAD - CONSTANT LOAD PATTERN.
+Constant load pattern class.
 
-@package test.model.load
+@package fnelem.model.load
 @author ppizarror
-@date 30/11/2018
+@date 21/12/2018
 @license
 	MIT License
 	Copyright (c) 2018 Pablo Pizarro R.
@@ -28,18 +28,38 @@ Test model.load package.
 	SOFTWARE.
 */
 
-// Include sources
-#include "test_load.h"
-#include "test_load_membrane_distributed.h"
-#include "test_load_node.h"
-#include "test_load_pattern.h"
-#include "test_load_pattern_constant.h"
+// Init header file
+#ifndef __FNELEM_MODEL_LOADS_LOAD_PATTERN_CONSTANT_H
+#define __FNELEM_MODEL_LOADS_LOAD_PATTERN_CONSTANT_H
 
-int main() {
-    test_load_suite();
-    test_load_node_suite();
-    test_load_membrane_distributed_suite();
-    test_load_pattern_suite();
-    test_load_pattern_constant_suite();
-    return 0;
-}
+// Include headers
+#include "load_pattern.h"
+#include "load.h"
+
+// Library imports
+#include <iostream>
+#include <vector>
+
+class LoadPatternConstant : public LoadPattern {
+private:
+
+    // Load pattern vector
+    std::vector<Load*> *load_array;
+
+public:
+
+    // Constructor
+    explicit LoadPatternConstant(std::string tag, std::vector<Load*> *loads);
+
+    // Destructor
+    ~LoadPatternConstant();
+
+    // Apply load pattern
+    void apply() override;
+
+    // Display load pattern information to console
+    void disp() const override;
+
+};
+
+#endif // __FNELEM_MODEL_LOADS_LOAD_PATTERN_CONSTANT_H
