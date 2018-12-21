@@ -52,7 +52,8 @@ Distributed load in membrane element.
  * @param dist2 Distance from node 1 to apply load 2
  */
 LoadMembraneDistributed::LoadMembraneDistributed(std::string tag, Membrane *membrane, int node1,
-                                                 int node2, double load1, double dist1, double load2, double dist2)
+                                                 int node2, double load1, double dist1, double load2,
+                                                 double dist2)
         : Load(std::move(tag)) {
 
     // Check nodes are well defined
@@ -160,6 +161,19 @@ void LoadMembraneDistributed::apply(double factor) {
 void LoadMembraneDistributed::disp() const {
     std::cout << "Load membrane distribuited information:" << std::endl;
     Load::disp();
+
+    // Check if load is vertical or horizontal
+    std::string direction;
+    if (fabs(this->theta) < FNELEM_CONST_ZERO_TOLERANCE) {
+        direction = "Horizontal";
+    } else if (fabs(this->theta - FNELEM_CONST_PI) < FNELEM_CONST_ZERO_TOLERANCE) {
+        direction = "Vertical";
+    } else {
+        direction = "Diagonal, theta=" + std::to_string(this->theta);
+    }
+    std::cout << "\n\tLoad distributed:\t" << this->load1 << "@" << this->node1->get_model_tag();
+    std::cout << " to " << this->load2 << "@" << this->node2->get_model_tag() << " (";
+    std::cout << direction << ")" << std::endl;
 }
 
 /**

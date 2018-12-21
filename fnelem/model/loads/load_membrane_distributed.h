@@ -34,6 +34,7 @@ Distributed load in membrane element.
 
 // Include headers
 #include "load.h"
+#include "../base/constants.h"
 #include "../elements/membrane.h"
 
 // Library imports

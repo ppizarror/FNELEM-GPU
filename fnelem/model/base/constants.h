@@ -36,4 +36,6 @@ Constants definition.
 #define FNELEM_CONST_MEMBRANE_INTEGRATION_NPOINTS 15    // Number of integration points inside membrane
 #define FNELEM_CONST_ZERO_TOLERANCE 1e-12               // Zero tolerance
 
+#define FNELEM_CONST_PI 3.14159265358979323846          // Pi value
+
 #endif // __FNELEM_MODEL_BASE_CONSTANTS_H
