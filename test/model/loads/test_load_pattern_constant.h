@@ -33,7 +33,7 @@ Test load pattern constant class.
 #include "../../../fnelem/model/loads/load_pattern_constant.h"
 
 void __test_load_pattern_constant_init() {
-    test_print_title("LOAD", "load_pattern_constant");
+    test_print_title("LOAD-PATTERN-CONSTANT", "load_pattern_constant");
     std::vector<Load *> *loads = new std::vector<Load *>();
     LoadPattern *ld = new LoadPatternConstant("LOAD", loads);
     ld->apply();

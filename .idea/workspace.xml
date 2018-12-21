@@ -19,8 +19,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="221cac94-3076-4b70-8e37-e7f72eb35a62" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/fnelem/model/elements/membrane.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/elements/membrane.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/model/loads/__loads__.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/loads/__loads__.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fnelem/model/base/model_component.h" beforeDir="false" afterPath="$PROJECT_DIR$/fnelem/model/base/model_component.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/base/__base__.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/base/__base__.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/loads/test_load_pattern.h" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/loads/test_load_pattern.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/loads/test_load_pattern_constant.h" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/loads/test_load_pattern_constant.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,92 +35,29 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fnelem/model/loads/load_pattern.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-760">
-              <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fnelem/model/loads/load_pattern_constant.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="54" column="19" selection-start-line="54" selection-start-column="19" selection-end-line="54" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/model/loads/test_load.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="74">
-              <caret line="32" column="45" selection-start-line="32" selection-start-column="45" selection-end-line="32" selection-end-column="45" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fnelem/model/loads/load_pattern_constant.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="53" column="3" selection-start-line="53" selection-start-column="3" selection-end-line="53" selection-end-column="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/model/loads/test_load_pattern_constant.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="34" column="34" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/test/model/loads/__loads__.cpp">
+        <entry file="file://$PROJECT_DIR$/fnelem/model/base/model.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="42" column="39" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
+            <state relative-caret-position="351">
+              <caret line="101" column="29" selection-start-line="101" selection-start-column="29" selection-end-line="101" selection-end-column="29" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/model/loads/test_load_pattern.h">
+        <entry file="file://$PROJECT_DIR$/fnelem/model/base/model.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="29" selection-start-line="29" selection-end-line="29" />
+            <state relative-caret-position="190">
+              <caret line="54" column="26" selection-start-line="54" selection-start-column="26" selection-end-line="54" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fnelem/model/nodes/node.cpp">
+        <entry file="file://$PROJECT_DIR$/fnelem/model/base/model_component.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4030">
-              <caret line="256" column="11" selection-start-line="256" selection-start-column="11" selection-end-line="256" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fnelem/model/restraints/restraint_node.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="64" column="12" selection-start-line="64" selection-start-column="12" selection-end-line="64" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fnelem/model/loads/load_membrane_distributed.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="173" column="42" lean-forward="true" selection-start-line="173" selection-start-column="4" selection-end-line="173" selection-end-column="42" />
+            <state relative-caret-position="-280">
+              <caret line="37" column="18" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -151,10 +91,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/test/model/node/test_node.h" />
-        <option value="$PROJECT_DIR$/test/model/elements/test_elements.h" />
-        <option value="$PROJECT_DIR$/test/model/base/__base__.cpp" />
-        <option value="$PROJECT_DIR$/fnelem/model/node/node.h" />
         <option value="$PROJECT_DIR$/fnelem/math/fematrix.cpp" />
         <option value="$PROJECT_DIR$/fnelem/model/restraints/node_restraint.h" />
         <option value="$PROJECT_DIR$/fnelem/model/node/node.cpp" />
@@ -177,7 +113,6 @@
         <option value="$PROJECT_DIR$/fnelem/math/fematrix.h" />
         <option value="$PROJECT_DIR$/fnelem/math/fematrix_utils.h" />
         <option value="$PROJECT_DIR$/fnelem/math/matrix_inversion_cpu.h" />
-        <option value="$PROJECT_DIR$/fnelem/model/base/model_component.h" />
         <option value="$PROJECT_DIR$/fnelem/model/elements/element.h" />
         <option value="$PROJECT_DIR$/fnelem/model/elements/membrane.h" />
         <option value="$PROJECT_DIR$/fnelem/model/loads/load.h" />
@@ -193,15 +128,20 @@
         <option value="$PROJECT_DIR$/fnelem/model/base/constants.h" />
         <option value="$PROJECT_DIR$/fnelem/model/loads/load_membrane_distributed.h" />
         <option value="$PROJECT_DIR$/fnelem/model/loads/load_membrane_distributed.cpp" />
-        <option value="$PROJECT_DIR$/test/model/loads/test_load_pattern.h" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/fnelem/model/loads/load_pattern.h" />
         <option value="$PROJECT_DIR$/fnelem/model/loads/load_pattern.cpp" />
         <option value="$PROJECT_DIR$/fnelem/model/elements/membrane.cpp" />
         <option value="$PROJECT_DIR$/fnelem/model/loads/load_pattern_constant.h" />
         <option value="$PROJECT_DIR$/fnelem/model/loads/load_pattern_constant.cpp" />
-        <option value="$PROJECT_DIR$/test/model/loads/test_load_pattern_constant.h" />
         <option value="$PROJECT_DIR$/test/model/loads/__loads__.cpp" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/test/model/loads/test_load_pattern_constant.h" />
+        <option value="$PROJECT_DIR$/test/model/loads/test_load_pattern.h" />
+        <option value="$PROJECT_DIR$/test/model/base/__base__.cpp" />
+        <option value="$PROJECT_DIR$/test/model/base/test_model.h" />
+        <option value="$PROJECT_DIR$/fnelem/model/base/model_component.h" />
+        <option value="$PROJECT_DIR$/fnelem/model/base/model.cpp" />
+        <option value="$PROJECT_DIR$/fnelem/model/base/model.h" />
       </list>
     </option>
   </component>
@@ -282,27 +222,6 @@
             <path>
               <item name="FNELEM-GPU" type="b2602c69:ProjectViewProjectNode" />
               <item name="FNELEM-GPU" type="462c0819:PsiDirectoryNode" />
-              <item name="fnelem" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="loads" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FNELEM-GPU" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FNELEM-GPU" type="462c0819:PsiDirectoryNode" />
-              <item name="fnelem" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="nodes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FNELEM-GPU" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FNELEM-GPU" type="462c0819:PsiDirectoryNode" />
-              <item name="fnelem" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="restraints" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FNELEM-GPU" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FNELEM-GPU" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -310,6 +229,13 @@
               <item name="FNELEM-GPU" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FNELEM-GPU" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FNELEM-GPU" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="base" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FNELEM-GPU" type="b2602c69:ProjectViewProjectNode" />
@@ -334,6 +260,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Pablo\Google Drive\Trabajos\Computacion en GPU\FNELEM-GPU\test\model\base" />
+      <recent name="C:\Users\Pablo\Google Drive\Trabajos\Computacion en GPU\FNELEM-GPU\fnelem\model\base" />
       <recent name="C:\Users\Pablo\Google Drive\Trabajos\Computacion en GPU\FNELEM-GPU\test\model\loads" />
       <recent name="C:\Users\Pablo\Google Drive\Trabajos\Computacion en GPU\FNELEM-GPU\fnelem\model\loads" />
     </key>
@@ -440,12 +368,12 @@
       <workItem from="1543591334339" duration="23796000" />
       <workItem from="1544199054542" duration="80000" />
       <workItem from="1545402241834" duration="243000" />
-      <workItem from="1545417393497" duration="2945000" />
+      <workItem from="1545417393497" duration="4840000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="149546000" />
+    <option name="totallyTimeSpent" value="151441000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
@@ -477,9 +405,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/fnelem/model/load/load.cpp" />
-    <entry file="file://$PROJECT_DIR$/fnelem/model/load/load.h" />
-    <entry file="file://$PROJECT_DIR$/fnelem/model/node/node.h" />
     <entry file="file://$PROJECT_DIR$/fnelem/model/node/node.cpp" />
     <entry file="file://$PROJECT_DIR$/fnelem/model/restraints/node_restraint.cpp" />
     <entry file="file://$PROJECT_DIR$/test/model/restraints/test_restraint_node.h">
@@ -499,13 +424,6 @@
     <entry file="file://$PROJECT_DIR$/test/model/nodes/__nodes__.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-480" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/model/base/__base__.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="36" column="1" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/math/test_fematrix.h">
@@ -548,20 +466,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/model/loads/test_load_node.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="35" column="45" selection-start-line="35" selection-start-column="45" selection-end-line="35" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fnelem/model/base/model_component.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="78" column="21" selection-start-line="78" selection-start-column="21" selection-end-line="78" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fnelem/math/fematrix.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
@@ -579,13 +483,6 @@
     <entry file="file://$PROJECT_DIR$/fnelem/math/matrix_inversion_cpu.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="260">
-          <caret line="31" column="16" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fnelem/model/base/model_component.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
           <caret line="31" column="16" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="16" />
         </state>
       </provider>
@@ -681,13 +578,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="59" column="43" selection-start-line="59" selection-start-column="43" selection-end-line="59" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fnelem/model/loads/load_pattern.h">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -723,13 +613,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fnelem/model/elements/membrane.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-9">
-          <caret line="637" column="2" lean-forward="true" selection-start-line="637" selection-start-column="2" selection-end-line="637" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fnelem/model/nodes/node.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2320">
@@ -744,38 +627,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fnelem/model/loads/load_pattern.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-760">
-          <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fnelem/model/loads/load_membrane_distributed.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
-          <caret line="173" column="42" lean-forward="true" selection-start-line="173" selection-start-column="4" selection-end-line="173" selection-end-column="42" />
+          <caret line="173" column="42" selection-start-line="173" selection-start-column="4" selection-end-line="173" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/model/loads/test_load_pattern.h">
+    <entry file="file://$PROJECT_DIR$/test/model/loads/__loads__.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/model/loads/test_load.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="74">
-          <caret line="32" column="45" selection-start-line="32" selection-start-column="45" selection-end-line="32" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fnelem/model/loads/load_pattern_constant.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="54" column="19" selection-start-line="54" selection-start-column="19" selection-end-line="54" selection-end-column="19" />
+        <state relative-caret-position="314">
+          <caret line="42" column="39" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -786,17 +648,101 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/model/loads/test_load_pattern_constant.h">
+    <entry file="file://$PROJECT_DIR$/test/model/loads/test_load.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="34" column="34" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
+        <state relative-caret-position="74">
+          <caret line="32" column="45" selection-start-line="32" selection-start-column="45" selection-end-line="32" selection-end-column="45" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/model/loads/__loads__.cpp">
+    <entry file="file://$PROJECT_DIR$/fnelem/model/loads/load_pattern.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="42" column="39" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
+        <state relative-caret-position="-760">
+          <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/model/loads/test_load_node.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="35" column="45" selection-start-line="35" selection-start-column="45" selection-end-line="35" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/model/base/__base__.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/model/loads/test_load_pattern_constant.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="35" column="43" selection-start-line="35" selection-start-column="43" selection-end-line="35" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/model/loads/test_load_pattern.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-20">
+          <caret line="35" column="34" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/model/base/test_model.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="32" column="38" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fnelem/model/loads/load_pattern_constant.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="38" selection-start-line="38" selection-end-line="40" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fnelem/model/base/model_component.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1560">
+          <caret line="78" column="21" selection-start-line="78" selection-start-column="21" selection-end-line="78" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fnelem/model/elements/membrane.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="543" column="5" lean-forward="true" selection-start-line="541" selection-start-column="4" selection-end-line="543" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fnelem/model/base/model_component.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-280">
+          <caret line="37" column="18" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fnelem/model/base/model.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="54" column="26" selection-start-line="54" selection-start-column="26" selection-end-line="54" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fnelem/model/base/model.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="101" column="29" selection-start-line="101" selection-start-column="29" selection-end-line="101" selection-end-column="29" />
         </state>
       </provider>
     </entry>

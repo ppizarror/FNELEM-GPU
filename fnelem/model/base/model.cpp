@@ -1,6 +1,6 @@
 /**
-FNELEM-GPU BASE - MODEL COMPONENT
-Base element of the platform.
+FNELEM-GPU BASE - MODEL
+Model main class, integrates all components.
 
 @package fnelem.model.base
 @author ppizarror
@@ -28,50 +28,28 @@ Base element of the platform.
 	SOFTWARE.
 */
 
-// Init header file
-#ifndef __FNELEM_MODEL_BASE_MODEL_COMPONENT_H
-#define __FNELEM_MODEL_BASE_MODEL_COMPONENT_H
-
-// Include headers
-#include "constants.h"
-
-// Library imports
-#include "sole.hpp"
-#include <iostream>
-#include <string>
+// Include source
+#include "model.h"
 
 /**
- * Base model component.
+ * Constructor.
+ *
+ * @param tag Model tag
+ * @param ndim Number of dimensions
+ * @param ndof Number of degrees of freedom
  */
-class ModelComponent {
-private:
+Model::Model(std::string tag, int ndim, int ndof) {
+    if (ndim < 1 || ndim > 3) {
+        throw std::logic_error("[MODEL] Dimension number must be greater than one and lesser than 4");
+    }
+    if (ndof < 1) {
+        throw std::logic_error("[MODEL] DOF must be greater than one");
+    }
+    this->ndim = ndim;
+    this->ndof = ndof;
+}
 
-    // Element tag
-    std::string tagID = "";
-
-    // UUID
-    std::string uuid = "";
-
-public:
-
-    // Init model
-    ModelComponent();
-
-    // Init model with tag
-    explicit ModelComponent(std::string tag);
-
-    // Destroy object
-    ~ModelComponent();
-
-    // Returns tag
-    std::string get_model_tag() const;
-
-    // Assign operator
-    ModelComponent &operator=(const ModelComponent &model);
-
-    virtual // Display model
-    void disp() const;
-
-};
-
-#endif // __FNELEM_MODEL_BASE_MODEL_COMPONENT_H
+/**
+ * Destructor.
+ */
+Model::~Model() = default;

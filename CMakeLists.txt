@@ -20,6 +20,7 @@ set(FNELEM_MATH
 
 # MODEL BASE LIBRARY
 set(FNELEM_MODEL_BASE
+        fnelem/model/base/model.cpp
         fnelem/model/base/model_component.cpp
         )
 

@@ -33,7 +33,7 @@ Test load pattern class.
 #include "../../../fnelem/model/loads/load_pattern.h"
 
 void __test_load_pattern_init() {
-    test_print_title("LOAD", "load_pattern_init");
+    test_print_title("LOAD-PATTERN", "load_pattern_init");
     LoadPattern *ld = new LoadPattern("LOAD");
     ld->apply();
     ld->disp();

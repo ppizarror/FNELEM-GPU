@@ -1,10 +1,10 @@
 /**
-FNELEM-GPU BASE - MODEL COMPONENT
-Base element of the platform.
+FNELEM-GPU - TEST MODEL
+Test model.
 
-@package fnelem.model.base
+@package test.model.base
 @author ppizarror
-@date 19/11/2018
+@date 21/12/2018
 @license
 	MIT License
 	Copyright (c) 2018 Pablo Pizarro R.
@@ -28,50 +28,17 @@ Base element of the platform.
 	SOFTWARE.
 */
 
-// Init header file
-#ifndef __FNELEM_MODEL_BASE_MODEL_COMPONENT_H
-#define __FNELEM_MODEL_BASE_MODEL_COMPONENT_H
+// Include sources
+#include "../../test_utils.h"
+#include "../../../fnelem/model/base/model.h"
 
-// Include headers
-#include "constants.h"
-
-// Library imports
-#include "sole.hpp"
-#include <iostream>
-#include <string>
+void __test_model_init() {
+    test_print_title("MODEL", "test_model_init");
+}
 
 /**
- * Base model component.
+ * Performs TEST-MODEL suite.
  */
-class ModelComponent {
-private:
-
-    // Element tag
-    std::string tagID = "";
-
-    // UUID
-    std::string uuid = "";
-
-public:
-
-    // Init model
-    ModelComponent();
-
-    // Init model with tag
-    explicit ModelComponent(std::string tag);
-
-    // Destroy object
-    ~ModelComponent();
-
-    // Returns tag
-    std::string get_model_tag() const;
-
-    // Assign operator
-    ModelComponent &operator=(const ModelComponent &model);
-
-    virtual // Display model
-    void disp() const;
-
-};
-
-#endif // __FNELEM_MODEL_BASE_MODEL_COMPONENT_H
+void test_model_suite() {
+    __test_model_init();
+}
