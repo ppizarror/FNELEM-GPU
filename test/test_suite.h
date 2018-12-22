@@ -71,7 +71,7 @@ void test_suite() {
  * Main test, checks differente between GPU/CPU.
  */
 void test_analysis() {
-    // __test_building();
+    __test_building();
     __test_bridge();
 }
 
