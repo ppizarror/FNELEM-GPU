@@ -171,14 +171,14 @@ void Model::update(FEMatrix *u) {
     FEMatrix *dof, *d;
     int node_ndof;
     for (Node *&node : *this->nodes) {
-        dof = node->get_dof();
+        dof = node->get_dofid();
         node_ndof = node->get_ndof();
 
         // Build displacement vector for each node
         d = FEMatrix_vector(node_ndof);
         for (int j = 0; j < node_ndof; j++) {
             if (dof->get(j) > 0) {
-                d->set(j, u->get(static_cast<int>(dof->get(j))));
+                d->set(j, u->get(static_cast<int>(dof->get(j)) - 1));
             }
         }
 
@@ -217,18 +217,17 @@ void Model::save_results(std::string filename) const {
 
     // Write node information
     plik << "\nNodes:\n";
-    plik << "\tNode number: " << this->nodes->size() << "\n";
+    plik << "\tNode count:\t" << this->nodes->size() << "\n";
     for (auto &node : *this->nodes) {
         node->save_properties(plik);
     }
 
     // Element properties
     plik << "\nElements:\n";
-    plik << "\tElement number: " << this->elements->size() << "\n";
+    plik << "\tElement count:\t\t" << this->elements->size() << "\n";
     for (auto &element : *this->elements) {
         element->save_properties(plik);
     }
-    plik << "\n";
 
     // Element results
     this->write_file_title(plik, "Analysis results:");
@@ -244,8 +243,9 @@ void Model::save_results(std::string filename) const {
     }
 
     // Save element results
-    plik << "\nElement stresses:\n";
+    plik << "\nElement stresses:";
     for (auto &element : *this->elements) {
+        plik << "\n";
         element->save_internal_stress(plik);
     }
 

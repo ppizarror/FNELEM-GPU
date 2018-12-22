@@ -62,7 +62,6 @@ void StaticAnalysis::analyze(bool use_gpu) {
 
     // Define DOFID
     this->define_dof();
-    return;
 
     // Apply load patterns
     this->model->apply_load_patterns();
@@ -81,6 +80,7 @@ void StaticAnalysis::analyze(bool use_gpu) {
 
     // Solve matrix system
     this->u = *invKt * *this->F;
+    delete invKt;
 
     // Update model
     this->model->update(this->u);
@@ -190,13 +190,14 @@ void StaticAnalysis::define_dof() {
     FEMatrix *dof;
     int dof_count = 0;
     for (auto &node : *nodes) {
-        dof = node->get_dof();
+        dof = node->get_dofid();
         for (int i = 0; i < dof->length(); i++) {
             if (fabs(dof->get(i) + 1) > FNELEM_CONST_ZERO_TOLERANCE) {
                 dof_count += 1;
                 node->set_dof(i + 1, dof_count);
             }
         }
+        delete dof;
     }
     this->ndof = dof_count;
 
@@ -215,33 +216,36 @@ void StaticAnalysis::build_stiffness_matrix() {
 
     // Create stiffness matrix
     this->Kt = new FEMatrix(this->ndof, this->ndof);
+    Kt->set_origin(1);
 
     std::vector<Element *> *elements = this->model->get_elements();
-    FEMatrix *dof;
+    FEMatrix *dofid;
     FEMatrix *Ktelem;
     int ndof, i, j;
     for (auto &element : *elements) {
 
-        dof = element->get_dofid();
-        dof->set_origin(1);
+        dofid = element->get_dofid();
+        dofid->set_origin(1);
         ndof = element->get_ndof();
         Ktelem = element->get_stiffness_global();
+        Ktelem->set_origin(1);
 
         // Performs index method
         for (int r = 1; r <= ndof; r++) {
             for (int s = 1; s <= ndof; s++) {
-                i = static_cast<int>(dof->get(r));
-                j = static_cast<int>(dof->get(s));
+                i = static_cast<int>(dofid->get(r));
+                j = static_cast<int>(dofid->get(s));
 
-                if (i != 0 && j != 0) {
+                if (i != -1 && j != -1) {
                     this->Kt->set(i, j, this->Kt->get(i, j) + Ktelem->get(r, s));
                 }
             }
         }
 
         delete Ktelem;
-        delete dof;
+        delete dofid;
     }
+    Kt->set_origin(0);
 
 }
 
@@ -252,14 +256,24 @@ void StaticAnalysis::build_force_vector() {
 
     // Create force
     this->F = FEMatrix_vector(this->ndof);
+    this->F->set_origin(1);
 
-    FEMatrix *dof;
+    FEMatrix *dofid;
     int ndof;
     std::vector<Node *> *nodes = this->model->get_nodes();
     for (auto &node : *nodes) {
-        dof = node->get_dof();
+        dofid = node->get_dofid();
+        dofid->set_origin(0);
         ndof = node->get_ndof();
+        for (int i = 0; i < ndof; i++) {
+            if (fabs(dofid->get(i) + 1) > FNELEM_CONST_ZERO_TOLERANCE) {
+                F->set(static_cast<int>(dofid->get(i)),
+                       F->get(static_cast<int>(dofid->get(i))) - node->get_reaction(i + 1));
+            }
+        }
+        delete dofid;
     }
+    this->F->set_origin(0);
 
 }
 

@@ -41,7 +41,7 @@ void __test_restraint_node() {
 
     // Apply restraints, no DOFID has been setted, so GLOBALID of node is 0
     r->apply();
-    FEMatrix *dofn1 = n->get_dof();
+    FEMatrix *dofn1 = n->get_dofid();
     assert(dofn1->is_double(0));
     r->disp();
 

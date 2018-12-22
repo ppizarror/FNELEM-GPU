@@ -146,9 +146,9 @@ void FEMatrix::disp_matrix(double *matrix, int dim_n, int dim_m, bool norm_expon
                 }
                 if (exponent != 0) {
                     if (exponent > 0) {
-                        std::cout << "1.0e+0" << exponent << " *" << std::endl;
+                        std::cout << "1.0e+" << exponent << " *" << std::endl;
                     } else {
-                        std::cout << "1.0e-0" << exponent << " *" << std::endl;
+                        std::cout << "1.0e" << exponent << " *" << std::endl;
                     }
                 } else {
                     div_norm = 1.0;
@@ -265,7 +265,7 @@ void FEMatrix::_set(int i, int j, double val) {
 double FEMatrix::get(int i, int j) const {
     if (i >= this->n + this->origin || j >= this->m + this->origin || (i - this->origin) < 0 ||
         (j - this->origin) < 0) {
-        throw std::logic_error("[FEMATRIX] Get value from matrix olumn or row position overflow");
+        throw std::logic_error("[FEMATRIX] Get value from matrix column or row position overflow");
     }
     return this->mat[(i - this->origin) * this->m + (j - this->origin)];
 }
@@ -1147,12 +1147,17 @@ std::string FEMatrix::to_string(bool matlab_like, std::string sep, bool to_int) 
     if (matlab_like) s += "[";
     for (int i = 0; i < this->n; i++) { // Rows
         if (this->n > 1 && matlab_like && !isv) s += "[";
+        double num;
         for (int j = 0; j < this->m; j++) { // Columns
             if (!to_int) {
-                s += std::to_string(this->_get(i, j));
+                num = this->_get(i, j);
             } else {
-                s += std::to_string(static_cast<int>(this->_get(i, j)));
+                num = static_cast<int>(this->_get(i, j));
             }
+            if (fabs(num) < __FEMATRIX_ZERO_TOL) {
+                num = 0;
+            }
+            s += std::to_string(num);
             if (j < this->m - 1) s += ", ";
         }
         if (this->n > 1 && matlab_like && !isv) s += "]";
@@ -1264,4 +1269,17 @@ void FEMatrix::set_disp_identation(int identation) {
  */
 void FEMatrix::set_disp_exponent(int exponent) {
     this->disp_normalization_exponent = static_cast<int>(fabs(exponent));
+}
+
+/**
+ * Apply round to zeros using tolerance.
+ */
+void FEMatrix::round_zeros() {
+    for (int i = 0; i < this->n; i++) { // Rows
+        for (int j = 0; j < this->m; j++) { // Columns
+            if (fabs(this->_get(i, j)) < __FEMATRIX_ZERO_TOL) {
+                this->_set(i, j, 0);
+            }
+        }
+    }
 }

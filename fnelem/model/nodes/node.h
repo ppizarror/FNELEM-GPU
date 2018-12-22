@@ -94,7 +94,7 @@ public:
     FEMatrix *get_coordinates() const;
 
     // Get degrees of freedom of node
-    FEMatrix *get_dof() const;
+    FEMatrix *get_dofid() const;
 
     // Get results of loads
     FEMatrix *get_load_results() const;

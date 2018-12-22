@@ -200,7 +200,7 @@ void Membrane::generate_local_stiffness() {
     this->stiffness_local->set(6, 8, this->k_cij(A, 2, 5));
 
     this->stiffness_local->set(7, 7, 2 * this->k_aij(A, 1, 4));
-    this->stiffness_local->set(7, 8, -this->k_bij(A, 3, 6));
+    this->stiffness_local->set(7, 8, -this->k_aij(A, 3, 6));
 
     this->stiffness_local->set(8, 8, 2 * this->k_aij(A, 2, 4));
 
@@ -632,6 +632,7 @@ void Membrane::save_properties(std::ofstream &file) const {
         }
     }
     file << "\n\t\tElement nodes:\t" << nodetag;
+    file << "\n";
 
 }
 
@@ -649,8 +650,8 @@ FEMatrix *Membrane::generate_stress_npoints_matrix() const {
     FEMatrix *tvec = new FEMatrix(el, 7);
 
     // Calculate integration point differential evaluation
-    double dx = (2 * this->b) / (FNELEM_CONST_MEMBRANE_INTEGRATION_NPOINTS + 1);
-    double dy = (2 * this->h) / (FNELEM_CONST_MEMBRANE_INTEGRATION_NPOINTS + 1);
+    double dx = (2 * this->b) / (FNELEM_CONST_MEMBRANE_INTEGRATION_NPOINTS);
+    double dy = (2 * this->h) / (FNELEM_CONST_MEMBRANE_INTEGRATION_NPOINTS);
 
     // Get first node coordinates
     double cglobx = this->nodes->at(0)->get_pos_x();
@@ -698,6 +699,7 @@ void Membrane::save_internal_stress(std::ofstream &file) const {
 
     // Stores forces
     FEMatrix *fr = this->get_force_global();
+    fr->round_zeros();
 
     // Saves forces to each node
     file << "\tMembrane " << this->get_model_tag() << ":";
@@ -708,11 +710,17 @@ void Membrane::save_internal_stress(std::ofstream &file) const {
 
     // Writes tension
     FEMatrix *tm = this->generate_stress_npoints_matrix();
+    tm->round_zeros();
     int tmlen = tm->length();
     file << "\n\t\tStress " << this->get_model_tag() << " [GLX GLY X Y SIGMAX SIGMAY SIGMAXY DISPLX DISPLY]";
+    FEMatrix *displ;
     for (int i = 0; i < tmlen; i++) {
+        displ = this->get_displacement(tm->get(i, 2), tm->get(i, 3));
+        displ->round_zeros();
         file << "\n\t\t\t" << tm->get(i, 0) << "\t" << tm->get(i, 1) << "\t" << tm->get(i, 2) << "\t";
         file << tm->get(i, 3) << "\t" << tm->get(i, 4) << "\t" << tm->get(i, 5) << "\t" << tm->get(i, 6);
+        file << displ->get(0) << "\t" << displ->get(1);
+        delete displ;
     }
 
     // Deletes variables

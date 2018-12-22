@@ -32,6 +32,7 @@ Imports all tests.
 #ifndef FNELEM_GPU_TEST_FNELEM_SUITE_H
 #define FNELEM_GPU_TEST_FNELEM_SUITE_H
 
+#include "analysis/test_static_analysis.h"
 #include "math/test_fematrix.h"
 #include "math/test_fematrix_utils.h"
 #include "model/base/test_model.h"
@@ -47,6 +48,7 @@ Imports all tests.
 #include "model/restraints/test_restraint_node.h"
 
 void test_suite() {
+    test_static_analysis_suite();
     test_elements_suite();
     test_fematrix_suite();
     test_fematrix_utils_suite();

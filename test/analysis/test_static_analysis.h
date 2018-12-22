@@ -37,28 +37,50 @@ Test static analysis class.
 #include "../../fnelem/model/loads/load_pattern_constant.h"
 #include "../../fnelem/model/loads/load_node.h"
 
-void __test_static_analysis() {
-    test_print_title("STATIC-ANALYSIS", "test_static_analysis");
+void __test_static_analysis_test1() {
+    test_print_title("STATIC-ANALYSIS", "test_static_analysis_test1");
+
+    // Simple membrane test
+    // Example from book
+    //   INTRODUCCION AL ANALISIS ESTRUCTURAL POR ELEMENTOS FINITOS
+    //   Author: JORGE EDUARDO HURTADO GÓMEZ
+    //   http://bdigital.unal.edu.co/10002/6/958932276X.2002.pdf
+    //   Page 92
+    //
+    //           1000 kN
+    //             |
+    //             v
+    //    2 ------ 4 ------ 6
+    //    |        |        |
+    //    |   (1)  |   (2)  |  2m
+    //    |        |        |
+    //    1 ------ 3 ------ 5
+    //    ^   2m       2m   ^
+    // ==========================
 
     // Create model
-    Model *model = new Model(2, 4);
+    Model *model = new Model(2, 8);
 
     // Create nodes
     std::vector<Node *> *nodes = new std::vector<Node *>();
     nodes->push_back(new Node("N1", 0, 0));
-    nodes->push_back(new Node("N2", 250, 0));
-    nodes->push_back(new Node("N3", 250, 100));
-    nodes->push_back(new Node("N4", 0, 100));
+    nodes->push_back(new Node("N2", 0, 2));
+    nodes->push_back(new Node("N3", 2, 0));
+    nodes->push_back(new Node("N4", 2, 2));
+    nodes->push_back(new Node("N5", 4, 0));
+    nodes->push_back(new Node("N6", 4, 2));
 
     // Creates membrane
     std::vector<Element *> *elements = new std::vector<Element *>();
-    elements->push_back(new Membrane("MEM", nodes->at(0), nodes->at(1), nodes->at(2), nodes->at(3),
-                                     300000, 0.15, 20));
+    elements->push_back(new Membrane("MEM1", nodes->at(0), nodes->at(2), nodes->at(3),
+                                     nodes->at(1), 2000, 0.2, 1.0));
+    elements->push_back(new Membrane("MEM2", nodes->at(2), nodes->at(4), nodes->at(5),
+                                     nodes->at(3), 2000, 0.2, 1.0));
 
     // Create restraints
     std::vector<Restraint *> *restraints = new std::vector<Restraint *>();
     RestraintNode *r1 = new RestraintNode("R1", nodes->at(0));
-    RestraintNode *r2 = new RestraintNode("R2", nodes->at(1));
+    RestraintNode *r2 = new RestraintNode("R2", nodes->at(4));
     r1->add_all();
     r2->add_all();
     restraints->push_back(r1);
@@ -67,15 +89,12 @@ void __test_static_analysis() {
     // Create loads
     std::vector<Load *> *loads = new std::vector<Load *>();
     FEMatrix *loadv = FEMatrix_vector(2);
-    loadv->set(0, -5);
-    loads->push_back(new LoadNode("NODE-LOAD", nodes->at(2), loadv));
+    loadv->set(1, -1000);
+    loads->push_back(new LoadNode("P", nodes->at(3), loadv));
 
     // Create load pattern
     std::vector<LoadPattern *> *loadpattern = new std::vector<LoadPattern *>();
     loadpattern->push_back(new LoadPatternConstant("LoadConstant", loads));
-
-    // Display information to console
-    model->disp();
 
     // Define elements
     model->set_nodes(nodes);
@@ -95,9 +114,10 @@ void __test_static_analysis() {
 
     // Run analysis
     analysis->analyze(false);
+    analysis->disp();
 
     // Save results to file
-    model->save_results("out/test-static-analysis.txt");
+    model->save_results("out/test-static-analysis-1.txt");
 
     // Delete data
     analysis->clear();
@@ -115,5 +135,5 @@ void __test_static_analysis() {
  * Performs TEST-STATIC-ANALYSIS suite.
  */
 void test_static_analysis_suite() {
-    __test_static_analysis();
+    __test_static_analysis_test1();
 }

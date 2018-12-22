@@ -130,7 +130,7 @@ FEMatrix *Node::get_coordinates() const {
  *
  * @return
  */
-FEMatrix *Node::get_dof() const {
+FEMatrix *Node::get_dofid() const {
     return this->dofid->clone();
 }
 
@@ -288,7 +288,7 @@ void Node::disp() const {
  * @param file
  */
 void Node::save_properties(std::ofstream &file) const {
-    file << "\tNode " << this->get_model_tag() << ":";
+    file << "\tNode " << this->get_model_tag() << ":\t";
     file << this->coords->to_string_line() << std::endl;
 }
 
@@ -298,7 +298,7 @@ void Node::save_properties(std::ofstream &file) const {
  * @param file
  */
 void Node::save_displacements(std::ofstream &file) const {
-    file << "\tNode " << this->get_model_tag() << ":";
+    file << "\tNode " << this->get_model_tag() << ":\t";
     file << this->displ->to_string_line() << std::endl;
 }
 
@@ -308,7 +308,7 @@ void Node::save_displacements(std::ofstream &file) const {
  * @param file
  */
 void Node::save_reactions(std::ofstream &file) const {
-    file << "\tNode " << this->get_model_tag() << ":";
+    file << "\tNode " << this->get_model_tag() << ":\t";
     file << this->reaction->to_string_line() << std::endl;
 }
 

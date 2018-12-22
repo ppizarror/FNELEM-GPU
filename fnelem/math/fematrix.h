@@ -303,6 +303,9 @@ public:
     // Set output minimal exponent
     void set_disp_exponent(int exponent);
 
+    // Apply zero round using tolerance
+    void round_zeros();
+
 };
 
 #endif // __FNELEM_MATH_FEMATRIX_H
