@@ -46,4 +46,12 @@ Performs matrix inversion using Gauss Jordan algorithm.
  */
 FEMatrix *matrix_inverse_cpu(FEMatrix *matrix);
 
+/**
+ * Performs CPU matrix inversion using Gauss-Jordan elimination algorithm with CUDA.
+ *
+ * @param matrix Matrix to inverse
+ * @return Inverse matrix
+ */
+FEMatrix *matrix_inverse_cuda(FEMatrix *feMatrix);
+
 #endif // __FNELEM_MATH_MATRIX_INVERSION_CPU_H

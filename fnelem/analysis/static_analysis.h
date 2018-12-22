@@ -34,6 +34,7 @@ Performs static analysis calculation.
 
 // Include headers
 #include "../model/base/model.h"
+#include "../math/matrix_inversion_cpu.h"
 
 // Library imports
 #include <iostream>
@@ -49,13 +50,13 @@ private:
     int ndof = 0;
 
     // Matrix stiffness
-    FEMatrix *Kt;
+    FEMatrix *Kt = nullptr;
 
     // Displacement vector
-    FEMatrix *u;
+    FEMatrix *u = nullptr;
 
     // Force vector
-    FEMatrix *F;
+    FEMatrix *F = nullptr;
 
     // Start dof numeration
     void define_dof();
@@ -66,31 +67,37 @@ private:
     // Build force vector
     void build_force_vector();
 
+    // Return yes/no
+    std::string yes_no(bool v) const;
+
 public:
 
     // Constructor
-    StaticAnalysis(Model *model);
+    explicit StaticAnalysis(Model *model);
 
     // Destructor
     ~StaticAnalysis();
 
     // Start analysis
-    void analyze();
+    void analyze(bool use_gpu);
 
     // Return stiffness matrix
-    FEMatrix *get_Kt();
+    FEMatrix *get_stiffness_matrix() const;
 
     // Return displacement vector
-    FEMatrix *get_u();
+    FEMatrix *get_displacements_vector() const;
 
     // Return force vector
-    FEMatrix *get_F();
+    FEMatrix *get_force_vector() const;
 
     // Get number of degrees of freedom
-    FEMatrix *get_ndof();
+    int get_ndof() const;
 
     // Display analysis information to console
-    void disp();
+    void disp() const;
+
+    // Clear data on demand
+    void clear();
 
 };
 

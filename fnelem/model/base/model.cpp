@@ -177,7 +177,7 @@ void Model::update(FEMatrix *u) {
         // Build displacement vector for each node
         d = FEMatrix_vector(node_ndof);
         for (int j = 0; j < node_ndof; j++) {
-            if (fabs(dof->get(j) + 1) > FNELEM_CONST_ZERO_TOLERANCE) {
+            if (dof->get(j) > 0) {
                 d->set(j, u->get(static_cast<int>(dof->get(j))));
             }
         }

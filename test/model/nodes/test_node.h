@@ -40,8 +40,8 @@ void __test_node_creation() {
     n->disp();
     assert(n->get_model_tag() == "NODE1");
     FEMatrix *gdlid = new FEMatrix(2, 1);
-    gdlid->set(0, -1);
-    gdlid->set(1, -1);
+    gdlid->set(0, 0);
+    gdlid->set(1, 0);
     FEMatrix *id = n->get_dof();
     assert(gdlid->equals(id));
     delete id;
@@ -65,7 +65,7 @@ void __test_node_coordinates() {
     assert(coords->get(0) == 1);
     assert(coords->get(1) == 2);
     FEMatrix *id = n->get_dof();
-    assert(id->is_double(-1));
+    assert(id->is_double(0));
     delete coords;
     delete id;
     delete n;
@@ -104,7 +104,7 @@ void __test_node_set_gdlid() {
 
     Node *n2 = new Node("NODE", 0, 0, 0);
     FEMatrix *id2 = n2->get_dof();
-    assert(id2->is_double(-1));
+    assert(id2->is_double(0));
     n2->set_dof(gdl);
     FEMatrix *id3 = n2->get_dof();
     assert(id3->equals(gdl));

@@ -131,10 +131,10 @@ void __test_membrane_creation() {
     // Check local and global matrices are the same
     assert(kl->equals(ke));
 
-    // Test local degrees of freedom, must be -1
+    // Test local degrees of freedom, must be 0
     mem->set_dofid();
     FEMatrix *dofid = mem->get_dofid();
-    assert(dofid->is_double(-1));
+    assert(dofid->is_double(0));
 
     // Delete vars
     delete n1;

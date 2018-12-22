@@ -99,7 +99,7 @@ void Node::init() {
 
     // Save initial values
     for (int i = 0; i < this->ndof; i++) {
-        this->dofid->set(i, -1);
+        this->dofid->set(i, 0);
         this->displ->set(i, 0);
         this->reaction->set(i, 0);
         this->loads->set(i, 0);

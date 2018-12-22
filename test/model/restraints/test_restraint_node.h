@@ -39,25 +39,25 @@ void __test_restraint_node() {
     Node *n = new Node("NODE", 1.5, 3.2, 5.6);
     RestraintNode *r = new RestraintNode("R1", n);
 
-    // Apply restraints, no DOFID has been setted, so GLOBALID of node is -1
+    // Apply restraints, no DOFID has been setted, so GLOBALID of node is 0
     r->apply();
     FEMatrix *dofn1 = n->get_dof();
-    assert(dofn1->is_double(-1));
+    assert(dofn1->is_double(0));
     r->disp();
 
     // Create restraints
     r->add_dofid(1);
     r->apply();
-    assert(is_num_equal(n->get_dof(1), 0));
-    assert(is_num_equal(n->get_dof(2), -1));
-    assert(is_num_equal(n->get_dof(3), -1));
+    assert(is_num_equal(n->get_dof(1), -1));
+    assert(is_num_equal(n->get_dof(2), 0));
+    assert(is_num_equal(n->get_dof(3), 0));
 
     // Apply more constraints
     r->add_dofid(3);
     r->apply();
-    assert(is_num_equal(n->get_dof(1), 0));
-    assert(is_num_equal(n->get_dof(2), -1));
-    assert(is_num_equal(n->get_dof(3), 0));
+    assert(is_num_equal(n->get_dof(1), -1));
+    assert(is_num_equal(n->get_dof(2), 0));
+    assert(is_num_equal(n->get_dof(3), -1));
 
     // Display restraint information
     r->disp();

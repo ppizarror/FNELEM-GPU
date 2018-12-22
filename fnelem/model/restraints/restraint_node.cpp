@@ -79,7 +79,7 @@ void RestraintNode::add_dofid(int id) {
 void RestraintNode::apply() {
     for (int i = 0; i < this->ndof; i++) {
         if (fabs(this->dofid->get(i) + 1) > FNELEM_CONST_ZERO_TOLERANCE) {
-            this->node->set_dof(static_cast<int>(this->dofid->get(i)), 0);
+            this->node->set_dof(static_cast<int>(this->dofid->get(i)), -1);
         }
     }
 }
@@ -110,4 +110,13 @@ void RestraintNode::disp() const {
     }
     std::cout << std::endl;
 
+}
+
+/**
+ * Add all dof.
+ */
+void RestraintNode::add_all() {
+    for (int i = 1; i <= this->ndof; i++) {
+        this->add_dofid(i);
+    }
 }

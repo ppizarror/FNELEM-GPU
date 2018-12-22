@@ -61,6 +61,9 @@ public:
     // Add restraint
     void add_dofid(int id);
 
+    // Add all DOF
+    void add_all();
+
     // Apply restraints
     void apply() override;
 

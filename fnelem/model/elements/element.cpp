@@ -79,7 +79,8 @@ int Element::get_ndof() const {
 }
 
 /**
- * Get DOFID associated with the element.
+ * Get DOFID associated with the element, used by analysis method for create
+ * matrix stiffness.
  *
  * @return
  */

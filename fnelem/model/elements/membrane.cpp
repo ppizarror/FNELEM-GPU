@@ -283,6 +283,7 @@ void Membrane::disp() const {
         }
     }
     std::cout << "\tElement nodes:\t\t" << nodetag << std::endl;
+    std::cout << "\tNode DOFID:\t\t\t" << this->dofid->to_string_line(true) << std::endl;
 
     // Display constitutive matrix
     std::cout << "\tConstitutive matrix (3x3):" << std::endl;
@@ -316,7 +317,8 @@ void Membrane::disp() const {
 }
 
 /**
- * Set ID degrees of freedom from node definition.
+ * Set ID degrees of freedom from node definition used by analysis method for create
+ * matrix stiffness.
  */
 void Membrane::set_dofid() {
 
