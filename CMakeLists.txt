@@ -11,6 +11,11 @@ set(FNELEM_CUDA
         main.cu
         )
 
+# ANALYSIS LIBRARY
+set(FNELEM_ANALYSIS
+        fnelem/analysis/static_analysis.cpp
+        )
+
 # MATH LIBRARY
 set(FNELEM_MATH
         fnelem/math/fematrix.cpp
@@ -64,6 +69,7 @@ set(FNELEM_MODEL_LOADS
 
 # ALL LIBRARIES
 set(FNELEM
+        ${FNELEM_ANALYSIS}
         ${FNELEM_MATH}
         ${FNELEM_MODEL_BASE}
         ${FNELEM_MODEL_NODES}
@@ -74,6 +80,7 @@ set(FNELEM
 
 # DEFINE TESTS
 add_executable(TEST-ALL test/test_suite.cpp ${FNELEM})
+add_executable(TEST-ANALYSIS test/analysis/__analysis__.cpp ${FNELEM})
 add_executable(TEST-BASE test/model/base/__base__.cpp ${FNELEM})
 add_executable(TEST-CUDA test/test_cuda.cpp ${FNELEM_CUDA})
 add_executable(TEST-ELEMENTS test/model/elements/__elements__.cpp ${FNELEM_MODEL_ELEMENTS})

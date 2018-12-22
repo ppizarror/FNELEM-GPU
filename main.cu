@@ -40,6 +40,7 @@ was calculated using a CUDA algorithm (Gauss Jordan inversion).
 #include "fnelem/math/matrix_inversion_cpu.cpp"
 #include "fnelem/math/matrix_inversion_cuda.cu"
 
+#include "fnelem/analysis/static_analysis.cpp"
 #include "fnelem/model/base/model.cpp"
 #include "fnelem/model/base/model_component.cpp"
 #include "fnelem/model/elements/element.cpp"

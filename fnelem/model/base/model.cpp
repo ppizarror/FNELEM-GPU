@@ -29,8 +29,8 @@ Model main class, integrates all components.
 */
 
 // Include source
-#include "constants.h"
 #include "model.h"
+#include "constants.h"
 
 /**
  * Constructor.
