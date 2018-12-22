@@ -208,15 +208,46 @@ void Model::save_results(std::string filename) const {
     plik.open(filename);
 
     // Write software header
-    plik << "FNELEM-GPU -  Finite element structural analysis using CUDA\n";
-    plik << "              and GPU. v" << FNELEM_ABOUT_VERSION_V << " (";
+    plik << "FNELEM-GPU -  Finite element structural analysis using CUDA and GPU.\n";
+    plik << "              v" << FNELEM_ABOUT_VERSION_V << " (";
     plik << FNELEM_ABOUT_VERSION_DATE << ") @ " << FNELEM_ABOUT_VERSION_AUTHOR << "\n";
 
     // Write model properties
     this->write_file_title(plik, "Input model properties:");
 
     // Write node information
+    plik << "\nNodes:\n";
+    plik << "\tNode number: " << this->nodes->size() << "\n";
+    for (auto &node : *this->nodes) {
+        node->save_properties(plik);
+    }
 
+    // Element properties
+    plik << "\nElements:\n";
+    plik << "\tElement number: " << this->elements->size() << "\n";
+    for (auto &element : *this->elements) {
+        element->save_properties(plik);
+    }
+    plik << "\n";
+
+    // Element results
+    this->write_file_title(plik, "Analysis results:");
+
+    // Save node results
+    plik << "\nNode displacements:\n";
+    for (auto &node : *this->nodes) {
+        node->save_displacements(plik);
+    }
+    plik << "\nNode reactions:\n";
+    for (auto &node : *this->nodes) {
+        node->save_reactions(plik);
+    }
+
+    // Save element results
+    plik << "\nElement stresses:\n";
+    for (auto &element : *this->elements) {
+        element->save_internal_stress(plik);
+    }
 
     // Close file
     plik.close();
@@ -229,9 +260,9 @@ void Model::save_results(std::string filename) const {
  * @param title String title
  */
 void Model::write_file_title(std::ofstream &plik, std::string title) const {
-    plik << "\n-------------------------------------------------------------------------------\n";
+    plik << "\n--------------------------------------------------------------------\n";
     plik << title << "\n";
-    plik << "-------------------------------------------------------------------------------\n";
+    plik << "--------------------------------------------------------------------\n";
 }
 
 /**

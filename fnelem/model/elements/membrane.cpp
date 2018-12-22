@@ -707,7 +707,7 @@ void Membrane::save_internal_stress(std::ofstream &file) const {
     // Writes tension
     FEMatrix *tm = this->generate_stress_npoints_matrix();
     int tmlen = tm->length();
-    file << "\n\t\tStress " << this->get_model_tag() << " [GLOBALX GLOBALY X Y SIGMAX SIGMAY SIGMAXY DISPLX DISPLY]";
+    file << "\n\t\tStress " << this->get_model_tag() << " [GLX GLY X Y SIGMAX SIGMAY SIGMAXY DISPLX DISPLY]";
     for (int i = 0; i < tmlen; i++) {
         file << "\n\t\t\t" << tm->get(i, 0) << "\t" << tm->get(i, 1) << "\t" << tm->get(i, 2) << "\t";
         file << tm->get(i, 3) << "\t" << tm->get(i, 4) << "\t" << tm->get(i, 5) << "\t" << tm->get(i, 6);
