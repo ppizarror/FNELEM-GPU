@@ -97,10 +97,10 @@ void __test_static_analysis_test1() {
     loadpattern->push_back(new LoadPatternConstant("LoadConstant", loads));
 
     // Define elements
-    model->set_nodes(nodes);
-    model->set_elements(elements);
-    model->set_restraints(restraints);
-    model->set_load_patterns(loadpattern);
+    model->add_nodes(nodes);
+    model->add_elements(elements);
+    model->add_restraints(restraints);
+    model->add_load_patterns(loadpattern);
 
     // Create analysis
     StaticAnalysis *analysis = new StaticAnalysis(model);
@@ -132,8 +132,122 @@ void __test_static_analysis_test1() {
 }
 
 /**
+ * Test building, variable number of stories.
+ */
+void __test_building() {
+
+    int N = 2; // Stories
+    int b = 100; // Story width
+    int h = 100; // Story height
+
+    // N = 2
+    //
+    //    3---6
+    //    |   |
+    //    2---5
+    //    |   |
+    //    1---4
+    //    ^   ^
+    // =============
+    //
+    // N = 3
+    //
+    //    4---8
+    //    |   |
+    //    3---7
+    //    |   |
+    //    2---6
+    //    |   |
+    //    1---5
+    //    ^   ^
+    // =============
+
+    double t = 15; // Thickness (cm)
+    double E = 300000; // Elastic modulus
+    double nu = 0.15; // Poisson modulus
+
+    // Number degrees of freedom
+    int gdl = N * 4;
+    std::cout << gdl << std::endl;
+
+    // Create model
+    Model *model = new Model(2, gdl);
+
+    // Create nodes
+    std::vector<Node *> *nodes = new std::vector<Node *>();
+    int j;
+    for (int i = 1; i <= N + 1; i++) {
+        nodes->push_back(new Node("N" + std::to_string(i), 0, h * (i - 1)));
+    }
+    for (int i = 1; i <= N + 1; i++) {
+        j = N + 1 + i;
+        nodes->push_back(new Node("N" + std::to_string(j), b, h * (i - 1)));
+    }
+
+    // Add nodes to model
+    model->add_nodes(nodes);
+
+    // Create elements
+    // n4 ------------ n3
+    //  |              |
+    //  |      (i)     |
+    //  |              |
+    // n1 ------------ n2
+    unsigned long n1, n2, n3, n4;
+    std::vector<Element *> *elements = new std::vector<Element *>();
+    for (unsigned long i = 0; i < N; i++) {
+        n1 = i;
+        n2 = N + i + 1;
+        n3 = N + i + 2;
+        n4 = i + 1;
+        elements->push_back(new Membrane("MEM" + std::to_string(i), nodes->at(n1), nodes->at(n2),
+                                         nodes->at(n3), nodes->at(n4), E, nu, t));
+    }
+    model->add_elements(elements);
+
+    // Create restraints
+    std::vector<Restraint *> *restraints = new std::vector<Restraint *>();
+    RestraintNode *r1 = new RestraintNode("R1", nodes->at(0));
+    RestraintNode *r2 = new RestraintNode("R2", nodes->at(static_cast<unsigned long>(N + 1)));
+    r1->add_all();
+    r2->add_all();
+    restraints->push_back(r1);
+    restraints->push_back(r2);
+    model->add_restraints(restraints);
+
+    // Add load
+    std::vector<Load *> *loads = new std::vector<Load *>();
+    FEMatrix *loadv = FEMatrix_vector(2);
+    loadv->set(0, 1000);
+    loads->push_back(new LoadNode("NL1000kN", nodes->at(static_cast<unsigned long>(N)), loadv));
+    std::vector<LoadPattern *> *loadpattern = new std::vector<LoadPattern *>();
+    loadpattern->push_back(new LoadPatternConstant("LOADCONSTANT", loads));
+    model->add_load_patterns(loadpattern);
+
+    // Create analysis
+    StaticAnalysis *analysis = new StaticAnalysis(model);
+    analysis->analyze(false);
+
+    // Save results to file
+    model->save_results("out/test-static-building-" + std::to_string(N));
+
+    // Delete data
+    analysis->disp();
+    analysis->clear();
+    delete elements;
+    delete loadpattern;
+    delete loadv;
+    delete loads;
+    delete restraints;
+    delete nodes;
+    delete model;
+    delete analysis;
+}
+
+/**
  * Performs TEST-STATIC-ANALYSIS suite.
  */
 void test_static_analysis_suite() {
     __test_static_analysis_test1();
+    __test_building();
 }

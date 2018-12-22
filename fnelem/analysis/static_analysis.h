@@ -38,6 +38,7 @@ Performs static analysis calculation.
 #include "../math/matrix_inversion_cuda.h"
 
 // Library imports
+#include <chrono>
 #include <iostream>
 #include <vector>
 

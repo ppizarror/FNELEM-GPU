@@ -58,24 +58,8 @@ was calculated using a CUDA algorithm (Gauss Jordan inversion).
 
 int main() {
 
-    // Test all
-    test_suite();
-
-    // Creates matrix
-    FEMatrix mat = FEMatrix(3, 3);
-    mat.set(0, 0, 1);
-    mat.set(0, 1, 2);
-    mat.set(0, 2, 3);
-    mat.set(1, 0, 5);
-    mat.set(1, 1, 2);
-    mat.set(1, 2, 1);
-    mat.set(2, 0, 2);
-    mat.set(2, 1, 2);
-    mat.set(2, 2, 3);
-
-    FEMatrix *imat = matrix_inverse_cuda(&mat);
-    imat->disp();
-    delete imat;
+    // test_suite(); // Test all
+	test_building(); // Test analysis
 
     return 0;
 }

@@ -71,10 +71,10 @@ void __test_model_init() {
     m->disp();
 
     // Define elements
-    m->set_nodes(nodes);
-    m->set_elements(elements);
-    m->set_restraints(restraints);
-    m->set_load_patterns(loadpattern);
+    m->add_nodes(nodes);
+    m->add_elements(elements);
+    m->add_restraints(restraints);
+    m->add_load_patterns(loadpattern);
 
     // Initialize model
     m->initialize();

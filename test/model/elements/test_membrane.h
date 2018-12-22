@@ -125,7 +125,7 @@ void __test_membrane_creation() {
     assert(is_num_equal(k->get(5, 6), 0.42199488491048597893));
     assert(is_num_equal(k->get(5, 7), 2.2097186700767257328));
     assert(is_num_equal(k->get(6, 6), 2.9923273657289004568));
-    assert(is_num_equal(k->get(6, 7), 0.42199488491048597893));
+    assert(is_num_equal(k->get(6, 7), -0.88235294117647056211));
     assert(is_num_equal(k->get(7, 7), 7.2890025575447561224));
 
     // Check local and global matrices are the same

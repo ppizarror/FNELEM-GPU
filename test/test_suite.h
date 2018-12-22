@@ -47,8 +47,10 @@ Imports all tests.
 #include "model/nodes/test_node.h"
 #include "model/restraints/test_restraint_node.h"
 
+/**
+ * General test suite.
+ */
 void test_suite() {
-    test_static_analysis_suite();
     test_elements_suite();
     test_fematrix_suite();
     test_fematrix_utils_suite();
@@ -62,6 +64,14 @@ void test_suite() {
     test_model_suite();
     test_node_suite();
     test_restraint_node_suite();
+    test_static_analysis_suite();
+}
+
+/**
+ * Main test, checks differente between GPU/CPU.
+ */
+void test_analysis() {
+    __test_building();
 }
 
 #endif // FNELEM_GPU_TEST_FNELEM_SUITE_H

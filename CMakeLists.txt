@@ -5,6 +5,11 @@ project(FNELEM-GPU)
 cmake_minimum_required(VERSION 3.10)
 set(CMAKE_CXX_STANDARD 14)
 
+# TEST HELP SOURCES
+set(FNELEM_TEST_HELP_FILES
+        test/math/force_cuda_cpu.cpp
+        )
+
 # CUDA SOURCES
 set(FNELEM_CUDA
         fnelem/math/matrix_inversion_cuda.cu
@@ -78,13 +83,8 @@ set(FNELEM
         ${FNELEM_MODEL_LOADS}
         )
 
-# TEST HELP SOURCES
-set(FNELEM_TEST_HELP_FILES
-        test/math/force_cuda_cpu.cpp
-        )
-
 # DEFINE TESTS
-add_executable(TEST-ALL test/test_suite.cpp ${FNELEM})
+add_executable(TEST-ALL test/test_suite.cpp ${FNELEM} ${FNELEM_TEST_HELP_FILES})
 add_executable(TEST-ANALYSIS test/analysis/__analysis__.cpp ${FNELEM} ${FNELEM_TEST_HELP_FILES})
 add_executable(TEST-BASE test/model/base/__base__.cpp ${FNELEM})
 add_executable(TEST-CUDA test/test_cuda.cpp ${FNELEM_CUDA})

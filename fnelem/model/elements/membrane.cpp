@@ -719,7 +719,7 @@ void Membrane::save_internal_stress(std::ofstream &file) const {
         displ->round_zeros();
         file << "\n\t\t\t" << tm->get(i, 0) << "\t" << tm->get(i, 1) << "\t" << tm->get(i, 2) << "\t";
         file << tm->get(i, 3) << "\t" << tm->get(i, 4) << "\t" << tm->get(i, 5) << "\t" << tm->get(i, 6);
-        file << displ->get(0) << "\t" << displ->get(1);
+        file << "\t" << displ->get(0) << "\t" << displ->get(1);
         delete displ;
     }
 

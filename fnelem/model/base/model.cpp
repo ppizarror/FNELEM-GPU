@@ -72,7 +72,7 @@ void Model::initialize() {
  *
  * @param node Node vector
  */
-void Model::set_nodes(std::vector<Node *> *node) {
+void Model::add_nodes(std::vector<Node *> *node) {
     this->nodes = node;
 }
 
@@ -90,7 +90,7 @@ std::vector<Node *> *Model::get_nodes() const {
  *
  * @param element Elements vector
  */
-void Model::set_elements(std::vector<Element *> *element) {
+void Model::add_elements(std::vector<Element *> *element) {
     this->elements = element;
 }
 
@@ -107,7 +107,7 @@ std::vector<Element *> *Model::get_elements() const {
  *
  * @param restraint Restraints vector.
  */
-void Model::set_restraints(std::vector<Restraint *> *restraint) {
+void Model::add_restraints(std::vector<Restraint *> *restraint) {
     this->restraints = restraint;
 }
 
@@ -125,7 +125,7 @@ std::vector<Restraint *> *Model::get_restrants() const {
  *
  * @param loadpattern Load patterns vector
  */
-void Model::set_load_patterns(std::vector<LoadPattern *> *loadpattern) {
+void Model::add_load_patterns(std::vector<LoadPattern *> *loadpattern) {
     this->loadpatterns = loadpattern;
 }
 

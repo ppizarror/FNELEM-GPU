@@ -87,25 +87,25 @@ public:
     void initialize();
 
     // Set nodes
-    void set_nodes(std::vector<Node *> *node);
+    void add_nodes(std::vector<Node *> *node);
 
     // Get nodes
     std::vector<Node *> *get_nodes() const;
 
     // Set elements
-    void set_elements(std::vector<Element *> *element);
+    void add_elements(std::vector<Element *> *element);
 
     // Get elements
     std::vector<Element *> *get_elements() const;
 
     // Set restraints
-    void set_restraints(std::vector<Restraint *> *restraint);
+    void add_restraints(std::vector<Restraint *> *restraint);
 
     // Get restraints
     std::vector<Restraint *> *get_restrants() const;
 
     // Set load patterns
-    void set_load_patterns(std::vector<LoadPattern *> *loadpattern);
+    void add_load_patterns(std::vector<LoadPattern *> *loadpattern);
 
     // Get load patterns
     std::vector<LoadPattern *> *get_load_patterns() const;

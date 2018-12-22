@@ -60,6 +60,9 @@ StaticAnalysis::~StaticAnalysis() {
  */
 void StaticAnalysis::analyze(bool use_gpu) {
 
+    // Init timer
+    std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
+
     // Define DOFID
     this->define_dof();
 
@@ -84,6 +87,11 @@ void StaticAnalysis::analyze(bool use_gpu) {
 
     // Update model
     this->model->update(this->u);
+
+    // Final timer
+    std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
+    std::cout << "[STATIC-ANALYSIS] Solved in " << duration << " microseconds" << std::endl;
 
 }
 
