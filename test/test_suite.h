@@ -72,6 +72,7 @@ void test_suite() {
  */
 void test_analysis() {
     __test_building();
+    __test_bridge();
 }
 
 #endif // FNELEM_GPU_TEST_FNELEM_SUITE_H

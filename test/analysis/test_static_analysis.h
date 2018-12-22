@@ -36,9 +36,10 @@ Test static analysis class.
 #include "../../fnelem/model/restraints/restraint_node.h"
 #include "../../fnelem/model/loads/load_pattern_constant.h"
 #include "../../fnelem/model/loads/load_node.h"
+#include "../../fnelem/model/loads/load_membrane_distributed.h"
 
-void __test_static_analysis_test1() {
-    test_print_title("STATIC-ANALYSIS", "test_static_analysis_test1");
+void __test_static_analysis_test() {
+    test_print_title("STATIC-ANALYSIS", "test_static_analysis_test");
 
     // Simple membrane test
     // Example from book
@@ -135,6 +136,7 @@ void __test_static_analysis_test1() {
  * Test building, variable number of stories.
  */
 void __test_building() {
+    test_print_title("STATIC-ANALYSIS", "test_building");
 
     int N = 2; // Stories
     int b = 100; // Story width
@@ -168,7 +170,6 @@ void __test_building() {
 
     // Number degrees of freedom
     int gdl = N * 4;
-    std::cout << gdl << std::endl;
 
     // Create model
     Model *model = new Model(2, gdl);
@@ -245,9 +246,119 @@ void __test_building() {
 }
 
 /**
+ * Test bridge, variable wall number.
+ */
+void __test_bridge() {
+    test_print_title("STATIC-ANALYSIS", "test_bridge");
+
+    int N = 11; // Number of piers
+    int b = 100; // Pier width
+    int h = 100; // Pier height
+
+    //    N = 2
+    //       4 ------ 5 ------ 6
+    //       |        |        |
+    //     h |   (1)  |   (2)  |  ......
+    //       |        |        |
+    //       1 ------ 2 ------ 3 .....
+    //       ^    b        b   ^
+    //
+    //    N = 3
+    //       4 ------ 5 ------ 6 ------- 8
+    //       |        |        |         |
+    //     h |   (1)  |   (2)  |   (3)   |
+    //       |        |        |         |
+    //       1 ------ 2 ------ 3 ------- 4
+    //       ^    b                      ^
+    // =====================================
+
+    double t = 15; // Thickness (cm)
+    double E = 300000; // Elastic modulus
+    double nu = 0.15; // Poisson modulus
+
+    // Number degrees of freedom
+    int gdl = N * 4;
+
+    // Create model
+    Model *model = new Model(2, gdl);
+
+    // Create nodes
+    std::vector<Node *> *nodes = new std::vector<Node *>();
+    int j;
+    for (int i = 1; i <= N + 1; i++) {
+        nodes->push_back(new Node("N" + std::to_string(i), b * (i - 1), 0));
+    }
+    for (int i = 1; i <= N + 1; i++) {
+        j = N + 1 + i;
+        nodes->push_back(new Node("N" + std::to_string(j), b * (i - 1), h));
+    }
+
+    // Add nodes to model
+    model->add_nodes(nodes);
+
+    // Create elements
+    // n4 ------------ n3
+    //  |              |
+    //  |      (i)     |
+    //  |              |
+    // n1 ------------ n2
+    unsigned long n1, n2, n3, n4;
+    std::vector<Element *> *elements = new std::vector<Element *>();
+    for (unsigned long i = 0; i < N; i++) {
+        n1 = i;
+        n2 = i + 1;
+        n3 = N + i + 2;
+        n4 = N + i + 1;
+        elements->push_back(new Membrane("MEM" + std::to_string(i), nodes->at(n1), nodes->at(n2),
+                                         nodes->at(n3), nodes->at(n4), E, nu, t));
+    }
+    model->add_elements(elements);
+
+    // Create restraints
+    std::vector<Restraint *> *restraints = new std::vector<Restraint *>();
+    RestraintNode *r1 = new RestraintNode("R1", nodes->at(0));
+    RestraintNode *r2 = new RestraintNode("R2", nodes->at(static_cast<unsigned long>(N)));
+    r1->add_all();
+    r2->add_all();
+    restraints->push_back(r1);
+    restraints->push_back(r2);
+    model->add_restraints(restraints);
+
+    // Add distribuited load
+    std::vector<Load *> *loads = new std::vector<Load *>();
+    for (int i = 0; i < elements->size(); i++) {
+        Membrane *mem = dynamic_cast<Membrane *>(elements->at(static_cast<unsigned long>(i)));
+        loads->push_back(
+                new LoadMembraneDistributed("DV100kN V @" + std::to_string(i + 1), mem, 4, 3, -100, 0, -100, 1));
+    }
+    std::vector<LoadPattern *> *loadpattern = new std::vector<LoadPattern *>();
+    loadpattern->push_back(new LoadPatternConstant("LOADCONSTANT", loads));
+    model->add_load_patterns(loadpattern);
+
+    // Create analysis
+    StaticAnalysis *analysis = new StaticAnalysis(model);
+    analysis->analyze(false);
+
+    // Save results to file
+    model->save_results("out/test-static-bridge-" + std::to_string(N));
+
+    // Delete data
+    // analysis->disp();
+    analysis->clear();
+    delete elements;
+    delete loadpattern;
+    delete loads;
+    delete restraints;
+    delete nodes;
+    delete model;
+    delete analysis;
+}
+
+/**
  * Performs TEST-STATIC-ANALYSIS suite.
  */
 void test_static_analysis_suite() {
-    __test_static_analysis_test1();
+    __test_static_analysis_test();
     __test_building();
+    __test_bridge();
 }

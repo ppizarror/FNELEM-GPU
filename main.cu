@@ -59,7 +59,7 @@ was calculated using a CUDA algorithm (Gauss Jordan inversion).
 int main() {
 
     // test_suite(); // Test all
-	test_building(); // Test analysis
+    test_analysis(); // Test analysis
 
     return 0;
 }
