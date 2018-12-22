@@ -35,6 +35,7 @@ Performs static analysis calculation.
 // Include headers
 #include "../model/base/model.h"
 #include "../math/matrix_inversion_cpu.h"
+#include "../math/matrix_inversion_cuda.h"
 
 // Library imports
 #include <iostream>

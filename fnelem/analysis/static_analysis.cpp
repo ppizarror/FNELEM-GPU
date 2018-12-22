@@ -75,7 +75,7 @@ void StaticAnalysis::analyze(bool use_gpu) {
     if (!use_gpu) {
         invKt = matrix_inverse_cpu(this->Kt);
     } else {
-        invKt = matrix_inverse_cpu(this->Kt);
+        invKt = matrix_inverse_cuda(this->Kt);
     }
 
     // Solve matrix system

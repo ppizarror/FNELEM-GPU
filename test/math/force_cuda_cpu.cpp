@@ -1,10 +1,10 @@
 /**
-FNELEM-GPU CPU MATRIX INVERSION
-Performs matrix inversion using Gauss Jordan algorithm.
+FNELEM-GPU - TEST MATH
+Force cuda as CPU inversion.
 
-@package fnelem.math
+@package test.math
 @author ppizarror
-@date 20/11/2018
+@date 22/12/2018
 @license
 	MIT License
 	Copyright (c) 2018 Pablo Pizarro R.
@@ -28,22 +28,15 @@ Performs matrix inversion using Gauss Jordan algorithm.
 	SOFTWARE.
 */
 
-// Init header file
-#ifndef __FNELEM_MATH_MATRIX_INVERSION_CPU_H
-#define __FNELEM_MATH_MATRIX_INVERSION_CPU_H
-
-// Include headers
-#include "fematrix.h"
-
-// Constant definition
-#define __FEMATRIX_MIN_INVERSION_VALUE 0.0005
+#include "../../fnelem/math/matrix_inversion_cpu.h"
 
 /**
- * Performs CPU matrix inversion using Gauss-Jordan elimination algorithm.
+ * Performs CPU matrix inversion using Gauss-Jordan elimination algorithm with CUDA, when run
+ * by CPU forces CPU function. This is intented to used by CPU tests suite.
  *
  * @param matrix Matrix to inverse
  * @return Inverse matrix
  */
-FEMatrix *matrix_inverse_cpu(FEMatrix *matrix);
-
-#endif // __FNELEM_MATH_MATRIX_INVERSION_CPU_H
+FEMatrix *matrix_inverse_cuda(FEMatrix *feMatrix) {
+    return matrix_inverse_cpu(feMatrix);
+}

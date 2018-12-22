@@ -1,5 +1,5 @@
 /**
-FNELEM-GPU CPU MATRIX INVERSION
+FNELEM-GPU CUDA MATRIX INVERSION
 Performs matrix inversion using Gauss Jordan algorithm.
 
 @package fnelem.math
@@ -29,8 +29,8 @@ Performs matrix inversion using Gauss Jordan algorithm.
 */
 
 // Init header file
-#ifndef __FNELEM_MATH_MATRIX_INVERSION_CPU_H
-#define __FNELEM_MATH_MATRIX_INVERSION_CPU_H
+#ifndef __FNELEM_MATH_MATRIX_INVERSION_CUDA_H
+#define __FNELEM_MATH_MATRIX_INVERSION_CUDA_H
 
 // Include headers
 #include "fematrix.h"
@@ -39,11 +39,11 @@ Performs matrix inversion using Gauss Jordan algorithm.
 #define __FEMATRIX_MIN_INVERSION_VALUE 0.0005
 
 /**
- * Performs CPU matrix inversion using Gauss-Jordan elimination algorithm.
+ * Matrix inversion, uses CUDA.
  *
- * @param matrix Matrix to inverse
+ * @param feMatrix Matrix to inverse
  * @return Inverse matrix
  */
-FEMatrix *matrix_inverse_cpu(FEMatrix *matrix);
+FEMatrix *matrix_inverse_cuda(FEMatrix *matrix);
 
-#endif // __FNELEM_MATH_MATRIX_INVERSION_CPU_H
+#endif // __FNELEM_MATH_MATRIX_INVERSION_CUDA_H
