@@ -84,7 +84,7 @@ public:
              double E, double poisson, double thickness);
 
     // Destructor
-    ~Membrane();
+    ~Membrane() override;
 
     // Return membrane width
     double get_width() const;

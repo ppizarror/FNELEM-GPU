@@ -48,7 +48,7 @@ public:
     explicit Load(std::string tag);
 
     // Destructor
-    ~Load();
+    virtual ~Load();
 
     // Apply load
     virtual void apply(double factor);

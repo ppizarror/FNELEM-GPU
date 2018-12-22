@@ -56,7 +56,7 @@ public:
     LoadNode(std::string tag, Node *n, FEMatrix *l);
 
     // Destructor
-    ~LoadNode();
+    ~LoadNode() override;
 
     // Apply load
     void apply(double factor) override;

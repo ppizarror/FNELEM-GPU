@@ -153,6 +153,9 @@ public:
     // Get position x
     double get_pos_z() const;
 
+    // Initialize element
+    virtual void initialize();
+
 };
 
 #endif // __FNELEM_MODEL_NODES_NODE_H

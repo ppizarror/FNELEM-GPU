@@ -45,13 +45,16 @@ public:
     explicit LoadPattern(std::string tag);
 
     // Destructor
-    ~LoadPattern();
+    virtual ~LoadPattern();
 
     // Apply load pattern
     virtual void apply();
 
     // Display load pattern information to console
     void disp() const override;
+
+    virtual // Clear data after analysis
+    void clear() {};
 
 };
 

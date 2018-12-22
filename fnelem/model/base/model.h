@@ -66,13 +66,25 @@ private:
     // Load pattern vector
     std::vector<LoadPattern *> *loadpatterns = nullptr;
 
+    // Write title header to file
+    void write_file_title(std::ofstream &plik, std::string title) const;
+
+    // Check if model is defined
+    void check_defined(FEMatrix *u) const;
+
+    // Check all variables are not null
+    void check_non_null() const;
+
 public:
 
     // Constructor
-    Model(std::string tag, int ndim, int ndof);
+    Model(int ndim, int ndof);
 
     // Destructor
     ~Model();
+
+    // Init model
+    void initialize();
 
     // Set nodes
     void set_nodes(std::vector<Node *> *node);
@@ -98,6 +110,12 @@ public:
     // Get load patterns
     std::vector<LoadPattern *> *get_load_patterns() const;
 
+    // Apply model restraints
+    void apply_restraints() const;
+
+    // Apply load patterns
+    void apply_load_patterns() const;
+
     // Update model components after solve method is done
     void update(FEMatrix *u);
 
@@ -106,6 +124,9 @@ public:
 
     // Display model information to console
     void disp() const;
+
+    // Clear all elements of model
+    void clear();
 
 };
 

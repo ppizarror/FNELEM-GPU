@@ -44,7 +44,13 @@ Restraint::Restraint(std::string tag) : ModelComponent(std::move(tag)) {
 /**
  * Destructor.
  */
-Restraint::~Restraint() = default;
+Restraint::~Restraint() = default;;
+
+/**
+ * Apply restraint
+ */
+void Restraint::apply() {
+}
 
 /**
  * Display restraint information

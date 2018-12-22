@@ -380,3 +380,9 @@ double Node::get_reaction(int local_id) {
     }
     return this->reaction->get(local_id - 1);
 }
+
+/**
+ * Initialize node.
+ */
+void Node::initialize() {
+}

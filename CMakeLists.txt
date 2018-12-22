@@ -74,7 +74,7 @@ set(FNELEM
 
 # DEFINE TESTS
 add_executable(TEST-ALL test/test_suite.cpp ${FNELEM})
-add_executable(TEST-BASE test/model/base/__base__.cpp ${FNELEM_MODEL_BASE})
+add_executable(TEST-BASE test/model/base/__base__.cpp ${FNELEM})
 add_executable(TEST-CUDA test/test_cuda.cpp ${FNELEM_CUDA})
 add_executable(TEST-ELEMENTS test/model/elements/__elements__.cpp ${FNELEM_MODEL_ELEMENTS})
 add_executable(TEST-FEMATRIX test/math/__math__.cpp ${FNELEM_MATH})

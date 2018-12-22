@@ -34,8 +34,11 @@ Constants definition.
 
 #define FNELEM_CONST_GAUSS_INTEGRAL_POINTS 1e3          // Number of points to perform integral of functions
 #define FNELEM_CONST_MEMBRANE_INTEGRATION_NPOINTS 15    // Number of integration points inside membrane
+#define FNELEM_CONST_PI 3.14159265358979323846          // Pi value
 #define FNELEM_CONST_ZERO_TOLERANCE 1e-12               // Zero tolerance
 
-#define FNELEM_CONST_PI 3.14159265358979323846          // Pi value
+#define FNELEM_ABOUT_VERSION_AUTHOR "ppizarror"         // Software author
+#define FNELEM_ABOUT_VERSION_DATE "21/12/2018"          // Software date
+#define FNELEM_ABOUT_VERSION_V "0.2.0"                  // Software version
 
 #endif // __FNELEM_MODEL_BASE_CONSTANTS_H

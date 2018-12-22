@@ -56,7 +56,7 @@ public:
     RestraintNode(std::string tag, Node *n);
 
     // Destructor
-    ~RestraintNode();
+    ~RestraintNode() override;
 
     // Add restraint
     void add_dofid(int id);

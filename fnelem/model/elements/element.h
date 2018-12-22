@@ -65,7 +65,7 @@ protected:
 public:
 
     // Destroy
-    ~Element();
+    virtual ~Element();
 
     // Constructor
     explicit Element(std::string tag);

@@ -53,8 +53,8 @@ LoadPatternConstant::~LoadPatternConstant() = default;
  * Apply load pattern.
  */
 void LoadPatternConstant::apply() {
-    for (auto &i : *this->load_array) {
-        i->apply(1);
+    for (Load *&load : *this->load_array) {
+        load->apply(1);
     }
 }
 
@@ -65,4 +65,13 @@ void LoadPatternConstant::disp() const {
     std::cout << "Constant load pattern information:" << std::endl;
     LoadPattern::disp();
     std::cout << "\n\tTotal loads at vector:\t" << this->load_array->size() << std::endl;
+}
+
+/**
+ * Clear load vector on demand.
+ */
+void LoadPatternConstant::clear() {
+    for (Load *&load : *this->load_array) {
+        delete load;
+    }
 }

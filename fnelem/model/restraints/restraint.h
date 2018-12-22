@@ -45,13 +45,13 @@ class Restraint : ModelComponent {
 public:
 
     // Constructor
-    Restraint(std::string tag);
+    explicit Restraint(std::string tag);
 
     // Destructor
-    ~Restraint();
+    virtual ~Restraint();
 
-    virtual // Apply restraints
-    void apply() = 0;
+    virtual // Apply restraint
+    void apply();
 
     // Display restraint information to console
     void disp() const override;

@@ -44,21 +44,24 @@ class LoadPatternConstant : public LoadPattern {
 private:
 
     // Load pattern vector
-    std::vector<Load*> *load_array;
+    std::vector<Load *> *load_array;
 
 public:
 
     // Constructor
-    explicit LoadPatternConstant(std::string tag, std::vector<Load*> *loads);
+    explicit LoadPatternConstant(std::string tag, std::vector<Load *> *loads);
 
     // Destructor
-    ~LoadPatternConstant();
+    ~LoadPatternConstant() override;
 
     // Apply load pattern
     void apply() override;
 
     // Display load pattern information to console
     void disp() const override;
+
+    // Clear load vector on demand
+    void clear() override;
 
 };
 

@@ -88,7 +88,7 @@ public:
                             int node2, double load1, double dist1, double load2, double dist2);
 
     // Destructor
-    ~LoadMembraneDistributed();
+    ~LoadMembraneDistributed() override;
 
     // Apply load
     void apply(double factor) override;
