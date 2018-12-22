@@ -251,7 +251,17 @@ void __test_building() {
 void __test_bridge() {
     test_print_title("STATIC-ANALYSIS", "test_bridge");
 
-    int N = 11; // Number of piers
+    // Read from file
+    std::ifstream infile;
+    infile.open("out/test-bridge-n.txt");
+    int x;
+    int N = 0;
+    while (infile >> x) {
+        N = N + x;
+    }
+    infile.close();
+    std::cout << "Test bridge, number of piers: " << N << std::endl;
+
     int b = 100; // Pier width
     int h = 100; // Pier height
 
@@ -343,7 +353,6 @@ void __test_bridge() {
     model->save_results("out/test-static-bridge-" + std::to_string(N));
 
     // Delete data
-    // analysis->disp();
     analysis->clear();
     delete elements;
     delete loadpattern;

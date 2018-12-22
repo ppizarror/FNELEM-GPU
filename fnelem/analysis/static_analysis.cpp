@@ -75,10 +75,13 @@ void StaticAnalysis::analyze(bool use_gpu) {
 
     // Inverse matrix
     FEMatrix *invKt;
+    std::string method;
     if (!use_gpu) {
         invKt = matrix_inverse_cpu(this->Kt);
+        method = "[GPU OFF]";
     } else {
         invKt = matrix_inverse_cuda(this->Kt);
+        method = "[GPU ON]";
     }
 
     // Solve matrix system
@@ -91,7 +94,8 @@ void StaticAnalysis::analyze(bool use_gpu) {
     // Final timer
     std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
-    std::cout << "[STATIC-ANALYSIS] Solved in " << duration << " microseconds" << std::endl;
+
+    std::cout << "[STATIC-ANALYSIS] Solved in " << duration << " microseconds " << method << std::endl;
 
 }
 
