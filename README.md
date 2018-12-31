@@ -1,6 +1,6 @@
 # FNELEM-GPU
 
-Simple finite elements matrix structural analysis using GPU. Actually supports 2D planar membrane/shell. Project created just for fun.
+Simple finite elements matrix structural analysis using GPU. Actually supports 2D planar membrane/shell.
 
 ## Requirements
 
