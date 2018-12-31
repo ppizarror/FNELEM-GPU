@@ -228,7 +228,7 @@ int h = 100; // Pier height
 //     h |   (1)  |   (2)  |  ......
 //       |        |        |
 //       1 ------ 2 ------ 3 .....
-//       ^    b        b   ^
+//       ^    b            ^
 //
 //    N = 3
 //       4 ------ 5 ------ 6 ------- 8
@@ -276,7 +276,8 @@ for (unsigned long i = 0; i < N; i++) {
     n2 = i + 1;
     n3 = N + i + 2;
     n4 = N + i + 1;
-    elements->push_back(new Membrane("MEM" + std::to_string(i), nodes->at(n1), nodes->at(n2), nodes->at(n3), nodes->at(n4), E, nu, t));
+    elements->push_back(new Membrane("MEM" + std::to_string(i), nodes->at(n1),
+		nodes->at(n2), nodes->at(n3), nodes->at(n4), E, nu, t));
 }
 model->add_elements(elements);
 
