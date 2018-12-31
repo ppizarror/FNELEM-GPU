@@ -190,7 +190,9 @@ loads->push_back(new LoadNode(load_tag, node, load));
 
 This class can apply a distributed load. It needs the membrane, the node position (1, 2, 3, 4)
 
+<div align="center">
 <img src="https://github.com/ppizarror/FNELEM-GPU/raw/master/other/readme-shell.png" width="50%" alt="Node definiton shell">
+</div>
 
 ```cpp
 std::vector<Load *> *loads = new std::vector<Load *>();
@@ -211,7 +213,9 @@ loadpattern->push_back(new LoadPatternConstant(load_tag, loads));
 
 The following code defines a simple bridge, composed by N membranes, under a distributed load of 100kN/m. The shells are the same, 100cm height, 100cm width, 15cm thickness, elastic modulus of 300000kN/cm^2, Poisson modulus of 0.2.
 
+<div align="center">
 <img src="https://github.com/ppizarror/FNELEM-GPU/blob/master/other/readme-bridge.PNG?raw=true" width="80%" alt="Bridge example">
+</div>
 
 ```cpp
 int N = 3; // Number of membranes
@@ -324,4 +328,6 @@ The results are the following:
 ![Bridge example, stress x](other/readme-bridge-sy.png)
 
 If *N* number of membranes is greater then GPU analysis will be faster.
-<img src="https://github.com/ppizarror/FNELEM-GPU/raw/master/other/readme-bridge-comparision.png" width="60%" alt="Comparision between GPU/CPU">
+<div align="center">
+<img src="https://github.com/ppizarror/FNELEM-GPU/raw/master/other/readme-bridge-comparision.png" width="40%" alt="Comparision between GPU/CPU">
+</div>
