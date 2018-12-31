@@ -20,7 +20,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="221cac94-3076-4b70-8e37-e7f72eb35a62" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -41,7 +40,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/analysis/test_static_analysis.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
+            <state relative-caret-position="-2024">
               <caret line="257" column="4" selection-start-line="257" selection-start-column="4" selection-end-line="362" selection-end-column="20" />
             </state>
           </provider>
@@ -375,12 +374,12 @@
       <workItem from="1545417393497" duration="33278000" />
       <workItem from="1545479085246" duration="84000" />
       <workItem from="1545777289243" duration="1407000" />
-      <workItem from="1546228635033" duration="2118000" />
+      <workItem from="1546228635033" duration="2524000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="183488000" />
+    <option name="totallyTimeSpent" value="183894000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
@@ -750,7 +749,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/analysis/test_static_analysis.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
+        <state relative-caret-position="-2024">
           <caret line="257" column="4" selection-start-line="257" selection-start-column="4" selection-end-line="362" selection-end-column="20" />
         </state>
       </provider>

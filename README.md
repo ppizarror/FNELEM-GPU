@@ -35,7 +35,7 @@ To fully use this library, you must include the following files:
 
 ### Model
 
-Model class is the base object for defining a problem. It needs the number of degrees of freedom, the dimension (actually only 2D is supported), the nodes, elements, loads, load patterns.
+Model class is the base object for defining a problem. It needs the number of degrees of freedom, the dimension (actually only 2D is supported), the nodes, elements, restraints, loads and load patterns.
 
 ```cpp
 Model *model = new Model(dimension, number_degrees_of_freedom);
@@ -190,11 +190,12 @@ loads->push_back(new LoadNode(load_tag, node, load));
 
 This class can apply a distributed load. It needs the membrane, the node position (1, 2, 3, 4)
 
-![Node definiton shell](other/readme-shell.png)
+<img src="https://github.com/ppizarror/FNELEM-GPU/raw/master/other/readme-shell.png" width="50%" alt="Node definiton shell">
 
 ```cpp
 std::vector<Load *> *loads = new std::vector<Load *>();
-loads->push_back(new LoadMembraneDistributed(load_tag, membrane, position_initial, position_final, load_at_initial, distance_from_initial, load_at_final, distance_from_initial));
+loads->push_back(new LoadMembraneDistributed(load_tag, membrane, position_initial,
+    position_final, load_at_initial, distance_from_initial, load_at_final, distance_from_initial));
 ```
 
 ### Load pattern
@@ -210,7 +211,7 @@ loadpattern->push_back(new LoadPatternConstant(load_tag, loads));
 
 The following code defines a simple bridge, composed by N membranes, under a distributed load of 100kN/m. The shells are the same, 100cm height, 100cm width, 15cm thickness, elastic modulus of 300000kN/cm^2, Poisson modulus of 0.2.
 
-![Bridge example](other/readme-bridge.png)
+<img src="https://github.com/ppizarror/FNELEM-GPU/blob/master/other/readme-bridge.PNG?raw=true" width="80%" alt="Bridge example">
 
 ```cpp
 int N = 3; // Number of membranes
@@ -323,4 +324,4 @@ The results are the following:
 ![Bridge example, stress x](other/readme-bridge-sy.png)
 
 If *N* number of membranes is greater then GPU analysis will be faster.
-![Comparision between GPU/CPU](other/readme-bridge-comparision.png)
+<img src="https://github.com/ppizarror/FNELEM-GPU/raw/master/other/readme-bridge-comparision.png" width="60%" alt="Comparision between GPU/CPU">
