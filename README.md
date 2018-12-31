@@ -211,7 +211,7 @@ loadpattern->push_back(new LoadPatternConstant(load_tag, loads));
 
 ## Example
 
-The following code defines a simple bridge, composed by N membranes, under a distributed load of 100kN/m. The shells are the same, 100cm height, 100cm width, 15cm thickness, elastic modulus of 300000kN/cm^2, Poisson modulus of 0.2.
+The following code defines a simple bridge, composed by N membranes, under a distributed load of 100kN/m. The membranes are the same, 100cm height, 100cm width, 15cm thickness, elastic modulus of 300000kN/cm^2, Poisson modulus of 0.2. This example can also be found in [test/analysis/test_static_analysis.h](https://github.com/ppizarror/FNELEM-GPU/blob/master/test/analysis/test_static_analysis.h).
 
 <div align="center">
 <img src="https://github.com/ppizarror/FNELEM-GPU/blob/master/other/readme-bridge.PNG?raw=true" width="80%" alt="Bridge example">
