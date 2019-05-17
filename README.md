@@ -332,3 +332,11 @@ If *N* number of membranes is greater then GPU analysis will be faster.
 <div align="center">
 <img src="https://github.com/ppizarror/FNELEM-GPU/raw/master/other/readme-bridge-comparision.png" width="50%" alt="Comparision between GPU/CPU">
 </div>
+
+## Author
+
+[Pablo Pizarro R.](https://ppizarror.com) | 2018-2019
+
+## License
+
+This project is licensed under MIT [https://opensource.org/licenses/MIT/]
