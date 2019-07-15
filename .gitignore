@@ -5,6 +5,7 @@ cmake-build-debug/
 
 # IDE
 .vs/
+.idea/
 
 # Shortcuts
 *.lnk
