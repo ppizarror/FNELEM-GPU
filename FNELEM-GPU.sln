@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FNELEM-GPU", "FNELEM-GPU.vcxproj", "{7BFAF3F5-104B-4901-8044-4DDDDFC98A55}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "T3-CC7515-OPENCL", "..\tareas-CC7515\tarea-03\opencl\T3-CC7515-OPENCL.vcxproj", "{393CFEE4-D610-4966-8727-5F970F50FB21}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
