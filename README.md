@@ -335,7 +335,7 @@ If *N* number of membranes is greater then GPU analysis will be faster.
 
 ## Author
 
-[Pablo Pizarro R.](https://ppizarror.com) | 2018-2019
+[Pablo Pizarro R.](https://ppizarror.com) | 2018 - 2019
 
 ## License
 
