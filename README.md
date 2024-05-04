@@ -35,7 +35,7 @@ To fully use this library, you must include the following files:
 
 ### Model
 
-Model class is the base object for defining a problem. It needs the number of degrees of freedom, the dimension (actually only 2D is supported), the nodes, elements, restraints, loads and load patterns.
+The model class is the base object for defining a problem. It needs the number of degrees of freedom, the dimension (actually, only 2D is supported), the nodes, elements, restraints, loads, and load patterns.
 
 ```cpp
 Model *model = new Model(dimension, number_degrees_of_freedom);
@@ -47,18 +47,18 @@ model->add_restraints(restraints);
 model->add_load_patterns(load_pattern);
 ```
 
-Nodes, elements, restraints and load_pattern are **std::vector** objects that contains the library Objects.
+Nodes, elements, restraints, and load_pattern are **std::vector** objects that contain the library Objects.
 
 ### StaticAnalysis
 
-StaticAnalysis class performs the basic static analysis method, using the model definition, it creates the structure stiffness matrix, then using ```K*u = F```it solves the displacement vector of the nodes.
+The StaticAnalysis class performs the basic static analysis method. Using the model definition, it creates the structure stiffness matrix, and then using ``K*u = F``, it solves the displacement vector of the nodes.
 
 ```cpp
 StaticAnalysis *analysis = new StaticAnalysis(model);
 analysis->analyze(use_gpu);
 ```
 
-If *use_gpu* is true then GPU performs the main matrix inversion. After the analysis is complete, the model can save the results into a file. That file contains the main structure elements: nodes, shells, reactions and internal forces of the elements.
+If *use_gpu* is true then GPU performs the main matrix inversion. After the analysis is complete, the model can save the results into a file. That file contains the main structure elements: nodes, shells, reactions, and internal forces of the elements.
 
 ```cpp
 model->save_results("file.txt");
@@ -125,7 +125,7 @@ nodes->push_back(new Node(node_tag, coordinate_x, coordinate_y, coordinate_z));
 
 ### Element
 
-Membrane shell must be defined using four nodes, the elastic and poisson modulus and the thickness.
+The membrane shell must be defined using four nodes, the elastic and Poisson modulus, and the thickness.
 
 ```cpp
 std::vector<Element *> *elements = new std::vector<Element *>();
@@ -148,10 +148,10 @@ restraints->push_back(r);
 
 #### LoadNode
 
-NodeLoad is a load applied into a node, it needs the node reference and a load vector. In FNELEM-GPU matrices and vectors are defined using **FEMatrix** class. That class provides the following main methods:
+NodeLoad is a load applied to a node; it needs the node reference and a load vector. In FNELEM-GPU matrices and vectors are defined using **FEMatrix** class. That class provides the following main methods:
 
 - Add
-- Substract
+- Subtract
 - Multiply
 - Inverse (Using CPU and GPU)
 - Determinant
@@ -202,7 +202,7 @@ loads->push_back(new LoadMembraneDistributed(load_tag, membrane, position_initia
 
 ### Load pattern
 
-The load pattern must be used to apply the loads into the model. Actually only the constant load pattern is defined.
+The load pattern must be used to apply the loads to the model. Only the constant load pattern is defined.
 
 ```cpp
 std::vector<LoadPattern *> *loadpattern = new std::vector<LoadPattern *>();
@@ -211,7 +211,7 @@ loadpattern->push_back(new LoadPatternConstant(load_tag, loads));
 
 ## Example
 
-The following code defines a simple bridge, composed by N membranes, under a distributed load of 100kN/m. The membranes are the same, 100cm height, 100cm width, 15cm thickness, elastic modulus of 300000kN/cm^2, Poisson modulus of 0.2. This example can also be found in [test/analysis/test_static_analysis.h](https://github.com/ppizarror/FNELEM-GPU/blob/master/test/analysis/test_static_analysis.h).
+The following code defines a simple bridge composed of N membranes under a distributed load of 100kN/m. The membranes are the same, 100cm height, 100cm width, 15cm thickness, elastic modulus of 300000kN/cm^2, Poisson modulus of 0.2. This example can also be found in [test/analysis/test_static_analysis.h](https://github.com/ppizarror/FNELEM-GPU/blob/master/test/analysis/test_static_analysis.h).
 
 <div align="center">
 <img src="https://github.com/ppizarror/FNELEM-GPU/blob/master/other/readme-bridge.PNG?raw=true" width="80%" alt="Bridge example">
