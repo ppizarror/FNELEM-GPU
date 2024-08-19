@@ -1,6 +1,6 @@
 # FNELEM-GPU
 
-Simple finite elements matrix structural analysis using GPU. Actually supports 2D planar membrane/shell.
+Simple finite elements matrix structural analysis using GPU. Supports 2D planar membrane/shell.
 
 ## Requirements
 
@@ -47,18 +47,18 @@ model->add_restraints(restraints);
 model->add_load_patterns(load_pattern);
 ```
 
-Nodes, elements, restraints, and load_pattern are **std::vector** objects that contain the library Objects.
+Nodes, elements, restraints, and load_pattern are **std::vector** objects containing library Objects.
 
 ### StaticAnalysis
 
-The StaticAnalysis class performs the basic static analysis method. Using the model definition, it creates the structure stiffness matrix, and then using ``K*u = F``, it solves the displacement vector of the nodes.
+The StaticAnalysis class performs the primary static analysis method. Using the model definition, it creates the structure stiffness matrix, and then, using ``K*u = F``, it solves the displacement vector of the nodes.
 
 ```cpp
 StaticAnalysis *analysis = new StaticAnalysis(model);
 analysis->analyze(use_gpu);
 ```
 
-If *use_gpu* is true then GPU performs the main matrix inversion. After the analysis is complete, the model can save the results into a file. That file contains the main structure elements: nodes, shells, reactions, and internal forces of the elements.
+If *use_gpu* is true, GPU performs the primary matrix inversion. After the analysis, the model can save the results into a file. That file contains the main structure elements: nodes, shells, reactions, and internal forces of the elements.
 
 ```cpp
 model->save_results("file.txt");
@@ -211,7 +211,7 @@ loadpattern->push_back(new LoadPatternConstant(load_tag, loads));
 
 ## Example
 
-The following code defines a simple bridge composed of N membranes under a distributed load of 100kN/m. The membranes are the same, 100cm height, 100cm width, 15cm thickness, elastic modulus of 300000kN/cm^2, Poisson modulus of 0.2. This example can also be found in [test/analysis/test_static_analysis.h](https://github.com/ppizarror/FNELEM-GPU/blob/master/test/analysis/test_static_analysis.h).
+The following code defines a simple bridge composed of N membranes under a distributed load of 100kN/m. The membranes are the same: 100cm height, 100cm width, 15cm thickness, elastic modulus of 300000kN/cm^2, Poisson modulus of 0.2. This example can also be found in [test/analysis/test_static_analysis.h](https://github.com/ppizarror/FNELEM-GPU/blob/master/test/analysis/test_static_analysis.h).
 
 <div align="center">
 <img src="https://github.com/ppizarror/FNELEM-GPU/blob/master/other/readme-bridge.PNG?raw=true" width="80%" alt="Bridge example">
@@ -328,7 +328,7 @@ The results are the following:
 ![Bridge example, stress x](other/readme-bridge-sx.png)
 ![Bridge example, stress x](other/readme-bridge-sy.png)
 
-If *N* number of membranes is greater then GPU analysis will be faster.
+GPU analysis will be faster if *N* (number of membranes) is greater.
 <div align="center">
 <img src="https://github.com/ppizarror/FNELEM-GPU/raw/master/other/readme-bridge-comparision.png" width="50%" alt="Comparision between GPU/CPU">
 </div>
