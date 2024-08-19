@@ -4,8 +4,9 @@ x86/
 cmake-build-debug/
 
 # IDE
-.vs/
 .idea/
+.vs/
+.vscode/
 
 # Shortcuts
 *.lnk
